@@ -1,0 +1,46 @@
+{
+  "name": "keep-away",
+  "version": "1.0.0",
+  "description": "The most boring app you will ever need.",
+  "author": "John Hillert <john.hillert@gmail.com>",
+  "license": "UNLICENSED",
+  "private": true,
+  "homepage": "https://github.com/jehillert/Keep-Away#readme",
+  "bugs": {
+    "url": "https://github.com/jehillert/Keep-Away/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jehillert/Keep-Away.git"
+  },
+  "main": "src/index.js",
+  "scripts": {
+    "build": "webpack -d --watch",
+    "react-dev": "webpack -d --watch",
+    "start": "nodemon --ignore node_modules server",
+    "start:dev": "nodenv -f ."
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "2.6.1"
+  },
+  "dependencies": {
+    "async": "^2.6.1",
+    "bluebird": "^3.3.4",
+    "bootstrap": "^4.0.0-alpha.2",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "moment": "^2.23.0",
+    "mysql": "^2.16.0",
+    "ntp-client": "^0.5.3",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "request": "^2.81.0"
+  }
+}
