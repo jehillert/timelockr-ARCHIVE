@@ -42,34 +42,5 @@ module.exports = {
     //   });
     // }
   // },
-
-  // incogSecrets: {
-  //   get: function (req, res) {
-  //     models.incogSecrets.get(function(err, results) {
-  //       if (err) {  }
-  //       res.json(results);
-  //     });
-  //   },
-  //   post: function (req, res) {
-  //     var params = [req.body.message, req.body.username, req.body.roomname];
-  //     models.incogSecrets.post(params, function(err, results) {
-  //       if (err) { /* do something */ }
-  //       res.sendStatus(201);
-  //     });
-  //   },
-  //   put: function (req, res) {
-  //     var params = [req.body.message, req.body.username, req.body.roomname];
-  //     models.incogSecrets.delete(params, function(err, results) {
-  //       if (err) { /* do something */ }
-  //       res.sendStatus(201);
-  //     });
-  //   },
-  //   delete: function (req, res) {
-  //     var params = [req.body.message, req.body.username, req.body.roomname];
-  //     models.incogSecrets.delete(params, function(err, results) {
-  //       if (err) { /* do something */ }
-  //       res.sendStatus(201);
-  //     });
-  //   }
   }
 };

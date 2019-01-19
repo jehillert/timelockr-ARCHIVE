@@ -45,9 +45,6 @@ async.series([
     populateTable(connection, 'dummyCredentials.csv', 'credentials', callback);
   },
   function(callback) {
-    populateTable(connection, 'dummyIncogSecrets.csv', 'incogSecrets', callback);
-  },
-  function(callback) {
     populateTable(connection, 'dummySecrets.csv', 'secrets', callback);
   },
 ]);

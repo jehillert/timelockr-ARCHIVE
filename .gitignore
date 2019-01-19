@@ -51,8 +51,10 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
+# misc
 .env
+.DS_Store
+config.js
 
 # next.js build output
 .next

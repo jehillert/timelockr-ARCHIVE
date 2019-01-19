@@ -39,34 +39,4 @@ module.exports = {
     //   });
     }
   },
-
-  // incogSecrets: {
-  //   get: function (username, callback) {
-  //     var queryStr = `SELECT secretsID, created, available, secret FROM credentials
-  //                     LEFT JOIN secrets USING (userID)
-  //                     WHERE username IS ${username};`;
-  //     db.query(queryStr, function(err, results) {
-  //       callback(err, results);
-  //     });
-  //   },
-
-  //   post: function (params, callback) {
-  //     var queryStr = ``;
-  //     db.query(queryStr, params, function(err, results) {
-  //       callback(err, results);
-  //     });
-  //   },
-  //   put: function (params, callback) {
-  //     var queryStr = ``;
-  //     db.query(queryStr, params, function(err, results) {
-  //       callback(err, results);
-  //     });
-  //   },
-  //   delete: function (params, callback) {
-  //     var queryStr = ``;
-  //     db.query(queryStr, params, function(err, results) {
-  //       callback(err, results);
-  //     });
-  //   }
-  // },
 };

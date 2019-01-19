@@ -23,7 +23,6 @@ const dFile = (fileName) => {
 
 dFile('dummyCredentials.csv');
 dFile('dummySecrets.csv');
-dFile('dummyIncogSecrets.csv');
 
 async.waterfall([
   function(callback) {
@@ -31,22 +30,19 @@ async.waterfall([
     // create and open stream to a dummy data file for each table
     const credStream = fs.createWriteStream('dummyCredentials.csv');
     const secretStream = fs.createWriteStream('dummySecrets.csv');
-    const incogSecretStream = fs.createWriteStream('dummyIncogSecrets.csv');
 
     // event listener - stop indication
     credStream.on('finish', () => { console.log('dummyCredentials.csv written'); });
     secretStream.on('finish', () => { console.log('dummySecrets.csv written'); });
-    incogSecretStream.on('finish', () => { console.log('dummyIncogSecrets.csv written'); });
 
-    callback(null, credStream, secretStream, incogSecretStream);
+    callback(null, credStream, secretStream);
 
   },
-  function(credStream, secretStream, incogSecretStream, callback) {
+  function(credStream, secretStream, callback) {
 
     // all vars used in this block except iterators i,j
     let available,
         created,
-        lastFormView,
         password,
         secret,
         secretCount,
@@ -54,9 +50,8 @@ async.waterfall([
         numberSameDayTrials = 15;
 
     // write csv column headers
-    credStream.write('username,password,lastFormView,userID\n');
+    credStream.write('username,password,userID\n');
     secretStream.write('created,available,secret,userID\n');
-    incogSecretStream.write('password,created,available,secret\n');
 
     // generate data & write to files
     faker.seed(123);
@@ -65,9 +60,8 @@ async.waterfall([
       username = faker.internet.userName();
       password = faker.internet.password();
       secretCount = faker.random.number({'min': 0, 'max': 2});
-      lastFormView = faker.random.number({'min': 1, 'max': 3});
 
-      credStream.write(`"${username}","${password}",${lastFormView},${i}\n`);
+      credStream.write(`"${username}","${password}",${i}\n`);
       for (let j = 0; j <= secretCount; j++) {
         secret = faker.lorem.lines(1);
         if (i < numberSameDayTrials) {
@@ -78,15 +72,13 @@ async.waterfall([
           available = moment(faker.date.future()).format('YYYY-MM-DD HH:mm:ss');
         }
         secretStream.write(`${created},${available},"${secret}",${i}\n`);
-        incogSecretStream.write(`"${password}",${created},${available},"${secret}"\n`);
       }
     }
-    callback(null, credStream, secretStream, incogSecretStream);
+    callback(null, credStream, secretStream);
   },
-  function(credStream, secretStream, incogSecretStream, callback) {
+  function(credStream, secretStream, callback) {
     credStream.end();
     secretStream.end();
-    incogSecretStream.end();
     callback();
   },
 ]);

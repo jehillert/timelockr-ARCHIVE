@@ -7,7 +7,6 @@ USE keepAway;
 CREATE TABLE IF NOT EXISTS credentials (
   username VARCHAR(25) NOT NULL,
   password VARCHAR(25) NOT NULL,
-  lastFormView INT(1) NOT NULL DEFAULT 1,
   userID INT NOT NULL AUTO_INCREMENT,
   UNIQUE KEY (username),
   PRIMARY KEY (userID)
@@ -26,11 +25,17 @@ CREATE TABLE IF NOT EXISTS secrets (
   PRIMARY KEY (secretsID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS incogSecrets (
-  password VARCHAR(25) NOT NULL,
-  created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  available DATETIME NOT NULL,
-  secret VARCHAR(10000) NOT NULL,
-  incogID INT NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (incogID)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/* Procedure to show full sectret entries */
+-- USE `keepAway`;
+-- DROP procedure IF EXISTS `ShowSecretsEntries`;
+
+-- DELIMITER $$
+-- USE `keepAway`$$
+-- CREATE DEFINER=`root`@`localhost` PROCEDURE `JoinTables`()
+-- BEGIN
+--   SELECT * FROM keepAway.secrets
+--   LEFT JOIN keepAway.credentials USING (userID);
+-- END;$$
+
+-- DELIMITER ;
