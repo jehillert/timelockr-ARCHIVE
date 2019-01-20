@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS credentials (
   password VARCHAR(25) NOT NULL,
   userID INT NOT NULL AUTO_INCREMENT,
   UNIQUE KEY (username),
+  UNIQUE KEY (password),
   PRIMARY KEY (userID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

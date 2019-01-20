@@ -15,32 +15,38 @@ module.exports = {
       });
     },
     post: function (req, res) {
-      let params = [
-        req.body.username,
-        req.body.password,
-        req.body.created,
-        req.body.available,
-        req.body.secret
-      ];
+      let params = {
+        username: req.body.username,
+        password: req.body.password,
+        created: req.body.created,
+        available: req.body.available,
+        secret: req.body.secret
+      };
+      // let params = [req.body.created, req.body.available, req.body.secret];
       models.secrets.post(params, function(err, results) {
-        if (err) { /* do something */ }
+        if (err) {
+          return console.error(err);
+        }
         res.sendStatus(201);
       });
     },
-    // put: function (req, res) {
-    //   var params = [req.body.message, req.body.username, req.body.roomname];
-    //   models.secrets.delete(params, function(err, results) {
-    //     if (err) { /* do something */ }
-    //     res.sendStatus(201);
-    //   });
-    // },
-    // delete: function (req, res) {
-    //   var params = [req.body.message, req.body.username, req.body.roomname];
-    //   models.secrets.delete(params, function(err, results) {
-    //     if (err) { /* do something */ }
-    //     res.sendStatus(201);
-    //   });
-    // }
-  // },
+    put: function (req, res) {
+      var params = [req.body.message, req.body.username, req.body.roomname];
+      models.secrets.delete(params, function(err, results) {
+        if (err) {
+          return console.error(err);
+        }
+        res.sendStatus(201);
+      });
+    },
+    delete: function (req, res) {
+      var params = [req.body.message, req.body.username, req.body.roomname];
+      models.secrets.delete(params, function(err, results) {
+        if (err) {
+          return console.error(err);
+        }
+        res.sendStatus(201);
+      });
+    }
   }
 };
