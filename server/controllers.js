@@ -1,20 +1,17 @@
-var models = require('./models');
+const models = require("./models");
 
 module.exports = {
 
   secrets: {
-    get: function (req, res) {
+
+    get: (req, res) => {
       var username = [req.body.username];
-      console.log(username);
-      models.secrets.get(username, function(err, results) {
-        if (err) {
-          console.error(err);
-        }
-        console.log(results);
-        res.json(results);
-      });
+      return models.secrets.get(username)
+        .then(results => res.json(results))
+        .catch(error => console.error('Error', error));
     },
-    post: function (req, res) {
+
+    post: (req, res) => {
       let params = {
         username: req.body.username,
         password: req.body.password,
@@ -22,31 +19,23 @@ module.exports = {
         available: req.body.available,
         secret: req.body.secret
       };
-      // let params = [req.body.created, req.body.available, req.body.secret];
-      models.secrets.post(params, function(err, results) {
-        if (err) {
-          return console.error(err);
-        }
-        res.sendStatus(201);
-      });
+      return models.secrets.post(params)
+        .then(results => res.sendStatus(201))
+        .catch(error => console.error('Error', error));
     },
-    put: function (req, res) {
-      var params = [req.body.message, req.body.username, req.body.roomname];
-      models.secrets.delete(params, function(err, results) {
-        if (err) {
-          return console.error(err);
-        }
-        res.sendStatus(201);
-      });
-    },
-    delete: function (req, res) {
-      var params = [req.body.message, req.body.username, req.body.roomname];
-      models.secrets.delete(params, function(err, results) {
-        if (err) {
-          return console.error(err);
-        }
-        res.sendStatus(201);
-      });
+
+    put: (req, res) => {
+      var params = [req.body.newReleaseDate, req.body.secretsId];
+      models.secrets.put(params)
+        .then(results => res.sendStatus(201))
+        .catch(error => console.error('Error', error));
+      },
+
+    delete: (req, res) => {
+      models.secrets.delete(req.body.secretsId)
+        .then(results => res.sendStatus(201))
+        .catch(error => console.error('Error', error));
+
     }
   }
-};
+}

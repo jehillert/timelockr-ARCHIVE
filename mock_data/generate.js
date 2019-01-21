@@ -50,8 +50,8 @@ async.waterfall([
         numberSameDayTrials = 15;
 
     // write csv column headers
-    credStream.write('username,password,userID\n');
-    secretStream.write('created,available,secret,userID\n');
+    credStream.write('username,password,userId\n');
+    secretStream.write('created,available,secret,userId\n');
 
     // generate data & write to files
     faker.seed(123);

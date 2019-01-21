@@ -1,0 +1,1620 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"z",
+				"zzzz\t          —————————————————————————————————————————————"
+			],
+			[
+				"sel",
+				"selectedCow"
+			],
+			[
+				"groc",
+				"groceryItems"
+			],
+			[
+				"prot",
+				"prototype"
+			],
+			[
+				"proto",
+				"prototype"
+			],
+			[
+				"lightgray",
+				"lightslategray"
+			],
+			[
+				"retern",
+				"retern2\t                  Multi-line Tern Statement - RETURN           /jeh/"
+			],
+			[
+				"parsa",
+				"parseableStrings"
+			],
+			[
+				"ter",
+				"tern2\t                  [CONDITION] ? [TRUE] : [FALSE]           /jeh/"
+			],
+			[
+				"string",
+				"stringifiableObjects"
+			],
+			[
+				"zz",
+				"zzzz\t          —————————————————————————————————————————————"
+			],
+			[
+				"max",
+				"max-width\tproperty"
+			],
+			[
+				"back",
+				"background-color\tproperty"
+			],
+			[
+				"gener",
+				"generated_card〔variable〕"
+			],
+			[
+				"for",
+				"for\tfor (…) {…}"
+			],
+			[
+				"if",
+				"ife\tif … else"
+			],
+			[
+				"cardNumb",
+				"cardNumberPrefixes〔argument〕"
+			],
+			[
+				"ass",
+				"assertEqual〔function〕"
+			],
+			[
+				"opposite",
+				"oppositeDay"
+			],
+			[
+				"assert",
+				"assertArraysEqual"
+			],
+			[
+				"asser",
+				"assertArraysEqual"
+			],
+			[
+				"add",
+				"addNewLine"
+			],
+			[
+				"black",
+				"blackShoesListing〔variable〕"
+			],
+			[
+				"assertob",
+				"assertObjectsEqual〔function〕"
+			],
+			[
+				"list",
+				"listAsString"
+			],
+			[
+				"sort",
+				"sortAscendingByLength"
+			],
+			[
+				"get",
+				"getExchangeCode〔function〕"
+			],
+			[
+				"points",
+				"pointsPerGame"
+			],
+			[
+				"nump",
+				"Numpad1"
+			],
+			[
+				"Exit",
+				"ExitApp"
+			],
+			[
+				"Del",
+				"Delete"
+			],
+			[
+				"susp",
+				"A_IsSuspended"
+			],
+			[
+				"Detect",
+				"DetectHiddenWindows"
+			],
+			[
+				"AltTab",
+				"AltTabAndMenu"
+			],
+			[
+				"IfWin",
+				"IfWinExist"
+			],
+			[
+				"control",
+				"Control"
+			],
+			[
+				"Volume_",
+				"Volume_Down"
+			],
+			[
+				"A_time",
+				"A_TimeSincePriorHotkey"
+			],
+			[
+				"%",
+				"%id%"
+			],
+			[
+				"spl",
+				"SplitPath"
+			],
+			[
+				"Wina",
+				"WinActive()"
+			],
+			[
+				"XBUT",
+				"XButton2"
+			],
+			[
+				"xb",
+				"XButton2"
+			],
+			[
+				"tray",
+				"trayscript\ttrayscript"
+			],
+			[
+				"winget",
+				"WinGetPos"
+			],
+			[
+				"A_PR",
+				"A_PriorKey"
+			],
+			[
+				"Sen",
+				"SendInput"
+			],
+			[
+				"Detec",
+				"DetectHiddenWindows"
+			],
+			[
+				"Pg",
+				"PgDn"
+			],
+			[
+				"XB",
+				"XButton2"
+			],
+			[
+				"send",
+				"SendInput"
+			],
+			[
+				"Wh",
+				"WheelDown"
+			],
+			[
+				"Xb",
+				"XButton2"
+			],
+			[
+				"Volume",
+				"Volume_Down"
+			],
+			[
+				"vOLU",
+				"Volume_Up"
+			],
+			[
+				"NumpadE",
+				"NumpadClear"
+			],
+			[
+				"high",
+				"highlight_color"
+			],
+			[
+				"highlight",
+				"highlightColor"
+			],
+			[
+				"Caps",
+				"CapsLock"
+			],
+			[
+				"Whee",
+				"WheelDown"
+			],
+			[
+				"Whe",
+				"WheelUp"
+			],
+			[
+				"Morse",
+				"Morse"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "server/controllers.js",
+			"settings":
+			{
+				"buffer_size": 1101,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "server/index.js",
+			"settings":
+			{
+				"buffer_size": 652,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/components/App.jsx",
+			"settings":
+			{
+				"buffer_size": 219,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 280.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"disable",
+				"Package Control: Disable Package"
+			],
+			[
+				"resource",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"enable",
+				"Package Control: Enable Package"
+			],
+			[
+				"theme",
+				"Color Scheme Editor: Edit current color scheme"
+			],
+			[
+				"scheme",
+				"Color Scheme Editor: Edit current color scheme"
+			],
+			[
+				"edit",
+				"Color Scheme Editor: Edit current color scheme"
+			],
+			[
+				"install pac",
+				"Package Control: Install Package"
+			],
+			[
+				"disabl",
+				"Package Control: Disable Package"
+			],
+			[
+				"resourc",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"babel",
+				"Set Syntax: JavaScript (Babel)"
+			],
+			[
+				"boxy",
+				"Boxy Theme: Configuration"
+			],
+			[
+				"gutter",
+				"GutterColor: Fix Current Color Scheme"
+			],
+			[
+				"Snippet: ",
+				"Snippet:                   alt codes - misc characters           /jeh/"
+			],
+			[
+				"box",
+				"Boxy Theme: Configuration"
+			],
+			[
+				"packages",
+				"Package Control: List Packages"
+			],
+			[
+				"ENABLE",
+				"Package Control: Enable Package"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"COLOR",
+				"Color Scheme Editor: Edit current color scheme"
+			],
+			[
+				"brack",
+				"BracketHighlighter: Documentation"
+			],
+			[
+				"sublimi",
+				"Preferences: SublimeLinter Settings"
+			],
+			[
+				"sublimelinter",
+				"Preferences: SublimeLinter Settings"
+			],
+			[
+				"lint",
+				"Preferences: SublimeLinter Key Bindings"
+			],
+			[
+				"fold",
+				"Fold Functions"
+			],
+			[
+				"color",
+				"Color Scheme Editor: Edit current color scheme"
+			],
+			[
+				"colorsc",
+				"Color Scheme Editor: Edit current color scheme"
+			],
+			[
+				"fix",
+				"GutterColor: Fix Current Color Scheme"
+			],
+			[
+				"dis",
+				"Package Control: Disable Package"
+			],
+			[
+				"table of comments",
+				"Table of Comments: Fold All"
+			],
+			[
+				"eslint",
+				"Preferences: SublimeLinter Settings"
+			],
+			[
+				"remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"disab",
+				"Package Control: Disable Package"
+			],
+			[
+				"resour",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"html",
+				"HTMLPrettify: Set `node` Path"
+			],
+			[
+				"css",
+				"CSSLint: Run CSSLint"
+			],
+			[
+				"find",
+				"FindKeyConflicts: All Conflicts"
+			],
+			[
+				"enabl",
+				"Package Control: Enable Package"
+			],
+			[
+				"disable ",
+				"Package Control: Disable Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: List Packages"
+			],
+			[
+				"terminal",
+				"Preferences: Terminal Settings – User"
+			],
+			[
+				"INSTALL",
+				"Package Control: Install Package"
+			],
+			[
+				"codecomp",
+				"CodeComplice: Dump Import Directories"
+			],
+			[
+				"csslint",
+				"CSSLint: Run CSSLint"
+			],
+			[
+				"jsh",
+				"JSHint"
+			],
+			[
+				"esli",
+				"ESLint"
+			],
+			[
+				"removep",
+				"Package Control: Remove Package"
+			],
+			[
+				"list pac",
+				"Package Control: List Packages"
+			],
+			[
+				"list packages",
+				"Package Control: List Packages"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"sublimec",
+				"SublimeCodeIntel: Enable Live Autocompletion for Current Language"
+			],
+			[
+				"findkey",
+				"FindKeyConflicts: All Conflicts"
+			],
+			[
+				"sublimecode",
+				"SublimeCodeIntel: Enable Live Autocompletion for Current Language"
+			],
+			[
+				"sublimecod",
+				"SublimeCodeIntel: Enable Live Autocompletion for Current Language"
+			],
+			[
+				"sublimeCode",
+				"SublimeCodeIntel: Enable Live Autocompletion for Current Language"
+			],
+			[
+				"sublime",
+				"SublimeCodeIntel: Enable Live Autocompletion for Current Language"
+			],
+			[
+				"isntall",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: Disable Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"INSTAL\t",
+				"Package Control: Install Package"
+			],
+			[
+				"install pack",
+				"Package Control: Install Package"
+			],
+			[
+				"remove packa",
+				"Package Control: Remove Package"
+			],
+			[
+				"resrouce",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"buildview",
+				"Disable/Enable buildview for this window"
+			],
+			[
+				"buildv",
+				"Disable/Enable buildview for this window"
+			],
+			[
+				"file brow",
+				"Browse Mode: Current file or project"
+			],
+			[
+				"SNIPPETMA",
+				"SnippetMaker: Make Snippet"
+			],
+			[
+				"LIST",
+				"Package Control: List Packages"
+			],
+			[
+				"snippetmaker",
+				"SnippetMaker: Make Snippet"
+			],
+			[
+				"make",
+				"SnippetMaker: Delete Snippet"
+			],
+			[
+				"snippet",
+				"Snippet: for-()-{}"
+			],
+			[
+				"snipp",
+				"Snippet: for-()-{}-(faster)"
+			],
+			[
+				"snipp\t",
+				"Snippet: if"
+			],
+			[
+				"eisable",
+				"Package Control: Disable Package"
+			],
+			[
+				"destr",
+				"Origami: Destroy Current Pane"
+			],
+			[
+				"o",
+				"Origami: Create Pane Above"
+			],
+			[
+				"build",
+				"Disable/Enable buildview for this window"
+			],
+			[
+				"auto",
+				"Set Syntax: AutoHotkey"
+			],
+			[
+				"pack",
+				"Package Control: List Packages"
+			],
+			[
+				"add file",
+				"Favorite Files: Add File(s)"
+			],
+			[
+				"Package Control: install",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: instal",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"Indentation: Convert to Spaces"
+			]
+		],
+		"width": 484.0
+	},
+	"console":
+	{
+		"height": 455.0,
+		"history":
+		[
+			"sublime.log_commands(True)",
+			"view.settings().get('font_face')",
+			"sublime.log_commands(False)",
+			"sublime.log_commands(True)",
+			"sublime.log_commands(False)",
+			"sublime.log_commands(True)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": true,
+		"show_open_files": false,
+		"show_tabs": true,
+		"side_bar_visible": false,
+		"status_bar_visible": true
+	},
+	"expanded_folders":
+	[
+		"/home/jhillert/Dropbox/Projects/Keep-Away",
+		"/home/jhillert/Dropbox/Projects/Keep-Away/src",
+		"/home/jhillert/Dropbox/Projects/Keep-Away/src/components"
+	],
+	"file_history":
+	[
+		"/home/jhillert/Dropbox/Projects/Keep-Away/lib/hashUtils.js",
+		"/home/jhillert/Dropbox/Projects/Keep-Away/helpers/index.js",
+		"/home/jhillert/Dropbox/Projects/Keep-Away/helpers/crypto.js",
+		"/home/jhillert/Dropbox/Projects/Keep-Away/server/routes.js",
+		"/home/jhillert/Dropbox/Projects/Keep-Away/server/models.js",
+		"/home/jhillert/Dropbox/Projects/Keep-Away/db/index.js",
+		"/home/jhillert/Dropbox/Projects/Keep-Away/node_modules/moment/src/lib/moment/format.js",
+		"/home/jhillert/Dropbox/Projects/Keep-Away/node_modules/moment/src/lib/format/format.js",
+		"/home/jhillert/Dropbox/Projects/Keep-Away/node_modules/moment/src/lib/moment/moment.js",
+		"/home/jhillert/.config/sublime-text-3/Packages/User/Menus/Tab Context.sublime-menu",
+		"/home/jhillert/Downloads/Default/Tab Context.sublime-menu",
+		"/home/jhillert/Dropbox/Coding/NotesProject.sublime-project",
+		"/home/jhillert/.config/sublime-text-3/Packages/User/Menus/EXAMPLES_Context.txt",
+		"/home/jhillert/.config/sublime-text-3/Packages/User/Menus/Context.sublime-menu",
+		"/home/jhillert/.config/sublime-text-3/Packages/SideBarEnhancements/Side Bar.sublime-menu",
+		"/home/jhillert/.config/sublime-text-3/Packages/SideBarEnhancements/Side Bar.sublime-settings",
+		"/home/jhillert/Downloads/Default (1)/Widget Context.sublime-menu",
+		"/home/jhillert/.config/sublime-text-3/Packages/SideBarEnhancements/Commands.sublime-commands",
+		"/home/jhillert/.config/sublime-text-3/Packages/SideBarEnhancements/SideBarDefaultDisable.py",
+		"/home/jhillert/.config/sublime-text-3/Packages/SideBarEnhancements/Tab Context.sublime-menu",
+		"/home/jhillert/.config/sublime-text-3/Packages/User/Menus/Tab Context_sublime-menu",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/bluebird.js",
+		"/home/jhillert/.config/sublime-text-3/Packages/User/Default/Context.sublime-menu",
+		"/home/jhillert/.config/sublime-text-3/Packages/User/Context.sublime-menu",
+		"/home/jhillert/Dropbox/Coding/SUBLIME TWEAK EXAMPLE CODE - Default Folder/Context.sublime-menu",
+		"/home/jhillert/Dropbox/Coding/SUBLIME TWEAK EXAMPLE CODE - Default Folder/Tab Context.sublime-menu",
+		"/home/jhillert/Downloads/SideBarEnhancements/Side Bar.sublime-menu",
+		"/home/jhillert/Dropbox/Coding/SUBLIME TWEAK EXAMPLE CODE - SideBarEnhancements/Tab Context.sublime-menu",
+		"/home/jhillert/Dropbox/Coding/SUBLIME TWEAK EXAMPLE CODE - Default Folder/Widget.sublime-settings",
+		"/home/jhillert/Downloads/SideBarEnhancements/Tab Context.sublime-menu",
+		"/home/jhillert/Downloads/SideBarEnhancements/SideBarDefaultDisable.py",
+		"/home/jhillert/Downloads/SideBarEnhancements/SideBarAPI.py",
+		"/home/jhillert/Downloads/SideBarEnhancements/SideBar.py",
+		"/home/jhillert/Dropbox/Coding/SUBLIME TWEAK EXAMPLE CODE - Default Folder/Side Bar Mount Point.sublime-menu",
+		"/home/jhillert/.config/sublime-text-3/Packages/User/Menus/EXAMPLES_Side_Bar.txt",
+		"/home/jhillert/.config/sublime-text-3/Packages/User/menus/Context.sublime-menu",
+		"/home/jhillert/Dropbox/Projects/Prompts/Full-Stack-Review/database/index.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/groceries/groceries_simple_API.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/cows/cows_index.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/databases-soln/db_server-app.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/minteger/index.js",
+		"/home/jhillert/Dropbox/Projects/Prompts/Full-Stack-Review/client/src/components/Search.jsx",
+		"/home/jhillert/Dropbox/Projects/Prompts/Cows Prompt/server/index.js",
+		"/home/jhillert/Dropbox/Projects/Prompts/Full-Stack-Review/_clean/client/src/components/Search.jsx",
+		"/home/jhillert/Dropbox/Projects/Prompts/Full-Stack-Review/_clean/helpers/github.js",
+		"/home/jhillert/Dropbox/Projects/Prompts/Full-Stack-Review/_clean/server/index.js",
+		"/home/jhillert/Dropbox/Projects/Prompts/Full-Stack-Review/client/dist/bundle.js",
+		"/home/jhillert/Dropbox/Projects/Prompts/Technical Assessment/mInteger/database/index.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Model, View, Controller/__MVC Example Code 2.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/_MySQL Notes.sql",
+		"/home/jhillert/Dropbox/Projects/Prompts/Technical Assessment/mInteger/server/index.js",
+		"/home/jhillert/Dropbox/Projects/Prompts/Full-Stack-Review/helpers/github.js",
+		"/home/jhillert/Dropbox/Projects/Prompts/Full-Stack-Review/JEH_NOTES.md",
+		"/home/jhillert/Dropbox/Projects/Prompts/Full-Stack-Review/JEH_scratch.js",
+		"/home/jhillert/Dropbox/Projects/Prompts/Full-Stack-Review/node_modules/body-parser/README.md",
+		"/home/jhillert/Dropbox/Projects/Prompts/Full-Stack-Review/node_modules/buffer/bin/download-node-tests.js",
+		"/home/jhillert/Dropbox/Projects/Prompts/Full-Stack-Review/node_modules/buffer/README.md",
+		"/home/jhillert/.config/sublime-text-3/Packages/User/Themes/jeh_oceanic-reef.tmTheme",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/minteger/indx.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/minteger/config.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Model, View, Controller/__MVC Example Code 1.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/groceries/server/index.html",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/MINI-promises/PROMISES_FLASH_CARD.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/promises/_promisify-all example.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/shortly-express/public/client/links.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/shortly-express/public/client/app.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/shortly-express/public/client/link.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Model, View, Controller/router.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/chatterbox-server/server_request-handler.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/stuff.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/chatterbox-client/client/env/config.example.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/groceries/src/components/QuantityInput.jsx",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/groceries/src/components/GroceryListTable.jsx",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/groceries/src/components/FoodInput.jsx",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/groceries/src/components/App.jsx",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/groceries/src/index.jsx",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/groceries/server_index.html",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/promises/lib/dummy_example_db.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/promises/lib/asyncLib.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/promises/test/advanced/advancedChaining.test.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/promises/test/advanced/PromiseLib.test.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/promises/.eslintrc.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/promises/.eslintignore",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/promises/exercises/advanced/PromiseLib.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/promises_flashcard.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/groceries/server/index.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/groceries/db/index.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/databases-soln/server/app.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Aggregate/databases-soln/server/spec/server-spec.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/Requests/SRV_models_COWS.js",
+		"/home/jhillert/Dropbox/Coding/--- NOTES ---/requests/queries_models_COWS.js",
+		"/home/jhillert/Dropbox/Coding/internet clocks.txt",
+		"/home/jhillert/Dropbox/Coding/Notes/JavaScript/clarifications.txt",
+		"/home/jhillert/Dropbox/Coding/README - CS ARTICLES NOW GOING INTO ROOT DROPBOX FOLDER",
+		"/home/jhillert/Dropbox/Coding/full stack/Front End/testdoc.html",
+		"/home/jhillert/Dropbox/Coding/full stack/Front End/sprint notes.js",
+		"/home/jhillert/Dropbox/Coding/full stack/Front End/sprint notes.html",
+		"/home/jhillert/Dropbox/Coding/full stack/Front End/repl node presentation.js",
+		"/home/jhillert/Dropbox/Coding/full stack/Front End/udacity.txt",
+		"/home/jhillert/Dropbox/Coding/full stack/Front End/getting-to-know-html/assets/stylesheets/main.css",
+		"/home/jhillert/Dropbox/Coding/full stack/Front End/flexbox.txt",
+		"/home/jhillert/Dropbox/Coding/full stack/Front End/event.target.txt",
+		"/home/jhillert/Dropbox/Coding/full stack/Servers (chatterbox)/SOLUTION - Chatterbox Sprint.js",
+		"/home/jhillert/Dropbox/Coding/4 - LISTS & CODES/CDN List.js",
+		"/home/jhillert/Dropbox/Coding/full stack/Front End/CDN List.js",
+		"/home/jhillert/Dropbox/Coding/Mock Data/jeh_faker_example.js",
+		"/home/jhillert/Dropbox/Coding/request_example.js",
+		"/home/jhillert/Dropbox/Coding/Snippets & Folder Paths.txt",
+		"/home/jhillert/Dropbox/Coding/Node JS/promises.js",
+		"/home/jhillert/Dropbox/Coding/Node JS/Read-Write Files/setup.js",
+		"/home/jhillert/.dropbox/info.json",
+		"/home/jhillert/.dropbox/host.db",
+		"/home/jhillert/.dropbox/dropbox.pid",
+		"/home/jhillert/.config/sublime-text-3/Packages/MarkdownLight/MarkdownLight.sublime-settings",
+		"/home/jhillert/Dropbox/Coding/Terminal Installs - DO NOT DELETE.md",
+		"/home/jhillert/Dropbox/Coding/Node JS/bluebird examples.js",
+		"/home/jhillert/Dropbox/Coding/Servers/Routes, Models (example, template).js",
+		"/home/jhillert/Dropbox/Projects/2 - databases/solution/server/models/index.js",
+		"/home/jhillert/Dropbox/Coding/Servers/Controllers, Routes, Models (example, template).js",
+		"/home/jhillert/Dropbox/Coding/Node JS/AsyncJS NPM Examples.js",
+		"/home/jhillert/.config/user-dirs.dirs",
+		"/home/jhillert/.config/user-dirs.locale",
+		"/home/jhillert/.config/zoomus.conf",
+		"/home/jhillert/Dropbox/Coding/How To/How to restore a Places folders accidentally deleted in Nautilus",
+		"/etc/mysql/mysql.conf.d/mysqld.cnf",
+		"/home/jhillert/Dropbox/Coding/_MySQL/Example Schemas/magento.sql",
+		"/home/jhillert/Dropbox/Projects/Prompts/Cows Prompt/server/controllers.js",
+		"/home/jhillert/Dropbox/Projects/1 - shortly-express/_solution/server/db/config.js"
+	],
+	"find":
+	{
+		"height": 48.0
+	},
+	"find_in_files":
+	{
+		"height": 157.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			", e",
+			"e =>",
+			"(e)",
+			"=>",
+			"results"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": false,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": false
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "server/controllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1101,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								286,
+								286
+							]
+						],
+						"settings":
+						{
+							"SL.109.region_keys":
+							[
+							],
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.clone": -1,
+							"bracket_highlighter.clone_locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										975,
+										976
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/round_bracket.png",
+										"region.yellowish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										966,
+										967
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.clone_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										1098,
+										1099
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"white"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										68,
+										69
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "server/index.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 652,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								68,
+								68
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.clone": -1,
+							"bracket_highlighter.clone_locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.clone_regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/components/App.jsx",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 219,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								105,
+								105
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.clone": -1,
+							"bracket_highlighter.clone_locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.clone_regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										108,
+										109
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"white"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										85,
+										86
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 30.0
+	},
+	"input":
+	{
+		"height": 425.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.SublimeLinter":
+	{
+		"height": 132.0
+	},
+	"output.SublimeLinter Messages":
+	{
+		"height": 518.0
+	},
+	"output.exec":
+	{
+		"height": 178.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.mdpopups":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/User/node.sublime-build",
+	"project": "keepAway.sublime-project",
+	"replace":
+	{
+		"height": 56.0
+	},
+	"save_all_on_build": false,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"find-dup",
+				"find-dup-char.js"
+			],
+			[
+				"algo",
+				"algo-find-dup-char.js"
+			],
+			[
+				"auto",
+				"SCRIPTS\\__autotext.ahk"
+			],
+			[
+				"autotext",
+				"SOURCE\\_Useful Code\\autotext_MultiMenu.ahk"
+			],
+			[
+				"pot",
+				"SCRIPTS\\2 - POTPLAYER64.ahk"
+			],
+			[
+				"gl",
+				"[SCRIPTS]\\GLOBAL.ahk"
+			],
+			[
+				"app",
+				"[SCRIPTS]\\APPS.ahk"
+			],
+			[
+				"vide",
+				"[SCRIPTS]\\VIDEO PLAYERS.ahk"
+			],
+			[
+				"scr",
+				"[SCRIPTS]\\scripts.ahk"
+			],
+			[
+				"glob",
+				"[SCRIPTS]\\GLOBAL.ahk"
+			],
+			[
+				"glo",
+				"[SCRIPTS]\\GLOBAL.ahk"
+			],
+			[
+				"apps",
+				"[SCRIPTS]\\APPS.ahk"
+			],
+			[
+				"sub",
+				"HOTKEYS_Software\\Sublime.ahk"
+			],
+			[
+				"main",
+				"FOLDERS\\GUI\\GUI_MAIN\\Archive\\main.ahk"
+			],
+			[
+				"tray",
+				"FOLDERS\\GUI\\GUI_MAIN\\TrayMenu.ahk"
+			],
+			[
+				"aux",
+				"FOLDERS\\DESKTOP\\aux_desktop_manager_JEH.ahk"
+			],
+			[
+				"jeh",
+				"FOLDERS\\DESKTOP\\aux_desktop_manager_JEH.ahk"
+			],
+			[
+				"variab",
+				"SCRIPTS\\[STARTUP]\\Variables.ahk"
+			],
+			[
+				"reload",
+				"TRAY SCRIPTS\\Reload Scripts.ahk"
+			],
+			[
+				"gui",
+				"_menus\\GUI.ahk"
+			],
+			[
+				"dmc",
+				"_menus\\DMC_menu.ahk"
+			],
+			[
+				"desktops",
+				"_functions\\Desktops.ahk"
+			],
+			[
+				"subl",
+				"Scripts\\S-Z\\Sublime.ahk"
+			],
+			[
+				"sublim",
+				"Scripts\\S-Z\\Sublime.ahk"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 919.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"D:\\AHK Tools\\Scripts\\SCRIPTS.sublime-project"
+			],
+			[
+				"s",
+				"E:\\Addendum\\START_STUFF_STOP_STUFF.sublime-workspace"
+			]
+		],
+		"width": 766.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "Rbutton",
+		"selected_items":
+		[
+			[
+				"Rbutton",
+				"RButton"
+			]
+		],
+		"width": 392.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 272.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

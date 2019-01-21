@@ -1,57 +1,46 @@
-var db = require('../db');
-// var Promise = require("bluebird");
-// Promise.promisifyAll(require("mysql/lib/Connection").prototype);
+const db = require('../db');
 
-// const connection = mysql.createConnection({.....});
-// global.db  = Promise.promisifyAll(connection);
-// db.queryAsync("SELECT * FROM users").then(function(rows){
-// console.log(rows);});
+Object.prototype.parseSqlResult = function () {
+    return JSON.parse(JSON.stringify(this[0]))
+}
 
 module.exports = {
 
   secrets: {
-    get: function (param, callback) {
-      var queryStr = `SELECT secretsID, created, available, secret FROM secrets
-                      LEFT JOIN credentials USING (userID)
-                      WHERE username='${param[0]}';`;
-      db.query(queryStr, function(err, results) {
-        callback(err, results);
-      });
-    },
 
-    post: function (params, callback) {
-      let param = [params.username, params.password];
-      db.queryAsync(`
-        INSERT IGNORE INTO credentials
-            (username, password)
-        VALUES
-            (?, ?);`,
-        param
-      ).then(function(results) {
-        let param = [params.created, params.available, params.secret];
-        db.query(`
-          INSERT INTO secrets
-              (userID,created,available,secret)
-          VALUES
-              ('103',?,?,?);`,
-          param)
-        }).then(function(err, results) {
-          return callback(err, results);
-        });
-    }
+    get: (param) => db
+      .queryAsync( `
+        SELECT secretsId, created, available, secret FROM secrets
+        LEFT JOIN credentials USING (userId)
+        WHERE username='${param[0]}';`)
+      .catch((error) => console.error('Error', error)),
 
-    // put: function (params, callback) {
-    //   var queryStr = ``;
-    //   db.query(queryStr, params, function(err, results) {
-    //     callback(err, results);
-    //   });
-    // },
-    // delete: function (params, callback) {
-    //   var queryStr = ``;
-    //   db.query(queryStr, params, function(err, results) {
-    //     callback(err, results);
-    //   });
-    // }
-  // },
+    post: (params) => db.queryAsync(`INSERT IGNORE INTO credentials(username, password) VALUES (?, ?);`,
+      [params.username, params.password])
+      .then((results) => {
+        // user was found, no last auto_id
+        if (results.insertId === 0) {
+          return db.queryAsync(`SELECT userId FROM credentials WHERE username='${params.username}';`);
+        }
+        return results.insertId;
+      })
+      .then((results) => {
+        if (typeof results === 'object') {
+          results = results.parseSqlResult().userId;
+        }
+        db.queryAsync(`INSERT INTO secrets (userId,created,available,secret) VALUES (?,?,?,?);`,
+          [results, params.created, params.available, params.secret])
+      })
+      .catch((error) => console.error('Error', error)),
+
+    put: (params) => db
+      .queryAsync(`UPDATE secrets SET available = ? WHERE secretsId = ?;`, params)
+      .catch((error) => console.error('Error', error)),
+
+    delete: (param) => db
+      .queryAsync(`DELETE FROM secrets WHERE secretsId = ${param[0]};`)
+      .catch((error) => console.error('Error', error))
+
   }
+
 }
