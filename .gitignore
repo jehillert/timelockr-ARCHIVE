@@ -55,6 +55,8 @@ typings/
 .env
 .DS_Store
 config.js
+*.sublime-workspace
+*.sublime-project
 
 # next.js build output
 .next

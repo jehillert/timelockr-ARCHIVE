@@ -27,9 +27,14 @@ module.exports = {
     'react/lib/ReactContext': true,
     'react/lib/ExecutionEnvironment': true
   },
+   node: {
+       fs: "empty"
+   },
   resolve: {
     extensions: ['.js', '.jsx']
   }
 };
 // 'node' key addresses a problem with dotenv
 // 'resolve' key makes it so import modules do not have to specify file extension
+// 'node: {fs: "empty"}' included to resolve 'Uncaught Error: Cannot find module "fs"',
+//      which necessitated adding "babel-preset-stage-0": "^6.24.1" to package (possibly)

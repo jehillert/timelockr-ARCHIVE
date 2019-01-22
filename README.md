@@ -35,6 +35,7 @@ TimeRemainingChart
 ROUTES
 getEntries
 postEntry
+updateEntry
 deleteEntry
 deleteAllEntries
 
@@ -46,7 +47,6 @@ deleteEntry
 A username
 A password
 A description
-A security level
 No username
 
 Tooltips to explain

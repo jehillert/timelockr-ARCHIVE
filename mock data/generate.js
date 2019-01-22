@@ -41,17 +41,19 @@ async.waterfall([
   function(credStream, secretStream, callback) {
 
     // all vars used in this block except iterators i,j
-    let available,
-        created,
+    let release_date,
+        creation_date,
         password,
-        secret,
+        secret_label,
+        secret_body,
         secretCount,
         username,
+        s = 1,
         numberSameDayTrials = 15;
 
     // write csv column headers
-    credStream.write('username,password,userId\n');
-    secretStream.write('created,available,secret,userId\n');
+    credStream.write('user_id,username,password\n');
+    secretStream.write('secret_id,user_id,secret_id,creation_date,release_date,secret_label,secret_body\n');
 
     // generate data & write to files
     faker.seed(123);
@@ -61,17 +63,19 @@ async.waterfall([
       password = faker.internet.password();
       secretCount = faker.random.number({'min': 0, 'max': 2});
 
-      credStream.write(`"${username}","${password}",${i}\n`);
+      credStream.write(`${i},"${username}","${password}"\n`);
       for (let j = 0; j <= secretCount; j++) {
-        secret = faker.lorem.lines(1);
+        secret_label = faker.lorem.words(2)
+        secret_body = faker.lorem.lines(1);
         if (i < numberSameDayTrials) {
-          created = moment().format('YYYY-MM-DD HH:mm:ss');
-          available = aTimeLaterToday();
+          creation_date = moment().format('YYYY-MM-DD HH:mm:ss');
+          release_date = aTimeLaterToday();
         } else {
-          created = moment(faker.date.past()).format('YYYY-MM-DD HH:mm:ss');
-          available = moment(faker.date.future()).format('YYYY-MM-DD HH:mm:ss');
+          creation_date = moment(faker.date.past()).format('YYYY-MM-DD HH:mm:ss');
+          release_date = moment(faker.date.future()).format('YYYY-MM-DD HH:mm:ss');
         }
-        secretStream.write(`${created},${available},"${secret}",${i}\n`);
+        secretStream.write(`${s},${i},${creation_date},${release_date},"${secret_label}","${secret_body}"\n`);
+        s++;
       }
     }
     callback(null, credStream, secretStream);

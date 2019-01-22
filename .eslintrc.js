@@ -16,7 +16,7 @@ module.exports = {
     'no-mixed-spaces-and-tabs': 2,
     'indent': [2, 2],
     /* Variable names */
-    'camelcase': 2,
+    /*'camelcase': 2,*/
     /* Language constructs */
     'curly': 2,
     'eqeqeq': [2, 'smart'],
@@ -39,6 +39,6 @@ module.exports = {
     'no-use-before-define': 2,
     /* Minuta */
     'comma-style': [2, 'last'],
-    'quotes': [1, 'single']
+    'quotes': [1, 'single', {"allowTemplateLiterals": true}]
   }
 };
