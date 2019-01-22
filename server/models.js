@@ -6,7 +6,21 @@ Object.prototype.parseSqlResult = function () {
 
 module.exports = {
 
-  secret: {
+  general: {
+    delete: (params) => db
+      .queryAsync(`DELETE FROM ?? WHERE ?? = ?;`, params)
+      .catch((error) => console.error('Error', error)),
+    put: (params) => db
+      .queryAsync(`UPDATE IGNORE ?? SET ?? = ? WHERE ?? = ?;`, params)
+      .catch((error) => console.error('Error', error))
+  },
+
+  credentials: {
+    post: (params) => db.queryAsync(`INSERT IGNORE INTO ??(??, ??) VALUES (?, ?);`, params)
+      .catch((error) => console.error('Error', error)),
+  },
+
+  secrets: {
     post: (params) => db.queryAsync(`INSERT IGNORE INTO credentials(username, password) VALUES (?, ?);`,
       [params.username, params.password])
       .then((results) => {
@@ -24,23 +38,8 @@ module.exports = {
           [results, params.creation_date, params.release_date, params.secret_label, params.secret_body]);
       })
       .catch((error) => console.error('Error', error)),
-    put: (params) => db
-      .queryAsync(`UPDATE secrets SET release_date = ? WHERE secret_id = ?;`, params)
-      .catch((error) => console.error('Error', error)),
-    delete: (param) => db
-      .queryAsync(`DELETE FROM secrets WHERE secret_id = ${param[0]};`)
-      .catch((error) => console.error('Error', error))
-  },
-
-  secrets: {
     get: (param) => db
-      .queryAsync( `
-        SELECT secret_id, creation_date, release_date, secret_label, secret_body FROM secrets
-        LEFT JOIN credentials USING (user_id)
-        WHERE username='${param[0]}';`)
-      .catch((error) => console.error('Error', error)),
-    delete: (param) => db
-      .queryAsync(`DELETE FROM secrets WHERE user_id = ${param[0]};`)
+      .queryAsync(`SELECT * FROM secrets LEFT JOIN credentials USING (user_id) WHERE username = ?;`, param)
       .catch((error) => console.error('Error', error))
   }
 

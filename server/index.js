@@ -20,7 +20,7 @@ app.use(parser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/../dist'));
 
 // Set up our routes
-app.use('/api/safekeep', router);
+app.use('/api/keepsafe', router);
 
 // Serve the client files
 app.use(express.static(__dirname + '/../client'));
