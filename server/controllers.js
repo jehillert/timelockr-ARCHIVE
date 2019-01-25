@@ -1,72 +1,71 @@
 const models = require('./models');
+const Promise = require('bluebird');
+const moment = require('moment');
+// const ntpClient = Promise.promisifyAll(require('ntp-client'));
 
 module.exports = {
 
   credentials: {
-    post: (req, res) => postToTable('credentials', req, res),
+    get: (req, res) => getData('credentials', req, res),
     put: (req, res) => updateField('credentials', req, res),
+    post: (req, res) => postToTable('credentials', req, res),
     delete: (req, res) => deleteFromTable('credentials', req, res)
   },
 
   secrets: {
-    get: (req, res) => {
-      return models.secrets.get(req.body.username)
-        .then(results => res.json(results))
-        .catch(error => console.error('Error', error));
-    },
+    get: (req, res) => getData('secrets', req, res),
     put: (req, res) => updateField('secrets', req, res),
-    delete: (req, res) => deleteFromTable('secrets', req, res),
-    post: (req, res) => {
-      let params = {
-        username: req.body.username,
-        password: req.body.password,
-        creation_date: req.body.creation_date,
-        release_date: req.body.release_date,
-        secret_label: req.body.secret_label,
-        secret_body: req.body.secret_body
-      };
-      return models.secret.post(params)
-        .then(results => res.sendStatus(201))
-        .catch(error => console.error('Error', error));
-    }
+    post: (req, res) => postToTable('secrets', req, res),
+    delete: (req, res) => deleteFromTable('secrets', req, res)
   }
 
 };
 
-function updateField(tableName, req, res) {
-  // query requires: table_name, targetFields, targetValues, reference_fields, reference_values
-// (`UPDATE ?? SET ?? = ? WHERE ?? = ?;`, params)
-
-  fields = Object.keys(req.body);
-  values = Object.keys(req.body).map(key => req.body[key]);
-
-  let params = [tableName].concat(fields[0], values[0], fields[1], values[1]);
-
-  models.general.put(params)
+function deleteFromTable(tableName, req, res) {
+  let params = getParams(tableName, req);
+  models.general.delete(params)
     .then(results => res.sendStatus(201))
     .catch(error => console.error('Error', error));
 }
 
+function getData(tableName, req, res) {
+  let params = getParams(tableName, req);
+  models[tableName].get(params)
+    .then(results => res.json(results))
+    .catch(error => console.error('Error', error));
+}
+
 function postToTable(tableName, req, res) {
-  // query requires: tableName, targetFields, targetValues
-  fields = Object.keys(req.body);
-  values = Object.keys(req.body).map(key => req.body[key]);
-
-  let params = [tableName].concat(fields, values);
-
+  let params = getParams(tableName, req);
   models[tableName].post(params)
     .then(results => res.sendStatus(201))
     .catch(error => console.error('Error', error));
 }
 
-function deleteFromTable(tableName, req, res) {
-  // query requires: tableName, reference_fields, reference_values
+function updateField(tableName, req, res) {
   fields = Object.keys(req.body);
   values = Object.keys(req.body).map(key => req.body[key]);
-
-  let params = [tableName].concat(fields, values);
-  console.log(params);
-  models.general.delete(params)
+  let params = [tableName].concat(fields[0], values[0], fields[1], values[1]);
+  models.general.put(params)
     .then(results => res.sendStatus(201))
     .catch(error => console.error('Error', error));
 }
+
+
+// HELPERS
+function getParams(tableName, req) {
+  fields = Object.keys(req.body);
+  values = Object.keys(req.body).map(key => req.body[key]);
+  return params = [tableName].concat(fields, values);
+}
+
+function getTime() {
+  return ntpClient
+    .getNetworkTimeAsync("time1.google.com", 123)
+    .then(date => moment(date).format('YYYY-MM-DD HH:mm:ss'))
+    .then(date => {
+      console.log(`Retrieved current network time: ${date}`);
+      return date;
+    })
+    .catch(error => console.error(`${error}\nNote: Error indicates that getTime() failed to retrieve internet time.`));
+};

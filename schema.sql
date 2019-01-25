@@ -1,11 +1,11 @@
 /*mysql -u root <schema.sql*/
-DROP DATABASE IF EXISTS safekeep;
-CREATE DATABASE IF NOT EXISTS safekeep;
+DROP DATABASE IF EXISTS keepsafe;
+CREATE DATABASE IF NOT EXISTS keepsafe;
 
-USE safekeep;
+USE keepsafe;
 
 CREATE TABLE IF NOT EXISTS credentials (
-  user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  user_id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
   username VARCHAR(25) NOT NULL,
   password VARCHAR(25) NOT NULL,
   UNIQUE KEY (username),
@@ -13,11 +13,11 @@ CREATE TABLE IF NOT EXISTS credentials (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS secrets (
-  secret_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  secret_id INT(4) ZEROFILL AUTO_INCREMENT NOT NULL PRIMARY KEY,
   user_id INT(10) NOT NULL,
   creation_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   release_date DATETIME NOT NULL,
-  secret_label VARCHAR(20) NOT NULL DEFAULT '',
+  secret_label VARCHAR(100) NOT NULL DEFAULT '',
   secret_body VARCHAR(10000) NOT NULL,
   FOREIGN KEY fk_user (user_id)
     REFERENCES credentials(user_id)
@@ -27,15 +27,15 @@ CREATE TABLE IF NOT EXISTS secrets (
 
 
 /* Procedure to show full secret entries */
--- USE `safekeep`;
+-- USE `keepsafe`;
 -- DROP procedure IF EXISTS `ShowSecretsEntries`;
 
 -- DELIMITER $$
--- USE `safekeep`$$
+-- USE `keepsafe`$$
 -- CREATE DEFINER=`root`@`localhost` PROCEDURE `JoinTables`()
 -- BEGIN
---   SELECT * FROM safekeep.secrets
---   LEFT JOIN safekeep.credentials USING (user_id);
+--   SELECT * FROM keepsafe.secrets
+--   LEFT JOIN keepsafe.credentials USING (user_id);
 -- END;$$
 
 -- DELIMITER ;

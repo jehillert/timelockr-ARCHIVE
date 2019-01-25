@@ -1,5 +1,8 @@
-const safe = require('../../lib/safe');
+// import Safe from '../../lib/getTime'
 import React from 'react';
+import EntryForm from './EntryForm';
+import TestButton from './TestButton';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -9,10 +12,10 @@ class App extends React.Component {
   render() {
     return (
       <div id='app'>
-
-        Howdy
+        <TestButton />
+        <EntryForm />
       </div>
-    );
+    )
   }
 }
 

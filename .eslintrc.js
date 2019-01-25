@@ -20,7 +20,7 @@ module.exports = {
     /* Language constructs */
     'curly': 2,
     'eqeqeq': [2, 'smart'],
-    'func-style': [2, 'expression'],
+    // 'func-style': [2, 'expression'],
     /* Semicolons */
     'semi': 2,
     'no-extra-semi': 2,
@@ -36,7 +36,7 @@ module.exports = {
     'space-infix-ops': 1,
     /* Variable declaration */
     'one-var': [1, { 'uninitialized': 'never', 'initialized': 'never' }],
-    'no-use-before-define': 2,
+    'no-use-before-define': [2, {'functions': false, 'classes': true}],
     /* Minuta */
     'comma-style': [2, 'last'],
     'quotes': [1, 'single', {"allowTemplateLiterals": true}]

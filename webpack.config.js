@@ -1,5 +1,6 @@
-var webpack = require('webpack');
-var path = require('path');
+const webpack = require('webpack');
+const Dotenv = require('dotenv-webpack');
+const path = require('path');
 
 module.exports = {
   entry: {
@@ -19,7 +20,8 @@ module.exports = {
         options: {
           presets: ['env', 'react', 'stage-0']
         }
-      }
+      },
+      { test: /\.css$/, use: ['style-loader', 'css-loader'] },
     ]
   },
   externals: {
@@ -27,14 +29,19 @@ module.exports = {
     'react/lib/ReactContext': true,
     'react/lib/ExecutionEnvironment': true
   },
-   node: {
-       fs: "empty"
-   },
+  node: {
+    console: true,
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
+  },
   resolve: {
     extensions: ['.js', '.jsx']
   }
 };
+// { test: /\.json$/, loader: 'json-loader' },
 // 'node' key addresses a problem with dotenv
 // 'resolve' key makes it so import modules do not have to specify file extension
 // 'node: {fs: "empty"}' included to resolve 'Uncaught Error: Cannot find module "fs"',
 //      which necessitated adding "babel-preset-stage-0": "^6.24.1" to package (possibly)
+// "node: { console: true, fs: 'empty', net: 'empty', tls: 'empty' }, " added to enable import of 'request' module

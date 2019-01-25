@@ -8,7 +8,8 @@ const aTimeLaterToday = () => {
   let now = moment();
   let midnight = moment().endOf('day');
   let timeInBetween = faker.date.between(now, midnight);
-  timeInBetween = moment(timeInBetween).format('YYYY-MM-DD HH:mm:ss');
+  timeInBetween = moment(timeInBetween).format('YYYY-MM-DD HH:mm');
+  // timeInBetween = moment(timeInBetween).format('YYYY-MM-DD HH:mm:ss');
   return timeInBetween;
 };
 
@@ -68,11 +69,14 @@ async.waterfall([
         secret_label = faker.lorem.words(2)
         secret_body = faker.lorem.lines(1);
         if (i < numberSameDayTrials) {
-          creation_date = moment().format('YYYY-MM-DD HH:mm:ss');
+          creation_date = moment().format('YYYY-MM-DD HH:mm');
+          // creation_date = moment().format('YYYY-MM-DD HH:mm:ss');
           release_date = aTimeLaterToday();
         } else {
-          creation_date = moment(faker.date.past()).format('YYYY-MM-DD HH:mm:ss');
-          release_date = moment(faker.date.future()).format('YYYY-MM-DD HH:mm:ss');
+          creation_date = moment(faker.date.past()).format('YYYY-MM-DD HH:mm');
+          // creation_date = moment(faker.date.past()).format('YYYY-MM-DD HH:mm:ss');
+          release_date = moment(faker.date.future()).format('YYYY-MM-DD HH:mm');
+          // release_date = moment(faker.date.future()).format('YYYY-MM-DD HH:mm:ss');
         }
         secretStream.write(`${s},${i},${creation_date},${release_date},"${secret_label}","${secret_body}"\n`);
         s++;
