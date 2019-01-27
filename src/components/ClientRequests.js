@@ -13,7 +13,7 @@ module.exports.retrieveSecrets = (username) => {
     qs: {
         username: username
     },
-    json: false
+    json: true
   };
   debug(options);
   return rp(options)
