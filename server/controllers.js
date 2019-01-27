@@ -1,3 +1,4 @@
+var debug = require('debug')('TimeLocker:server:controllers');
 const models = require('./models');
 const Promise = require('bluebird');
 const moment = require('moment');
@@ -28,8 +29,15 @@ function deleteFromTable(tableName, req, res) {
     .catch(error => console.error('Error', error));
 }
 
+// 'GET' Request Helpers
 function getData(tableName, req, res) {
   let params = getParams(tableName, req);
+
+  if (req.query.username) {
+    params.splice(1, 0, 'username', req.query.username);
+  }
+
+  debug(`username: ${req.query.username}, params: ${params}\n`);
   models[tableName].get(params)
     .then(results => res.json(results))
     .catch(error => console.error('Error', error));
@@ -50,7 +58,6 @@ function updateField(tableName, req, res) {
     .then(results => res.sendStatus(201))
     .catch(error => console.error('Error', error));
 }
-
 
 // HELPERS
 function getParams(tableName, req) {

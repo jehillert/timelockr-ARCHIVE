@@ -1,3 +1,4 @@
+var debug = require('debug')('components:EntryForm');
 import React from 'react';
 import {InputTextarea} from 'primereact/inputtextarea';
 import {InputText} from 'primereact/inputtext';
@@ -95,10 +96,3 @@ class EntryForm extends React.Component {
 }
 
 export default EntryForm;
-
-
-
-
-
-
-

@@ -1,8 +1,16 @@
+AFTER BASIC IMPLEMENTATION
+- MULTIPLE VIEWS
+  • “react-router-dom”: “^4.3.1”,
+
+https://react-bootstrap.github.io/components/forms/
+look at choose file option
+can you populate your database with files as will?
+
 # Keep-Away/Nuh-uh/fuggeddaboutit
 
 STUFF
   • https://www.npmjs.com/package/classnames#usage-with-reactjs
-  •
+  • DEBUGGING https://blog.risingstack.com/node-js-logging-tutorial/
 ANSWERS
   MYSQL ==> CONTEXT MENU QUERIES...
   POSTMAN ==> CODE FOR REQUEST...

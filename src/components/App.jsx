@@ -1,21 +1,36 @@
-// import Safe from '../../lib/getTime'
+require('dotenv').config();
+const rq = require('./ClientRequests');
 import React from 'react';
 import EntryForm from './EntryForm';
-import TestButton from './TestButton';
+import Table from './Table';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      error: null,
+      isLoaded: false,
+      username: 'Johnpaul_Kutch',
+      secrets: []
+    };
+  }
 
+  componentDidMount() {
+    rq.retrieveSecrets(this.state.username)
+      .then(results => {
+        this.setState(state => {
+          state.secrets = results;
+        });
+      });
   }
 
   render() {
     return (
       <div id='app'>
-        <TestButton />
         <EntryForm />
+        <Table secrets={this.state.secrets}/>
       </div>
-    )
+    );
   }
 }
 

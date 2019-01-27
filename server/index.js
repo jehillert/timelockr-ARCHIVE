@@ -1,29 +1,24 @@
+require('dotenv').config();
+var debug = require('debug')('TimeLocker:server');
+var cors = require('cors')
 const express = require('express');
-// const db = require('../db');
 const PORT = 3000;
-
-// Middleware
 var parser = require('body-parser');
-
-// Router
 var router = require('./routes.js');
-
 var app = express();
 module.exports.app = app;
 
-// Set what we are listening on.
 app.set('port', PORT);
-
-// Logging and parsing
 app.use(parser.json());
-app.use(parser.urlencoded({extended: true}));
+app.use(parser.urlencoded({extended: false}));
 app.use(express.static(__dirname + '/../dist'));
+app.use(cors());
 
 // Set up our routes
 app.use('/api/keepsafe', router);
 
 // Serve the client files
-app.use(express.static(__dirname + '/../client'));
+// app.use(express.static(__dirname + '/../client'));
 
 //listen
 app.listen(PORT, () => {

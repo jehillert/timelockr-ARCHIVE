@@ -1,3 +1,4 @@
+var debug = require('debug')('TimeLocker:server:models');
 const db = require('../db');
 
 Object.prototype.parseSqlResult = function () {
@@ -24,11 +25,15 @@ module.exports = {
   },
 
   secrets: {
-    post: (params) => db.queryAsync(`INSERT INTO ??(secret_id, ??, ??, ??, ??, ??) VALUES (0,?,?,?,?,?);`, params)
+    post: (params) => db
+      .queryAsync(`INSERT INTO ??(secret_id, ??, ??, ??, ??, ??) VALUES (0,?,?,?,?,?);`, params)
       .catch((error) => console.error('Error', error)),
-    get: (params) => db
-      .queryAsync(`SELECT * FROM ?? LEFT JOIN credentials USING (user_id) WHERE ?? = ?;`, params)
-      .catch((error) => console.error('Error', error))
+    get: (params) => {
+      debug(params);
+      return db
+        .queryAsync(`SELECT * FROM ?? LEFT JOIN credentials USING (user_id) WHERE ?? = ?;`, params)
+        .catch((error) => console.error('Error', error))
+    }
   }
 
 };
