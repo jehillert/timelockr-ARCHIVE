@@ -1,20 +1,22 @@
 var debug = require('debug')('TimeLocker:server:controllers');
-const models = require('./models');
 const Promise = require('bluebird');
+const models = require('./models');
 const moment = require('moment');
-// const ntpClient = Promise.promisifyAll(require('ntp-client'));
+const helpers = require('./../lib/helpers.js');
 
 module.exports = {
 
   credentials: {
-    get: (req, res) => getData('credentials', req, res),
+    get: (req, res) => getData('credentials', req, res).then(results => res.json(results)),
     put: (req, res) => updateField('credentials', req, res),
     post: (req, res) => postToTable('credentials', req, res),
     delete: (req, res) => deleteFromTable('credentials', req, res)
   },
 
   secrets: {
-    get: (req, res) => getData('secrets', req, res),
+    get: (req, res) => getData('secrets', req, res)
+      .then(results => helpers.filterAndFormatSecrets(results))
+      .then(results => res.json(results)),
     put: (req, res) => updateField('secrets', req, res),
     post: (req, res) => postToTable('secrets', req, res),
     delete: (req, res) => deleteFromTable('secrets', req, res)
@@ -23,7 +25,7 @@ module.exports = {
 };
 
 function deleteFromTable(tableName, req, res) {
-  let params = getParams(tableName, req);
+  let params = helpers.getParams(tableName, req);
   models.general.delete(params)
     .then(results => res.sendStatus(201))
     .catch(error => console.error('Error', error));
@@ -31,20 +33,19 @@ function deleteFromTable(tableName, req, res) {
 
 // 'GET' Request Helpers
 function getData(tableName, req, res) {
-  let params = getParams(tableName, req);
+  let params = helpers.getParams(tableName, req);
 
   if (req.query.username) {
     params.splice(1, 0, 'username', req.query.username);
   }
 
-  debug(`username: ${req.query.username}, params: ${params}\n`);
-  models[tableName].get(params)
-    .then(results => res.json(results))
+  return models[tableName].get(params)
+    // .tap(results => {debug(results)})
     .catch(error => console.error('Error', error));
 }
 
 function postToTable(tableName, req, res) {
-  let params = getParams(tableName, req);
+  let params = helpers.getParams(tableName, req);
   models[tableName].post(params)
     .then(results => res.sendStatus(201))
     .catch(error => console.error('Error', error));
@@ -58,21 +59,3 @@ function updateField(tableName, req, res) {
     .then(results => res.sendStatus(201))
     .catch(error => console.error('Error', error));
 }
-
-// HELPERS
-function getParams(tableName, req) {
-  fields = Object.keys(req.body);
-  values = Object.keys(req.body).map(key => req.body[key]);
-  return params = [tableName].concat(fields, values);
-}
-
-function getTime() {
-  return ntpClient
-    .getNetworkTimeAsync("time1.google.com", 123)
-    .then(date => moment(date).format('YYYY-MM-DD HH:mm:ss'))
-    .then(date => {
-      console.log(`Retrieved current network time: ${date}`);
-      return date;
-    })
-    .catch(error => console.error(`${error}\nNote: Error indicates that getTime() failed to retrieve internet time.`));
-};

@@ -1,11 +1,11 @@
-// const rq = require('./ClientRequests');
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import EntryForm from './EntryForm';
+// import Grid from './Grid';
+// import LoginForm from './LoginForm';
 import Table from './Table';
-const rp = require('request-promise');
-const errors = require('request-promise/errors');
+import {Grid, Row, Col} from 'react-bootstrap';
+const rq = require('../../lib/ClientRequests');
 
 class App extends React.Component {
   constructor(props) {
@@ -14,49 +14,37 @@ class App extends React.Component {
       error: null,
       isLoaded: false,
       username: '',
-      secrets: []
+      locked: [],
+      released: []
     };
   }
 
   componentDidMount = () => {
-    this.retrieveSecrets('Johnpaul_Kutch');
+    rq.retrieveSecrets('Makenzie.Kohler83')
+      .then(results => {
+        this.setState((state, props) => ({
+          locked: results.locked,
+          released: results.released
+        }));
+      console.log(this.state.secrets);
+        // this.setState({secrets: results});
+      });
   }
 
   render() {
     return (
       <div>
-        <Table secrets={this.state.secrets}/>
+        <Grid>
+          <Row className="show-grid">
+            <Col lg={4} md={4}>
+              <Table secrets={this.state.released}/>
+            </Col>
+          </Row>
+        </Grid>
         <EntryForm />
       </div>
     );
   }
-
-  retrieveSecrets = (username) => {
-    var options = {
-      uri: `http://localhost:3000/api/keepsafe/secrets/`,
-      headers: {
-        'User-Agent': 'Request-Promise',
-        'Content-Type': 'application/json'
-      },
-      qs: {
-          username: username
-      },
-      json: true
-    };
-    rp(options)
-      .then(results => {
-        // this.setState((state) => {
-          // state.secrets = results;
-          // state.isLoaded = true;
-        // });
-        this.setState({secrets: results})
-      })
-      .catch(errors.StatusCodeError, reason => {
-        console.error(`ERROR @ function 'retrieveSecrets().'\n${reason.statusCode}`)})
-      .catch(errors.RequestError, reason => {
-        console.error(`ERROR @ function 'retrieveSecrets().'\n${reason.cause}`)}).bind;
-  };
-
 }
 
 export default App;

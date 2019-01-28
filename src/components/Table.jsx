@@ -1,49 +1,36 @@
 import React from 'react';
-import moment from 'moment';
+import { Table } from 'react-bootstrap';
 
-class Table extends React.Component {
+// moment(scr.creation_date).format("DD/MM/YYYY MM:hh a")
+class UserTable extends React.Component {
   render() {
-    console.log(this.props.secrets);
+    let tbl;
+    if (this.props.secrets.length > 0) {
+      tbl = (
+        <Table striped bordered condensed hover>
+          <thead>
+            <tr>
+              <th>Label</th>
+              <th>Content</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.props.secrets.map(scr => (
+              <tr className="scr-row" key={scr.id}>
+                <td className="scr-data">{scr.label}</td>
+                <td className="scr-data">{scr.body}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      );
+    } else {
+      tbl = <div></div>
+    }
     return (
-      <div className="scr-list">
-        <div className="scr-header scr-row">
-          <div className="scr-data">Label</div>
-          <div className="scr-data">Content</div>
-          <div className="scr-data">Date Created</div>
-          <div className="scr-data">Release Date</div>
-        </div>
-        {this.props.secrets.map(scr => (
-          <div className="scr-row" key={scr.secret_id}>
-            <div className="scr-data">{scr.secret_label}</div>
-            <div className="scr-data">{scr.secret_body}</div>
-            <div className="scr-data">{scr.creation_date}</div>
-            <div className="scr-data">{scr.release_date}</div>
-          </div>
-        ))}
-      </div>
+      tbl
     );
   }
 }
 
-// function Table(props) {
-//   return (
-//     <div className="scr-list">
-//       <div className="scr-header scr-row">
-//         <div className="scr-data">Label</div>
-//         <div className="scr-data">Content</div>
-//         <div className="scr-data">Date Created</div>
-//         <div className="scr-data">Release Date</div>
-//       </div>
-//       {this.props.secrets.map(scr => (
-//         <div className="scr-row" key={scr.secret_id}>
-//           <div className="scr-data">{scr.secret_label}</div>
-//           <div className="scr-data">{scr.secret_body}</div>
-//           <div className="scr-data">{scr.creation_date}</div>
-//           <div className="scr-data">{scr.release_date}</div>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// }
-
-export default Table;
+export default UserTable;

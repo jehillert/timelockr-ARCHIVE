@@ -1,4 +1,3 @@
-var debug = require('debug')('components:EntryForm');
 import React from 'react';
 import {InputTextarea} from 'primereact/inputtextarea';
 import {InputText} from 'primereact/inputtext';
@@ -40,15 +39,15 @@ class EntryForm extends React.Component {
   }
 
   handleChange(e) {
-      this.setState({[e.target.id]: e.target.value});
+    this.setState({[e.target.id]: e.target.value});
   }
 
   onOpen() {
-      this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
+    this.carservice.getCarsSmall().then(data => this.setState({cars: data}));
   }
 
   toggle() {
-      this.setState({disabled: !this.state.disabled});
+    this.setState({disabled: !this.state.disabled});
   }
 
   render() {
@@ -58,31 +57,31 @@ class EntryForm extends React.Component {
       <div>
         <div>
           <h4> Enter something you wish to forget. </h4>
-            <InputText id="secret_label" value={this.state.secret_label} onChange={this.handleChange} />
-            <p></p>
-            <InputTextarea id="secret_body" rows={3} cols={30} value={this.state.secret_body} onChange={this.handleChange} autoResize={true} />
+          <InputText id="secret_label" value={this.state.secret_label} onChange={this.handleChange} />
+          <p></p>
+          <InputTextarea id="secret_body" rows={3} cols={30} value={this.state.secret_body} onChange={this.handleChange} autoResize={true} />
         </div>
 
         <div>
           <h4> Enter date to remember it by. </h4>
           <div className="p-col-12 p-md-4">
-              <h3>Time</h3>
-              <InputMask
-                mask="99:99"
-                value={this.state.val7}
-                placeholder="99:99"
-                slotChar="hh:mm"
-                onChange={(e) => this.setState({val7: e.value})}/>
+            <h3>Time</h3>
+            <InputMask
+              mask="99:99"
+              value={this.state.val7}
+              placeholder="99:99"
+              slotChar="hh:mm"
+              onChange={(e) => this.setState({val7: e.value})}/>
           </div>
 
           <div className="p-col-12 p-md-4">
-              <h3>Date {this.state.val3}</h3>
-              <InputMask
-                mask="99/99/9999"
-                value={this.state.val3}
-                placeholder="99/99/9999"
-                slotChar="mm/dd/yyyy"
-                onChange={(e) => this.setState({val3: e.value})}/>
+            <h3>Date {this.state.val3}</h3>
+            <InputMask
+              mask="99/99/9999"
+              value={this.state.val3}
+              placeholder="99/99/9999"
+              slotChar="mm/dd/yyyy"
+              onChange={(e) => this.setState({val3: e.value})}/>
           </div>
 
           <Calendar
