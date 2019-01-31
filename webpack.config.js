@@ -21,7 +21,13 @@ module.exports = {
           presets: ['env', 'react', 'stage-0']
         }
       },
-      { test: /\.css$/, use: ['style-loader', 'css-loader'] }
+      {
+          test: /\.css$/,
+          include: [
+              path.resolve(__dirname, "not_exist_path")
+          ],
+          loader: "style!css"
+      }
     ]
   },
 
@@ -41,10 +47,24 @@ module.exports = {
     tls: 'empty'
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx', '.css']
   }
 };
+// https://github.com/webpack-contrib/css-loader/issues/295 solution for style sheets?
+// { test: /\.css$/, loader: ['style-loader', 'css-loader'] }
+// { test: /\.css$/, loader: "style-loader!css-loader" },
 // { test: /\.json$/, loader: 'json-loader' },
+//       {
+//         test: /\.css$/,
+//         loader: 'style-loader'
+//       }, {
+//         test: /\.css$/,
+//         loader: 'css-loader',
+//         query: {
+//           modules: true,
+//           localIdentName: '[name]__[local]___[hash:base64:5]'
+//         }
+//       }
 // 'node' key addresses a problem with dotenv
 // 'resolve' key makes it so import modules do not have to specify file extension
 // 'node: {fs: "empty"}' included to resolve 'Uncaught Error: Cannot find module "fs"',

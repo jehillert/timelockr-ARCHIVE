@@ -11,7 +11,6 @@ connection.connect();
 
 module.exports = connection;
 
-
 // const mysql = require('mysql');
 // const createTables = require('./config');
 // const Promise = require('bluebird');
