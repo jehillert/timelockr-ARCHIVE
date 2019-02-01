@@ -30,11 +30,9 @@ module.exports = {
       }
     ]
   },
-
   plugins: [
     new Dotenv()
   ],
-
   externals: {
     'react/addons': true, // important!!
     'react/lib/ReactContext': true,

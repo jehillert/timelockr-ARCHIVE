@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import EntryForm from './EntryForm';
+import Styles from 'style-loader!css-loader?modules!./../styles/styles.css';
 import Table_ReleasedData from './Table_ReleasedData';
 import Table_LockedData from './Table_LockedData';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Styles from 'style-loader!css-loader?modules!./styles.css';
+
 const rq = require('../scripts/ClientRequests');
+
 
 class App extends React.Component {
   constructor(props) {
@@ -35,17 +37,16 @@ class App extends React.Component {
   render() {
     return (
       <Container>
-        <Row className="justify-content-md-center">
-          <Col xs={6} sm={6} md={6} lg={6} xl={6}>
+        <Row>
+          <h2>TimeLockr</h2>
+        </Row>
+        <Row>
+          <Col xs={5} sm={5} md={5} lg={5} xl={5}>
             <Table_ReleasedData secrets={this.state.released} />
           </Col>
-          <Col xs={6} sm={6} md={6} lg={6} xl={6}>
-            <Table_LockedData secrets={this.state.locked} />
-          </Col>
-        </Row>
-        <Row className="justify-content-md-center">
-          <Col xs={6} sm={6} md={6} lg={6} xl={6}>
+          <Col xs={5} sm={5} md={5} lg={5} xl={5}>
             <EntryForm />
+            <Table_LockedData secrets={this.state.locked} />
           </Col>
         </Row>
       </Container>
@@ -54,3 +55,4 @@ class App extends React.Component {
 }
 
 export default App;
+

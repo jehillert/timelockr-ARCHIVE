@@ -17,7 +17,7 @@ function RowLD(props) {
         </Col>
       </Row>
       <Row>
-        <Col>
+        <Col xs="4" sm="4" md="4" lg="4" xl="4">
           <ProgressBar animated now={props.secret.fractionCompleted * 100} />
         </Col>
       </Row>
@@ -26,12 +26,12 @@ function RowLD(props) {
           {props.secret.creationDate}
           {props.secret.creationTime}
         </Col>
-        <Col xs="6" sm="6" md="6" lg="6" xl="6"></Col>
+        <Col xs="4" sm="4" md="4" lg="4" xl="4"></Col>
         <Col>
           {moment(props.secret.todaysDate).format('MMM DD, YYYY')}
           {moment(props.secret.todaysDate).format('h:mm A')}
         </Col>
-        <Col xs="6" sm="6" md="6" lg="6" xl="6"></Col>
+        <Col xs="4" sm="4" md="4" lg="4" xl="4"></Col>
         <Col>
           {props.secret.releaseDate}
           {props.secret.releaseTime}
@@ -51,5 +51,5 @@ export default RowLD;
   moment().format("MMM DD, YYYY, [at] H:mm a")
 Contents of time capsule will be available at:
 
-xs="6" sm="6" md="6" lg="6" xl="6"
+xs="4" sm="4" md="4" lg="4" xl="4"
 */
