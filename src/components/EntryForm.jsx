@@ -1,57 +1,79 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button'
-import Glyphicon from 'react-bootstrap';
-import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import FieldGroup from './FieldGroup';
 import Form from 'react-bootstrap/Form';
+import moment from 'moment';
 
 class EntryForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hi: ''
+      username: '',
+      password: '',
+      secret_label: '',
+      secret_body: '',
+      creation_date: null,
+      release_date: null,
+      releaseDate: '',
+      releaseTime: '',
     };
+  }
+
+  handleChange = e => {
+    this.setState({[e.target.id]: e.target.value})
   }
 
   render() {
     return (
-      <form>
-        <Form.Row >
-          <Col>
-            <Form.Label>New Entry</Form.Label>
-          </Col>
-        </Form.Row>
-        {/* secrets_label */}
-        <Form.Row >
-          <Form.Group controlId="validationCustom01">
-            <Form.Label>Enter Title</Form.Label>
-            <Form.Control placeholder="Ex-girlfriend's phone number" />
-          </Form.Group>
-        </Form.Row>
-        {/* secrets_body */}
-        <Form.Row >
-          <Form.Group controlId="validationCustom02">
-            <Form.Label>Enter Information</Form.Label>
-            <Form.Control as="textarea" placeholder="555-555-5555" />
-          </Form.Group>
-        </Form.Row>
-        {/* Date & Time --- Labels */}
-        <Form.Row>
-          <Form.Group as={Col} xs="6" sm="6" md="6" lg="6" xl="6" controlId="validationCustom03">
-            <Form.Label>Enter Release Date</Form.Label>
-            <Form.Control type="date" required />
-          </Form.Group>
-          <Form.Group as={Col} xs="6" sm="6" md="6" lg="6" xl="6" controlId="validationCustom04">
-            <Form.Label>Enter Release Time</Form.Label>
-            <Form.Control type="time" required />
-          </Form.Group>
-        </Form.Row>
-        <Form.Row className="justify-content-md-end">
-          <Form.Group as={Col} controlId="validationCustom05">
-            <Button type='submit' >Submit</Button>
-          </Form.Group>
-        </Form.Row>
-      </form>
+      <Container className='secondary-container'>
+        <h3 className='component-block-header'>New Entry</h3>
+        <Card id='entry-form-card' className='shadow'>
+          <Card.Body className='d-flex flex-column flex-nowrap'>
+            <form id='entry-form'>
+              <FieldGroup
+                id='secret_label'
+                label='Enter a description.'
+                placeholder={`Ex-girlfriend's phone number`}
+                value={this.state.secret_label}
+                onChange={this.handleChange}
+              />
+              <FieldGroup
+                id='secret_body'
+                label='Enter something to lock away.'
+                as='textarea'
+                placeholder='555-555-5555'
+                value={this.state.secret_body}
+                onChange={this.handleChange}
+                required
+              />
+              <Form.Row>
+                <FieldGroup
+                  id='releaseDate'
+                  label='Unlock Date'
+                  type='date'
+                  value={this.state.releaseDate}
+                  onChange={this.handleChange}
+                  required
+                />
+                <FieldGroup
+                  id='releaseTime'
+                  label='Unlock Time'
+                  type='time'
+                  value={this.state.releaseTime}
+                  onChange={this.handleChange}
+                  required
+                />
+              </Form.Row>
+              <Form.Group className='d-flex flex-row justify-content-md-end' as={Col} controlId='entrySubmit'>
+                <Button type='submit' onSubmit={this.handleSubmit}>Submit</Button>
+              </Form.Group>
+            </form>
+          </Card.Body>
+        </Card>
+      </Container>
     );
   }
 }
