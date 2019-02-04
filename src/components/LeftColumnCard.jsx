@@ -9,7 +9,7 @@ const LeftColumnCard = (props) => {
       <Card id={props.capsule.id} className="mb-3 shadow" bg="light" style={{ width: '20rem' }}>
         <Card.Header className='d-flex justify-content-between flex-nowrap'>
           {props.capsule.label}
-          <Octicon icon={x} className='octicon-controls x' scale={1.5} />
+          <Octicon icon={x} className='x' scale={1.5} />
         </Card.Header>
         <Card.Body>
           <Card.Text>

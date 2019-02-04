@@ -3,8 +3,9 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
-import FieldGroup from './FieldGroup';
 import Form from 'react-bootstrap/Form';
+import InputsGroup from './InputsGroup';
+import FieldsGroup from './FieldsGroup';
 import moment from 'moment';
 
 class EntryForm extends React.Component {
@@ -22,8 +23,12 @@ class EntryForm extends React.Component {
     };
   }
 
-  handleChange = e => {
-    this.setState({[e.target.id]: e.target.value})
+  handleChange = (e) => {
+    this.setState({ [e.target.id]: e.target.value });
+  }
+
+  onSubmit = () => {
+
   }
 
   render() {
@@ -33,14 +38,14 @@ class EntryForm extends React.Component {
         <Card id='entry-form-card' className='shadow'>
           <Card.Body className='d-flex flex-column flex-nowrap'>
             <form id='entry-form'>
-              <FieldGroup
+              <FieldsGroup
                 id='secret_label'
                 label='Enter a description.'
                 placeholder={`Ex-girlfriend's phone number`}
                 value={this.state.secret_label}
                 onChange={this.handleChange}
               />
-              <FieldGroup
+              <FieldsGroup
                 id='secret_body'
                 label='Enter something to lock away.'
                 as='textarea'
@@ -49,26 +54,30 @@ class EntryForm extends React.Component {
                 onChange={this.handleChange}
                 required
               />
-              <Form.Row>
-                <FieldGroup
+              <Col className='d-flex flex-nowrap'>
+                <InputsGroup
+                  icon='calendar'
                   id='releaseDate'
-                  label='Unlock Date'
+                  controlId='formBasicDate'
+                  label='Release Date'
                   type='date'
                   value={this.state.releaseDate}
                   onChange={this.handleChange}
                   required
                 />
-                <FieldGroup
+                <InputsGroup
+                  controlId='formBasicTime'
                   id='releaseTime'
-                  label='Unlock Time'
+                  label='Release Time'
                   type='time'
+                  icon='clock'
                   value={this.state.releaseTime}
                   onChange={this.handleChange}
                   required
                 />
-              </Form.Row>
-              <Form.Group className='d-flex flex-row justify-content-md-end' as={Col} controlId='entrySubmit'>
-                <Button type='submit' onSubmit={this.handleSubmit}>Submit</Button>
+              </Col>
+              <Form.Group className='d-flex flex-row justify-content-md-end' as={Col}>
+                <Button type='submit'>Submit</Button>
               </Form.Group>
             </form>
           </Card.Body>
@@ -79,3 +88,4 @@ class EntryForm extends React.Component {
 }
 
 export default EntryForm;
+

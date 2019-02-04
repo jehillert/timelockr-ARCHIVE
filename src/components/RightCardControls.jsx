@@ -11,7 +11,7 @@ const RightCardControls = (props) => {
           <Octicon icon={calendar} className='octicon-controls calendar' scale={1.75} />
         </button>
         <button className='icon-btn' >
-          <Octicon icon={trashcan} className='octicon-controls trashcan' scale={1.75} />
+          <Octicon icon={trashcan} className='trashcan' scale={1.75} />
         </button>
       </ButtonGroup>
   );

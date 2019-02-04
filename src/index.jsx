@@ -1,7 +1,11 @@
 require('dotenv').config();
 import React from 'react';
 import ReactDOM from 'react-dom';
-import moment from 'moment';
 import App from './components/App';
+import { AuthProvider } from './auth/AuthContext'
+import { hot } from 'react-hot-loader'
 
-ReactDOM.render(<App />, document.getElementById('app'));
+const AppWithHot = hot(module)(App);
+
+var mountNode = document.getElementById("app");
+ReactDOM.render(<AppWithHot name="TimeLockr" />, mountNode);

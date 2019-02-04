@@ -1,3 +1,9 @@
+/*
+CHANGES TO VARIABLE NAMES IN THE FUTURE
+  secrets ==> capsules
+  secret_body ==> contents
+  secret_label ==> description
+*/
 /*mysql -u root <schema.sql*/
 DROP DATABASE IF EXISTS keepsafe;
 CREATE DATABASE IF NOT EXISTS keepsafe;
