@@ -4,19 +4,15 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Octicon, { calendar, trashcan } from 'octicons-react';
 import Col from 'react-bootstrap/Col';
 
-const RightCardControls = (props) => {
-  return (
-      <ButtonGroup size="sm" className='progress-row-controls'>
-        <button className='icon-btn' >
-          <Octicon icon={calendar} className='octicon-controls calendar' scale={1.75} />
-        </button>
-        <button className='icon-btn' >
-          <Octicon icon={trashcan} className='trashcan' scale={1.75} />
-        </button>
-      </ButtonGroup>
-  );
-}
+const RightCardControls = (props) => (
+  <ButtonGroup size="sm" className='progress-row-controls'>
+    <button className='icon-btn' >
+      <Octicon icon={calendar} className='octicon-controls calendar' scale={1.75} />
+    </button>
+    <button className='icon-btn' >
+      <Octicon icon={trashcan} className='trashcan' scale={1.75} />
+    </button>
+  </ButtonGroup>
+)
 
 export default RightCardControls;
-
-// <span role="button" class="glyphicon glyphicon-trash btn-lg" onclick="yourFunction()"></span>

@@ -12,8 +12,6 @@ class EntryForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
       secret_label: '',
       secret_body: '',
       creation_date: null,
@@ -21,6 +19,17 @@ class EntryForm extends React.Component {
       releaseDate: '',
       releaseTime: '',
     };
+  }
+
+  componentDidMount() {
+    req.retrieveEntries('Maurine42').then(results => {
+      this.setState((state, props) => ({
+        locked: results.locked,
+        released: results.released
+      }));
+      console.log(this.state.secrets);
+      // this.setState({secrets: results});
+    });
   }
 
   handleChange = (e) => {
@@ -58,7 +67,6 @@ class EntryForm extends React.Component {
                 <InputsGroup
                   icon='calendar'
                   id='releaseDate'
-                  controlId='formBasicDate'
                   label='Release Date'
                   type='date'
                   value={this.state.releaseDate}
@@ -66,7 +74,6 @@ class EntryForm extends React.Component {
                   required
                 />
                 <InputsGroup
-                  controlId='formBasicTime'
                   id='releaseTime'
                   label='Release Time'
                   type='time'
@@ -89,3 +96,7 @@ class EntryForm extends React.Component {
 
 export default EntryForm;
 
+  // controlId='formBasicTextInput'
+  // controlId='formBasicTextInput'
+  // controlId='formBasicDate'
+  // controlId='formBasicTime'

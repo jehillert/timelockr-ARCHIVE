@@ -1,6 +1,19 @@
 const debug = require('debug')('TimeLocker:lib:helpers');
+const util = require('util');
 const Promise = require('bluebird');
 const moment = require('moment');
+
+function debugReq(req) {
+  debug('─────────────────────────────────────────────────────────────')
+  debug('REQUEST METHOD: %O', req.method)
+  debug('REQUEST URL: %O', req.url)
+  debug('REQUEST BASEURL: %O', req.baseUrl)
+  debug('REQUEST ORIGINALURL: %O', req.originalUrl)
+  debug('\nREQUEST BODY:\n %O', req.body)
+  debug('\nREQUEST ROUTE:\n %O', req.route)
+  debug('\nREQUEST HEADERS:\n %O', req.headers);
+  debug('─────────────────────────────────────────────────────────────')
+}
 
 const filterAndFormatSecrets = secrets => {
   let locked = [];
@@ -51,7 +64,6 @@ const getQueryParams = req => {
   let fields = Object.keys(req.body);
   let values = Object.keys(req.body).map(key => req.body[key]);
 
-  debug('req.method: ', req.method);
   if (req.method !== 'put') {
     queryParams = [tableName].concat(fields, values);
   } else {

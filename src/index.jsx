@@ -2,7 +2,6 @@ require('dotenv').config();
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
-import { AuthProvider } from './auth/AuthContext'
 import { hot } from 'react-hot-loader'
 
 const AppWithHot = hot(module)(App);

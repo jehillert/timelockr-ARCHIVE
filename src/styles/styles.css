@@ -119,6 +119,15 @@ h1, h2, h3, h4, h5, h6 {
   border-color: #6A6A6A;
 }
 
+.btn-primary:hover {
+  background-color: #D93646;
+  border-color: #D93646;
+}
+
+.credential-form {
+  padding-top: 40px;
+}
+
 .global-container {
 }
 
@@ -203,6 +212,41 @@ h1, h2, h3, h4, h5, h6 {
   width: 32px;
 }
 
+.modal-content {
+  border-radius: 0rem;
+  box-shadow: 0 0 100px rgba(24,29,39,.1), 0 15px 30px rgba(24,29,39,.1), 0 5px 10px rgba(24,29,39,.05);
+}
+
+.nav-tabs {
+  background-color: #6A6A6A;
+  margin: -1rem;
+}
+
+.nav-tabs .nav-link {
+  border-radius: 0rem;
+  color: white;
+  border: none;
+}
+
+.nav-tabs a:hover {
+  background-color: #D93646;
+  border-color: #D93646;
+}
+
+.nav-tabs .nav-link.active {
+}
+
+.left-tab-shadow{
+  -webkit-box-shadow: 5px -5px 6px 0px rgba(82,82,82,0.52);
+  box-shadow: 5px -5px 6px 0px rgba(82,82,82,0.52);
+  z-index: 1;
+}
+
+.right-tab-shadow{
+  -webkit-box-shadow: -5px 0px 6px 0px rgba(82,82,82,0.52);
+  box-shadow: -5px 0px 6px 0px rgba(82,82,82,0.52);
+}
+
 .right-column-card-container {
   padding-left: 0px;
   padding-right: 0px;
@@ -223,3 +267,4 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: 20px;
   margin-top: -6px;
 }
+

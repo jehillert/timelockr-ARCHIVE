@@ -1,14 +1,30 @@
-const debug = require('debug')('TimeLocker:server:controllers');
-const Promise = require('bluebird');
+const debug = require('debug')('server:controllers');
+const hash = require('pbkdf2-password')();
+const helpers = require('./helpers');
 const models = require('./models');
-const moment = require('moment');
-const helpers = require('./../lib/helpers.js');
+const auth = require('./helpers/auth');
 
 module.exports = {
+  login: {
+    post: (req, res) =>
+      models.credentials.get(['username', req.body.username])
+        .then(user => auth.verifyUserAsync(user))
+        .tap(user => { debug(user) })
+        .tap(req => { helpers.debugReq(req) } )
+        .tap(req.session.regenerate(() => { req.session.user = user }))
+        .then(res.status(200).json({message: `Login successful.`}))
+        .catch(error => console.error('Error', error))
+  },
+
+  logout: {
+    get: (req, res) => req.session.destroy()
+      .then(() => res.status(200).json({message: 'Logout successful.'}))
+      .catch(error => console.error('Error', error))
+  },
+
   credentials: {
-    get: (req, res) => getData(req, res).then(results => res.json(results)),
     put: (req, res) => updateField(req, res),
-    post: (req, res) => postToTable(req, res),
+    post: (req, res) => createUser(req, res),
     delete: (req, res) => deleteFromTable(req, res)
   },
 
@@ -23,6 +39,24 @@ module.exports = {
   }
 };
 
+function createUser(req, res) {
+  hash({ password: req.body.password }, function (err, pass, salt, hash) {
+    if (err) {
+      throw err;
+    }
+    req.body.salt = salt;
+    req.body.password = hash;
+  });
+
+  let params = helpers.getQueryParams(req);
+
+  req => { helpers.debugReq(req) };
+  models[params[0]]
+    .post(params)
+    .then(results => res.sendStatus(201))
+    .catch(error => console.error('Error', error));
+}
+
 function deleteFromTable(req, res) {
   let params = helpers.getQueryParams(req);
   models.general
@@ -33,14 +67,14 @@ function deleteFromTable(req, res) {
 
 function getData(req, res) {
   let params = helpers.getQueryParams(req);
-  if (req.query.username) {
-    params.splice(1, 0, 'username', req.query.username);
-  }
+  // if (req.query.username) {
+  //   params.splice(1, 0, 'username', req.query.username);
+  // }
   return (
     models[params[0]]
       .get(params)
-      // .tap(results => {debug(results)})
-      // .tap(debug(req))
+      .tap(req => { helpers.debugReq(req) })
+      .tap(results => { debug(results) })
       .catch(error => console.error('Error', error))
   );
 }

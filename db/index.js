@@ -1,32 +1,17 @@
 require('dotenv').config();
-var debug = require('debug')('TimeLocker:database');
+const debug = require('debug')('TimeLocker:database');
 const mysql = require('mysql');
 const Promise = require('bluebird');
-const mysqlConfig = require('./config');
-
 Promise.promisifyAll(require('mysql/lib/Connection').prototype);
+
+const mysqlConfig = {
+  host               : process.env.DB_HOST,
+  user               : process.env.DB_USER,
+  password           : process.env.DB_PASS,
+  database           : process.env.DB_NAME
+};
 
 var connection = mysql.createConnection(mysqlConfig);
 connection.connect();
 
 module.exports = connection;
-
-// const mysql = require('mysql');
-// const createTables = require('./config');
-// const Promise = require('bluebird');
-// const database = 'shortly';
-
-// const connection = mysql.createConnection({
-//   user: 'root',
-//   password: ''
-// });
-
-// const db = Promise.promisifyAll(connection, { multiArgs: true });
-
-// db.connectAsync()
-//   .then(() => console.log(`Connected to ${database} database as ID ${db.threadId}`))
-//   .then(() => db.queryAsync(`CREATE DATABASE IF NOT EXISTS ${database}`))
-//   .then(() => db.queryAsync(`USE ${database}`))
-//   .then(() => createTables(db));
-
-// module.exports = db;

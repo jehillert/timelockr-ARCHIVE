@@ -2,22 +2,64 @@ require('dotenv').config();
 const cors = require('cors');
 const debug = require('debug')('TimeLocker:server');
 const express = require('express');
-const parser = require('body-parser');
+const bodyParser = require('body-parser');
+const path = require('path');
+const session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session);
 const router = require('./routes.js');
+
+// initialize server
+const app = module.exports = express();
 const PORT = process.env.PORT || 3000;
 
-const app = express();
-module.exports.app = app;
+// session
+const options = {
+  host            : process.env.DB_HOST,
+  port            : process.env.DB_PORT,
+  user            : process.env.DB_USER,
+  password        : process.env.DB_PASS,
+  database        : process.env.DB_NAME
+};
 
-// app.set('port', PORT);
-app.use(parser.json());
+const sessionStore = new MySQLStore(options);
+
+// middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(cors());
+app.use(session({
+  key: 'session_cookie_name',
+  secret: 'session_cookie_secret', // needs to be made secure?
+  store: sessionStore, // don't create session until something stored
+  resave: false, // don't save session if unmodified
+  saveUninitialized: false
+}));
+
+// router
 app.use('/api/keepsafe', router);
 
-// app.listen(PORT, () => {
-// console.log(`Node app started.  Listening on port ${PORT}`);
-// });
 app.set('port', PORT);
 app.listen(app.get('port'), function() {
-  console.log(`Node app started.  Listening on port ${PORT}`);
+  console.log(`Node app started. Listening on port ${PORT}`);
 });
+
+/*do not delete*/
+// require('dotenv').config();
+// const cors = require('cors');
+// const debug = require('debug')('TimeLocker:server');
+// const express = require('express');
+// const bodyParser = require('body-parser');
+// const router = require('./routes.js');
+// const PORT = process.env.PORT || 3000;
+
+// const app = express();
+// module.exports.app = app;
+
+// app.use(bodyParser.json());
+// app.use(cors());
+// app.use('/api/keepsafe', router);
+
+// app.set('port', PORT);
+// app.listen(app.get('port'), function() {
+//   console.log(`Node app started.  Listening on port ${PORT}`);
+// });

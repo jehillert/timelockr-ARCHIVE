@@ -1,29 +1,4 @@
-import rp from 'request-promise';
-
-// GET --- VERIFY USER CREDENTIALS
-module.exports.verifyUser = () => {
-  var options = {
-    method: 'GET',
-    url: 'http://localhost:3000/api/keepsafe/credentials',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: {
-      username: this.state.username,
-      password: this.state.password
-    },
-    json: true
-  };
-  // need to add error handling for non-existant user
-  rp(options)
-    .then(username => console.log(username))
-    .catch(error => error.console(error));
-}
-
 // GET --- Retrieve User Secrets
-componentWillMount() {
-
-}
 module.exports.retrieveSecrets = () => {
   var options = {
     method: 'GET',
@@ -32,7 +7,7 @@ module.exports.retrieveSecrets = () => {
       'Content-Type': 'application/json'
     },
     body: {
-      username: this.props.username
+      username: this.props.username,
       password: this.props.password
     },
     json: true
@@ -48,9 +23,9 @@ module.exports.retrieveSecrets = () => {
                not initially setting it.
      NOTE  --> handleChange will cover most of the forms. A separate
                function for each is not necessary.*/
-module.exports.handleChange = (e) => {
-  this.setState({e.currentTarget.id: e.currentTarget.value});
-}
+// module.exports.handleChange = (e) => {
+//   this.setState({e.currentTarget.id: e.currentTarget.value});
+// }
 module.exports.handleSubmit = () => {
   var options = {
     method: 'POST',
@@ -84,28 +59,7 @@ module.exports.handleSubmit = () => {
 module.exports.handleChange = (e) => {
   this.setState({e.currentTarget.id: e.currentTarget.value});
 }
-module.exports.storeCredentials = (state, props) => {
-  var options = {
-    method: 'POST',
-    url: 'http://localhost:3000/api/keepsafe/secrets', // uri:
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: {
-      username: this.state.username,
-      usernamepassword: this.state.password,
-    }
-    json: true
-  };
-  rp(options)
-    .then(parsedBody => {
-      // ADD DEBUG STATEMENT HERE
-      // DON'T WANT USERS CREDENTIALS
-      // BEING CACHED ON THE USERS COMPUTER
-      console.log('New user successfully created.')
-    })
-    .catch(error => error.console(error));
-}
+
 
 // PUT --- Extend release date.
 module.exports.handleChange = (e) => {

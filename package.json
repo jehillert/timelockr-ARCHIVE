@@ -6,6 +6,10 @@
   "keywords": [],
   "author": "",
   "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jehillert/Keep-Away"
+  },
   "scripts": {
     "clean": "rm dist/bundle.js",
     "build-dev": "webpack -d --mode development",
@@ -24,17 +28,21 @@
     "debug": "^4.1.1",
     "dotenv-webpack": "^1.7.0",
     "express": "^4.16.4",
+    "express-mysql-session": "^2.1.0",
+    "express-session": "^1.15.6",
     "jquery": "^3.3.1",
     "less": "^3.9.0",
     "moment": "^2.22.2",
     "mysql": "^2.16.0",
     "octicons": "0.0.0-882a0ed25",
     "octicons-react": "^0.17.10",
+    "pbkdf2-password": "^1.2.1",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-bootstrap": "^1.0.0-beta.5",
     "react-dom": "^16.5.2",
     "react-hot-loader": "^4.3.11",
+    "react-router-dom": "^4.3.1",
     "react-transition-group": "^2.5.3",
     "request": "^2.88.0",
     "request-promise": "^4.2.2"
