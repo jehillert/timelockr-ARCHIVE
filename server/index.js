@@ -28,11 +28,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(session({
-  key: 'session_cookie_name',
-  secret: 'session_cookie_secret', // needs to be made secure?
-  store: sessionStore, // don't create session until something stored
-  resave: false, // don't save session if unmodified
-  saveUninitialized: false
+  secret: 'SECRET', // needs to be uuid?
+  store: sessionStore,
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 60*60*60*24,
+    httpOnly: true,
+    domain:'localhost:8080',
+    path: '/',
+    secure: false
+  }
 }));
 
 // router

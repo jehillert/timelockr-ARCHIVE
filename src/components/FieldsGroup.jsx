@@ -12,8 +12,8 @@ const FieldsGroup = (props) => (
 
 FieldsGroup.propTypes = {
   id: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-}
+  label: PropTypes.string.isRequired
+};
 
 export default FieldsGroup;
 // controlId={props.controlId}

@@ -15,7 +15,7 @@ module.exports.retrieveSecrets = () => {
 
   rp(options)
     .then(secrets => console.log(secrets))
-    .catch(error => error.console(error));
+    .catch(error => console.error(error));
 }
 
 /* POST --- STORE NEW SECRET
@@ -50,7 +50,7 @@ module.exports.handleSubmit = () => {
       // BEING CACHED ON THE USERS COMPUTER
       console.log('Post successful.')
     })
-    .catch(error => error.console(error));
+    .catch(error => console.error(error));
 }
 
 /* POST --- CREATE NEW USER
@@ -79,7 +79,7 @@ module.exports.extendReleaseDate = (state, props, credential, extension) => {
 
   rp(options)
     .then(results => console.log(results))
-    .catch(error => error.console(error));
+    .catch(error => console.error(error));
 }
 
 // PUT --- delay release date
@@ -97,7 +97,7 @@ module.exports.updateCredential(state, props, credential) {
     json: true };
   rp(options)
     .then(results => console.log(results))
-    .catch(error => error.console(error));
+    .catch(error => console.error(error));
 }
 
 // PUT --- Change/update credential
@@ -146,7 +146,7 @@ module.exports.updateCredential(state, props, credential) {
 
   rp(options)
     .then(results => console.log(results))
-    .catch(error => error.console(error));
+    .catch(error => console.error(error));
 }
 
 module.exports.deleteSecret(e) {
@@ -160,7 +160,7 @@ module.exports.deleteSecret(e) {
 
   rp(options)
     .then(results => console.log(results))
-    .catch(error => error.console(error));
+    .catch(error => console.error(error));
 }
 
 // DELETE - Delete all secrets
@@ -174,5 +174,5 @@ module.exports.deleteAllSecrets(e) {
 
   rp(options)
     .then(results => console.log(results))
-    .catch(error => error.console(error));
+    .catch(error => console.error(error));
 }

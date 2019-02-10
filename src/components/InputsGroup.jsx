@@ -25,8 +25,8 @@ const InputsGroup = (props) => (
 
 InputsGroup.propTypes = {
   id: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-}
+  label: PropTypes.string.isRequired
+};
 
 export default InputsGroup;
 // controlId: PropTypes.string,

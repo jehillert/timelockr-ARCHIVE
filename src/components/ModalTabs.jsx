@@ -2,6 +2,7 @@ import React from 'react';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import CredentialForm from './CredentialForm';
+import PropTypes from 'prop-types';
 
 class ModalTabs extends React.Component {
   constructor(props, context) {
@@ -46,5 +47,12 @@ class ModalTabs extends React.Component {
     );
   }
 }
+
+ModalTabs.propTypes = {
+  handleSigninAttempt: PropTypes.func.isRequired,
+  handleCreateNewUserAttempt: PropTypes.func.isRequired,
+  isAuth: PropTypes.bool.isRequired,
+  setTitle: PropTypes.func.isRequired
+};
 
 export default ModalTabs;

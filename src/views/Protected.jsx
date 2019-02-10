@@ -7,25 +7,23 @@ import LeftCardColumn from './../components/LeftCardColumn';
 import RightCardColumn from './../components/RightCardColumn';
 import Row from 'react-bootstrap/Row';
 import Styles from './../styles/styles.css';
+import PropTypes from 'prop-types';
 
-const rq = require('../scripts/ClientRequests');
+const req = require('../scripts/ClientRequests');
 
-class App extends React.Component {
+class ProtectedView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       error: null,
       isLoaded: false,
-      username: '',
-      password: '',
-      isAuthorized: false,
       locked: [],
       released: []
     };
   }
 
   componentDidMount() {
-    rq.retrieveSecrets('Maurine42').then(results => {
+    req.retrieveEntries(this.props.username).then(results => {
       this.setState((state, props) => ({
         locked: results.locked,
         released: results.released
@@ -35,11 +33,12 @@ class App extends React.Component {
     });
   }
 
-  setAuthorization = (isAuthorized) => {
-    this.setState({
-      isAuthorized: isAuthorized
-    });
-  }
+      // isAuthorized: false,
+  // setAuthorization = (isAuthorized) => {
+  //   this.setState({
+  //     isAuthorized: isAuthorized
+  //   });
+  // }
 
   render() {
     return (
@@ -56,5 +55,11 @@ class App extends React.Component {
   }
 }
 
-export default App;
+ProtectedView.propTypes = {
+  username: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  isAuth: PropTypes.bool.isRequired
+}
+
+export default ProtectedView;
 

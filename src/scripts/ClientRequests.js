@@ -1,27 +1,28 @@
-var debug = require('debug')('client:requests');
+require('dotenv').config();
+const debug = require('debug')('scripts:ClientRequests');
 const rp = require('request-promise');
 const errors = require('request-promise/errors');
 const Promise = require('bluebird');
 
-module.exports.createNewUser = (state, props) => {
+module.exports.createNewUser = (user, pass) => {
   var options = {
     method: 'POST',
-    url: 'http://localhost:3000/api/keepsafe/secrets', // uri:
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: {
-      username: this.state.username,
-      password: this.state.password,
-    },
+    url: 'http://localhost:3000/api/keepsafe/signup', // uri:
+    headers: { 'Content-Type': 'application/json' },
+    body: { username: user, password: pass },
     json: true
   };
-  rp(options)
-    .then(parsedBody => {
-      debug(parsedBody);
-      console.log('New user successfully created.');
+  return rp(options)
+    .then(() => {
+      return {userCreated: true, message: 'New user successfully created.'};l
     })
-    .catch(error => error.console(error));
+    .catch(error => {
+      if (error.statusCode === 409) {
+        return {userCreated: false, message: 'Username taken.  Please select another'};
+      } else {
+        alert(`ERROR ${error.statusCode} @ function 'createNewUser().'\nCAUSE: ${error.cause}`)
+      }
+    });
 };
 
 module.exports.retrieveEntries = username => {
@@ -31,12 +32,9 @@ module.exports.retrieveEntries = username => {
       'User-Agent': 'Request-Promise',
       'Content-Type': 'application/json'
     },
-    qs: {
-      username: username
-    },
+    qs: { username: username },
     json: true
   };
-  // .tap(results => {console.log(results)})
   return rp(options)
     .then(results => results)
     .catch(errors.StatusCodeError, reason => {
@@ -49,24 +47,21 @@ module.exports.retrieveEntries = username => {
     });
 };
 
-module.exports.verifyUser = (username, password) => {
-  console.log('CREDENTIALS -----------', username, password);
+module.exports.verifyUser = (user, pass) => {
   var options = {
     method: 'POST',
-    url: `http://localhost:3000/api/keepsafe/credentials`,
+    url: `http://localhost:3000/api/keepsafe/login`,
     headers: {
       'User-Agent': 'Request-Promise',
       'Content-Type': 'application/json'
     },
-    body: {
-      username: this.props.username,
-      password: this.props.password
-    },
+    body: { username: user, password: pass },
     json: true
   };
-  // need to add error handling for non-existant user
   return rp(options)
-    .then(results => results)
+    .then(() => {
+      return {userAuthenticated: true, message: 'User authenticated.'};l
+    })
     .catch(errors.StatusCodeError, reason => {
       console.error(
         `ERROR @ function 'verifyUser().'\n${reason.statusCode}`
@@ -76,49 +71,3 @@ module.exports.verifyUser = (username, password) => {
       console.error(`ERROR @ function 'verifyUser().'\n${reason.cause}`);
     });
 };
-
-//https://stackoverflow.com/questions/18264601/how-to-send-a-correct-authorization-header-for-basic-authentication
-// consider switching to htis in the future...
-// module.exports.verifyUser = (user, password) => {
-//   var base64encodedData = new Buffer(user + ':' + password).toString('base64');
-
-//   requestPromise.get({
-//     uri: 'https://example.org/whatever',
-//     headers: {
-//       'Authorization': 'Basic ' + base64encodedData
-//     },
-//     json: true
-//   })
-//   .then(function ok(jsonData) {
-//     console.dir(jsonData);
-//   })
-//   .catch(function fail(error) {
-//     // handle error
-//   });
-// }
-// ———————————————————————————————————————————————————————————————————————————————
-// module.exports.verifyUser = (username, password) => {
-//   var options = {
-//     url: 'http://localhost:3000/api/keepsafe/credentials',
-//     headers: {
-//       'User-Agent': 'Request-Promise',
-//       'Content-Type': 'application/json'
-//     },
-//     auth: {
-//       user: username,
-//       pass: password
-//     },
-//     json: true
-//   };
-//   // need to add error handling for non-existant user
-//   return rp(options)
-//     .then(results => results)
-//     .catch(errors.StatusCodeError, reason => {
-//       console.error(
-//         `ERROR @ function 'verifyUser().'\n${reason.statusCode}`
-//       );
-//     })
-//     .catch(errors.RequestError, reason => {
-//       console.error(`ERROR @ function 'verifyUser().'\n${reason.cause}`);
-//     });
-// }

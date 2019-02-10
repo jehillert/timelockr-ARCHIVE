@@ -5,10 +5,6 @@ import SignInView from './Auth/SignInView';
   setAuthorization={this.setAuthorization}>
 />
 
-
-
-
-
 import React form 'react';
 import Modal from 'react-bootstrap/Modal'
 import ModalHeader from 'react-bootstrap/ModalHeader'

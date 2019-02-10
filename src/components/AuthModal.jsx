@@ -7,8 +7,7 @@ import ModalTitle from 'react-bootstrap/ModalTitle'
 import ModalBody from 'react-bootstrap/ModalBody'
 import CredentialForm from './CredentialForm'
 import ModalTabs from './ModalTabs'
-
-// import Styles from './AuthModal.css';
+import PropTypes from 'prop-types';
 
 class AuthModal extends React.Component {
   constructor(props, context) {
@@ -65,6 +64,12 @@ class AuthModal extends React.Component {
     );
   }
 }
+
+AuthModal.propTypes = {
+  handleSigninAttempt: PropTypes.func.isRequired,
+  handleCreateNewUserAttempt: PropTypes.func.isRequired,
+  isAuth: PropTypes.bool.isRequired
+};
 
 export default AuthModal;
 

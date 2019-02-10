@@ -1,9 +1,10 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Form from 'react-bootstrap/Form';
 import FieldsGroup from './FieldsGroup';
+import Form from 'react-bootstrap/Form';
+import PropTypes from 'prop-types';
+import Row from 'react-bootstrap/Row';
 
 class CredentialForm extends React.Component {
   constructor(props) {
@@ -60,4 +61,10 @@ class CredentialForm extends React.Component {
     );
   }
 }
+
+CredentialForm.propTypes = {
+  buttonLabel: PropTypes.string.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  isAuth: PropTypes.bool.isRequired
+};
 export default CredentialForm;

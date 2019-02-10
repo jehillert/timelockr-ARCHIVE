@@ -7,8 +7,8 @@ USE keepsafe;
 CREATE TABLE IF NOT EXISTS credentials (
   user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(40) UNIQUE,
-  password VARCHAR(64),
-  salt VARCHAR(64)
+  hash VARCHAR(172),
+  salt VARCHAR(100)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS secrets (

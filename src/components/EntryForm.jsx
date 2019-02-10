@@ -8,6 +8,8 @@ import InputsGroup from './InputsGroup';
 import FieldsGroup from './FieldsGroup';
 import moment from 'moment';
 
+const req = require('./../scripts/ClientRequests');
+
 class EntryForm extends React.Component {
   constructor(props) {
     super(props);
@@ -95,8 +97,3 @@ class EntryForm extends React.Component {
 }
 
 export default EntryForm;
-
-  // controlId='formBasicTextInput'
-  // controlId='formBasicTextInput'
-  // controlId='formBasicDate'
-  // controlId='formBasicTime'

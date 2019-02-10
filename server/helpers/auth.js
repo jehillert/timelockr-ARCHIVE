@@ -1,22 +1,21 @@
 const Promise = require('bluebird');
+var debug = require('debug')('server:auth');
 const hash = require('pbkdf2-password')();
 
-verifyUserAsync = Promise.promisify(
-  (user) => {
-    if (!user.username) {
-      throw new Error('Invalid username.');
+Object.prototype.parseSqlResult = function() {
+  return JSON.parse(JSON.stringify(this[0]));
+};
+
+const hashPassword = (req, res, next) => {
+  hash({ password: req.body.password }, function (err, pass, salt, hash) {
+    if (err) {
+      next(err);
     }
-    hash({ password: user.password, salt: user.salt }, function (err, pass, salt, hash) {
-      if (err) {
-        return fn(err);
-      }
-      if (hash !== user.hash) {
-        throw new Error('Invalid password.');
-      }
-      return user;
-    });
-  }
-);
+    req.body.hash = hash;
+    req.body.salt = salt;
+    next();
+  });
+};
 
 const restrict = (req, res, next) => {
   if (req.session.user) {
@@ -24,9 +23,9 @@ const restrict = (req, res, next) => {
   } else {
     res.status(401).json({message: 'Access denied.'});
   }
-}
+};
 
 module.exports = {
-  verifyUserAsync,
+  hashPassword,
   restrict
-}
+};

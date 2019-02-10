@@ -3,16 +3,38 @@ const hash = require('pbkdf2-password')();
 const helpers = require('./helpers');
 const models = require('./models');
 const auth = require('./helpers/auth');
+const util = require('util');
+
+Object.prototype.parseSqlResult = function() {
+  return JSON.parse(JSON.stringify(this[0]));
+};
 
 module.exports = {
   login: {
     post: (req, res) =>
-      models.credentials.get(['username', req.body.username])
-        .then(user => auth.verifyUserAsync(user))
-        .tap(user => { debug(user) })
-        .tap(req => { helpers.debugReq(req) } )
-        .tap(req.session.regenerate(() => { req.session.user = user }))
-        .then(res.status(200).json({message: `Login successful.`}))
+      models.credentials.get(['credentials', 'username', req.body.username])
+        .then(user => {
+          user = user.parseSqlResult();
+          if (!user.username) {
+            throw new Error('Invalid username.');
+          }
+          return user;
+        })
+        .then(user => {
+          hash({ password: req.body.password, salt: user.salt }, function (err, pass, salt, hash) {
+            if (err) {
+              throw err;
+            }
+            if (hash !== user.hash) {
+              throw new Error('Invalid password.');
+            }
+            req.session.regenerate(() => {
+              req.session.user = user;
+              req.session.save();
+            });
+          });
+        })
+        .then(() => res.sendStatus(202))
         .catch(error => console.error('Error', error))
   },
 
@@ -24,7 +46,6 @@ module.exports = {
 
   credentials: {
     put: (req, res) => updateField(req, res),
-    post: (req, res) => createUser(req, res),
     delete: (req, res) => deleteFromTable(req, res)
   },
 
@@ -36,26 +57,23 @@ module.exports = {
     put: (req, res) => updateField(req, res),
     post: (req, res) => postToTable(req, res),
     delete: (req, res) => deleteFromTable(req, res)
+  },
+
+  signup: {
+    post: (req, res) =>
+      models.credentials
+        .post([ 'credentials',
+                'username',
+                'hash',
+                'salt',
+                req.body.username,
+                req.body.hash,
+                req.body.salt])
+        .then(results => res.sendStatus(201))
+        .catch(error => res.sendStatus(409))
+        // .then(results => res.status(201).json({message: 'New user successfully created.'}))
   }
 };
-
-function createUser(req, res) {
-  hash({ password: req.body.password }, function (err, pass, salt, hash) {
-    if (err) {
-      throw err;
-    }
-    req.body.salt = salt;
-    req.body.password = hash;
-  });
-
-  let params = helpers.getQueryParams(req);
-
-  req => { helpers.debugReq(req) };
-  models[params[0]]
-    .post(params)
-    .then(results => res.sendStatus(201))
-    .catch(error => console.error('Error', error));
-}
 
 function deleteFromTable(req, res) {
   let params = helpers.getQueryParams(req);
@@ -73,8 +91,8 @@ function getData(req, res) {
   return (
     models[params[0]]
       .get(params)
-      .tap(req => { helpers.debugReq(req) })
-      .tap(results => { debug(results) })
+      .tap(req => { helpers.debugReq(req); })
+      .tap(results => { debug(results); })
       .catch(error => console.error('Error', error))
   );
 }

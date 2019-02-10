@@ -73,6 +73,7 @@ const getQueryParams = req => {
 };
 
 module.exports = {
+  debugReq,
   filterAndFormatSecrets,
   getQueryParams
 };
