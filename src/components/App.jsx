@@ -36,7 +36,7 @@ class App extends React.Component {
     this.handleCreateNewUserAttempt = this.handleCreateNewUserAttempt.bind(this);
   }
 
-handleSigninAttempt = (user, pass) => {
+handleSignin = (user, pass) => {
     req.verifyUser(user, pass)
       .then(result => {
         this.setState((state, props) => ({
@@ -64,7 +64,7 @@ handleSigninAttempt = (user, pass) => {
             />
           ) : (
             <AuthModal
-              handleSigninAttempt={this.handleSigninAttempt}
+              handleSignin={this.handleSignin}
               handleCreateNewUserAttempt={this.handleCreateNewUserAttempt}
               viewState={this.state.viewState}
             />

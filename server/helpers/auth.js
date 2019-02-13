@@ -20,21 +20,14 @@ const hashPassword = (req, res, next) => {
   });
 };
 
-/*PROBLEM AREA*/
-const restrict = (req, res, next) => {
-  let sess = req.sessionID
-  debug(req.session);
-  if (sess) {
+function restrict(req, res, next) {
+  if (req.session.user) {
     next();
   } else {
-    res.status(401).json({message: 'Access denied.'});
+    req.session.error = 'Access denied!';
+    res.redirect('/login');
   }
-
-  // let params = ['sessions', 'session_id', req.sessionId];
-  // db.queryAsync(`SELECT * FROM ?? WHERE ?? = ?;`, params)
-  //   .then(next)
-  //   .catch(() => res.status(401).json({message: 'Access denied.'}))
-};
+}
 
 module.exports = {
   hashPassword,

@@ -1,4 +1,3 @@
-
 var debug = require('debug')('server:models');
 const db = require('../db');
 
