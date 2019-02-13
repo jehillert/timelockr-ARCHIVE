@@ -36,22 +36,14 @@ class App extends React.Component {
     this.handleCreateNewUserAttempt = this.handleCreateNewUserAttempt.bind(this);
   }
 
-
-  handleSignin = (user, pass) => {
+handleSigninAttempt = (user, pass) => {
     req.verifyUser(user, pass)
       .then(result => {
-        return this.setState((state, props) => ({
+        this.setState((state, props) => ({
           username: user,
           viewState: result.userAuthenticated
         }));
-    })
-    // .then(() => req.retrieveEntries(user)
-    // .then(results => {
-    //   this.setState((state, props) => ({
-    //     locked: results.locked,
-    //     released: results.released
-    //   }));
-    // });)
+    });
   }
 
   handleCreateNewUserAttempt = (user, pass) => {
@@ -65,14 +57,18 @@ class App extends React.Component {
     return (
       <Router>
         <Route exact path="/" render={() => (
-          this.state.viewState ?
-            ( <AuthModal
-                handleSignin={this.handleSignin}
-                handleCreateNewUserAttempt={this.handleCreateNewUserAttempt}
-                viewState={this.state.viewState} />
-        ) : ( <Main
-                username={this.state.username}
-                viewState={this.state.viewState} /> )
+          this.state.viewState ? (
+            <Main
+              username={this.state.username}
+              viewState={this.state.viewState}
+            />
+          ) : (
+            <AuthModal
+              handleSigninAttempt={this.handleSigninAttempt}
+              handleCreateNewUserAttempt={this.handleCreateNewUserAttempt}
+              viewState={this.state.viewState}
+            />
+          )
         )}/>
       </Router>
     );
