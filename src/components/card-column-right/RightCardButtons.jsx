@@ -1,10 +1,8 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Octicon, { calendar, trashcan } from 'octicons-react';
-import Col from 'react-bootstrap/Col';
+import { Button, ButtonGroup, Col } from 'Components';
 
-const RightCardControls = (props) => (
+const RightCardButtons = (props) => (
   <ButtonGroup size="sm" className='progress-row-controls'>
     <button className='icon-btn' >
       <Octicon icon={calendar} className='octicon-controls calendar' scale={1.75} />
@@ -15,4 +13,4 @@ const RightCardControls = (props) => (
   </ButtonGroup>
 )
 
-export default RightCardControls;
+export default RightCardButtons;

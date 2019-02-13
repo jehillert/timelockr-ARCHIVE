@@ -1,5 +1,4 @@
-const debug = require('debug')('TimeLocker:lib:helpers');
-const util = require('util');
+const debug = require('debug')('lib:helpers');
 const Promise = require('bluebird');
 const moment = require('moment');
 
@@ -60,7 +59,7 @@ const filterAndFormatSecrets = secrets => {
 
 const getQueryParams = req => {
   let queryParams;
-  let tableName = req.path.slice(1, req.path.length - 1);
+  let tableName = req.path.slice(1, req.path.length);
   let fields = Object.keys(req.body);
   let values = Object.keys(req.body).map(key => req.body[key]);
 

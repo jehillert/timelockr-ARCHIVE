@@ -1,7 +1,6 @@
 import React from 'react';
-import RightColumnCard from './RightColumnCard';
-import Container from 'react-bootstrap/Container';
 import PropTypes from 'prop-types';
+import { RightCard, Container } from 'Components';
 
 class RightCardColumn extends React.Component {
   render() {
@@ -11,7 +10,7 @@ class RightCardColumn extends React.Component {
         <Container className='secondary-container d-flex align-items-start flex-column'>
           <h3 className='component-block-header'>Locked</h3>
           {this.props.secrets.map(secret => (
-            <RightColumnCard key={secret.id} capsule={secret}/>
+            <RightCard key={secret.id} capsule={secret}/>
           ))}
         </Container>
       );
@@ -21,8 +20,7 @@ class RightCardColumn extends React.Component {
 }
 
 RightCardColumn.propTypes = {
-  secrets: PropTypes.array.isRequired
+  secrets: PropTypes.array
 }
-
 
 export default RightCardColumn;

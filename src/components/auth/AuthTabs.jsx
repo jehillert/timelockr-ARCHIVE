@@ -1,10 +1,10 @@
 import React from 'react';
-import Tabs from 'react-bootstrap/Tabs';
-import Tab from 'react-bootstrap/Tab';
-import CredentialForm from './CredentialForm';
+import { AuthForm
+       , Tabs
+       , Tab } from 'Components';
 import PropTypes from 'prop-types';
 
-class ModalTabs extends React.Component {
+class AuthTabs extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -30,17 +30,17 @@ class ModalTabs extends React.Component {
         onSelect={key => this.setState({ key }, this.handleSelect)}
       >
         <Tab eventKey='signin' title='Sign in'>
-          <CredentialForm
+          <AuthForm
             buttonLabel='Sign in'
-            handleSubmit={this.props.handleSigninAttempt}
-            isAuth={this.props.isAuth}
+            handleSubmit={this.props.handleSignin}
+            viewState={this.props.viewState}
           />
         </Tab>
         <Tab eventKey='signup' title='Sign Up'>
-          <CredentialForm
+          <AuthForm
             buttonLabel='Sign up'
             handleSubmit={this.props.handleCreateNewUserAttempt}
-            isAuth={this.props.isAuth}
+            viewState={this.props.viewState}
           />
         </Tab>
       </Tabs>
@@ -48,11 +48,11 @@ class ModalTabs extends React.Component {
   }
 }
 
-ModalTabs.propTypes = {
-  handleSigninAttempt: PropTypes.func.isRequired,
+AuthTabs.propTypes = {
+  handleSignin: PropTypes.func.isRequired,
   handleCreateNewUserAttempt: PropTypes.func.isRequired,
-  isAuth: PropTypes.bool.isRequired,
+  viewState: PropTypes.bool.isRequired,
   setTitle: PropTypes.func.isRequired
 };
 
-export default ModalTabs;
+export default AuthTabs;

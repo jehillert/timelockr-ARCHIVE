@@ -1,12 +1,12 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import FieldsGroup from './FieldsGroup';
-import Form from 'react-bootstrap/Form';
+import { Button
+       , Col
+       , Form
+       , GroupOfFields
+       , Row } from 'Components';
 import PropTypes from 'prop-types';
-import Row from 'react-bootstrap/Row';
 
-class CredentialForm extends React.Component {
+class AuthForm extends React.Component {
   constructor(props) {
     super(props);
 
@@ -33,7 +33,7 @@ class CredentialForm extends React.Component {
     return (
       <Form className='credential-form' onSubmit={this.handleSubmit}>
         <Form.Row>
-          <FieldsGroup
+          <GroupOfFields
             id='usrnm'
             label='Username'
             type='text'
@@ -43,7 +43,7 @@ class CredentialForm extends React.Component {
             />
         </Form.Row>
         <Form.Row>
-          <FieldsGroup
+          <GroupOfFields
             id='passwd'
             label='Password'
             type='password'
@@ -62,9 +62,9 @@ class CredentialForm extends React.Component {
   }
 }
 
-CredentialForm.propTypes = {
+AuthForm.propTypes = {
   buttonLabel: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  isAuth: PropTypes.bool.isRequired
+  viewState: PropTypes.bool.isRequired
 };
-export default CredentialForm;
+export default AuthForm;

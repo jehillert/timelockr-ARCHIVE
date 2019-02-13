@@ -1,25 +1,25 @@
 import React from 'react';
-import ProgressBar from 'react-bootstrap/ProgressBar';
-import ProgressBarDate from './ProgressBarDate';
-import RightCardControls from './RightCardControls';
-import Container from 'react-bootstrap/Container';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Card from 'react-bootstrap/Card';
 import moment from 'moment';
+import { Card
+       , Col
+       , Container
+       , ProgressBar
+       , RightCardButtons
+       , RightCardDates
+       , Row } from 'Components'
 import PropTypes from 'prop-types';
 
 /*future change: use circular progress bars instead:
   https://www.npmjs.com/package/react-circular-progressbar
   https://kimmobrunfeldt.github.io/progressbar.js/
   https://bootsnipp.com/snippets/nrDmZ*/
-const RightColumnCard = (props) => (
+const RightCard = (props) => (
   <Container className='secondary-container right-column-card-container'>
     <Card className="mb-3 shadow" style={{ width: '25rem' }}>
       <Card.Header>
         <Row className='d-flex justify-content-between flex-nowrap'>
           {props.secret.label}
-          <RightCardControls />
+          <RightCardButtons />
         </Row>
       </Card.Header>
       <Card.Body>
@@ -29,17 +29,17 @@ const RightColumnCard = (props) => (
           </Col>
         </Row>
         <Row className='d-flex justify-content-between'>
-          <ProgressBarDate label='Created' date={props.secret.creationDate} />
-          <ProgressBarDate label='Today' date={props.secret.todaysDate} />
-          <ProgressBarDate label='Release' date={props.secret.releaseDate} />
+          <RightCardDates label='Created' date={props.secret.creationDate} />
+          <RightCardDates label='Today' date={props.secret.todaysDate} />
+          <RightCardDates label='Release' date={props.secret.releaseDate} />
         </Row>
       </Card.Body>
     </Card>
   </Container>
 )
 
-RightColumnCard.propTypes = {
+RightCard.propTypes = {
   key: PropTypes.number,
   secret: PropTypes.object.isRequired
 }
-export default RightColumnCard;
+export default RightCard;

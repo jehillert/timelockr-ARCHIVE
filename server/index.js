@@ -28,13 +28,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(session({
-  secret: 'SECRET', // needs to be uuid?
+  secret: process.env.SESSION_SECRET,
   store: sessionStore,
   resave: true,
+  rolling: true,
   saveUninitialized: true,
   cookie: {
-    maxAge: 60*60*60*24,
-    httpOnly: true,
+    maxAge: 24*60*60*1000,
     domain:'localhost:8080',
     path: '/',
     secure: false

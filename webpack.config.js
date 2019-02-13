@@ -48,12 +48,6 @@ const config = {
     net: 'empty',
     tls: 'empty'
   },
-  resolve: {
-    extensions: [
-      '.js',
-      '.jsx'
-    ]
-  },
   plugins: [
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/)
   ],
@@ -61,8 +55,11 @@ const config = {
     contentBase: './dist'
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.css']
-  }
+    extensions: ['.js', '.jsx', '.css'],
+    alias: {
+      'Components': path.resolve(__dirname, 'src/components/index.jsx')
+    },
+  },
 }
 
 module.exports = config;

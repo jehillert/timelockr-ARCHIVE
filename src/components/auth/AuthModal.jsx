@@ -1,12 +1,12 @@
-import React from 'react'
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Modal from 'react-bootstrap/Modal'
-import ModalHeader from 'react-bootstrap/ModalHeader'
-import ModalTitle from 'react-bootstrap/ModalTitle'
-import ModalBody from 'react-bootstrap/ModalBody'
-import CredentialForm from './CredentialForm'
-import ModalTabs from './ModalTabs'
+import React from 'react';
+import { AuthForm
+       , AuthTabs
+       , Container
+       , Row
+       , Modal
+       , ModalHeader
+       , ModalTitle
+       , ModalBody } from 'Components';
 import PropTypes from 'prop-types';
 
 class AuthModal extends React.Component {
@@ -24,11 +24,11 @@ class AuthModal extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.isAuth !== prevProps.isAuth) {
-      if (this.props.isAuth === true) {
-        this.handleClose();
-      } else {
+    if (this.props.viewState !== prevProps.viewState) {
+      if (this.props.viewState < 2) {
         this.handleShow();
+      } else {
+        this.handleClose();
       }
     }
   }
@@ -48,15 +48,15 @@ class AuthModal extends React.Component {
 
   render() {
     return (
-      <Modal show={this.state.show} onHide={this.handleClose}>
-        <Modal.Header closeButton>
+      <Modal backdrop='static' show={this.state.show} onHide={this.handleClose}>
+        <Modal.Header>
           <Modal.Title>{this.state.title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ModalTabs
-            handleSigninAttempt={this.props.handleSigninAttempt}
+          <AuthTabs
+            handleSignin={this.props.handleSignin}
             handleCreateNewUserAttempt={this.props.handleCreateNewUserAttempt}
-            isAuth={this.props.isAuth}
+            viewState={this.props.viewState}
             setTitle={this.setTitle}
           />
         </Modal.Body>
@@ -66,9 +66,9 @@ class AuthModal extends React.Component {
 }
 
 AuthModal.propTypes = {
-  handleSigninAttempt: PropTypes.func.isRequired,
+  handleSignin: PropTypes.func.isRequired,
   handleCreateNewUserAttempt: PropTypes.func.isRequired,
-  isAuth: PropTypes.bool.isRequired
+  viewState: PropTypes.bool.isRequired
 };
 
 export default AuthModal;

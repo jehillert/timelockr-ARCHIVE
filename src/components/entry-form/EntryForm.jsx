@@ -1,14 +1,14 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import InputsGroup from './InputsGroup';
-import FieldsGroup from './FieldsGroup';
 import moment from 'moment';
+import { Button
+       , Card
+       , Col
+       , Container
+       , Form
+       , GroupOfInputs
+       , GroupOfFields } from 'Components';
 
-const req = require('./../scripts/ClientRequests');
+const req = require('./../../scripts/ClientRequests');
 
 class EntryForm extends React.Component {
   constructor(props) {
@@ -21,17 +21,8 @@ class EntryForm extends React.Component {
       releaseDate: '',
       releaseTime: '',
     };
-  }
 
-  componentDidMount() {
-    req.retrieveEntries('Maurine42').then(results => {
-      this.setState((state, props) => ({
-        locked: results.locked,
-        released: results.released
-      }));
-      console.log(this.state.secrets);
-      // this.setState({secrets: results});
-    });
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange = (e) => {
@@ -49,14 +40,14 @@ class EntryForm extends React.Component {
         <Card id='entry-form-card' className='shadow'>
           <Card.Body className='d-flex flex-column flex-nowrap'>
             <form id='entry-form'>
-              <FieldsGroup
+              <GroupOfFields
                 id='secret_label'
                 label='Enter a description.'
                 placeholder={`Ex-girlfriend's phone number`}
                 value={this.state.secret_label}
                 onChange={this.handleChange}
               />
-              <FieldsGroup
+              <GroupOfFields
                 id='secret_body'
                 label='Enter something to lock away.'
                 as='textarea'
@@ -66,7 +57,7 @@ class EntryForm extends React.Component {
                 required
               />
               <Col className='d-flex flex-nowrap'>
-                <InputsGroup
+                <GroupOfInputs
                   icon='calendar'
                   id='releaseDate'
                   label='Release Date'
@@ -75,7 +66,7 @@ class EntryForm extends React.Component {
                   onChange={this.handleChange}
                   required
                 />
-                <InputsGroup
+                <GroupOfInputs
                   id='releaseTime'
                   label='Release Time'
                   type='time'
