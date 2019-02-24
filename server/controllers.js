@@ -1,6 +1,6 @@
 const debug = require('debug')('server:controllers');
 const hash = require('pbkdf2-password')();
-const helpers = require('./helpers');
+const helpers = require('./helpers/helpers');
 const models = require('./models');
 const auth = require('./helpers/auth');
 const util = require('util');
@@ -46,8 +46,11 @@ module.exports = {
 
   secrets: {
     get: (req, res) =>
-      models.secrets.get(['secrets', 'user_id', 'username', req.query.username])
+      models.secrets.get(['secrets', 'credentials', 'user_id', 'username', req.query.username])
+        // .tap(() => console.clear())
+        .tap((results) => debug(results))
         .then(results => helpers.filterAndFormatSecrets(results))
+        .tap(results => debug(results.locked))
         .then(results => res.json(results))
         .catch(error => console.error('Error', error)),
     put: (req, res) => updateField(req, res),
@@ -58,13 +61,15 @@ module.exports = {
   signup: {
     post: (req, res) =>
       models.credentials
-        .post([ 'credentials',
-                'username',
-                'hash',
-                'salt',
-                req.body.username,
-                req.body.hash,
-                req.body.salt])
+        .post([
+          'credentials',
+          'username',
+          'hash',
+          'salt',
+          req.body.username,
+          req.body.hash,
+          req.body.salt
+        ])
         .then(results => res.sendStatus(201))
         .catch(error => res.sendStatus(409))
         // .then(results => res.status(201).json({message: 'New user successfully created.'}))

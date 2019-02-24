@@ -57,7 +57,7 @@ const generateUsers = (numOfUsers = 100, users = []) => {
 };
 
 let users;
-const numOfUsers = 100;
+const numOfUsers = 25;
 console.clear();
 
 getAsync('mysql -u root <schema.sql')
@@ -66,6 +66,7 @@ getAsync('mysql -u root <schema.sql')
   .then((users) => {
     // add each user to credentials table
     return Promise.each(users, function(user) {
+      console.log(user.username, user.password);
       return axios.post('http://localhost:3000/api/keepsafe/signup', {
         username: user.username,
         password: user.password

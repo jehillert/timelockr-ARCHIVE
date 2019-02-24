@@ -3,7 +3,7 @@ const Promise = require('bluebird');
 const debug = require('debug')('server:auth');
 const session = require('express-session');
 const hash = require('pbkdf2-password')();
-const helpers = require('./index');
+const helpers = require('./helpers');
 
 Object.prototype.parseSqlResult = function() {
   return JSON.parse(JSON.stringify(this[0]));

@@ -1,25 +1,14 @@
-const debug = require('debug')('lib:helpers');
+const debug = require('debug')('server:helpers');
 const Promise = require('bluebird');
 const moment = require('moment');
 
-function debugReq(req) {
-  debug('─────────────────────────────────────────────────────────────')
-  debug('REQUEST METHOD: %O', req.method)
-  debug('REQUEST URL: %O', req.url)
-  debug('REQUEST BASEURL: %O', req.baseUrl)
-  debug('REQUEST ORIGINALURL: %O', req.originalUrl)
-  debug('\nREQUEST BODY:\n %O', req.body)
-  debug('\nREQUEST ROUTE:\n %O', req.route)
-  debug('\nREQUEST HEADERS:\n %O', req.headers);
-  debug('─────────────────────────────────────────────────────────────')
-}
-
-const filterAndFormatSecrets = secrets => {
+const filterAndFormatSecrets = (secrets) => {
   let locked = [];
   let released = [];
   let todaysDate = moment().toISOString();
 
   for (let secret of secrets) {
+    debug('secret: ', secret);
     if (moment(secret.release_date).isBefore(todaysDate, 'seconds')) {
       let releasedSecret = {
         id: secret.secret_id,
@@ -52,12 +41,12 @@ const filterAndFormatSecrets = secrets => {
     }
   }
 
-  debug(locked);
-  // debug(released);
+  debug(`LOCKED:locked`);
+  debug(released);
   return { locked: locked, released: released };
 };
 
-const getQueryParams = req => {
+const getQueryParams = (req) => {
   let queryParams;
   let tableName = req.path.slice(1, req.path.length);
   let fields = Object.keys(req.body);
@@ -72,7 +61,6 @@ const getQueryParams = req => {
 };
 
 module.exports = {
-  debugReq,
   filterAndFormatSecrets,
   getQueryParams
 };

@@ -1,14 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as
-         Router
-       , Route
-       , Link
-       , Redirect
-       , withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from 'react-router-dom';
 import { AuthModal, Main } from 'Components';
 import Styles from './../styles/styles.css';
-
 const req = require('./../scripts/ClientRequests');
 const Promise = require('bluebird');
 
@@ -27,8 +21,6 @@ class App extends React.Component {
     */
     this.state = {
       username: '',
-      locked: [],
-      released: [],
       viewState: false
     };
 
@@ -37,20 +29,22 @@ class App extends React.Component {
   }
 
 handleSignin = (user, pass) => {
-    req.verifyUser(user, pass)
-      .then(result => {
-        this.setState((state, props) => ({
-          username: user,
-          viewState: result.userAuthenticated
-        }));
-    });
-  }
+  console.log(`signing in`)
+  console.log(user, pass)
+  req.verifyUser(user, pass)
+    .then(result => {
+      this.setState((state, props) => ({
+        username: user,
+        viewState: result.userAuthenticated
+      }));
+  });
+}
 
   handleCreateNewUserAttempt = (user, pass) => {
-    req.createNewUser(user, pass)
-      .then(response => {
-        alert(response.data);
-      });
+    // req.createNewUser(user, pass)
+    //   .then(response => {
+    //     alert(response.data);
+    //   });
   }
 
   render() {

@@ -5,10 +5,11 @@ import { Col
        , EntryForm
        , LeftCardColumn
        , RightCardColumn
-       , Row } from 'Components';
+       , Row
+     } from 'Components';
 import PropTypes from 'prop-types';
 import Styles from './../../styles/styles.css';
-
+const loggers = require('../../../lib/loggers');
 const req = require('../../scripts/ClientRequests');
 
 class Main extends React.Component {
@@ -17,11 +18,21 @@ class Main extends React.Component {
     this.state = {
       error: null,
       isLoaded: false,
+      locked: [],
+      released: [],
     };
   }
 
-  // componentDidMount() {
-  // }
+  componentDidMount() {
+    req.retrieveEntries(this.props.username)
+      .then(results => {
+        console.log(loggers.sqLine3);
+        this.setState((state, props) => ({
+          locked: results.locked,
+          released: results.released
+        }));
+      });
+  }
 
   render() {
     return (

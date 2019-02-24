@@ -11,8 +11,8 @@ class AuthForm extends React.Component {
     super(props);
 
     this.state = {
-      usrnm: '',
-      passwd: '',
+      usrnm: 'Maurine42',
+      passwd: '6bUeeOIkHbXNFGA',
       buttonLabel: this.props.buttonLabel
     };
 
