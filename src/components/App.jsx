@@ -28,17 +28,16 @@ class App extends React.Component {
     this.handleCreateNewUserAttempt = this.handleCreateNewUserAttempt.bind(this);
   }
 
-handleSignin = (user, pass) => {
-  console.log(`signing in`)
-  console.log(user, pass)
-  req.verifyUser(user, pass)
-    .then(result => {
-      this.setState((state, props) => ({
-        username: user,
-        viewState: result.userAuthenticated
-      }));
-  });
-}
+  handleSignin = (user, pass) => {
+    console.log(`signing in`)
+    req.verifyUser(user, pass)
+      .then(result => {
+        this.setState((state, props) => ({
+          username: user,
+          viewState: result.userAuthenticated
+        }));
+    });
+  }
 
   handleCreateNewUserAttempt = (user, pass) => {
     // req.createNewUser(user, pass)

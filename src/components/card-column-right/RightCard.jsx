@@ -18,20 +18,20 @@ const RightCard = (props) => (
     <Card className="mb-3 shadow" style={{ width: '25rem' }}>
       <Card.Header>
         <Row className='d-flex justify-content-between flex-nowrap'>
-          {props.secret.label}
+          {props.capsule.label}
           <RightCardButtons />
         </Row>
       </Card.Header>
       <Card.Body>
         <Row>
           <Col>
-            <ProgressBar variant="danger" now={props.secret.fraction * 100} />
+            <ProgressBar variant="danger" now={props.capsule.fraction * 100} />
           </Col>
         </Row>
         <Row className='d-flex justify-content-between'>
-          <RightCardDates label='Created' date={props.secret.creationDate} />
-          <RightCardDates label='Today' date={props.secret.todaysDate} />
-          <RightCardDates label='Release' date={props.secret.releaseDate} />
+          <RightCardDates label='Created' date={props.capsule.creationDate} />
+          <RightCardDates label='Today' date={props.capsule.todaysDate} />
+          <RightCardDates label='Release' date={props.capsule.releaseDate} />
         </Row>
       </Card.Body>
     </Card>
@@ -39,7 +39,6 @@ const RightCard = (props) => (
 )
 
 RightCard.propTypes = {
-  key: PropTypes.number,
-  secret: PropTypes.object.isRequired
+  capsule: PropTypes.object.isRequired
 }
 export default RightCard;

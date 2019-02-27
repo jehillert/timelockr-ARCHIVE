@@ -21,17 +21,24 @@ class Main extends React.Component {
       locked: [],
       released: [],
     };
+    // req.retrieveEntries(this.props.username)
+    //   .then(results => {
+    //     this.setState((state, props) => ({
+    //       locked: results.locked,
+    //       released: results.released
+    //     }));
+    //   });
   }
 
   componentDidMount() {
     req.retrieveEntries(this.props.username)
       .then(results => {
-        console.log(loggers.sqLine3);
+        console.log(results);
         this.setState((state, props) => ({
           locked: results.locked,
           released: results.released
         }));
-      });
+      })
   }
 
   render() {
@@ -40,11 +47,9 @@ class Main extends React.Component {
         <Container className='primary-container d-flex align-items-end flex-column'>
           <Row><Col>
               <h1 className='app-title'>TimeLockr</h1>
+            <Col className='inline-blk'><LeftCardColumn secrets={this.state.released} /></Col>
           </Col></Row>
           <Row>
-            <Col className='inline-blk'>
-              <LeftCardColumn secrets={this.state.released} />
-            </Col>
             <Col className='inline-blk'>
               <EntryForm />
               <RightCardColumn secrets={this.state.locked} />

@@ -47,11 +47,9 @@ module.exports = {
   secrets: {
     get: (req, res) =>
       models.secrets.get(['secrets', 'credentials', 'user_id', 'username', req.query.username])
-        // .tap(() => console.clear())
         .tap((results) => debug(results))
         .then(results => helpers.filterAndFormatSecrets(results))
-        .tap(results => debug(results.locked))
-        .then(results => res.json(results))
+        .then(results => res.send(results))
         .catch(error => console.error('Error', error)),
     put: (req, res) => updateField(req, res),
     post: (req, res) => postToTable(req, res),

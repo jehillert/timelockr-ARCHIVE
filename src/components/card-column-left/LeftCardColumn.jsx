@@ -9,7 +9,7 @@ const LeftCardColumn = (props) => {
       <Container id='left-card-column-container' className='secondary-container'>
         <h3 className='component-block-header'>Unlocked</h3>
         {props.secrets.map(secret => (
-          <LeftCard key={secret.id} secret={secret} />
+          <LeftCard key={secret.id} capsule={secret} />
         ))}
       </Container>
     );

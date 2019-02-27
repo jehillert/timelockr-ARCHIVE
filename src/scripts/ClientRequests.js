@@ -20,7 +20,7 @@ module.exports.createNewUser = (user, pass) => {
 module.exports.retrieveEntries = (user) => {
   return axios.get(`http://localhost:3000/api/keepsafe/secrets?username=${user}`)
     .then((results) => {
-      loggers.dotsLine1;
+      results = JSON.parse(results.request.response);
       return results;
     })
     .catch((error) => {
