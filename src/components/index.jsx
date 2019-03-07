@@ -1,6 +1,7 @@
 export { default as AuthForm } from './auth/AuthForm';
 export { default as AuthModal } from './auth/AuthModal';
 export { default as AuthTabs } from './auth/AuthTabs';
+export { default as DeleteButton } from './shared/DeleteButton';
 export { default as EntryForm } from './entry-form/EntryForm';
 export { default as GroupOfFields } from './shared/GroupOfFields';
 export { default as GroupOfInputs } from './shared/GroupOfInputs';

@@ -21,17 +21,43 @@ class Main extends React.Component {
       locked: [],
       released: [],
     };
-    // req.retrieveEntries(this.props.username)
-    //   .then(results => {
-    //     this.setState((state, props) => ({
-    //       locked: results.locked,
-    //       released: results.released
-    //     }));
-    //   });
+
+    this.refresh = this.refresh.bind(this);
   }
 
-  componentDidMount() {
-    req.retrieveEntries(this.props.username)
+  componentDidMount = () => this.getEntries();
+  refresh = () => this.getEntries();
+
+  render() {
+    return (
+      <Container className='global-container d-flex d-inline-flex justify-content-center' fluid>
+        <Container className='primary-container d-flex flex-column'>
+          <Row>
+            <Col className='inline-blk'>
+              <h1 className='app-title'>TimeLockr</h1>
+            </Col>
+          </Row>
+          <Row>
+            <Col className='inline-blk'>
+              <LeftCardColumn
+                entries={this.state.released}
+                refresh={this.refresh} />
+            </Col>
+            <Col className='inline-blk'>
+              <EntryForm />
+              <RightCardColumn
+                entries={this.state.locked}
+                refresh={this.refresh} />
+            </Col>
+          </Row>
+        </Container>
+      </Container>
+    );
+  }
+
+  // HELPERS
+  getEntries() {
+    req.getEntries(this.props.username)
       .then(results => {
         console.log(results);
         this.setState((state, props) => ({
@@ -39,25 +65,6 @@ class Main extends React.Component {
           released: results.released
         }));
       })
-  }
-
-  render() {
-    return (
-      <Container className='global-container d-flex d-inline-flex justify-content-center' fluid>
-        <Container className='primary-container d-flex align-items-end flex-column'>
-          <Row><Col>
-              <h1 className='app-title'>TimeLockr</h1>
-            <Col className='inline-blk'><LeftCardColumn secrets={this.state.released} /></Col>
-          </Col></Row>
-          <Row>
-            <Col className='inline-blk'>
-              <EntryForm />
-              <RightCardColumn secrets={this.state.locked} />
-            </Col>
-          </Row>
-        </Container>
-      </Container>
-    );
   }
 }
 

@@ -76,8 +76,8 @@ class EntryForm extends React.Component {
                   required
                 />
               </Col>
-              <Form.Group className='d-flex flex-row justify-content-md-end' as={Col}>
-                <Button type='submit'>Submit</Button>
+              <Form.Group className='d-flex justify-content-end' as={Col}>
+                <Button type='submit' className='submit-btn'>Submit</Button>
               </Form.Group>
             </form>
           </Card.Body>
@@ -86,5 +86,4 @@ class EntryForm extends React.Component {
     );
   }
 }
-
 export default EntryForm;

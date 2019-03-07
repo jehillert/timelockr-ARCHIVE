@@ -14,7 +14,6 @@ module.exports = {
     post: (req, res) =>
       models.credentials.get(['credentials', 'username', req.body.username])
         .then(user => {
-          // debug(req);
           user = user.parseSqlResult();
           if (!user.username) throw new Error('Invalid username.');
           return user;
@@ -53,7 +52,12 @@ module.exports = {
         .catch(error => console.error('Error', error)),
     put: (req, res) => updateField(req, res),
     post: (req, res) => postToTable(req, res),
-    delete: (req, res) => deleteFromTable(req, res)
+    delete: (req, res) => {
+      return models.general
+        .delete(['secrets', 'secret_id', req.body.entryId])
+        .then(results => res.sendStatus(201))
+        .catch(error => console.error('Error', error));
+    }
   },
 
   signup: {

@@ -29,16 +29,16 @@ class AuthTabs extends React.Component {
         transition={false}
         onSelect={key => this.setState({ key }, this.handleSelect)}
       >
-        <Tab eventKey='signin' title='Sign in'>
+        <Tab eventKey='signin' title='Sign In'>
           <AuthForm
-            buttonLabel='Sign in'
+            buttonLabel='Submit'
             handleSubmit={this.props.handleSignin}
             viewState={this.props.viewState}
           />
         </Tab>
         <Tab eventKey='signup' title='Sign Up'>
           <AuthForm
-            buttonLabel='Sign up'
+            buttonLabel='Submit'
             handleSubmit={this.props.handleCreateNewUserAttempt}
             viewState={this.props.viewState}
           />

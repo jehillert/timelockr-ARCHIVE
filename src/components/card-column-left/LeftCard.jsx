@@ -1,24 +1,44 @@
 import React from 'react';
 import Octicon, { x } from 'octicons-react';
 import PropTypes from 'prop-types';
-import { Button, Card, Container } from 'Components';
+import { Button, Card, Container, DeleteButton } from 'Components';
+const req = require('./../../scripts/ClientRequests');
 
-const LeftCard = (props) => (
-  <Card id={props.capsule.id} className="mb-3 shadow" bg="light" style={{ width: '20rem' }}>
-    <Card.Header className='d-flex justify-content-between flex-nowrap'>
-      {props.capsule.label}
-      <Octicon icon={x} className='x' scale={1.5} />
-    </Card.Header>
-    <Card.Body>
-      <Card.Text>
-        {props.capsule.body}
-      </Card.Text>
-    </Card.Body>
-  </Card>
-)
+class LeftCard extends React.Component {
+  constructor(props) {
+    super(props);
 
-LeftCard.propTypes = {
-  capsule: PropTypes.object.isRequired
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  /*consider moving all req.___ to Main.jsx*/
+  handleClick = () => (
+    req.deleteEntry(this.props.entry.id)
+      .then(() => this.props.refresh())
+  );
+
+  render() {
+    return (
+      <Card id={this.props.entry.id} className="mb-3 shadow" bg="light" style={{ width: '24rem' }}>
+        <Card.Header className='d-flex justify-content-between flex-nowrap'>
+          {this.props.entry.label}
+          <DeleteButton handleClick={this.handleClick}/>
+        </Card.Header>
+        <Card.Body>
+          <Card.Text>
+            {this.props.entry.body}
+          </Card.Text>
+        </Card.Body>
+      </Card>
+    )
+  }
 }
 
+LeftCard.propTypes = {
+  entry: PropTypes.object.isRequired,
+  refresh: PropTypes.func.isRequired
+};
+
 export default LeftCard;
+
+// <Octicon icon={x} className='x ml-auto' scale={1.5} />

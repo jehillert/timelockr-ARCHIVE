@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 const config = {
@@ -51,6 +52,12 @@ const config = {
   plugins: [
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/)
   ],
+  plugins: [
+    new CopyWebpackPlugin([
+      // relative path is from src
+      { from: './static/favicon.ico' }, // <- your path to favicon
+    ])
+  ],
   devServer: {
     contentBase: './dist'
   },
@@ -63,3 +70,13 @@ const config = {
 }
 
 module.exports = config;
+/*
+THIS IS FOR FAVICON
+  const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+  new CopyWebpackPlugin([
+    // relative path is from src
+    { from: './static/favicon.ico' }, // <- your path to favicon
+  ])
+
+*/

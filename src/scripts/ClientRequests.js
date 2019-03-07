@@ -9,23 +9,30 @@ module.exports.createNewUser = (user, pass) => {
     password: pass
   })
     .then((response) => response)
-    .catch((error) => {
-      console.log(error);
-      if (error.statusCode === 409) {
+    .catch(err => {
+      console.log(err);
+      if (err.statusCode === 409) {
         return {userCreated: false, message: 'Username taken.  Please select another'};
       }
     });
 };
 
-module.exports.retrieveEntries = (user) => {
+module.exports.deleteEntry = (entryId) => {
+  const url = 'http://localhost:3000/api/keepsafe/secrets'
+  const data = { data: { entryId: entryId } };
+
+  return axios.delete(url, data)
+    .then(results => console.log(results))
+    .catch(err => console.error(err));
+}
+
+module.exports.getEntries = (user) => {
   return axios.get(`http://localhost:3000/api/keepsafe/secrets?username=${user}`)
     .then((results) => {
       results = JSON.parse(results.request.response);
       return results;
     })
-    .catch((error) => {
-      console.log(error);
-    });
+    .catch(err => console.log(err) );
 };
 
 module.exports.verifyUser = (user, pass) => {
@@ -37,9 +44,7 @@ module.exports.verifyUser = (user, pass) => {
       console.log(results);
       return {userAuthenticated: true, message: 'User authenticated.'};
     })
-    .catch((error) => {
-      console.log(error);
-    });
+    .catch(err => console.log(err));
 };
 
 module.exports.createEntry = (entry) => {
@@ -50,5 +55,5 @@ module.exports.createEntry = (entry) => {
     secret_label: entry.secret_label,
     secret_body: entry.secret_body
   }).then((response) => response)
-    .catch(error => console.error(error));
+    .catch(err => console.error(err));
 };

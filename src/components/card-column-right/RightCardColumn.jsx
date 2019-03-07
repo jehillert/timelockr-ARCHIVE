@@ -2,25 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { RightCard, Container } from 'Components';
 
-class RightCardColumn extends React.Component {
-  render() {
-    let tbl = <div></div>;
-    if (this.props.secrets.length > 0) {
-      tbl = (
-        <Container className='secondary-container d-flex align-items-start flex-column'>
-          <h3 className='component-block-header'>Locked</h3>
-          {this.props.secrets.map(secret => (
-            <RightCard key={secret.id} capsule={secret}/>
-          ))}
-        </Container>
-      );
-    }
-    return tbl;
+const RightCardColumn = (props) => {
+  let tbl = <div></div>;
+  if (props.entries.length > 0) {
+    tbl = (
+      <Container className='secondary-container d-flex align-items-start flex-column'>
+        <h3 className='component-block-header'>Locked</h3>
+        {props.entries.map(entry => (
+          <RightCard key={entry.id} entry={entry} refresh={props.refresh} />
+        ))}
+      </Container>
+    );
   }
+  return tbl;
 }
 
 RightCardColumn.propTypes = {
-  secrets: PropTypes.array
+  entries: PropTypes.array,
+  refresh: PropTypes.func.isRequired
 }
 
 export default RightCardColumn;
