@@ -15,9 +15,9 @@ router.post('/signup', controller.signup.post);
 router.put('/credentials', controller.credentials.put);
 router.delete('/credentials', controller.credentials.delete);
 
-router.get('/secrets', controller.secrets.get);
-router.put('/secrets', controller.secrets.put);
-router.post('/secrets', controller.secrets.post);
-router.delete('/secrets', controller.secrets.delete);
+router.get('/entries', controller.entries.get);
+router.put('/entries', controller.entries.put);
+router.post('/entries', controller.entries.post);
+router.delete('/entries', controller.entries.delete);
 
 module.exports = router;

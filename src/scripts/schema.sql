@@ -11,13 +11,13 @@ CREATE TABLE IF NOT EXISTS `credentials` (
   `salt` VARCHAR(100)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `secrets` (
-  `secret_id` INT(4) ZEROFILL NOT NULL AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS `entries` (
+  `entry_id` INT(4) ZEROFILL NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `user_id` INT NOT NULL,
   `creation_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `release_date` DATETIME NOT NULL,
-  `secret_label` VARCHAR(100) NOT NULL DEFAULT '',
-  `secret_body` VARCHAR(10000) NOT NULL,
+  `description` VARCHAR(100) NOT NULL DEFAULT '',
+  `content` VARCHAR(10000) NOT NULL,
   FOREIGN KEY fk_user (user_id)
     REFERENCES credentials(`user_id`)
     ON DELETE CASCADE
@@ -31,15 +31,15 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   PRIMARY KEY (`session_id`)
 ) ENGINE=InnoDB
 
-/* Procedure to show full secret entries */
+/* Procedure to show full entries */
 -- USE `keepsafe`;
--- DROP procedure IF EXISTS `ShowSecretsEntries`;
+-- DROP procedure IF EXISTS `ShowEntries`;
 
 -- DELIMITER $$
 -- USE `keepsafe`$$
 -- CREATE DEFINER=`root`@`localhost` PROCEDURE `JoinTables`()
 -- BEGIN
---   SELECT * FROM keepsafe.secrets
+--   SELECT * FROM keepsafe.entries
 --   LEFT JOIN keepsafe.credentials USING (user_id);
 -- END;$$
 

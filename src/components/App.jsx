@@ -20,6 +20,7 @@ class App extends React.Component {
         5 - Entry Form + Entries
     */
     this.state = {
+      user_id: 0,
       username: '',
       viewState: false
     };
@@ -30,11 +31,13 @@ class App extends React.Component {
 
   handleSignin = (user, pass) => {
     console.log(`signing in`)
+    // auth indicated by non-zero value for result.user_id
     req.verifyUser(user, pass)
       .then(result => {
         this.setState((state, props) => ({
+          user_id: result.user_id,
           username: user,
-          viewState: result.userAuthenticated
+          viewState: result.viewState
         }));
     });
   }
@@ -52,6 +55,7 @@ class App extends React.Component {
         <Route exact path="/" render={() => (
           this.state.viewState ? (
             <Main
+              user_id={this.state.user_id}
               username={this.state.username}
               viewState={this.state.viewState}
             />

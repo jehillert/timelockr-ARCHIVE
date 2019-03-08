@@ -21,15 +21,10 @@ module.exports = {
     post: params => db.queryAsync(`INSERT INTO ??(??, ??, ??) VALUES (?, ?, ?)`, params)
   },
 
-  secrets: {
+  entries: {
     get: params => db.queryAsync(`SELECT * FROM ?? LEFT JOIN ?? USING (??) WHERE ?? = ?`, params )
         .tap(results => { debug(results) })
         .catch(error => console.error('Error', error)),
-    post: params =>
-      db.queryAsync(
-          `INSERT INTO ??(secret_id, ??, ??, ??, ??, ??) VALUES (0,?,?,?,?,?)`,
-          params
-        )
-        .catch(error => console.error('Error', error)),
+    post: params => db.queryAsync(`INSERT INTO ??(entry_id, ??, ??, ??, ??, ??) VALUES (0, ?,?,?,?,?)`, params )
   }
 };

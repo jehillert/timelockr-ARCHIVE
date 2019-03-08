@@ -7,17 +7,15 @@ import { Button
        , Form
        , GroupOfInputs
        , GroupOfFields } from 'Components';
-
+import PropTypes from 'prop-types';
 const req = require('./../../scripts/ClientRequests');
 
 class EntryForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      secret_label: '',
-      secret_body: '',
-      creation_date: null,
-      release_date: null,
+      description: '',
+      content: '',
       releaseDate: '',
       releaseTime: '',
     };
@@ -29,8 +27,20 @@ class EntryForm extends React.Component {
     this.setState({ [e.target.id]: e.target.value });
   }
 
-  onSubmit = () => {
-
+  handleSubmit = (e) => {
+    // reformulate release date
+    e.preventDefault();
+    let releaseDateTime = this.state.releaseDate + ' ' + this.state.releaseTime;
+    let release_date = moment(releaseDateTime, "YYYY-MM-DD h:mm").format("YYYY-MM-DD HH:mm");
+    let newEntry = {
+      user_id: this.props.user_id,
+      creation_date: moment().format('YYYY-MM-DD HH:mm'),
+      release_date: release_date,
+      description: this.state.description,
+      content: this.state.content
+    }
+    return req.createEntry(newEntry)
+      .then(this.props.refresh());
   }
 
   render() {
@@ -41,18 +51,18 @@ class EntryForm extends React.Component {
           <Card.Body className='d-flex flex-column flex-nowrap'>
             <form id='entry-form'>
               <GroupOfFields
-                id='secret_label'
+                id='description'
                 label='Enter a description.'
                 placeholder={`Ex-girlfriend's phone number`}
-                value={this.state.secret_label}
+                value={this.state.description}
                 onChange={this.handleChange}
               />
               <GroupOfFields
-                id='secret_body'
+                id='content'
                 label='Enter something to lock away.'
                 as='textarea'
                 placeholder='555-555-5555'
-                value={this.state.secret_body}
+                value={this.state.content}
                 onChange={this.handleChange}
                 required
               />
@@ -77,7 +87,7 @@ class EntryForm extends React.Component {
                 />
               </Col>
               <Form.Group className='d-flex justify-content-end' as={Col}>
-                <Button type='submit' className='submit-btn'>Submit</Button>
+                <Button type='submit' className='submit-btn' onClick={this.handleSubmit}>Submit</Button>
               </Form.Group>
             </form>
           </Card.Body>
@@ -86,4 +96,10 @@ class EntryForm extends React.Component {
     );
   }
 }
+
+EntryForm.propTypes = {
+  refresh: PropTypes.func.isRequired,
+  user_id: PropTypes.number.isRequired
+}
+
 export default EntryForm;

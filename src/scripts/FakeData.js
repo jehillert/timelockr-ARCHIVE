@@ -33,8 +33,8 @@ const generateUserEntries = (user, maxEntries = 7) => {
       user_id: user.user_id,
       creation_date: creationDate,
       release_date: releaseDate,
-      secret_label: faker.lorem.words(Math.floor((Math.random() * 10))),
-      secret_body: faker.lorem.sentence()
+      description: faker.lorem.words(Math.floor((Math.random() * 10))),
+      content: faker.lorem.sentence()
     };
 
     // console.log(entry);
@@ -61,7 +61,7 @@ const numOfUsers = 25;
 console.clear();
 
 getAsync('mysql -u root <schema.sql')
-  .then(() => { console.log('db tabledds cleared') })
+  .then(() => { console.log('db tables cleared') })
   .then(() => generateUsers(numOfUsers))
   .then((users) => {
     // add each user to credentials table
@@ -74,13 +74,13 @@ getAsync('mysql -u root <schema.sql')
       .then(() => {
         // add entry to entries section
         return Promise.each(user.entries, function(entry) {
-          console.log(entry.user_id, entry.creation_date, entry.release_date, entry.secret_label, entry.secret_body);
-          return axios.post('http://localhost:3000/api/keepsafe/secrets', {
+          console.log(entry.user_id, entry.creation_date, entry.release_date, entry.description, entry.content);
+          return axios.post('http://localhost:3000/api/keepsafe/entries', {
             user_id: entry.user_id,
             creation_date: entry.creation_date,
             release_date: entry.release_date,
-            secret_label: entry.secret_label,
-            secret_body: entry.secret_body
+            description: entry.description,
+            content: entry.content
           });
         });
       });

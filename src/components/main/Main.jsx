@@ -21,12 +21,16 @@ class Main extends React.Component {
       locked: [],
       released: [],
     };
-
     this.refresh = this.refresh.bind(this);
   }
 
-  componentDidMount = () => this.getEntries();
-  refresh = () => this.getEntries();
+  componentDidMount = () => (
+    this.getEntries()
+  );
+
+  refresh = () => (
+    this.getEntries()
+  );
 
   render() {
     return (
@@ -44,7 +48,9 @@ class Main extends React.Component {
                 refresh={this.refresh} />
             </Col>
             <Col className='inline-blk'>
-              <EntryForm />
+              <EntryForm
+                refresh={this.refresh}
+                user_id={this.props.user_id} />
               <RightCardColumn
                 entries={this.state.locked}
                 refresh={this.refresh} />
@@ -69,6 +75,7 @@ class Main extends React.Component {
 }
 
 Main.propTypes = {
+  user_id: PropTypes.number.isRequired,
   username: PropTypes.string.isRequired,
   viewState: PropTypes.bool.isRequired
 }

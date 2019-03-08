@@ -2,25 +2,25 @@ const debug = require('debug')('server:helpers');
 const Promise = require('bluebird');
 const moment = require('moment');
 
-const filterAndFormatSecrets = (secrets) => {
+const filterAndFormatEntries = (entries) => {
   let locked = [];
   let released = [];
   let todaysDate = moment().toISOString();
 
-  for (let secret of secrets) {
-    debug('secret: ', secret);
-    if (moment(secret.release_date).isBefore(todaysDate, 'seconds')) {
-      let releasedSecret = {
-        id: secret.secret_id,
-        label: secret.secret_label,
-        body: secret.secret_body
+  for (let entry of entries) {
+    debug('entry: ', entry);
+    if (moment(entry.release_date).isBefore(todaysDate, 'seconds')) {
+      let releasedEntry = {
+        id: entry.entry_id,
+        label: entry.description,
+        body: entry.content
       };
 
-      released.push(releasedSecret);
+      released.push(releasedEntry);
     } else {
       let present = moment(todaysDate).unix();
-      let past = moment(secret.creation_date).toISOString();
-      let future = moment(secret.release_date).toISOString();
+      let past = moment(entry.creation_date).toISOString();
+      let future = moment(entry.release_date).toISOString();
       past = moment(past).unix();
       future = moment(future).unix();
 
@@ -28,16 +28,16 @@ const filterAndFormatSecrets = (secrets) => {
         ((present - past) / (future - past)).toFixed(2)
       );
 
-      let lockedSecret = {
-        id: secret.secret_id,
-        label: secret.secret_label,
+      let lockedEntry = {
+        id: entry.entry_id,
+        label: entry.description,
         todaysDate: todaysDate,
-        creationDate: moment(secret.creation_date).toISOString(),
-        releaseDate: moment(secret.release_date).toISOString(),
+        creationDate: moment(entry.creation_date).toISOString(),
+        releaseDate: moment(entry.release_date).toISOString(),
         fraction: fraction,
-        timeRemaining: moment(secret.release_date).calendar()
+        timeRemaining: moment(entry.release_date).calendar()
       };
-      locked.push(lockedSecret);
+      locked.push(lockedEntry);
     }
   }
 
@@ -61,6 +61,6 @@ const getQueryParams = (req) => {
 };
 
 module.exports = {
-  filterAndFormatSecrets,
+  filterAndFormatEntries,
   getQueryParams
 };
