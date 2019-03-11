@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from 'react-router-dom';
 import { AuthModal, Main } from 'Components';
 import Styles from './../styles/styles.css';
@@ -10,15 +9,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    /*
-      viewState:
-        0 - Signin
-        1 - Signin (invalid credentials)
-        2 - Signup
-        3 - Signup (username taken)
-        4 - Entry Form (alone)
-        5 - Entry Form + Entries
-    */
     this.state = {
       user_id: 0,
       username: '',

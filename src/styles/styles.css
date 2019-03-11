@@ -14,7 +14,7 @@ body {
   line-height: 1.5;
   color: #839496;
   text-align: left;
-  background-color: #565858;
+  background-color: #ffffff;
   /* background-color: #011734; */
 }
 
@@ -55,9 +55,6 @@ body {
 
 .credential-form {
   padding-top: 40px;
-}
-
-.global-container {
 }
 
 .primary-container {
@@ -136,10 +133,6 @@ body {
 }
 .progress-row-controls svg {
   color: #FFFFFF;
-}
-
-.inline-blk {
-  display: inline-block;
 }
 
 .modal-content {

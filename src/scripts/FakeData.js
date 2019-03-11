@@ -12,13 +12,13 @@ faker.seed(123);
 
 const aTimeLaterToday = () => {
   let now = moment();
-  let midnight = moment().endOf('day');
+  let midnight = moment().endOf('hour');
   let timeInBetween = faker.date.between(now, midnight);
   timeInBetween = moment(timeInBetween).format('YYYY-MM-DD HH:mm');
   // timeInBetween = moment(timeInBetween).format('YYYY-MM-DD HH:mm:ss');
   return timeInBetween;
 };
-const generateUserEntries = (user, maxEntries = 7) => {
+const generateUserEntries = (user, maxEntries = 15) => {
   entries = [];
 
   let numOfUserEntries = faker.random.number({ min: 0, max: maxEntries });
@@ -71,19 +71,19 @@ getAsync('mysql -u root <schema.sql')
         username: user.username,
         password: user.password
       })
-      .then(() => {
-        // add entry to entries section
-        return Promise.each(user.entries, function(entry) {
-          console.log(entry.user_id, entry.creation_date, entry.release_date, entry.description, entry.content);
-          return axios.post('http://localhost:3000/api/keepsafe/entries', {
-            user_id: entry.user_id,
-            creation_date: entry.creation_date,
-            release_date: entry.release_date,
-            description: entry.description,
-            content: entry.content
+        .then(() => {
+          // add entry to entries section
+          return Promise.each(user.entries, function(entry) {
+            console.log(entry.user_id, entry.creation_date, entry.release_date, entry.description, entry.content);
+            return axios.post('http://localhost:3000/api/keepsafe/entries', {
+              user_id: entry.user_id,
+              creation_date: entry.creation_date,
+              release_date: entry.release_date,
+              description: entry.description,
+              content: entry.content
+            });
           });
         });
-      });
     }).then(function() {
       console.log('done')
     });

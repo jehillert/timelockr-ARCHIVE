@@ -1,7 +1,7 @@
 import React from 'react';
 import Octicon, { x } from 'octicons-react';
 import PropTypes from 'prop-types';
-import { Button, Card, Container, DeleteButton } from 'Components';
+import { Card, DeleteButton } from 'Components';
 const req = require('./../../scripts/ClientRequests');
 
 class LeftCard extends React.Component {

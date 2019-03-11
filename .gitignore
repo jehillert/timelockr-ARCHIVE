@@ -69,3 +69,5 @@ _notes/
 node_modules/
 bower_components
 jspm_packages/
+.favorites.json
+TIMELOCKR.code-workspace

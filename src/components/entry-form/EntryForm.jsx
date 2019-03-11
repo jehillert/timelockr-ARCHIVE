@@ -13,14 +13,15 @@ const req = require('./../../scripts/ClientRequests');
 class EntryForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this.initialState = {
       description: '',
       content: '',
       releaseDate: '',
       releaseTime: '',
     };
-
+    this.state = this.initialState
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange = (e) => {
@@ -40,7 +41,8 @@ class EntryForm extends React.Component {
       content: this.state.content
     }
     return req.createEntry(newEntry)
-      .then(this.props.refresh());
+      .then(() => this.props.refresh())
+      .then(this.setState((state) => state = this.initialState))
   }
 
   render() {

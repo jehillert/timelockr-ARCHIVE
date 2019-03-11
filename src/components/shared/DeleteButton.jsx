@@ -57,5 +57,3 @@ DeleteButton.propTypes = {
 };
 
 export default DeleteButton;
-
-// className='d-flex align-self-start ml-auto'

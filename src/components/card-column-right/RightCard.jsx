@@ -2,7 +2,6 @@ import React from 'react';
 import moment from 'moment';
 import { Card
        , Col
-       , Container
        , DeleteButton
        , ProgressBar
        , RightCardDates
@@ -28,28 +27,26 @@ class RightCard extends React.Component {
 
   render() {
     return (
-      <Container className='secondary-container right-column-card-container'>
-        <Card className="mb-3 shadow" style={{ width: '25rem' }}>
-          <Card.Header>
-            <Row className='d-flex justify-content-between flex-nowrap'>
-              {this.props.entry.label}
-              <DeleteButton handleClick={this.handleClick}/>
-            </Row>
-          </Card.Header>
-          <Card.Body>
-            <Row>
-              <Col>
-                <ProgressBar variant="danger" now={this.props.entry.fraction * 100} />
-              </Col>
-            </Row>
-            <Row className='d-flex justify-content-between'>
-              <RightCardDates label='Created' date={this.props.entry.creationDate} />
-              <RightCardDates label='Today' date={this.props.entry.todaysDate} />
-              <RightCardDates label='Release' date={this.props.entry.releaseDate} />
-            </Row>
-          </Card.Body>
-        </Card>
-      </Container>
+      <Card className="mb-3 shadow" style={{ width: '25rem' }}>
+        <Card.Header>
+          <Row className='d-flex justify-content-between flex-nowrap'>
+            {this.props.entry.label}
+            <DeleteButton handleClick={this.handleClick}/>
+          </Row>
+        </Card.Header>
+        <Card.Body>
+          <Row>
+            <Col>
+              <ProgressBar variant="danger" now={this.props.entry.fraction * 100} />
+            </Col>
+          </Row>
+          <Row className='d-flex justify-content-between'>
+            <RightCardDates label='Created' date={this.props.entry.creationDate} />
+            <RightCardDates label='Today' date={this.props.entry.todaysDate} />
+            <RightCardDates label='Release' date={this.props.entry.releaseDate} />
+          </Row>
+        </Card.Body>
+      </Card>
     )
   }
 }
