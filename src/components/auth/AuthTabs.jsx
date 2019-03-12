@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { AuthForm
+       , ErrorBoundary
        , Tabs
        , Tab } from 'Components';
-import PropTypes from 'prop-types';
 
 class AuthTabs extends React.Component {
   constructor(props, context) {
@@ -22,28 +23,34 @@ class AuthTabs extends React.Component {
 
   render() {
     return (
-      <Tabs
-        id='modal-tabs'
-        className='nav-justified'
-        activeKey={this.state.key}
-        transition={false}
-        onSelect={key => this.setState({ key }, this.handleSelect)}
-      >
-        <Tab eventKey='signin' title='Sign In'>
-          <AuthForm
-            buttonLabel='Submit'
-            handleSubmit={this.props.handleSignin}
-            viewState={this.props.viewState}
-          />
-        </Tab>
-        <Tab eventKey='signup' title='Sign Up'>
-          <AuthForm
-            buttonLabel='Submit'
-            handleSubmit={this.props.handleCreateNewUserAttempt}
-            viewState={this.props.viewState}
-          />
-        </Tab>
-      </Tabs>
+      <ErrorBoundary>
+        <Tabs
+          id='modal-tabs'
+          className='nav-justified'
+          activeKey={this.state.key}
+          transition={false}
+          onSelect={key => this.setState({ key }, this.handleSelect)}
+        >
+          <Tab eventKey='signin' title='Sign In'>
+            <ErrorBoundary>
+              <AuthForm
+                buttonLabel='Submit'
+                handleSubmit={this.props.handleSignin}
+                viewState={this.props.viewState}
+              />
+            </ErrorBoundary>
+          </Tab>
+          <Tab eventKey='signup' title='Sign Up'>
+            <ErrorBoundary>
+              <AuthForm
+                buttonLabel='Submit'
+                handleSubmit={this.props.handleCreateNewUserAttempt}
+                viewState={this.props.viewState}
+              />
+            </ErrorBoundary>
+          </Tab>
+        </Tabs>
+      </ErrorBoundary>
     );
   }
 }

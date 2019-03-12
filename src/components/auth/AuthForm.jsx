@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button
        , Col
+       , ErrorBoundary
        , Form
        , GroupOfFields
        , Row } from 'Components';
-import PropTypes from 'prop-types';
 
 class AuthForm extends React.Component {
   constructor(props) {
@@ -59,31 +60,37 @@ class AuthForm extends React.Component {
     return (
       <Form className='credential-form' onSubmit={this.handleSubmit}>
         <Form.Row>
-          <GroupOfFields
-            id='usrnm'
-            label='Username'
-            type='text'
-            placeholder='Username'
-            value={this.state.usrnm}
-            onChange={this.handleChange}
+          <ErrorBoundary>
+            <GroupOfFields
+              id='usrnm'
+              label='Username'
+              type='text'
+              placeholder='Username'
+              value={this.state.usrnm}
+              onChange={this.handleChange}
             />
+          </ErrorBoundary>
         </Form.Row>
         <Form.Row>
-          <GroupOfFields
-            id='passwd'
-            label='Password'
-            type='password'
-            placeholder='Password'
-            value={this.state.passwd}
-            onChange={this.handleChange}
-          />
+          <ErrorBoundary>
+            <GroupOfFields
+              id='passwd'
+              label='Password'
+              type='password'
+              placeholder='Password'
+              value={this.state.passwd}
+              onChange={this.handleChange}
+            />
+          </ErrorBoundary>
         </Form.Row>
         <Form.Row>
-          <Form.Group className='d-flex justify-content-end' as={Col}>
-            <Button type='submit' className='submit-btn'>
-              {this.state.buttonLabel}
-            </Button>
-          </Form.Group>
+          <ErrorBoundary>
+            <Form.Group className='d-flex justify-content-end' as={Col}>
+              <Button type='submit' className='submit-btn'>
+                {this.state.buttonLabel}
+              </Button>
+            </Form.Group>
+          </ErrorBoundary>
         </Form.Row>
       </Form>
     );

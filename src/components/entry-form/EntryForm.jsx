@@ -1,13 +1,14 @@
 import React from 'react';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 import { Button
        , Card
        , Col
        , Container
+       , ErrorBoundary
        , Form
        , GroupOfInputs
        , GroupOfFields } from 'Components';
-import PropTypes from 'prop-types';
 const req = require('./../../scripts/ClientRequests');
 
 class EntryForm extends React.Component {
@@ -52,45 +53,55 @@ class EntryForm extends React.Component {
         <Card id='entry-form-card' className='shadow'>
           <Card.Body className='d-flex flex-column flex-nowrap'>
             <form id='entry-form'>
-              <GroupOfFields
-                id='description'
-                label='Enter a description.'
-                placeholder={`Ex-girlfriend's phone number`}
-                value={this.state.description}
-                onChange={this.handleChange}
-              />
-              <GroupOfFields
-                id='content'
-                label='Enter something to lock away.'
-                as='textarea'
-                placeholder='555-555-5555'
-                value={this.state.content}
-                onChange={this.handleChange}
-                required
-              />
+              <ErrorBoundary>
+                <GroupOfFields
+                  id='description'
+                  label='Enter a description.'
+                  placeholder={`Ex-girlfriend's phone number`}
+                  value={this.state.description}
+                  onChange={this.handleChange}
+                />
+              </ErrorBoundary>
+              <ErrorBoundary>
+                <GroupOfFields
+                  id='content'
+                  label='Enter something to lock away.'
+                  as='textarea'
+                  placeholder='555-555-5555'
+                  value={this.state.content}
+                  onChange={this.handleChange}
+                  required
+                />
+              </ErrorBoundary>
               <Col className='d-flex flex-nowrap'>
-                <GroupOfInputs
-                  icon='calendar'
-                  id='releaseDate'
-                  label='Release Date'
-                  type='date'
-                  value={this.state.releaseDate}
-                  onChange={this.handleChange}
-                  required
-                />
-                <GroupOfInputs
-                  id='releaseTime'
-                  label='Release Time'
-                  type='time'
-                  icon='clock'
-                  value={this.state.releaseTime}
-                  onChange={this.handleChange}
-                  required
-                />
+                <ErrorBoundary>
+                  <GroupOfInputs
+                    icon='calendar'
+                    id='releaseDate'
+                    label='Release Date'
+                    type='date'
+                    value={this.state.releaseDate}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </ErrorBoundary>
+                <ErrorBoundary>
+                  <GroupOfInputs
+                    id='releaseTime'
+                    label='Release Time'
+                    type='time'
+                    icon='clock'
+                    value={this.state.releaseTime}
+                    onChange={this.handleChange}
+                    required
+                  />
+                </ErrorBoundary>
               </Col>
-              <Form.Group className='d-flex justify-content-end' as={Col}>
-                <Button type='submit' className='submit-btn' onClick={this.handleSubmit}>Submit</Button>
-              </Form.Group>
+              <ErrorBoundary>
+                <Form.Group className='d-flex justify-content-end' as={Col}>
+                  <Button type='submit' className='submit-btn' onClick={this.handleSubmit}>Submit</Button>
+                </Form.Group>
+              </ErrorBoundary>
             </form>
           </Card.Body>
         </Card>

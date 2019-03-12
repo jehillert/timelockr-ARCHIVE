@@ -1,12 +1,12 @@
 import React from 'react';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 import { Card
        , Col
        , DeleteButton
        , ProgressBar
        , RightCardDates
        , Row } from 'Components'
-import PropTypes from 'prop-types';
 const req = require('./../../scripts/ClientRequests');
 
 /*future change: use circular progress bars instead:

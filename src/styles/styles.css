@@ -31,13 +31,6 @@ body {
   font-size: .9rem;
 }
 
-#left-card-column-container {
-  /* max-width: 400px; */
-  max-width: 480px;
-  margin: 0;
-  /* max-width: 125rem; */
-}
-
 .app-title {
   /* width: 500px; */
   color: #AEAEAA;
@@ -168,11 +161,6 @@ body {
 .right-tab-shadow{
   -webkit-box-shadow: -5px 0px 6px 0px rgba(82,82,82,0.52);
   box-shadow: -5px 0px 6px 0px rgba(82,82,82,0.52);
-}
-
-.right-column-card-container {
-  padding-left: 0px;
-  padding-right: 0px;
 }
 
 .shadow {

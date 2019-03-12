@@ -1,13 +1,35 @@
 import React from 'react';
-import { Col
+import PropTypes from 'prop-types';
+import { CardColumn
+       , Col
        , Container
        , EntryForm
-       , LeftCardColumn
-       , RightCardColumn
-       , Row
-     } from 'Components';
-import PropTypes from 'prop-types';
+       , ErrorBoundary
+       , LeftCard
+       , RightCard
+       , Row } from 'Components';
+
 const req = require('../../scripts/ClientRequests');
+
+/*
+  THESE ARE VALID:
+
+    this.setState((state, props) => ({
+      title: newTitle
+    }));
+
+    this.setState((state) => state.title = newTitle);
+
+    this.setState((state) => {
+      return state.title = newTitle
+    });
+
+  THIS IS INVALID BECAUSE NO RETURN STATEMENT:
+
+    this.setState((state) => {
+      state.title = newTitle
+    });
+*/
 
 class Main extends React.Component {
   constructor(props) {
@@ -35,13 +57,14 @@ class Main extends React.Component {
           released: results.released,
           hasReleasedChildren: !!(results.released.length)
         }));
-      })
+      });
   }
 
   refresh = () => (
     this.getEntries()
   );
 
+// GENERIC CARD-COLUMN IMPLEMENTATION
   render() {
     return (
       <Container className='d-flex d-inline-flex justify-content-center' fluid>
@@ -52,28 +75,40 @@ class Main extends React.Component {
             </Col>
           </Row>
           <Row>
-            {
-              this.state.hasReleasedChildren &&
-              <LeftCardColumn
-                entries={this.state.released}
-                refresh={this.refresh}
-                showColumn={this.state.hasReleasedChildren}
-              />
-            }
-            <Col>
-              <EntryForm
-                refresh={this.refresh}
-                user_id={this.props.user_id}
-              />
-            </Col>
-            {
-              this.state.hasLockedChildren &&
-              <RightCardColumn
-                entries={this.state.locked}
-                refresh={this.refresh}
-                showColumn={this.state.hasLockedChildren}
-              />
-            }
+            <ErrorBoundary>
+              {
+                this.state.hasReleasedChildren &&
+                <CardColumn
+                  id='left-card-column'
+                  title='Unlocked'
+                  Card={LeftCard}
+                  entries={this.state.released}
+                  refresh={this.refresh}
+                  showComponent={this.state.hasReleasedChildren}
+                />
+              }
+            </ErrorBoundary>
+            <ErrorBoundary>
+              <Col>
+                <EntryForm
+                  refresh={this.refresh}
+                  user_id={this.props.user_id}
+                />
+              </Col>
+            </ErrorBoundary>
+            <ErrorBoundary>
+              {
+                this.state.hasLockedChildren &&
+                <CardColumn
+                  id='right-card-column'
+                  title='Locked'
+                  Card={RightCard}
+                  entries={this.state.locked}
+                  refresh={this.refresh}
+                  showComponent={this.state.hasLockedChildren}
+                />
+              }
+            </ErrorBoundary>
           </Row>
         </Container>
       </Container>
@@ -86,7 +121,6 @@ Main.propTypes = {
   user_id: PropTypes.number.isRequired,
   username: PropTypes.string.isRequired,
   viewState: PropTypes.bool.isRequired
-}
+};
 
 export default Main;
-

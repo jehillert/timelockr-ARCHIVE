@@ -1,13 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { AuthForm
        , AuthTabs
        , Container
-       , Row
+       , ErrorBoundary
        , Modal
        , ModalHeader
        , ModalTitle
-       , ModalBody } from 'Components';
-import PropTypes from 'prop-types';
+       , ModalBody
+       , Row } from 'Components';
 
 class AuthModal extends React.Component {
   constructor(props, context) {
@@ -41,7 +42,6 @@ class AuthModal extends React.Component {
     this.setState({ show: false });
   }
 
-  // see note [1]
   setTitle = (newTitle) => {
     this.setState((state) => state.title = newTitle);
   }
@@ -53,12 +53,14 @@ class AuthModal extends React.Component {
           <Modal.Title>{this.state.title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <AuthTabs
-            handleSignin={this.props.handleSignin}
-            handleCreateNewUserAttempt={this.props.handleCreateNewUserAttempt}
-            viewState={this.props.viewState}
-            setTitle={this.setTitle}
-          />
+          <ErrorBoundary>
+            <AuthTabs
+              handleSignin={this.props.handleSignin}
+              handleCreateNewUserAttempt={this.props.handleCreateNewUserAttempt}
+              viewState={this.props.viewState}
+              setTitle={this.setTitle}
+            />
+          </ErrorBoundary>
         </Modal.Body>
       </Modal>
     );
@@ -72,24 +74,3 @@ AuthModal.propTypes = {
 };
 
 export default AuthModal;
-
-/*
-  [1] THESE ARE VALID:
-
-        this.setState((state, props) => ({
-          title: newTitle
-        }));
-
-        this.setState((state) => state.title = newTitle);
-
-        this.setState((state) => {
-          return state.title = newTitle
-        });
-
-      THIS IS INVALID BECAUSE NO RETURN STATEMENT:
-
-        this.setState((state) => {
-          state.title = newTitle
-        });
-
-*/

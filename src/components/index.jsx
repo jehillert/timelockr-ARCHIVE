@@ -3,17 +3,17 @@ export { default as AuthForm } from './auth/AuthForm';
 export { default as AuthModal } from './auth/AuthModal';
 export { default as AuthTabs } from './auth/AuthTabs';
 export { default as Calendar } from './pickers/Calendar';
+export { default as CardColumn } from './card-column/CardColumn';
 export { default as DatePicker } from './pickers/DatePicker';
 export { default as DeleteButton } from './shared/DeleteButton';
 export { default as EntryForm } from './entry-form/EntryForm';
+export { default as ErrorBoundary } from './error-boundary/ErrorBoundary';
 export { default as GroupOfFields } from './shared/GroupOfFields';
 export { default as GroupOfInputs } from './shared/GroupOfInputs';
 export { default as Main } from './main/Main';
-export { default as LeftCardColumn } from './card-column-left/LeftCardColumn';
-export { default as LeftCard } from './card-column-left/LeftCard';
-export { default as RightCard } from './card-column-right/RightCard';
-export { default as RightCardColumn } from './card-column-right/RightCardColumn';
-export { default as RightCardDates } from './card-column-right/RightCardDates';
+export { default as LeftCard } from './cards/LeftCard';
+export { default as RightCard } from './cards/RightCard';
+export { default as RightCardDates } from './cards/RightCardDates';
 export { default as TimePicker } from './pickers/TimePicker';
 
 // REACT-BOOTSTRAP

@@ -1,17 +1,17 @@
 import React from 'react';
 import Octicon, { x } from 'octicons-react';
 import PropTypes from 'prop-types';
-import { Card, DeleteButton } from 'Components';
+import { Card
+       , DeleteButton } from 'Components';
+
 const req = require('./../../scripts/ClientRequests');
 
 class LeftCard extends React.Component {
   constructor(props) {
     super(props);
-
     this.handleClick = this.handleClick.bind(this);
   }
 
-  /*consider moving all req.___ to Main.jsx*/
   handleClick = () => (
     req.deleteEntry(this.props.entry.id)
       .then(() => this.props.refresh())
@@ -40,5 +40,3 @@ LeftCard.propTypes = {
 };
 
 export default LeftCard;
-
-// <Octicon icon={x} className='x ml-auto' scale={1.5} />
