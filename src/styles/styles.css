@@ -65,6 +65,10 @@ body {
 }
 
 .card-header {
+  padding-left: 1.75rem;
+  padding-right: 1.25rem;
+  padding-top: .75rem;
+  padding-bottom: .75rem;
   font-size: .9rem;
   font-style: ;
   background-color: #202020;

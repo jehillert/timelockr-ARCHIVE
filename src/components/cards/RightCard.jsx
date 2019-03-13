@@ -6,7 +6,7 @@ import { Card
        , DeleteButton
        , ProgressBar
        , RightCardDates
-       , Row } from 'Components'
+       , Row } from 'Components';
 const req = require('./../../scripts/ClientRequests');
 
 /*future change: use circular progress bars instead:
@@ -31,7 +31,7 @@ class RightCard extends React.Component {
         <Card.Header>
           <Row className='d-flex justify-content-between flex-nowrap'>
             {this.props.entry.label}
-            <DeleteButton handleClick={this.handleClick}/>
+            <DeleteButton marginTop={'-.25rem'} handleClick={this.handleClick}/>
           </Row>
         </Card.Header>
         <Card.Body>
@@ -47,12 +47,12 @@ class RightCard extends React.Component {
           </Row>
         </Card.Body>
       </Card>
-    )
+    );
   }
 }
 
 RightCard.propTypes = {
   entry: PropTypes.object.isRequired,
   // id: PropTypes.string.isRequired
-}
+};
 export default RightCard;

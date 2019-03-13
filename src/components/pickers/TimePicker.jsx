@@ -7,4 +7,4 @@ class TimePicker extends React.Component {
 
 TimePicker.propTypes = {
   releaseTime: PropTypes.string.isRequired
-}
+};

@@ -2,7 +2,8 @@ import React from 'react';
 import Octicon, { x } from 'octicons-react';
 import PropTypes from 'prop-types';
 import { Card
-       , DeleteButton } from 'Components';
+       , DeleteButton
+       , Row } from 'Components';
 
 const req = require('./../../scripts/ClientRequests');
 
@@ -20,9 +21,11 @@ class LeftCard extends React.Component {
   render() {
     return (
       <Card id={this.props.entry.id} className="mb-3 shadow" bg="light" style={{ width: '24rem' }}>
-        <Card.Header className='d-flex justify-content-between flex-nowrap'>
-          {this.props.entry.label}
-          <DeleteButton handleClick={this.handleClick}/>
+        <Card.Header>
+          <Row className='d-flex justify-content-between flex-nowrap'>
+            {this.props.entry.label}
+            <DeleteButton marginTop={'-.25rem'} handleClick={this.handleClick}/>
+          </Row>
         </Card.Header>
         <Card.Body>
           <Card.Text>

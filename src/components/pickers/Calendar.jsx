@@ -14,6 +14,6 @@ class Calendar extends React.Component {
 
 Calendar.propTypes = {
   releaseDate: PropTypes.string.isRequired,
-}
+};
 
 export default Calendar;

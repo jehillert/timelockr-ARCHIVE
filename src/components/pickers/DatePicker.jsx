@@ -1,11 +1,11 @@
 import React from 'react';
-const { Octicon, Octicons } = require('octicons-react')
+const { Octicon, Octicons } = require('octicons-react');
 import PropTypes from 'prop-types';
 import { Button
-        ,Calendar
-        ,Col
-        ,Form
-        ,InputGroup } from 'Components';
+        , Calendar
+        , Col
+        , Form
+        , InputGroup } from 'Components';
 
 
 
@@ -33,10 +33,10 @@ class DatePicker extends React.Component {
                 <Octicon icon={Octicons[props.icon]} scale={2.75} />
               </button>
             </InputGroup.Prepend>
-          <Form.Control {...props} className='align-self-stretch' /></Col>
+            <Form.Control {...props} className='align-self-stretch' /></Col>
         </Form.Row>
       </InputGroup>
-    )
+    );
   }
 }
 
@@ -44,6 +44,6 @@ DatePicker.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   releaseDate: PropTypes.string.isRequired,
-}
+};
 
 export default DatePicker;

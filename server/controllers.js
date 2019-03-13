@@ -31,15 +31,19 @@ module.exports = {
         .then((user) => res.status(202).send({ user_id: user.user_id }))
         .catch(error => console.error('Error', error))
   },
+
   logout: {
     get: (req, res) => req.session.destroy()
       .then(() => res.status(200).json({message: 'Logout successful.'}))
       .catch(error => console.error('Error', error))
   },
+
   credentials: {
     put: (req, res) => updateField(req, res),
+
     delete: (req, res) => deleteFromTable(req, res)
   },
+
   entries: {
     get: (req, res) =>
       models.entries.get(['entries', 'credentials', 'user_id', 'username', req.query.username])
@@ -47,12 +51,15 @@ module.exports = {
         .then(results => helpers.filterAndFormatEntries(results))
         .then(results => res.send(results))
         .catch(error => console.error('Error', error)),
+
     put: (req, res) => updateField(req, res),
+
     post: (req, res) =>
       models.entries.post(['entries', 'user_id', 'creation_date', 'release_date', 'description', 'content',
         req.body.user_id, req.body.creation_date, req.body.release_date, req.body.description, req.body.content])
       .then(results => res.sendStatus(201))
       .catch(error => console.error('Error', error)),
+
     delete: (req, res) => {
       return models.general
         .delete(['entries', 'entry_id', req.body.entryId])
@@ -60,6 +67,7 @@ module.exports = {
         .catch(error => console.error('Error', error));
     }
   },
+
   signup: {
     post: (req, res) =>
       models.credentials
