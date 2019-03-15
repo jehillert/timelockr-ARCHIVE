@@ -53,6 +53,7 @@ typings/
 .yarn-integrity
 
 # misc
+.bit/
 .env
 .DS_Store
 config.js

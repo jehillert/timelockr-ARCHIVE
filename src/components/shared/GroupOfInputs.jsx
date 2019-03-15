@@ -1,28 +1,51 @@
 import React from 'react';
-import { Button
-       , Col
-       , Form
-       , InputGroup } from 'Components';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { Button
+  , Col
+  , Form
+  , InputGroup } from 'Components';
 
-const { Octicon, Octicons } = require('octicons-react')
+const S = {};
+S.Icon = styled.div`
+  .btn-primary.btn {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    vertical-align: middle;
+
+    :hover {
+      background-color: #D93646;
+      border-color: #D93646;
+    }
+  }
+  svg {
+    color: #FFFFFF;
+    height: 28px;
+    width: 28px;
+  }
+`;
 
 const GroupOfInputs = (props) => (
-  <InputGroup id={props.id} className="field-group mb-3">
+  <InputGroup id={props.id} className="mb-3">
     <Form.Row>
       <Col><Form.Label>{props.label}</Form.Label></Col>
     </Form.Row>
     <Form.Row>
       <Col className='d-flex flex-nowrap'>
         <InputGroup.Prepend>
-          <button className='icon-btn' >
-            <Octicon icon={Octicons[props.icon]} scale={2.75} />
-          </button>
+          <S.Icon>
+            <Button>{props.iconElement}</Button>
+          </S.Icon>
         </InputGroup.Prepend>
-      <Form.Control {...props} className='align-self-stretch' /></Col>
+        <Form.Control {...props} className='align-self-stretch' />
+      </Col>
     </Form.Row>
   </InputGroup>
-)
+);
 
 GroupOfInputs.propTypes = {
   id: PropTypes.string.isRequired,
@@ -30,5 +53,3 @@ GroupOfInputs.propTypes = {
 };
 
 export default GroupOfInputs;
-// controlId: PropTypes.string,
-// controlId={props.controlId}

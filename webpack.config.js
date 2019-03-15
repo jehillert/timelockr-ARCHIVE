@@ -19,7 +19,7 @@ const config = {
         test: /\.css$/,
         use: [
           'style-loader',
-          'css-loader'
+          'css-loader/locals'
         ]
       },
       {
@@ -64,10 +64,10 @@ const config = {
   resolve: {
     extensions: ['.js', '.jsx', '.css'],
     alias: {
-      'Components': path.resolve(__dirname, 'src/components/index.jsx')
+      'Components': path.resolve(__dirname, 'src/component-index.jsx')
     },
   },
-}
+};
 
 module.exports = config;
 /*

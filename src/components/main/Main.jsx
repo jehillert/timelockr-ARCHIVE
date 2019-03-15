@@ -1,4 +1,5 @@
 import React from 'react';
+import ClientRequests from './../../scripts/ClientRequests.js';
 import PropTypes from 'prop-types';
 import { CardColumn
        , Col
@@ -8,8 +9,6 @@ import { CardColumn
        , LeftCard
        , RightCard
        , Row } from 'Components';
-
-const req = require('../../scripts/ClientRequests');
 
 /*
   THESE ARE VALID:
@@ -48,7 +47,7 @@ class Main extends React.Component {
   );
 
   getEntries = () => {
-    req.getEntries(this.props.username)
+    ClientRequests.getEntries(this.props.username)
       .then(results => {
         console.log(results);
         this.setState((state, props) => ({
@@ -68,7 +67,7 @@ class Main extends React.Component {
   render() {
     return (
       <Container className='d-flex d-inline-flex justify-content-center' fluid>
-        <Container className='primary-container d-flex flex-column justify-content-center'>
+        <Container className='d-flex flex-column justify-content-center'>
           <Row>
             <Col>
               <h1 className='app-title'>TimeLockr</h1>

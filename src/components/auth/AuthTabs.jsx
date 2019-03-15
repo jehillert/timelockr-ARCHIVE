@@ -5,6 +5,25 @@ import { AuthForm
        , Tabs
        , Tab } from 'Components';
 
+// const S = {};
+//   S.Tabs = styled.div`
+//   .nav-tabs {
+//     background-color: #6A6A6A;
+//     margin: -1rem;
+//   }
+
+//   .nav-tabs .nav-link {
+//     border-radius: 0rem;
+//     color: white;
+//     border: none;
+//   }
+
+//   .nav-tabs a:hover {
+//     background-color: #D93646;
+//     border-color: #D93646;
+//   }
+// `;
+
 class AuthTabs extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -24,32 +43,32 @@ class AuthTabs extends React.Component {
   render() {
     return (
       <ErrorBoundary>
-        <Tabs
-          id='modal-tabs'
-          className='nav-justified'
-          activeKey={this.state.key}
-          transition={false}
-          onSelect={key => this.setState({ key }, this.handleSelect)}
-        >
-          <Tab eventKey='signin' title='Sign In'>
-            <ErrorBoundary>
-              <AuthForm
-                buttonLabel='Submit'
-                handleSubmit={this.props.handleSignin}
-                viewState={this.props.viewState}
-              />
-            </ErrorBoundary>
-          </Tab>
-          <Tab eventKey='signup' title='Sign Up'>
-            <ErrorBoundary>
-              <AuthForm
-                buttonLabel='Submit'
-                handleSubmit={this.props.handleCreateNewUserAttempt}
-                viewState={this.props.viewState}
-              />
-            </ErrorBoundary>
-          </Tab>
-        </Tabs>
+          <Tabs
+            id='modal-tabs'
+            className='nav-justified'
+            activeKey={this.state.key}
+            transition={false}
+            onSelect={key => this.setState({ key }, this.handleSelect)}
+          >
+            <Tab eventKey='signin' title='Sign In'>
+              <ErrorBoundary>
+                <AuthForm
+                  buttonLabel='Submit'
+                  handleSubmit={this.props.handleSignin}
+                  viewState={this.props.viewState}
+                />
+              </ErrorBoundary>
+            </Tab>
+            <Tab eventKey='signup' title='Sign Up'>
+              <ErrorBoundary>
+                <AuthForm
+                  buttonLabel='Submit'
+                  handleSubmit={this.props.handleCreateNewUserAttempt}
+                  viewState={this.props.viewState}
+                />
+              </ErrorBoundary>
+            </Tab>
+          </Tabs>
       </ErrorBoundary>
     );
   }
@@ -63,3 +82,8 @@ AuthTabs.propTypes = {
 };
 
 export default AuthTabs;
+
+
+// <S.Tabs>
+// </S.Tabs >
+// import styled from 'styled-components';

@@ -1,8 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from 'react-router-dom';
 import { AuthModal, Main } from 'Components';
+import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from 'react-router-dom';
+// import ClientRequests from './../scripts/ClientRequests.js';
+import { MuiPickersUtilsProvider } from 'material-ui-pickers';
+import MomentUtils from '@date-io/moment';
 import Styles from './../styles/styles.css';
-const req = require('./../scripts/ClientRequests');
+
+const ClientRequests = require('./../scripts/ClientRequests.js')
 const Promise = require('bluebird');
 
 class App extends React.Component {
@@ -20,20 +24,20 @@ class App extends React.Component {
   }
 
   handleSignin = (user, pass) => {
-    console.log(`signing in`)
+    console.log(`signing in`);
     // auth indicated by non-zero value for result.user_id
-    req.verifyUser(user, pass)
+    ClientRequests.verifyUser(user, pass)
       .then(result => {
         this.setState((state, props) => ({
           user_id: result.user_id,
           username: user,
           viewState: result.viewState
         }));
-    });
+      });
   }
 
   handleCreateNewUserAttempt = (user, pass) => {
-    // req.createNewUser(user, pass)
+    // createNewUser(user, pass)
     //   .then(response => {
     //     alert(response.data);
     //   });
@@ -42,21 +46,23 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Route exact path="/" render={() => (
-          this.state.viewState ? (
-            <Main
-              user_id={this.state.user_id}
-              username={this.state.username}
-              viewState={this.state.viewState}
-            />
-          ) : (
-            <AuthModal
-              handleSignin={this.handleSignin}
-              handleCreateNewUserAttempt={this.handleCreateNewUserAttempt}
-              viewState={this.state.viewState}
-            />
-          )
-        )}/>
+        <MuiPickersUtilsProvider utils={MomentUtils}>
+          <Route exact path="/" render={() => (
+            this.state.viewState ? (
+              <Main
+                user_id={this.state.user_id}
+                username={this.state.username}
+                viewState={this.state.viewState}
+              />
+            ) : (
+              <AuthModal
+                handleSignin={this.handleSignin}
+                handleCreateNewUserAttempt={this.handleCreateNewUserAttempt}
+                viewState={this.state.viewState}
+              />
+            )
+          )}/>
+        </MuiPickersUtilsProvider>
       </Router>
     );
   }

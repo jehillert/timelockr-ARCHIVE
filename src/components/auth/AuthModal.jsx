@@ -1,14 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AuthForm
-       , AuthTabs
-       , Container
+import { AuthTabs
        , ErrorBoundary
-       , Modal
-       , ModalHeader
-       , ModalTitle
-       , ModalBody
-       , Row } from 'Components';
+       , Modal } from 'Components';
 
 class AuthModal extends React.Component {
   constructor(props, context) {
@@ -74,3 +68,19 @@ AuthModal.propTypes = {
 };
 
 export default AuthModal;
+
+// import styled from 'styled-components';
+// const Modal = ({ className, children }) => (
+//   <a className={className}>
+//     {children}
+//   </a>
+// );
+// const S = {};
+// S.Modal = styled.div`
+//   .modal-content {
+//      border-radius: 0rem;
+//      box-shadow: 0 0 100px rgba(24,29,39,.1), 0 15px 30px rgba(24,29,39,.1), 0 5px 10px rgba(24,29,39,.05);
+//   }
+// `;
+// <S.Modal backdrop='static' show={this.state.show} onHide={this.handleClose}>
+// </S.Modal>

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Octicon, { x } from 'octicons-react';
+import Close from '@material-ui/icons/Close';
 import styled from 'styled-components';
 
-// re marginLeft, marginRight, marginTop, marginBottom:
-// Use negative/positive margins to fine-tune
+// Use marginLeft, marginRight, marginTop, marginBottom
+// with positive/negative margins to fine-tune
 // position of DeleteButton in upper l/r corner
 
 const S = {};
@@ -22,12 +22,12 @@ S.DeleteButton = styled.button`
   padding: 0;
   textAlign: top;
 
-  * {
-    color: #A3A3A3;
+  svg {
+    color: #AEAEAA;
   }
 
   :hover * {
-    color: #DC3545;
+    color: #D93646;
   }
 `;
 
@@ -39,12 +39,19 @@ const DeleteButton = (props) => (
     marginTop={props.marginTop}
     marginBottom={props.marginBottom}
     onClick={props.handleClick}>
-    <Octicon icon={x} scale={1.5} />
+    <Close />
   </S.DeleteButton>
 );
 
 DeleteButton.propTypes = {
   handleClick: PropTypes.func.isRequired,
+  marginLeft: PropTypes.string,
+  marginRight: PropTypes.string,
+  marginTop: PropTypes.string,
+  marginBottom: PropTypes.string
+};
+
+S.DeleteButton.propTypes = {
   marginLeft: PropTypes.string,
   marginRight: PropTypes.string,
   marginTop: PropTypes.string,

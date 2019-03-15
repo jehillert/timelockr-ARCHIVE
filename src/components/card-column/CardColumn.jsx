@@ -1,27 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { Col
        , Container } from 'Components';
 
-const CardColumn = (props) => {
-  const columnStyle = {
-    padding: '0px',
-    margin: '0px',
-  };
+const S = {};
+S.CardColumn = styled.div`
+  .container {
+    padding: 0px;
+    margin: 0px;
+  }
+`;
 
+const CardColumn = (props) => {
   const titleHeaderStyle = {
     paddingTop: '2rem'
   }
 
   return (
-    <Col style={columnStyle}>
-      <Container id={props.id}>
-        <h3 style={titleHeaderStyle}>{props.title}</h3>
-        {props.entries.map(entry => (
-          <props.Card key={entry.id} entry={entry} refresh={props.refresh} />
-        ))}
-      </Container>
-    </Col>
+    <S.CardColumn>
+      <Col >
+        <Container id={props.id}>
+          <h3 style={titleHeaderStyle}>{props.title}</h3>
+          {props.entries.map(entry => (
+            <props.Card key={entry.id} entry={entry} refresh={props.refresh} />
+          ))}
+        </Container>
+      </Col>
+    </S.CardColumn>
   );
 }
 

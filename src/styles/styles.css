@@ -1,81 +1,23 @@
 html {
-  font-family: sans-serif;
-  line-height: 1.15;
-  font-size: 16pt;
+  /* line-height: 1.15; */
+  /* font-size: 16pt; */
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+
+/* FIGURE OUT WHY COLUMNS INHERET PADDING FROM body */
+
 body {
-  margin: 0;
   font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 0.8rem;
-  font-weight: 400;
-  line-height: 1.5;
   color: #839496;
-  text-align: left;
   background-color: #ffffff;
   /* background-color: #011734; */
-}
-
-/* CONTAINERS */
-
-#entry-form-card {
-  background-color: #F0F1F2;
-  border-radius: 7px;
-  width: 25rem;
-  background-color: #202020;
-}
-
-#entry-form {
-  font-size: .9rem;
 }
 
 .app-title {
   /* width: 500px; */
   color: #AEAEAA;
-}
-
-.btn-primary {
-  background-color: #6A6A6A;
-  border-color: #6A6A6A;
-}
-
-.btn-primary:hover {
-  background-color: #D93646;
-  border-color: #D93646;
-}
-
-.credential-form {
-  padding-top: 40px;
-}
-
-.primary-container {
-  padding: 0px;
-  margin: 0px;
-}
-
-.secondary-container {
-  padding: 0px;
-  margin: 0px;
-}
-
-.secondary-container #entry-form {
-  font-weight: bold;
-}
-
-.card-header {
-  padding-left: 1.75rem;
-  padding-right: 1.25rem;
-  padding-top: .75rem;
-  padding-bottom: .75rem;
-  font-size: .9rem;
-  font-style: ;
-  background-color: #202020;
-}
-
-.card-body {
-  font-size: .8rem;
 }
 
 .center {
@@ -86,29 +28,8 @@ body {
   padding-top: 2rem;
 }
 
-.field-group svg {
-  color: #FFFFFF;
-}
-
 .font-bold {
   font-weight: bold;
-}
-
-.icon-btn {
-    background: #222;
-    vertical-align: middle;
-    padding: 0;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    outline: none;
-    border: 0;
-    background: transparent;
-}
-
-.progress {
-  height: 23px;
-  background-color: ;
 }
 
 .progress-bar-dates {
@@ -121,15 +42,6 @@ body {
   display:inline-block;
   padding: 0px;
   margin: 0px;
-}
-
-.progress-row-controls {
-  margin-right: -14px;
-  margin-left: 20px;
-  margin-top: -6px;
-}
-.progress-row-controls svg {
-  color: #FFFFFF;
 }
 
 .modal-content {
@@ -153,9 +65,35 @@ body {
   border-color: #D93646;
 }
 
-.nav-tabs .nav-link.active {
+
+.shadow {
+  /* offset-x | offset-y | color */
+  /* offset-x | offset-y | blur-radius | color */
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+  /* inset | offset-x | offset-y | color */
+  /* box-shadow: 5px 5px 2px 3px rgba(255, 255, 255, 0.6); */
+  box-shadow: 0 0 10px rgba(24,29,39,.1), 0 15px 30px rgba(24,29,39,.1), 0 5px 10px rgba(24,29,39,.05);
 }
 
+/* .submit-btn {
+  width: 6em;
+  display: table-cell !important;
+} */
+/*
+getting rid of outline/detecting tabs
+https://hackernoon.com/removing-that-ugly-focus-ring-and-keeping-it-too-6c8727fefcd2
+https://react-bootstrap.github.io/components/buttons/#outline-buttons
+
+:focus {
+  outline: 0;
+  background-color: #6A6A6A;
+}
+:active {
+  border: none;
+  outline: none !important;;
+}
+
+MAYBE DELETE
 .left-tab-shadow{
   -webkit-box-shadow: 5px -5px 6px 0px rgba(82,82,82,0.52);
   box-shadow: 5px -5px 6px 0px rgba(82,82,82,0.52);
@@ -167,24 +105,5 @@ body {
   box-shadow: -5px 0px 6px 0px rgba(82,82,82,0.52);
 }
 
-.shadow {
-  /* offset-x | offset-y | color */
-  /* offset-x | offset-y | blur-radius | color */
-  /* offset-x | offset-y | blur-radius | spread-radius | color */
-  /* inset | offset-x | offset-y | color */
-  /* box-shadow: 5px 5px 2px 3px rgba(255, 255, 255, 0.6); */
-  box-shadow: 0 0 10px rgba(24,29,39,.1), 0 15px 30px rgba(24,29,39,.1), 0 5px 10px rgba(24,29,39,.05);
-}
 
-.submit-btn {
-  width: 6em;
-  display: table-cell !important;
-}
-/*
-.x {
-  color: #A3A3A3;
-  margin-right: -14px;
-  margin-left: 20px;
-  margin-top: -6px;
-}
  */

@@ -12,7 +12,7 @@ module.exports.createNewUser = (user, pass) => {
     .catch(err => {
       console.log(err);
       if (err.statusCode === 409) {
-        return {userCreated: false, message: 'Username taken.  Please select another'};
+        return { userCreated: false, message: 'Username taken.  Please select another' };
       }
     });
 };
@@ -32,7 +32,7 @@ module.exports.getEntries = (user) => {
       results = JSON.parse(results.request.response);
       return results;
     })
-    .catch(err => console.log(err) );
+    .catch(err => console.log(err));
 };
 
 module.exports.verifyUser = (user, pass) => {

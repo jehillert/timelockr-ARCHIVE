@@ -1,11 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { Button
        , Col
        , ErrorBoundary
        , Form
-       , GroupOfFields
-       , Row } from 'Components';
+       , GroupOfFields } from 'Components';
+
+const S = {};
+S.SubmitButton = styled.div`
+  .btn-primary.btn {
+    background-color: #6A6A6A;
+    border-color: #6A6A6A;
+    display: table-cell;
+    width: 6em;
+
+    :hover {
+      background-color: #D93646;
+      border-color: #D93646;
+    }
+
+    :focus {
+      background-color: #D93646;
+    }
+  }
+`;
 
 class AuthForm extends React.Component {
   constructor(props) {
@@ -16,32 +35,6 @@ class AuthForm extends React.Component {
       passwd: 'W4Egy6IZ7E2G3q2',
       buttonLabel: this.props.buttonLabel
     };
-
-    // Maurine42               6bUeeOIkHbXNFGA
-    // Meagan.Luettgen35       iYbtFi7CAsQU7uL
-    // Theodora.Schoen65       ULyVXI4eEbpYMgF
-    // Evans.Hahn79            Y48KZdGv3Xdaszw
-    // Fern.Williamson67       scBLyzpqpYTeVC6
-    // Nico.Howell             8zMwBuN4HHtjogd
-    // Nia.Bauch               MzlmD0j4M0xCsQO
-    // Felicity_Jast           Zz8_0dwxFMMDZTo
-    // Sadye_Denesik           1QrhFnv0CSCEm84
-    // Aletha.Davis16          RBUbLbIVB_C305z
-    // Elna.Blick              MIoz1vEKlS4JLOr
-    // Shane20                 V8FRqjPYKhATavz
-    // Shaylee_Wuckert24       7e5zLKFgn7ksETS
-    // Sidney_Runolfsdottir    pC_8tBAKKriBHvJ
-    // Lue.Heller84            KoFEk3LF1WIzeyK
-    // Chelsey.Emmerich        OxdQMEVkkJxJ9qW
-    // Leopoldo82              ogEzVp4IbsMjSr3
-    // Rosario_Kertzmann0      COxj8hgpg_r7EUO
-    // Delfina.Hilll75         oRr25YvHdmSNHHM
-    // Sabina.Roberts93        nFI8rW9bf25zg62
-    // Elissa11                CzF8lmuqbSiue2f
-    // Ruth.Kilback            5ZLc_7m9dXYsbsz
-    // Kennith_Mayer10         W4Egy6IZ7E2G3q2
-    // Reese.Keeling           G_6or8p9flibSfL
-    // Soledad.Adams           Vo6RvoFmnjqtmO1
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -58,7 +51,7 @@ class AuthForm extends React.Component {
 
   render() {
     return (
-      <Form className='credential-form' onSubmit={this.handleSubmit}>
+      <Form style={{paddingTop: '40px'}} onSubmit={this.handleSubmit}>
         <Form.Row>
           <ErrorBoundary>
             <GroupOfFields
@@ -86,9 +79,11 @@ class AuthForm extends React.Component {
         <Form.Row>
           <ErrorBoundary>
             <Form.Group className='d-flex justify-content-end' as={Col}>
-              <Button type='submit' className='submit-btn'>
-                {this.state.buttonLabel}
-              </Button>
+              <S.SubmitButton>
+                <Button type='submit'>
+                  {this.state.buttonLabel}
+                </Button>
+              </S.SubmitButton>
             </Form.Group>
           </ErrorBoundary>
         </Form.Row>
