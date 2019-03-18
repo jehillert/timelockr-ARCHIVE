@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Button
-       , Col
+import { Box
+  , Button
        , ErrorBoundary
        , Form
        , GroupOfFields } from 'Components';
@@ -78,7 +78,7 @@ class AuthForm extends React.Component {
         </Form.Row>
         <Form.Row>
           <ErrorBoundary>
-            <Form.Group className='d-flex justify-content-end' as={Col}>
+            <Form.Group className='d-flex justify-content-end' as={Box}>
               <S.SubmitButton>
                 <Button type='submit'>
                   {this.state.buttonLabel}

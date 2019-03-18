@@ -1,32 +1,45 @@
+
 import React, { Fragment } from 'react';
-import moment from 'moment';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import { Box
+  , Button
+  , DatePicker
+  , ErrorBoundary
+  , Form
+  , GroupOfFields
+  , TimePicker } from 'Components';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Button
-       , Card
-       , Col
-       , Container
-       , DatePicker
-       , ErrorBoundary
-       , Form
-       , GroupOfFields
-       , TimePicker } from 'Components';
+import moment from 'moment';
 
 const ClientRequests = require('./../../scripts/ClientRequests.js');
-
 const S = {};
 
-S.EntryForm = styled.div`
-  .card {
-    background-color: #202020;
-    border-radius: 7px;
-  }
+// className='shadow' add back shadows...
+S.Card = styled(Card)`
+  background-color: #202020;
+  border-radius: 7px;
+  display: flex;
+  flex-flow: nowrap;
+  width: ${props => props.width};
+`;
+
+S.CardContent = styled(CardContent)`
+  font-size: .8rem;
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+`;
+
+
+S.EntryForm = styled(Box)`
   .container {
     padding: 0px;
     margin: 0px;
   }
 
-  width: 26rem;
+
 `;
 
 S.SubmitButton = styled.div`
@@ -65,6 +78,7 @@ class EntryForm extends React.Component {
   handleChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
   }
+
   handleTimeChange = (time) => {
     this.setState((state) => state.selectedTime = time);
   }
@@ -96,57 +110,60 @@ class EntryForm extends React.Component {
 
     return (
       <S.EntryForm>
-        <Container className='secondary-container'>
-          <h3 className='component-block-header'>New Entry</h3>
-          <Card className='shadow'>
-            <Card.Body className='d-flex flex-column flex-nowrap'>
-              <Form>
+        <h3 className='component-block-header'>New Entry</h3>
+        <S.Card width='26rem'>
+          <S.CardContent>
+            <Form>
+              <ErrorBoundary>
+                <GroupOfFields
+                  id='description'
+                  label='Enter a description.'
+                  placeholder={`Ex-girlfriend's phone number`}
+                  value={this.state.description}
+                  onChange={this.handleChange}
+                />
+              </ErrorBoundary>
+              <ErrorBoundary>
+                <GroupOfFields
+                  id='content'
+                  label='Enter something to lock away.'
+                  as='textarea'
+                  placeholder='555-555-5555'
+                  value={this.state.content}
+                  onChange={this.handleChange}
+                  required
+                />
+              </ErrorBoundary>
+              <Box flexWrap='nowrap'>
                 <ErrorBoundary>
-                  <GroupOfFields
-                    id='description'
-                    label='Enter a description.'
-                    placeholder={`Ex-girlfriend's phone number`}
-                    value={this.state.description}
-                    onChange={this.handleChange}
-                  />
+                  <Fragment>
+                    <DatePicker handleDateChange={this.handleDateChange} selectedDate={this.state.selectedDate} />
+                    <TimePicker handleTimeChange={this.handleTimeChange} selectedTime={this.state.selectedTime} />
+                  </Fragment>
                 </ErrorBoundary>
-                <ErrorBoundary>
-                  <GroupOfFields
-                    id='content'
-                    label='Enter something to lock away.'
-                    as='textarea'
-                    placeholder='555-555-5555'
-                    value={this.state.content}
-                    onChange={this.handleChange}
-                    required
-                  />
-                </ErrorBoundary>
-                <Col className='d-flex flex-nowrap'>
-                  <ErrorBoundary>
-                    <Fragment>
-                        <DatePicker handleDateChange={this.handleDateChange} selectedDate={this.state.selectedDate} />
-                        <TimePicker handleTimeChange={this.handleTimeChange} selectedTime={this.state.selectedTime} />
-                    </Fragment>
-                  </ErrorBoundary>
-                </Col>
-                <ErrorBoundary>
-                  <Form.Group className='d-flex justify-content-end' as={Col}>
-                    <S.SubmitButton>
-                      <Button type='submit' className='submit-btn' onClick={this.handleSubmit}>Submit</Button>
-                    </S.SubmitButton>
-                  </Form.Group>
-                </ErrorBoundary>
-              </Form>
-            </Card.Body>
-          </Card>
-        </Container>
+              </Box>
+              <ErrorBoundary>
+                <Form.Group className='d-flex justify-content-end' as={Box}>
+                  <S.SubmitButton>
+                    <Button type='submit' className='submit-btn' onClick={this.handleSubmit}>Submit</Button>
+                  </S.SubmitButton>
+                </Form.Group>
+              </ErrorBoundary>
+            </Form>
+          </S.CardContent>
+        </S.Card>
       </S.EntryForm>
     );
   }
 }
+
 EntryForm.propTypes = {
   refresh: PropTypes.func.isRequired,
   user_id: PropTypes.number.isRequired
+};
+
+S.Card.propTypes = {
+  width: PropTypes.string
 };
 
 export default EntryForm;

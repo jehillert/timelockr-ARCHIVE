@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Col
+import { Box
        , Container } from 'Components';
 
 const S = {};
@@ -19,14 +19,14 @@ const CardColumn = (props) => {
 
   return (
     <S.CardColumn>
-      <Col >
+      <Box>
         <Container id={props.id}>
           <h3 style={titleHeaderStyle}>{props.title}</h3>
           {props.entries.map(entry => (
             <props.Card key={entry.id} entry={entry} refresh={props.refresh} />
           ))}
         </Container>
-      </Col>
+      </Box>
     </S.CardColumn>
   );
 }

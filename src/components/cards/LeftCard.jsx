@@ -1,30 +1,39 @@
 import React from 'react';
-// import ClientRequests from './../../scripts/ClientRequests.js';
 import PropTypes from 'prop-types';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import CloseIcon from '@material-ui/icons/Close';
+import IconButton from '@material-ui/core/IconButton';
 import styled from 'styled-components';
-import { Card
-  , Col
-  , DeleteButton
-  , Row } from 'Components';
+import Typography from '@material-ui/core/Typography';
 
 const ClientRequests = require('./../../scripts/ClientRequests.js');
-
 const S = {};
-S.Card = styled.div`
-  .card {
-    width: ${props => props.width};
-  }
-  .card-header {
+
+S.Card = styled(Card)`
+  width: ${props => props.width};
+`;
+
+S.CardHeader = styled(CardHeader)`
+  background-color: #202020;
+  span {
     font-size: 1rem;
-    background-color: #202020;
-    padding-top: .75rem;
-    padding-bottom: .75rem;
+    color: #839496;
   }
-  .card-body {
-    font-size: .85rem;
-    padding-top: .75rem;
-    padding-bottom: .75rem;
-  }
+`;
+
+S.CardContent = styled(CardContent)`
+  font-size: .8rem;
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+`;
+
+S.IconButton = styled(IconButton)`
+  marginLeft={props.marginLeft}
+  marginRight={props.marginRight}
+  marginTop={props.marginTop}
+  marginBottom={props.marginBottom}
 `;
 
 class LeftCard extends React.Component {
@@ -41,23 +50,19 @@ class LeftCard extends React.Component {
   render() {
     return (
       <S.Card width={'20rem'}>
-        <Card id={this.props.entry.id} className='mb-3 shadow' bg='light' >
-          <Card.Header>
-            <Row className='d-flex justify-content-between flex-nowrap'>
-              <Col >
-                {this.props.entry.label}
-              </Col>
-              <Col xs={1}>
-                <DeleteButton marginTop={'-.30rem'} handleClick={this.handleClick} />
-              </Col>
-            </Row>
-          </Card.Header>
-          <Card.Body>
-            <Card.Text>
-              {this.props.entry.body}
-            </Card.Text>
-          </Card.Body>
-        </Card>
+        <S.CardHeader
+          action={
+            <IconButton onClick={this.handleClick}>
+              <CloseIcon />
+            </IconButton>
+          }
+          title={this.props.entry.label}
+        />
+        <S.CardContent>
+          <Typography>
+            {this.props.entry.body}
+          </Typography>
+        </S.CardContent>
       </S.Card>
     );
   }
@@ -70,6 +75,13 @@ LeftCard.propTypes = {
 
 S.Card.propTypes = {
   width: PropTypes.string
+};
+
+S.IconButton.propTypes = {
+  marginLeft: PropTypes.string,
+  marginRight: PropTypes.string,
+  marginTop: PropTypes.string,
+  marginBottom: PropTypes.string
 };
 
 export default LeftCard;

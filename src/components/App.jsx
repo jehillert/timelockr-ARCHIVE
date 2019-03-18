@@ -1,7 +1,6 @@
 import React from 'react';
 import { AuthModal, Main } from 'Components';
 import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from 'react-router-dom';
-// import ClientRequests from './../scripts/ClientRequests.js';
 import { MuiPickersUtilsProvider } from 'material-ui-pickers';
 import MomentUtils from '@date-io/moment';
 import Styles from './../styles/styles.css';

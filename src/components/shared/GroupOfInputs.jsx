@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button
-  , Col
+  , Box
   , Form
   , InputGroup } from 'Components';
 
@@ -32,17 +32,17 @@ S.Icon = styled.div`
 const GroupOfInputs = (props) => (
   <InputGroup id={props.id} className="mb-3">
     <Form.Row>
-      <Col><Form.Label>{props.label}</Form.Label></Col>
+      <Box><Form.Label>{props.label}</Form.Label></Box>
     </Form.Row>
     <Form.Row>
-      <Col className='d-flex flex-nowrap'>
+      <Box className='d-flex flex-nowrap'>
         <InputGroup.Prepend>
           <S.Icon>
             <Button>{props.iconElement}</Button>
           </S.Icon>
         </InputGroup.Prepend>
         <Form.Control {...props} className='align-self-stretch' />
-      </Col>
+      </Box>
     </Form.Row>
   </InputGroup>
 );

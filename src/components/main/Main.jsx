@@ -1,8 +1,8 @@
 import React from 'react';
 import ClientRequests from './../../scripts/ClientRequests.js';
 import PropTypes from 'prop-types';
-import { CardColumn
-       , Col
+import { Box
+       , CardColumn
        , Container
        , EntryForm
        , ErrorBoundary
@@ -69,9 +69,9 @@ class Main extends React.Component {
       <Container className='d-flex d-inline-flex justify-content-center' fluid>
         <Container className='d-flex flex-column justify-content-center'>
           <Row>
-            <Col>
+            <Box>
               <h1 className='app-title'>TimeLockr</h1>
-            </Col>
+            </Box>
           </Row>
           <Row>
             <ErrorBoundary>
@@ -88,12 +88,12 @@ class Main extends React.Component {
               }
             </ErrorBoundary>
             <ErrorBoundary>
-              <Col>
+              <Box>
                 <EntryForm
                   refresh={this.refresh}
                   user_id={this.props.user_id}
                 />
-              </Col>
+              </Box>
             </ErrorBoundary>
             <ErrorBoundary>
               {
