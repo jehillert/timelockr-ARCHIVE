@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { AuthModal, Main } from 'Components';
 import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from 'react-router-dom';
+import { GlobalStyles } from 'styles';
 import { MuiPickersUtilsProvider } from 'material-ui-pickers';
 import MomentUtils from '@date-io/moment';
-import Styles from './../styles/styles.css';
 
 const ClientRequests = require('./../scripts/ClientRequests.js')
 const Promise = require('bluebird');
@@ -44,25 +44,28 @@ class App extends React.Component {
 
   render() {
     return (
-      <Router>
-        <MuiPickersUtilsProvider utils={MomentUtils}>
-          <Route exact path="/" render={() => (
-            this.state.viewState ? (
-              <Main
-                user_id={this.state.user_id}
-                username={this.state.username}
-                viewState={this.state.viewState}
-              />
-            ) : (
-              <AuthModal
-                handleSignin={this.handleSignin}
-                handleCreateNewUserAttempt={this.handleCreateNewUserAttempt}
-                viewState={this.state.viewState}
-              />
-            )
-          )}/>
-        </MuiPickersUtilsProvider>
-      </Router>
+      <React.Fragment>
+        <GlobalStyles />
+        <Router>
+          <MuiPickersUtilsProvider utils={MomentUtils}>
+            <Route exact path="/" render={() => (
+              this.state.viewState ? (
+                <Main
+                  user_id={this.state.user_id}
+                  username={this.state.username}
+                  viewState={this.state.viewState}
+                />
+              ) : (
+                <AuthModal
+                  handleSignin={this.handleSignin}
+                  handleCreateNewUserAttempt={this.handleCreateNewUserAttempt}
+                  viewState={this.state.viewState}
+                />
+              )
+            )}/>
+          </MuiPickersUtilsProvider>
+        </Router>
+      </React.Fragment>
     );
   }
 }

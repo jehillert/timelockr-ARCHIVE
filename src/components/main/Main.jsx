@@ -1,17 +1,19 @@
 import React from 'react';
 import ClientRequests from './../../scripts/ClientRequests.js';
 import PropTypes from 'prop-types';
-import { Box
-       , CardColumn
-       , Container
-       , EntryForm
-       , ErrorBoundary
-       , LeftCard
-       , RightCard
-       , Row } from 'Components';
+import { CardColumn
+  , Container
+  , EntryFormDialog
+  , ErrorBoundary
+  , LeftCard
+  , RightCard
+  , Row } from 'Components';
 
 /*
   THESE ARE VALID:
+    this.setState({
+      isHidden: !this.state.isHidden
+    })
 
     this.setState((state, props) => ({
       title: newTitle
@@ -63,16 +65,17 @@ class Main extends React.Component {
     this.getEntries()
   );
 
-// GENERIC CARD-COLUMN IMPLEMENTATION
+  // GENERIC CARD-COLUMN IMPLEMENTATION
   render() {
     return (
       <Container className='d-flex d-inline-flex justify-content-center' fluid>
+        <h1 style={{ color: '#AEAEAA' }} >TimeLockr</h1>
+        <EntryFormDialog
+          refresh={this.refresh}
+          user_id={this.props.user_id}
+          username={this.props.username}
+        />
         <Container className='d-flex flex-column justify-content-center'>
-          <Row>
-            <Box>
-              <h1 className='app-title'>TimeLockr</h1>
-            </Box>
-          </Row>
           <Row>
             <ErrorBoundary>
               {
@@ -86,14 +89,6 @@ class Main extends React.Component {
                   showComponent={this.state.hasReleasedChildren}
                 />
               }
-            </ErrorBoundary>
-            <ErrorBoundary>
-              <Box>
-                <EntryForm
-                  refresh={this.refresh}
-                  user_id={this.props.user_id}
-                />
-              </Box>
             </ErrorBoundary>
             <ErrorBoundary>
               {

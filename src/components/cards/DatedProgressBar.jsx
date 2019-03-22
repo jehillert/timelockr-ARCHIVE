@@ -2,13 +2,20 @@ import React from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Box, ProgressBar } from 'Components';
+import ProgressBar from 'react-bootstrap/ProgressBar';
+import { Box } from 'Components';
 
 const S = {};
 S.Box = styled(Box)`
   display: flex;
   flex-flow: nowrap;
   justify-content: space-between;
+`;
+
+S.ProgressBar = styled(ProgressBar)`
+  height: 1.3rem;
+  margin-top: .7rem;
+  margin-bottom: .7rem;
 `;
 
 const DatedProgressBar = (props) => (
@@ -18,7 +25,7 @@ const DatedProgressBar = (props) => (
       <div>Release</div>
     </S.Box>
     <Box>
-      <ProgressBar variant="danger" now={props.entry.fraction * 100} style={{ height: '1.3rem', margin: '.7rem' }} />
+      <S.ProgressBar variant="danger" now={props.entry.fraction * 100} />
     </Box>
     <S.Box>
       <div>{moment(props.entry.creationDate).format('MMM DD, YYYY')}</div>

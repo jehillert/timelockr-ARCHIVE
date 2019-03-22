@@ -1,101 +1,121 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import classNames from 'classnames';
+import { withStyles } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import TextField from '@material-ui/core/TextField';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { Box
-  , Button
-       , ErrorBoundary
-       , Form
-       , GroupOfFields } from 'Components';
+  , ErrorBoundary
+  , FormButton } from 'Components';
 
 const S = {};
-S.SubmitButton = styled.div`
-  .btn-primary.btn {
-    background-color: #6A6A6A;
-    border-color: #6A6A6A;
-    display: table-cell;
-    width: 6em;
-
-    :hover {
-      background-color: #D93646;
-      border-color: #D93646;
-    }
-
-    :focus {
-      background-color: #D93646;
-    }
-  }
+S.Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  padding-top: 5rem;
+  padding-bottom: 1.5rem;
 `;
+
+const styles = theme => ({
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+  },
+  dense: {
+    marginTop: 16
+  },
+  onRight: {
+    alignSelf: 'flex-end'
+  }
+});
 
 class AuthForm extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      usrnm: 'Kennith_Mayer10',
-      passwd: 'W4Egy6IZ7E2G3q2',
-      buttonLabel: this.props.buttonLabel
+      email: 'Kennith_Mayer10',
+      password: 'W4Egy6IZ7E2G3q2',
+      showPassword: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange = (e) => {
-    this.setState({ [e.target.id]: e.target.value });
-  }
-
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.handleSubmit(this.state.usrnm, this.state.passwd);
+    this.props.handleSubmit(this.state.email, this.state.password);
   }
 
+  handleChange = (prop) => (event) => {
+    this.setState({ [prop]: event.target.value });
+  };
+
+  handleClickShowPassword = () => {
+    this.setState(state => ({ showPassword: !state.showPassword }));
+  };
+
   render() {
+    const { classes } = this.props;
+
     return (
-      <Form style={{paddingTop: '40px'}} onSubmit={this.handleSubmit}>
-        <Form.Row>
-          <ErrorBoundary>
-            <GroupOfFields
-              id='usrnm'
-              label='Username'
-              type='text'
-              placeholder='Username'
-              value={this.state.usrnm}
-              onChange={this.handleChange}
-            />
-          </ErrorBoundary>
-        </Form.Row>
-        <Form.Row>
-          <ErrorBoundary>
-            <GroupOfFields
-              id='passwd'
-              label='Password'
-              type='password'
-              placeholder='Password'
-              value={this.state.passwd}
-              onChange={this.handleChange}
-            />
-          </ErrorBoundary>
-        </Form.Row>
-        <Form.Row>
-          <ErrorBoundary>
-            <Form.Group className='d-flex justify-content-end' as={Box}>
-              <S.SubmitButton>
-                <Button type='submit'>
-                  {this.state.buttonLabel}
-                </Button>
-              </S.SubmitButton>
-            </Form.Group>
-          </ErrorBoundary>
-        </Form.Row>
-      </Form>
+      <S.Form autoComplete='off'>
+        <ErrorBoundary>
+          <TextField
+            id='outlined-email-input'
+            label='Email'
+            className={classNames(classes.dense, classes.margin, classes.textField)}
+            type='email'
+            name='email'
+            autoComplete='email'
+            margin='dense'
+            value={this.state.email}
+            variant='outlined'
+          />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <TextField
+            id='outlined-adornment-password'
+            className={classNames(classes.dense, classes.margin, classes.textField)}
+            margin='dense'
+            variant='outlined'
+            type={this.state.showPassword ? 'text' : 'password'}
+            label='Password'
+            value={this.state.password}
+            onChange={this.handleChange('password')}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position='end'>
+                  <IconButton
+                    aria-label='Toggle password visibility'
+                    onClick={this.handleClickShowPassword}
+                  >
+                    {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <Box alignItems="flex-end" className={classNames(classes.dense, classes.textField, classes.onRight)}>
+            <FormButton type='submit' handleSubmit={this.handleSubmit}>Submit</FormButton>
+          </Box>
+        </ErrorBoundary>
+      </S.Form>
     );
   }
 }
 
 AuthForm.propTypes = {
-  buttonLabel: PropTypes.string.isRequired,
+  classes: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   viewState: PropTypes.bool.isRequired
 };
 
-export default AuthForm;
+export default withStyles(styles)(AuthForm);

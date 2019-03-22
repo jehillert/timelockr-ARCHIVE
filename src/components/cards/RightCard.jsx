@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
-import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
+import Grow from '@material-ui/core/Grow';
+import Paper from '@material-ui/core/Paper';
 import styled from 'styled-components';
-import { DatedProgressBar } from 'Components';
+import { DatedProgressBar, RightCardMenu } from 'Components';
+
 
 const ClientRequests = require('./../../scripts/ClientRequests.js');
 const S = {};
@@ -43,34 +45,72 @@ S.IconButton = styled(IconButton)`
 class RightCard extends React.Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    this.state = {
+      shouldRender: false,
+      show: false
+    };
+    // ARE BINDINGS NECESSARY FOR EVENT HANDLERS HERE???
   }
 
-  handleClick = () => (ClientRequests
+  componentDidMount() {
+    if (!!this.props.delay) {
+      this.timer = setTimeout(() => {
+        this.setState({
+          shouldRender: true,
+          show: true
+        });
+      }, this.props.delay);
+    } else {
+      this.setState({
+        shouldRender: true,
+        show: true
+      });
+    }
+  }
+
+  componentWillUnMount() {
+    clearTimeout(this.timer);
+  }
+
+  handleDelete = () => (ClientRequests
     .deleteEntry(this.props.entry.id)
     .then(() => this.props.refresh())
   );
 
+  handleExtend = () => {
+    alert('you said extend.');
+  }
+
   render() {
+    const show = this.state.show;
     return (
-      <S.Card width='23rem' >
-        <S.CardHeader
-          action={
-            <IconButton onClick={this.handleClick}>
-              <CloseIcon />
-            </IconButton>
-          }
-          title={this.props.entry.label}
-        />
-        <S.CardContent>
-          <DatedProgressBar entry={this.props.entry}/>
-        </S.CardContent>
-      </S.Card>
+      <div>
+        {this.state.shouldRender &&
+          <Grow
+            in={show}
+            {...(show ? { timeout: 300 } : {})} >
+            <Paper elevation={15}>
+              <S.Card width='23rem' >
+                <S.CardHeader
+                  action={
+                    <RightCardMenu handleDelete={this.handleDelete} handleExtend={this.handleExtend} />
+                  }
+                  title={this.props.entry.label}
+                />
+                <S.CardContent>
+                  <DatedProgressBar entry={this.props.entry}/>
+                </S.CardContent>
+              </S.Card>
+            </Paper>
+          </Grow>
+        }
+      </div>
     );
   }
 }
 
 RightCard.propTypes = {
+  delay: PropTypes.number,
   entry: PropTypes.object.isRequired,
   refresh: PropTypes.func.isRequired
 };

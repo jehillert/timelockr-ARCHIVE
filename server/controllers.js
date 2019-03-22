@@ -46,7 +46,7 @@ module.exports = {
 
   entries: {
     get: (req, res) =>
-      models.entries.get(['entries', 'credentials', 'user_id', 'username', req.query.username])
+      models.entries.get(['entries', 'credentials', 'user_id', 'username', req.query.username, 'release_date'])
         .tap((results) => debug(results))
         .then(results => helpers.filterAndFormatEntries(results))
         .then(results => res.send(results))

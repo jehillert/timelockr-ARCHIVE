@@ -1,5 +1,4 @@
 const debug = require('debug')('server:helpers');
-const Promise = require('bluebird');
 const moment = require('moment');
 
 const filterAndFormatEntries = (entries) => {

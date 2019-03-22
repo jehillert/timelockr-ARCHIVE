@@ -22,7 +22,7 @@ module.exports = {
   },
 
   entries: {
-    get: params => db.queryAsync(`SELECT * FROM ?? LEFT JOIN ?? USING (??) WHERE ?? = ?`, params )
+    get: params => db.queryAsync(`SELECT * FROM ?? LEFT JOIN ?? USING (??) WHERE ?? = ? ORDER BY ?? ASC`, params )
         .tap(results => { debug(results) })
         .catch(error => console.error('Error', error)),
     post: params => db.queryAsync(`INSERT INTO ??(entry_id, ??, ??, ??, ??, ??) VALUES (0, ?,?,?,?,?)`, params )
