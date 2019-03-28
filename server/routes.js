@@ -12,8 +12,8 @@ router.post('/logout', controller.logout.get);
 router.post('/signup', controller.signup.post);
 
 // auth.restrict
-router.put('/credentials', controller.credentials.put);
-router.delete('/credentials', controller.credentials.delete);
+router.put('/users', controller.users.put);
+router.delete('/users', controller.users.delete);
 
 router.get('/entries', controller.entries.get);
 router.put('/entries', controller.entries.put);

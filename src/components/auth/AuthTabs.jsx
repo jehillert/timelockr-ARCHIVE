@@ -3,23 +3,23 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import { AuthForm
-       , ErrorBoundary } from 'Components';
+import { AuthForm } from 'components';
+import { ErrorBoundary } from 'utilities';
 
 const S = {};
 S.Tabs = styled(Tabs)`
-  background-color: #6A6A6A;
+  background-color: ${props => props.theme.primaryColor};
   margin: -1rem;
 
   .nav-link {
-    border-radius: 0rem;
-    color: white;
+    border-radius: ${props => props.theme.tabBorderRadius};
+    color: ${props => props.theme.primaryFontColor};
     border: none;
   }
 
   a:hover {
-    background-color: #D93646;
-    border-color: #D93646;
+    background-color: ${props => props.theme.backgroundHoverColor};
+    border-color: ${props => props.theme.backgroundBorderHoverColor};
   }
 `;
 

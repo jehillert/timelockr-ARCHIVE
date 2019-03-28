@@ -1,12 +1,15 @@
-import React, { Fragment } from 'react';
-import { AuthModal, Main } from 'Components';
-import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from 'react-router-dom';
-import { GlobalStyles } from 'styles';
-import { MuiPickersUtilsProvider } from 'material-ui-pickers';
+import React from 'react';
 import MomentUtils from '@date-io/moment';
-
-const ClientRequests = require('./../scripts/ClientRequests.js')
-const Promise = require('bluebird');
+import { AuthModal, Main } from 'components';
+import { createNewUser, verifyUser } from 'utilities';
+import { defaultTheme } from 'theme';
+import { GlobalStyle } from 'theme';
+import { MuiPickersUtilsProvider } from 'material-ui-pickers';
+import { ThemeProvider } from 'styled-components';
+import {
+    BrowserRouter as Router
+  , Route
+} from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props) {
@@ -24,8 +27,7 @@ class App extends React.Component {
 
   handleSignin = (user, pass) => {
     console.log(`signing in`);
-    // auth indicated by non-zero value for result.user_id
-    ClientRequests.verifyUser(user, pass)
+    verifyUser(user, pass) // non-zero value indicates authenticated
       .then(result => {
         this.setState((state, props) => ({
           user_id: result.user_id,
@@ -36,36 +38,40 @@ class App extends React.Component {
   }
 
   handleCreateNewUserAttempt = (user, pass) => {
-    // createNewUser(user, pass)
-    //   .then(response => {
-    //     alert(response.data);
-    //   });
+    createNewUser(user, pass)
+      .then(response => {
+        alert(response.data);
+      });
   }
 
   render() {
     return (
-      <React.Fragment>
-        <GlobalStyles />
+      <>
+        <GlobalStyle />
         <Router>
           <MuiPickersUtilsProvider utils={MomentUtils}>
-            <Route exact path="/" render={() => (
+            <Route exact path='/' render={() => (
               this.state.viewState ? (
-                <Main
-                  user_id={this.state.user_id}
-                  username={this.state.username}
-                  viewState={this.state.viewState}
-                />
+                <ThemeProvider theme={defaultTheme}>
+                  <Main
+                    user_id={this.state.user_id}
+                    username={this.state.username}
+                    viewState={this.state.viewState}
+                  />
+                </ThemeProvider>
               ) : (
-                <AuthModal
-                  handleSignin={this.handleSignin}
-                  handleCreateNewUserAttempt={this.handleCreateNewUserAttempt}
-                  viewState={this.state.viewState}
-                />
+                <ThemeProvider theme={defaultTheme}>
+                  <AuthModal
+                    handleSignin={this.handleSignin}
+                    handleCreateNewUserAttempt={this.handleCreateNewUserAttempt}
+                    viewState={this.state.viewState}
+                  />
+                </ThemeProvider>
               )
             )}/>
           </MuiPickersUtilsProvider>
         </Router>
-      </React.Fragment>
+      </>
     );
   }
 }

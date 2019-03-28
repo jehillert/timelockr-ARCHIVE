@@ -6,23 +6,27 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Fab from '@material-ui/core/Fab';
-import Form from 'react-bootstrap/Form';
-import { Box
-  , DatePicker
-  , ErrorBoundary
-  , GroupOfFields
-  , FormButton
-  , TimePicker } from 'Components';
-import { withStyles } from '@material-ui/core/styles';
 import moment from 'moment';
-
-const ClientRequests = require('./../../scripts/ClientRequests.js');
+import { Box } from 'layout';
+import { createEntry, ErrorBoundary } from 'utilities';
+import { DatePicker
+  , FormButton
+  , TimePicker } from 'components';
+import TextField from '@material-ui/core/TextField';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
+  dense: {
+    marginTop: 16
+  },
   fab: {
     margin: theme.spacing.unit,
   },
   extendedIcon: {
+    marginRight: theme.spacing.unit,
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
   },
 });
@@ -44,12 +48,18 @@ class EntryFormDialog extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.handleClickOpen = this.handleClickOpen.bind(this);
-    this.handleClose = this.handleClose.bind(this)
+    this.handleClose = this.handleClose.bind(this);
   }
 
   handleChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
   }
+
+  // handleChange = name => event => {
+  //   this.setState({
+  //     [name]: event.target.value,
+  //   });
+  // };
 
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -77,7 +87,7 @@ class EntryFormDialog extends React.Component {
       content: this.state.content
     };
 
-    return ClientRequests.createEntry(newEntry)
+    return createEntry(newEntry)
       .then(() => this.props.refresh())
       .then(this.setState((state) => state = this.initialState));
   }
@@ -109,40 +119,62 @@ class EntryFormDialog extends React.Component {
           <DialogTitle id='form-dialog-title'>New Entry</DialogTitle>
           <DialogContent >
             <ErrorBoundary>
-              <GroupOfFields
+              <TextField
                 id='description'
+                fullWidth
                 label='Enter a description.'
-                placeholder={`Ex-girlfriend's phone number`}
+                margin='dense'
+                placeholder='(555) 555-5555'
+                style={{ margin: 8 }}
+                variant='outlined'
+                className={classes.textField}
+                onChange={this.handleChange}
                 value={this.state.description}
-                onChange={this.handleChange}
               />
-            </ErrorBoundary>
-            <ErrorBoundary>
-              <GroupOfFields
+              <TextField
                 id='content'
+                fullWidth
                 label='Enter something to lock away.'
-                as='textarea'
-                placeholder='555-555-5555'
-                value={this.state.content}
+                margin='dense'
+                multiline
+                placeholder={`Ex-girlfriend's phone number`}
+                rows='4'
+                rowsMax='10'
+                variant='outlined'
+                className={classes.textField}
                 onChange={this.handleChange}
-                required
+                value={this.state.content}
               />
             </ErrorBoundary>
             <Box flexWrap='nowrap'>
               <ErrorBoundary>
-                <React.Fragment>
-                  <DatePicker handleDateChange={this.handleDateChange} selectedDate={this.state.selectedDate} />
-                  <TimePicker handleTimeChange={this.handleTimeChange} selectedTime={this.state.selectedTime} />
-                </React.Fragment>
+                <>
+                  <DatePicker
+                    handleDateChange={this.handleDateChange}
+                    selectedDate={this.state.selectedDate}
+                  />
+                  <TimePicker
+                    handleTimeChange={this.handleTimeChange}
+                    selectedTime={this.state.selectedTime}
+                  />
+                </>
               </ErrorBoundary>
             </Box>
           </DialogContent>
           <ErrorBoundary>
             <DialogActions>
-              <FormButton type='button' handleSubmit={this.handleClose} color='primary'>
+              <FormButton
+                type='button'
+                handleSubmit={this.handleClose}
+                color='primary'
+              >
                 Cancel
               </FormButton>
-              <FormButton type='submit' handleSubmit={this.handleSubmit} color='primary'>
+              <FormButton
+                type='submit'
+                handleSubmit={this.handleSubmit}
+                color='primary'
+              >
                 Submit
               </FormButton>
             </DialogActions>
@@ -154,7 +186,6 @@ class EntryFormDialog extends React.Component {
 }
 
 EntryFormDialog.propTypes = {
-  // classes: PropTypes.object.isRequired,
   refresh: PropTypes.func.isRequired,
   user_id: PropTypes.number.isRequired
 };

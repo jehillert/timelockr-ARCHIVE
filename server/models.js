@@ -13,7 +13,7 @@ module.exports = {
         .catch(error => console.error('Error', error))
   },
 
-  credentials: {
+  users: {
     get: params => {
       debug(params);
       return db.queryAsync(`SELECT * FROM ?? WHERE ?? = ?`, params);

@@ -12,7 +12,7 @@ Object.prototype.parseSqlResult = function() {
 module.exports = {
   signin: {
     post: (req, res) =>
-      models.credentials.get(['credentials', 'username', req.body.username])
+      models.users.get(['users', 'username', req.body.username])
         .then(user => {
           user = user.parseSqlResult();
           if (!user.username) throw new Error('Invalid username.');
@@ -38,7 +38,7 @@ module.exports = {
       .catch(error => console.error('Error', error))
   },
 
-  credentials: {
+  users: {
     put: (req, res) => updateField(req, res),
 
     delete: (req, res) => deleteFromTable(req, res)
@@ -46,7 +46,7 @@ module.exports = {
 
   entries: {
     get: (req, res) =>
-      models.entries.get(['entries', 'credentials', 'user_id', 'username', req.query.username, 'release_date'])
+      models.entries.get(['entries', 'users', 'user_id', 'username', req.query.username, 'release_date'])
         .tap((results) => debug(results))
         .then(results => helpers.filterAndFormatEntries(results))
         .then(results => res.send(results))
@@ -70,8 +70,8 @@ module.exports = {
 
   signup: {
     post: (req, res) =>
-      models.credentials
-        .post(['credentials', 'username', 'hash', 'salt', req.body.username, req.body.hash, req.body.salt])
+      models.users
+        .post(['users', 'username', 'hash', 'salt', req.body.username, req.body.hash, req.body.salt])
         .then(results => res.sendStatus(201))
         .catch(error => res.sendStatus(409))
         // .then(results => res.status(201).json({message: 'New user successfully created.'}))

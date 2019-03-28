@@ -1,36 +1,74 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
+import Button from '@material-ui/core/Button';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
-const S = {};
+const styles = theme => ({
+  margin: {
+    margin: theme.spacing.unit,
+  },
+  bootstrapRoot: {
+    boxShadow: 'none',
+    textTransform: 'none',
+    fontSize: 16,
+    padding: '6px 12px',
+    border: '1px solid',
+    lineHeight: 1.5,
+    backgroundColor: '#6A6A6A',
+    borderColor: '#6A6A6A',
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+    '&:hover': {
+      backgroundColor: '#D93646',
+      borderColor: '#D93646',
+    },
+    '&:active': {
+      boxShadow: 'none',
+      backgroundColor: '#0062cc',
+      borderColor: '#005cbf',
+    },
+    '&:focus': {
+      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
+    },
+  },
+});
 
-// display: table-cell;
-S.Button = styled(Button)`
-  background-color: #6A6A6A;
-  border-color: #6A6A6A;
-  width: 6em;
-
-  :hover {
-    background-color: #D93646;
-    border-color: #D93646;
-  }
-
-  :focus {
-    background-color: #D93646;
-  }
-`;
-
-const FormButton = (props) => (
-  <S.Button onClick={props.handleSubmit}>{props.children}</S.Button>
-);
+const FormButton = (props) => {
+  const { classes } = props;
+  return (
+    <Button
+      onClick={props.handleSubmit}
+      variant="contained"
+      color="primary"
+      disableRipple
+      className={classNames(classes.margin, classes.bootstrapRoot)}
+    >
+      {props.children}
+    </Button>
+  );
+}
 
 FormButton.propTypes = {
+  classes: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   text: PropTypes.string
 };
 
-export default FormButton;
+export default withStyles(styles)(FormButton);
 
-
-//<S.Button className='d-flex align-self-end' type='submit' onClick={props.handleSubmit}>Submit</S.Button>
+// export default FormButton;
+//const FormButton = (props) => (
+//  <S.Button onClick={props.handleSubmit}>{props.children}</S.Button>
+//);

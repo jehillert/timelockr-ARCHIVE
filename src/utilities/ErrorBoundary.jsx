@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class ErrorBoundary extends React.Component {
     if (this.state.errorInfo) {
       // Error path
       return (
-        <div>
+        <>
           <h3>Something went wrong.</h3>
           <details style={{ whiteSpace: 'pre-wrap' }}>
             <br />
@@ -27,7 +27,7 @@ class ErrorBoundary extends React.Component {
             {this.state.errorInfo.componentStack}
           </details>
           <br />
-        </div>
+        </>
       );
     }
     // Normally, just render children

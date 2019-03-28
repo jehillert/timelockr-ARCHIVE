@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import classNames from 'classnames';
@@ -8,9 +8,9 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import { Box
-  , ErrorBoundary
-  , FormButton } from 'Components';
+import { Box } from 'layout';
+import { ErrorBoundary } from 'utilities';
+import { FormButton } from 'components';
 
 const S = {};
 S.Form = styled.form`
@@ -38,8 +38,8 @@ class AuthForm extends React.Component {
     super(props);
 
     this.state = {
-      email: 'Kennith_Mayer10',
-      password: 'W4Egy6IZ7E2G3q2',
+      email: 'Maurine42',
+      password: '6bUeeOIkHbXNFGA',
       showPassword: false,
     };
 
@@ -103,7 +103,7 @@ class AuthForm extends React.Component {
           />
         </ErrorBoundary>
         <ErrorBoundary>
-          <Box alignItems="flex-end" className={classNames(classes.dense, classes.textField, classes.onRight)}>
+          <Box alignItems='flex-end' className={classNames(classes.dense, classes.textField, classes.onRight)}>
             <FormButton type='submit' handleSubmit={this.handleSubmit}>Submit</FormButton>
           </Box>
         </ErrorBoundary>

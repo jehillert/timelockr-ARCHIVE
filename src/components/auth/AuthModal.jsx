@@ -2,14 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Modal from 'react-bootstrap/Modal';
-import { AuthTabs
-       , ErrorBoundary } from 'Components';
+import { AuthTabs } from 'components';
+import { ErrorBoundary } from 'utilities';
 
+// box-shadow: 0 0 100px rgba(24,29,39,.1), 0 15px 30px rgba(24,29,39,.1), 0 5px 10px rgba(24,29,39,.05);
 const S = {};
 S.Modal = styled(Modal)`
   div .modal-content {
-    border-radius: 0rem;
-    box-shadow: 0 0 100px rgba(24,29,39,.1), 0 15px 30px rgba(24,29,39,.1), 0 5px 10px rgba(24,29,39,.05);
+    border-radius: ${props => props.theme.modalBorderRadius};
+    border-shadow: ${props => props.theme.boxShadow};
   }
 `;
 

@@ -18,10 +18,10 @@ const aTimeLaterToday = () => {
   // timeInBetween = moment(timeInBetween).format('YYYY-MM-DD HH:mm:ss');
   return timeInBetween;
 };
-const generateUserEntries = (user, maxEntries = 15) => {
+const generateUserEntries = (user, minEntries = 15, maxEntries = 30) => {
   entries = [];
 
-  let numOfUserEntries = faker.random.number({ min: 0, max: maxEntries });
+  let numOfUserEntries = faker.random.number({ min: minEntries, max: maxEntries });
 
   for (let e = 0; e < numOfUserEntries; e++) {
     let creationDate = moment(faker.date.past()).format('YYYY-MM-DD HH:mm');
@@ -64,7 +64,7 @@ getAsync('mysql -u root <schema.sql')
   .then(() => { console.log('db tables cleared') })
   .then(() => generateUsers(numOfUsers))
   .then((users) => {
-    // add each user to credentials table
+    // add each user to users table
     return Promise.each(users, function(user) {
       console.log(user.username, user.password);
       return axios.post('http://localhost:3000/api/keepsafe/signup', {

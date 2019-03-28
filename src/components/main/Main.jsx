@@ -1,36 +1,15 @@
 import React from 'react';
-import ClientRequests from './../../scripts/ClientRequests.js';
 import PropTypes from 'prop-types';
+import { getEntries, ErrorBoundary } from 'utilities';
+import { ActionBar
+  , Box
+  , CardArea
+  , LeftSide
+  , RightSide } from 'layout';
 import { CardColumn
-  , Container
-  , EntryFormDialog
-  , ErrorBoundary
-  , LeftCard
-  , RightCard
-  , Row } from 'Components';
-
-/*
-  THESE ARE VALID:
-    this.setState({
-      isHidden: !this.state.isHidden
-    })
-
-    this.setState((state, props) => ({
-      title: newTitle
-    }));
-
-    this.setState((state) => state.title = newTitle);
-
-    this.setState((state) => {
-      return state.title = newTitle
-    });
-
-  THIS IS INVALID BECAUSE NO RETURN STATEMENT:
-
-    this.setState((state) => {
-      state.title = newTitle
-    });
-*/
+  , ReleasedEntryCard
+  , LockedEntryCard
+} from 'components';
 
 class Main extends React.Component {
   constructor(props) {
@@ -38,8 +17,10 @@ class Main extends React.Component {
     this.state = {
       locked: [],
       hasLockedChildren: false,
+      showLocked: false,
       released: [],
       hasReleasedChildren: false,
+      showReleased: false
     };
     this.refresh = this.refresh.bind(this);
   }
@@ -49,14 +30,16 @@ class Main extends React.Component {
   );
 
   getEntries = () => {
-    ClientRequests.getEntries(this.props.username)
+    getEntries(this.props.username)
       .then(results => {
         console.log(results);
         this.setState((state, props) => ({
           locked: results.locked,
           hasLockedChildren: !!(results.locked.length),
+          showLocked: !!(results.locked.length),
           released: results.released,
-          hasReleasedChildren: !!(results.released.length)
+          hasReleasedChildren: !!(results.released.length),
+          showReleased: !!(results.released.length)
         }));
       });
   }
@@ -65,50 +48,50 @@ class Main extends React.Component {
     this.getEntries()
   );
 
-  // GENERIC CARD-COLUMN IMPLEMENTATION
   render() {
     return (
-      <Container className='d-flex d-inline-flex justify-content-center' fluid>
-        <h1 style={{ color: '#AEAEAA' }} >TimeLockr</h1>
-        <EntryFormDialog
-          refresh={this.refresh}
-          user_id={this.props.user_id}
-          username={this.props.username}
-        />
-        <Container className='d-flex flex-column justify-content-center'>
-          <Row>
-            <ErrorBoundary>
-              {
-                this.state.hasReleasedChildren &&
-                <CardColumn
-                  id='left-card-column'
-                  title='Unlocked'
-                  Card={LeftCard}
-                  entries={this.state.released}
-                  refresh={this.refresh}
-                  showComponent={this.state.hasReleasedChildren}
-                />
-              }
-            </ErrorBoundary>
-            <ErrorBoundary>
-              {
-                this.state.hasLockedChildren &&
-                <CardColumn
-                  id='right-card-column'
-                  title='Locked'
-                  Card={RightCard}
-                  entries={this.state.locked}
-                  refresh={this.refresh}
-                  showComponent={this.state.hasLockedChildren}
-                />
-              }
-            </ErrorBoundary>
-          </Row>
-        </Container>
-      </Container>
+      <Box className='wrapper'>
+        <LeftSide>
+          <h1>TimeLockr</h1>
+        </LeftSide>
+        <CardArea>
+          <ErrorBoundary>
+            {
+              this.state.hasReleasedChildren &&
+              <CardColumn
+                id='card-column-released-entries'
+                title='Unlocked'
+                Card={ReleasedEntryCard}
+                delayIncrement={50}
+                entries={this.state.released}
+                refresh={this.refresh}
+                showCards={this.state.showReleased}
+              />
+            }
+          </ErrorBoundary>
+          <ErrorBoundary>
+            {
+              this.state.hasLockedChildren &&
+              <CardColumn
+                id='card-column-locked-entries'
+                title='Locked'
+                Card={LockedEntryCard}
+                delayIncrement={50}
+                entries={this.state.locked}
+                refresh={this.refresh}
+                showCards={this.state.showLocked}
+              />
+            }
+          </ErrorBoundary>
+        </CardArea>
+        <RightSide>
+          <ErrorBoundary>
+            <ActionBar {...this.props} refresh={this.refresh} />
+          </ErrorBoundary>
+        </RightSide>
+      </Box>
     );
   }
-
 }
 
 Main.propTypes = {

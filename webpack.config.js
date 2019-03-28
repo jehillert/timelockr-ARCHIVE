@@ -64,8 +64,10 @@ const config = {
   resolve: {
     extensions: ['.js', '.jsx', '.css'],
     alias: {
-      'Components': path.resolve(__dirname, 'src/index-components.jsx'),
-      'styles': path.resolve(__dirname, 'src/index-styles.jsx')
+      'components': path.resolve(__dirname, 'src/indexes/components.jsx'),
+      'layout': path.resolve(__dirname, 'src/indexes/layout.jsx'),
+      'theme': path.resolve(__dirname, 'src/indexes/theme.jsx'),
+      'utilities': path.resolve(__dirname, 'src/indexes/utilities.jsx'),
     },
   },
 };
