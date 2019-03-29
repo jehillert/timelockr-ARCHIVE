@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -6,7 +6,19 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-class AlertDialog extends React.Component {
+// Delete entry?
+// Entry will be permanently deleted before release date.
+// Cancel Confirm
+
+// Delete entry?
+// Entry will be permanently deleted.
+// Cancel Confirm
+
+// `Extend Release Date?`
+// `Information contained in this entry will not be released until ${props.newReleaseDate}`
+// Cancel Confirm
+
+class ConfirmDialog extends React.Component {
   state = {
     open: false,
   };
@@ -21,7 +33,7 @@ class AlertDialog extends React.Component {
 
   render() {
     return (
-      <div>
+      <>
         <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
           Open alert dialog
         </Button>
@@ -47,9 +59,9 @@ class AlertDialog extends React.Component {
             </Button>
           </DialogActions>
         </Dialog>
-      </div>
+      </>
     );
   }
 }
 
-export default AlertDialog;
+export default ConfirmDialog;

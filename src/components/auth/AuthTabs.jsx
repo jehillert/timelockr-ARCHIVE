@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { AuthForm } from 'components';
-import { ErrorBoundary } from 'utilities';
 
 const S = {};
 S.Tabs = styled(Tabs)`
@@ -41,7 +40,6 @@ class AuthTabs extends React.Component {
 
   render() {
     return (
-      <ErrorBoundary>
         <S.Tabs
           id='modal-tabs'
           className='nav-justified'
@@ -50,23 +48,18 @@ class AuthTabs extends React.Component {
           onSelect={key => this.setState({ key }, this.handleSelect)}
         >
           <Tab eventKey='signin' title='Sign In'>
-            <ErrorBoundary>
               <AuthForm
                 handleSubmit={this.props.handleSignin}
                 viewState={this.props.viewState}
               />
-            </ErrorBoundary>
           </Tab>
           <Tab eventKey='signup' title='Sign Up'>
-            <ErrorBoundary>
               <AuthForm
                 handleSubmit={this.props.handleCreateNewUserAttempt}
                 viewState={this.props.viewState}
               />
-            </ErrorBoundary>
           </Tab>
         </S.Tabs>
-      </ErrorBoundary>
     );
   }
 }

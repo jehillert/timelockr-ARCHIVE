@@ -17,7 +17,8 @@ S.Card = styled(Card)`
 `;
 
 // Overrides IconButton padding
-// see https://www.styled-components.com/docs/basics at Pseudoelements, pseudoselectors, and nesting
+// see https://www.styled-components.com/docs/basics
+// at Pseudoelements, pseudoselectors, and nesting
 S.IconButton = styled(IconButton)`
   &.s-icon-button {
     padding: 8px 7px 8px 7px;

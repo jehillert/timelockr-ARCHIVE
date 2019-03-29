@@ -13,7 +13,7 @@ const LockedEntryCard = (props) => {
 
   const handleDelete = () => (
     deleteEntry(entry.id)
-    .then(() => refresh())
+      .then(() => refresh())
   );
 
   const handleExtend = () => {

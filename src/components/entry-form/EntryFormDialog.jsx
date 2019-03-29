@@ -101,7 +101,6 @@ class EntryFormDialog extends React.Component {
 
     return (
       <Box>
-        <ErrorBoundary>
           <Fab onClick={this.handleClickOpen}
             size='medium'
             color='primary'
@@ -109,7 +108,6 @@ class EntryFormDialog extends React.Component {
             className={classes.fab}>
             <AddIcon />
           </Fab>
-        </ErrorBoundary>
         <Dialog
           aria-labelledby='form-dialog-title'
           open={this.state.open}
@@ -118,7 +116,6 @@ class EntryFormDialog extends React.Component {
         >
           <DialogTitle id='form-dialog-title'>New Entry</DialogTitle>
           <DialogContent >
-            <ErrorBoundary>
               <TextField
                 id='description'
                 fullWidth
@@ -145,9 +142,7 @@ class EntryFormDialog extends React.Component {
                 onChange={this.handleChange}
                 value={this.state.content}
               />
-            </ErrorBoundary>
             <Box flexWrap='nowrap'>
-              <ErrorBoundary>
                 <>
                   <DatePicker
                     handleDateChange={this.handleDateChange}
@@ -158,10 +153,8 @@ class EntryFormDialog extends React.Component {
                     selectedTime={this.state.selectedTime}
                   />
                 </>
-              </ErrorBoundary>
             </Box>
           </DialogContent>
-          <ErrorBoundary>
             <DialogActions>
               <FormButton
                 type='button'
@@ -178,7 +171,6 @@ class EntryFormDialog extends React.Component {
                 Submit
               </FormButton>
             </DialogActions>
-          </ErrorBoundary>
         </Dialog>
       </Box>
     );

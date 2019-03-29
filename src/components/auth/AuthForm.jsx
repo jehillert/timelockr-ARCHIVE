@@ -9,7 +9,6 @@ import TextField from '@material-ui/core/TextField';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { Box } from 'layout';
-import { ErrorBoundary } from 'utilities';
 import { FormButton } from 'components';
 
 const S = {};
@@ -65,7 +64,6 @@ class AuthForm extends React.Component {
 
     return (
       <S.Form autoComplete='off'>
-        <ErrorBoundary>
           <TextField
             id='outlined-email-input'
             label='Email'
@@ -77,8 +75,6 @@ class AuthForm extends React.Component {
             value={this.state.email}
             variant='outlined'
           />
-        </ErrorBoundary>
-        <ErrorBoundary>
           <TextField
             id='outlined-adornment-password'
             className={classNames(classes.dense, classes.margin, classes.textField)}
@@ -101,12 +97,9 @@ class AuthForm extends React.Component {
               ),
             }}
           />
-        </ErrorBoundary>
-        <ErrorBoundary>
           <Box alignItems='flex-end' className={classNames(classes.dense, classes.textField, classes.onRight)}>
             <FormButton type='submit' handleSubmit={this.handleSubmit}>Submit</FormButton>
           </Box>
-        </ErrorBoundary>
       </S.Form>
     );
   }

@@ -4,6 +4,7 @@ export { default as AuthModal } from './../components/auth/AuthModal';
 export { default as AuthTabs } from './../components/auth/AuthTabs';
 export { default as CardColumn } from './../components/card-column/CardColumn';
 export { default as CardWrapper } from './../components/card-column/CardWrapper';
+export { default as ConfirmDialog } from './../components/dialogs/ConfirmDialog';
 export { default as DatePicker } from './../components/entry-form/DatePicker';
 export { default as DatedProgressBar } from './../components/cards/DatedProgressBar';
 export { default as EntryFormDialog } from './../components/entry-form/EntryFormDialog';

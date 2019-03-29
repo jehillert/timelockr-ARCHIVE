@@ -1,7 +1,6 @@
 import React from 'react';
 import { EntryFormDialog } from 'components';
 import { Box } from 'layout';
-import { ErrorBoundary } from 'utilities';
 import { withStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';

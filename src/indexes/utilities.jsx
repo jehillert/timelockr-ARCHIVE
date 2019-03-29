@@ -1,4 +1,3 @@
-export { default as ErrorBoundary } from './../utilities/ErrorBoundary';
 export { createEntry } from './../utilities/ClientRequests.js';
 export { createNewUser } from './../utilities/ClientRequests.js';
 export { deleteEntry } from './../utilities/ClientRequests.js';

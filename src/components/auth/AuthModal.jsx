@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Modal from 'react-bootstrap/Modal';
 import { AuthTabs } from 'components';
-import { ErrorBoundary } from 'utilities';
 
 // box-shadow: 0 0 100px rgba(24,29,39,.1), 0 15px 30px rgba(24,29,39,.1), 0 5px 10px rgba(24,29,39,.05);
 const S = {};
@@ -57,14 +56,12 @@ class AuthModal extends React.Component {
           <Modal.Title>{this.state.title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <ErrorBoundary>
             <AuthTabs
               handleSignin={this.props.handleSignin}
               handleCreateNewUserAttempt={this.props.handleCreateNewUserAttempt}
               viewState={this.props.viewState}
               setTitle={this.setTitle}
             />
-          </ErrorBoundary>
         </Modal.Body>
       </S.Modal>
     );

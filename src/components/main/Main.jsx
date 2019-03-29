@@ -55,7 +55,6 @@ class Main extends React.Component {
           <h1>TimeLockr</h1>
         </LeftSide>
         <CardArea>
-          <ErrorBoundary>
             {
               this.state.hasReleasedChildren &&
               <CardColumn
@@ -68,8 +67,6 @@ class Main extends React.Component {
                 showCards={this.state.showReleased}
               />
             }
-          </ErrorBoundary>
-          <ErrorBoundary>
             {
               this.state.hasLockedChildren &&
               <CardColumn
@@ -82,12 +79,9 @@ class Main extends React.Component {
                 showCards={this.state.showLocked}
               />
             }
-          </ErrorBoundary>
         </CardArea>
         <RightSide>
-          <ErrorBoundary>
             <ActionBar {...this.props} refresh={this.refresh} />
-          </ErrorBoundary>
         </RightSide>
       </Box>
     );

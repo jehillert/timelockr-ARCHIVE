@@ -3,6 +3,7 @@ import MomentUtils from '@date-io/moment';
 import { AuthModal, Main } from 'components';
 import { createNewUser, verifyUser } from 'utilities';
 import { defaultTheme } from 'theme';
+import { hot } from 'react-hot-loader'
 import { GlobalStyle } from 'theme';
 import { MuiPickersUtilsProvider } from 'material-ui-pickers';
 import { ThemeProvider } from 'styled-components';
@@ -76,4 +77,5 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default hot(module)(App);
+// export default App;

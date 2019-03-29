@@ -44,7 +44,6 @@ class CardWrapper extends React.Component {
     const show = this.state.show;
     return (
       <Box m={2}>
-        <ErrorBoundary>
           {this.state.shouldRender &&
             <Grow
               in={show}
@@ -54,7 +53,6 @@ class CardWrapper extends React.Component {
               </Paper>
             </Grow>
           }
-        </ErrorBoundary>
       </Box>
     );
   }
