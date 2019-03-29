@@ -66,6 +66,7 @@
     "copy-webpack-plugin": "^5.0.2",
     "css-loader": "^1.0.0",
     "eslint": "^5.15.3",
+    "eslint-plugin-react-hooks": "^1.6.0",
     "faker": "^4.1.0",
     "less-loader": "^4.1.0",
     "node-cmd": "^3.0.0",
