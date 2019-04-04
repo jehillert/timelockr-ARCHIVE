@@ -1,14 +1,18 @@
+/* eslint-disable react/jsx-indent */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getEntries, ErrorBoundary } from 'utilities';
-import { ActionBar
-  , Box
-  , CardArea
-  , LeftSide
-  , RightSide } from 'layout';
-import { CardColumn
-  , ReleasedEntryCard
-  , LockedEntryCard
+import { getEntries } from 'utilities';
+import {
+  ActionBar,
+  Box,
+  CardArea,
+  LeftSide,
+  RightSide,
+} from 'layout';
+import {
+  CardColumn,
+  ReleasedEntryCard,
+  LockedEntryCard,
 } from 'components';
 
 class Main extends React.Component {
@@ -20,26 +24,28 @@ class Main extends React.Component {
       showLocked: false,
       released: [],
       hasReleasedChildren: false,
-      showReleased: false
+      showReleased: false,
     };
     this.refresh = this.refresh.bind(this);
   }
 
-  componentDidMount = () => (
-    this.getEntries()
-  );
+  componentDidMount() {
+    return this.getEntries();
+  }
 
   getEntries = () => {
-    getEntries(this.props.username)
-      .then(results => {
+    const { username } = this.props;
+    getEntries(username)
+      .then((results) => {
         console.log(results);
+        const { locked, released } = results;
         this.setState((state, props) => ({
-          locked: results.locked,
-          hasLockedChildren: !!(results.locked.length),
-          showLocked: !!(results.locked.length),
-          released: results.released,
-          hasReleasedChildren: !!(results.released.length),
-          showReleased: !!(results.released.length)
+          locked,
+          released,
+          hasLockedChildren: !!(locked.length),
+          hasReleasedChildren: !!(released.length),
+          showLocked: !!(locked.length),
+          showReleased: !!(released.length),
         }));
       });
   }
@@ -49,36 +55,44 @@ class Main extends React.Component {
   );
 
   render() {
+    const {
+      released,
+      showReleased,
+      hasReleasedChildren,
+      hasLockedChildren,
+      locked,
+      showLocked,
+    } = this.state;
     return (
       <Box className='wrapper'>
         <LeftSide>
           <h1>TimeLockr</h1>
         </LeftSide>
         <CardArea>
-            {
-              this.state.hasReleasedChildren &&
-              <CardColumn
-                id='card-column-released-entries'
-                title='Unlocked'
-                Card={ReleasedEntryCard}
-                delayIncrement={50}
-                entries={this.state.released}
-                refresh={this.refresh}
-                showCards={this.state.showReleased}
-              />
-            }
-            {
-              this.state.hasLockedChildren &&
+            {hasReleasedChildren
+              && (
+                <CardColumn
+                  id='card-column-released-entries'
+                  heading='Unlocked'
+                  Card={ReleasedEntryCard}
+                  delayIncrement={70}
+                  entries={released}
+                  refresh={this.refresh}
+                  showCards={showReleased}
+                />
+            )}
+            {hasLockedChildren
+              && (
               <CardColumn
                 id='card-column-locked-entries'
-                title='Locked'
+                heading='Locked'
                 Card={LockedEntryCard}
-                delayIncrement={50}
-                entries={this.state.locked}
+                delayIncrement={70}
+                entries={locked}
                 refresh={this.refresh}
-                showCards={this.state.showLocked}
+                showCards={showLocked}
               />
-            }
+            )}
         </CardArea>
         <RightSide>
             <ActionBar {...this.props} refresh={this.refresh} />
@@ -89,9 +103,9 @@ class Main extends React.Component {
 }
 
 Main.propTypes = {
-  user_id: PropTypes.number.isRequired,
+  userId: PropTypes.number.isRequired,
   username: PropTypes.string.isRequired,
-  viewState: PropTypes.bool.isRequired
+  viewState: PropTypes.bool.isRequired,
 };
 
 export default Main;

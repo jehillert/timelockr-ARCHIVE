@@ -1,6 +1,8 @@
-export { createEntry } from './../utilities/ClientRequests.js';
-export { createNewUser } from './../utilities/ClientRequests.js';
-export { deleteEntry } from './../utilities/ClientRequests.js';
-export { getEntries } from './../utilities/ClientRequests.js';
-export { extendTime } from './../utilities/ClientRequests.js';
-export { verifyUser } from './../utilities/ClientRequests.js';
+export { createEntry } from '../utilities/ClientRequests';
+export { createNewUser } from '../utilities/ClientRequests';
+export { deleteEntry } from '../utilities/ClientRequests';
+export { extendReleaseDate } from '../utilities/ClientRequests';
+export { getEntries } from '../utilities/ClientRequests';
+export { verifyUser } from '../utilities/ClientRequests';
+export { CopyToClipboard } from 'react-copy-to-clipboard';
+export { default as ErrorBoundary } from '../utilities/ErrorBoundary';

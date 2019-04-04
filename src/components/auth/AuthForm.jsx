@@ -37,8 +37,8 @@ class AuthForm extends React.Component {
     super(props);
 
     this.state = {
-      email: 'Maurine42',
-      password: '6bUeeOIkHbXNFGA',
+      email: 'Cielo.Hermann',
+      password: '8IjZMxCae7ZHLzy',
       showPassword: false,
     };
 
@@ -108,7 +108,6 @@ class AuthForm extends React.Component {
 AuthForm.propTypes = {
   classes: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  viewState: PropTypes.bool.isRequired
 };
 
 export default withStyles(styles)(AuthForm);

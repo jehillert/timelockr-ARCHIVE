@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AddIcon from '@material-ui/icons/Add';
+import classNames from 'classnames';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -8,22 +9,21 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Fab from '@material-ui/core/Fab';
 import moment from 'moment';
 import { Box } from 'layout';
-import { createEntry, ErrorBoundary } from 'utilities';
-import { DatePicker
-  , FormButton
-  , TimePicker } from 'components';
+import { createEntry } from 'utilities';
+import {
+  DatePicker,
+  FormButton,
+  TimePicker,
+} from 'components';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   dense: {
-    marginTop: 16
+    marginTop: 16,
   },
   fab: {
     margin: theme.spacing.unit,
-  },
-  extendedIcon: {
-    marginRight: theme.spacing.unit,
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -39,7 +39,7 @@ class EntryFormDialog extends React.Component {
       content: '',
       selectedDate: new Date(),
       selectedTime: new Date(),
-      open: false
+      open: false,
     };
     this.state = this.initialState;
     this.handleChange = this.handleChange.bind(this);
@@ -70,25 +70,34 @@ class EntryFormDialog extends React.Component {
   };
 
   handleDateChange = (date) => {
-    this.setState((state) => state.selectedDate = date);
+    this.setState((state) => { state.selectedDate = date; });
   };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    let formattedTime = moment(this.state.selectedTime).format('HH:mm').toString();
-    let formattedDate = moment(this.state.selectedDate).format('YYYY-MM-DD').toString();
-    let releaseDateTime = formattedDate + ' ' + formattedTime;
-    let release_date = moment(releaseDateTime, 'YYYY-MM-DD h:mm').format('YYYY-MM-DD HH:mm');
-    let newEntry = {
-      user_id: this.props.user_id,
-      creation_date: moment().format('YYYY-MM-DD HH:mm'),
-      release_date: release_date,
-      description: this.state.description,
-      content: this.state.content
+  handleSubmit = (event) => {
+    // dates stored in UTC
+    event.preventDefault();
+    const {
+      content,
+      description,
+      selectedDate,
+      selectedTime,
+    } = this.state;
+    const { refresh } = this.props;
+    // console.log(formattedTime);
+    const formattedTime = moment(selectedTime).utc().format('HH:mm').toString();
+    const formattedDate = moment(selectedDate).utc().format('YYYY-MM-DD').toString();
+    const releaseDateTime = `${formattedDate} ${formattedTime}`;
+    const releaseDate = moment(releaseDateTime, 'YYYY-MM-DD h:mm').format('YYYY-MM-DD HH:mm');
+    const newEntry = {
+      userId: this.props.userId,
+      creationDate: moment().format('YYYY-MM-DD HH:mm'),
+      releaseDate: releaseDate,
+      description,
+      content,
     };
 
     return createEntry(newEntry)
-      .then(() => this.props.refresh())
+      .then(() => refresh())
       .then(this.setState((state) => state = this.initialState));
   }
 
@@ -101,13 +110,13 @@ class EntryFormDialog extends React.Component {
 
     return (
       <Box>
-          <Fab onClick={this.handleClickOpen}
-            size='medium'
-            color='primary'
-            aria-label='New Entry'
-            className={classes.fab}>
-            <AddIcon />
-          </Fab>
+        <Fab onClick={this.handleClickOpen}
+          size='medium'
+          color='primary'
+          aria-label='New Entry'
+          className={classes.fab}>
+          <AddIcon />
+        </Fab>
         <Dialog
           aria-labelledby='form-dialog-title'
           open={this.state.open}
@@ -115,33 +124,35 @@ class EntryFormDialog extends React.Component {
           width='26rem'
         >
           <DialogTitle id='form-dialog-title'>New Entry</DialogTitle>
-          <DialogContent >
-              <TextField
-                id='description'
-                fullWidth
-                label='Enter a description.'
-                margin='dense'
-                placeholder='(555) 555-5555'
-                style={{ margin: 8 }}
-                variant='outlined'
-                className={classes.textField}
-                onChange={this.handleChange}
-                value={this.state.description}
+          <DialogContent>
+            <TextField
+              id='description'
+              autoComplete='off'
+              fullWidth
+              label='Enter a description.'
+              margin='dense'
+              placeholder='(555) 555-5555'
+              style={{ margin: 8 }}
+              variant='outlined'
+              className={classNames(classes.dense, classes.textField)}
+              onChange={this.handleChange}
+              value={this.state.description}
               />
-              <TextField
-                id='content'
-                fullWidth
-                label='Enter something to lock away.'
-                margin='dense'
-                multiline
-                placeholder={`Ex-girlfriend's phone number`}
-                rows='4'
-                rowsMax='10'
-                variant='outlined'
-                className={classes.textField}
-                onChange={this.handleChange}
-                value={this.state.content}
-              />
+            <TextField
+              id='content'
+              autoComplete='off'
+              fullWidth
+              label='Enter something to lock away.'
+              margin='dense'
+              multiline
+              placeholder={`Ex-girlfriend's phone number`}
+              rows='4'
+              rowsMax='10'
+              variant='outlined'
+              className={classNames(classes.dense, classes.textField)}
+              onChange={this.handleChange}
+              value={this.state.content}
+            />
             <Box flexWrap='nowrap'>
                 <>
                   <DatePicker
@@ -155,22 +166,22 @@ class EntryFormDialog extends React.Component {
                 </>
             </Box>
           </DialogContent>
-            <DialogActions>
-              <FormButton
-                type='button'
-                handleSubmit={this.handleClose}
-                color='primary'
-              >
-                Cancel
-              </FormButton>
-              <FormButton
-                type='submit'
-                handleSubmit={this.handleSubmit}
-                color='primary'
-              >
-                Submit
-              </FormButton>
-            </DialogActions>
+          <DialogActions>
+            <FormButton
+              type='button'
+              handleSubmit={this.handleClose}
+              color='primary'
+            >
+              Cancel
+            </FormButton>
+            <FormButton
+              type='submit'
+              handleSubmit={this.handleSubmit}
+              color='primary'
+            >
+              Submit
+            </FormButton>
+          </DialogActions>
         </Dialog>
       </Box>
     );
@@ -179,7 +190,7 @@ class EntryFormDialog extends React.Component {
 
 EntryFormDialog.propTypes = {
   refresh: PropTypes.func.isRequired,
-  user_id: PropTypes.number.isRequired
+  userId: PropTypes.number.isRequired,
 };
 
 export default withStyles(styles)(EntryFormDialog);

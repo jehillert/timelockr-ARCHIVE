@@ -1,6 +1,7 @@
 import React from 'react';
-import { Box } from 'layout';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Box } from 'layout';
 
 const S = {};
 
@@ -13,10 +14,21 @@ S.LeftSide = styled(Box)`
   justify-content: flex-end;
 `;
 
-const LeftSide = (props) => (
-  <S.LeftSide pt={2} pr={3}>
-    {props.children}
-  </S.LeftSide>
-);
+const LeftSide = (props) => {
+  const { children } = props;
+  return (
+    <S.LeftSide pt={2} pr={3}>
+      {children}
+    </S.LeftSide>
+  );
+};
+
+LeftSide.defaultProps = {
+  children: null,
+};
+
+LeftSide.propTypes = {
+  children: PropTypes.node,
+};
 
 export default LeftSide;

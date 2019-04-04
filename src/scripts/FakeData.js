@@ -1,6 +1,5 @@
 /*                  DO NOT FUCK WITH THIS FILE !!!!                  */
 
-require('dotenv').config();
 const axios = require('axios');
 const cmd = require('node-cmd');
 const faker = require('faker');
@@ -30,9 +29,9 @@ const generateUserEntries = (user, minEntries = 15, maxEntries = 30) => {
                     : moment(faker.date.future()).format('YYYY-MM-DD HH:mm');
 
     let entry = {
-      user_id: user.user_id,
-      creation_date: creationDate,
-      release_date: releaseDate,
+      userId: user.userId,
+      creationDate: creationDate,
+      releaseDate: releaseDate,
       description: faker.lorem.words(Math.floor((Math.random() * 10))),
       content: faker.lorem.sentence()
     };
@@ -45,12 +44,12 @@ const generateUserEntries = (user, minEntries = 15, maxEntries = 30) => {
 const generateUsers = (numOfUsers = 100, users = []) => {
   for (let i = 1; i <= numOfUsers; i++ ) {
     let user = {
-      user_id: i,
+      userId: i,
       username: faker.internet.userName(),
       password: faker.internet.password()
     };
     user.entries = generateUserEntries(user);
-    // console.log(`[${user.user_id}, '${user.username}', '${user.password}'],`);
+    // console.log(`[${user.userId}, '${user.username}', '${user.password}'],`);
     users.push(user);
   }
   return users;
@@ -74,11 +73,11 @@ getAsync('mysql -u root <schema.sql')
         .then(() => {
           // add entry to entries section
           return Promise.each(user.entries, function(entry) {
-            console.log(entry.user_id, entry.creation_date, entry.release_date, entry.description, entry.content);
+            console.log(entry.userId, entry.creationDate, entry.releaseDate, entry.description, entry.content);
             return axios.post('http://localhost:3000/api/keepsafe/entries', {
-              user_id: entry.user_id,
-              creation_date: entry.creation_date,
-              release_date: entry.release_date,
+              userId: entry.userId,
+              creationDate: entry.creationDate,
+              releaseDate: entry.releaseDate,
               description: entry.description,
               content: entry.content
             });

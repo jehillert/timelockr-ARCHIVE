@@ -50,13 +50,11 @@ class AuthTabs extends React.Component {
           <Tab eventKey='signin' title='Sign In'>
               <AuthForm
                 handleSubmit={this.props.handleSignin}
-                viewState={this.props.viewState}
               />
           </Tab>
           <Tab eventKey='signup' title='Sign Up'>
               <AuthForm
                 handleSubmit={this.props.handleCreateNewUserAttempt}
-                viewState={this.props.viewState}
               />
           </Tab>
         </S.Tabs>
@@ -67,7 +65,6 @@ class AuthTabs extends React.Component {
 AuthTabs.propTypes = {
   handleSignin: PropTypes.func.isRequired,
   handleCreateNewUserAttempt: PropTypes.func.isRequired,
-  viewState: PropTypes.bool.isRequired,
   setTitle: PropTypes.func.isRequired
 };
 

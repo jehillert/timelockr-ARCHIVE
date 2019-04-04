@@ -1,55 +1,63 @@
+/* eslint-disable camelcase */
 const debug = require('debug')('server:helpers');
 const moment = require('moment');
 
 const filterAndFormatEntries = (entries) => {
-  let locked = [];
-  let released = [];
-  let todaysDate = moment().toISOString();
+  // Database dates are UTC.
+  const locked = [];
+  const released = [];
 
-  for (let entry of entries) {
-    debug('entry: ', entry);
-    if (moment(entry.release_date).isBefore(todaysDate, 'seconds')) {
-      let releasedEntry = {
-        id: entry.entry_id,
-        label: entry.description,
-        body: entry.content
+  const todayInISO = new Date().toISOString();
+  const present = moment().unix();
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const entry of entries) {
+    const content = entry.content;
+    const creationDate = entry.creation_date;
+    const description = entry.description;
+    const entryId = entry.entry_id;
+    const releaseDate = entry.release_date;
+
+    debug({
+      entryId,
+      creationDate,
+      releaseDate,
+    });
+
+    if (moment(releaseDate).isBefore(todayInISO, 'seconds')) {
+      const releasedEntry = {
+        entryId,
+        description,
+        content,
       };
 
       released.push(releasedEntry);
     } else {
-      let present = moment(todaysDate).unix();
-      let past = moment(entry.creation_date).toISOString();
-      let future = moment(entry.release_date).toISOString();
-      past = moment(past).unix();
-      future = moment(future).unix();
-
-      let fraction = parseFloat(
-        ((present - past) / (future - past)).toFixed(2)
+      const past = moment(creationDate).unix();
+      const future = moment(releaseDate).unix();
+      const fraction = parseFloat(
+        ((present - past) / (future - past)).toFixed(2),
       );
 
-      let lockedEntry = {
-        id: entry.entry_id,
-        label: entry.description,
-        todaysDate: todaysDate,
-        creationDate: moment(entry.creation_date).toISOString(),
-        releaseDate: moment(entry.release_date).toISOString(),
-        fraction: fraction,
-        timeRemaining: moment(entry.release_date).calendar()
+      const lockedEntry = {
+        entryId,
+        description,
+        creationDate,
+        releaseDate,
+        fraction,
       };
       locked.push(lockedEntry);
     }
   }
 
-  debug(`LOCKED:locked`);
-  debug(released);
-  return { locked: locked, released: released };
+  return { locked, released };
 };
 
 const getQueryParams = (req) => {
   let queryParams;
-  let tableName = req.path.slice(1, req.path.length);
-  let fields = Object.keys(req.body);
-  let values = Object.keys(req.body).map(key => req.body[key]);
+  const tableName = req.path.slice(1, req.path.length);
+  const fields = Object.keys(req.body);
+  const values = Object.keys(req.body).map(key => req.body[key]);
 
   if (req.method !== 'put') {
     queryParams = [tableName].concat(fields, values);
@@ -61,5 +69,5 @@ const getQueryParams = (req) => {
 
 module.exports = {
   filterAndFormatEntries,
-  getQueryParams
+  getQueryParams,
 };

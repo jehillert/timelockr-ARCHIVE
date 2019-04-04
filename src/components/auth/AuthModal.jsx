@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import Modal from 'react-bootstrap/Modal';
 import { AuthTabs } from 'components';
 
-// box-shadow: 0 0 100px rgba(24,29,39,.1), 0 15px 30px rgba(24,29,39,.1), 0 5px 10px rgba(24,29,39,.05);
 const S = {};
+
 S.Modal = styled(Modal)`
   div .modal-content {
     border-radius: ${props => props.theme.modalBorderRadius};
@@ -19,7 +19,7 @@ class AuthModal extends React.Component {
 
     this.state = {
       title: 'TimeLockr',
-      show: true
+      show: true,
     };
 
     this.handleShow = this.handleShow.bind(this);
@@ -28,8 +28,9 @@ class AuthModal extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.viewState !== prevProps.viewState) {
-      if (this.props.viewState < 2) {
+    const { viewState } = this.props;
+    if (viewState !== prevProps.viewState) {
+      if (viewState < 2) {
         this.handleShow();
       } else {
         this.handleClose();
@@ -46,22 +47,26 @@ class AuthModal extends React.Component {
   }
 
   setTitle = (newTitle) => {
-    this.setState((state) => state.title = newTitle);
+    // eslint-disable-next-line no-return-assign
+    this.setState(state => state.title = newTitle);
   }
 
   render() {
+    const { show, title } = this.state;
+    const { handleCreateNewUserAttempt, handleSignin, viewState } = this.props;
+
     return (
-      <S.Modal backdrop='static' show={this.state.show} onHide={this.handleClose}>
+      <S.Modal backdrop='static' show={show} onHide={this.handleClose}>
         <Modal.Header>
-          <Modal.Title>{this.state.title}</Modal.Title>
+          <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <AuthTabs
-              handleSignin={this.props.handleSignin}
-              handleCreateNewUserAttempt={this.props.handleCreateNewUserAttempt}
-              viewState={this.props.viewState}
-              setTitle={this.setTitle}
-            />
+          <AuthTabs
+            handleSignin={handleSignin}
+            handleCreateNewUserAttempt={handleCreateNewUserAttempt}
+            viewState={viewState}
+            setTitle={this.setTitle}
+          />
         </Modal.Body>
       </S.Modal>
     );
@@ -71,8 +76,7 @@ class AuthModal extends React.Component {
 AuthModal.propTypes = {
   handleSignin: PropTypes.func.isRequired,
   handleCreateNewUserAttempt: PropTypes.func.isRequired,
-  viewState: PropTypes.bool.isRequired
+  viewState: PropTypes.bool.isRequired,
 };
 
 export default AuthModal;
-

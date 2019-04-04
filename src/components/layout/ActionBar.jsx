@@ -56,12 +56,12 @@ class ActionBar extends React.Component {
       <S.ActionBar>
         <EntryFormDialog
           refresh={this.props.refresh}
-          user_id={this.props.user_id}
+          userId={this.props.userId}
           username={this.props.username}
         />
         <Fab
           aria-label='Switch-Views'
-          className={`${classes.fab}`}
+          className={classes.fab}
           color='primary'
           size='medium'
         >
@@ -69,7 +69,7 @@ class ActionBar extends React.Component {
         </Fab>
         <Fab
           aria-label='Sign Off'
-          className={`${classes.fab}`}
+          className={classes.fab}
           color='primary'
           size='medium'
         >
@@ -77,7 +77,7 @@ class ActionBar extends React.Component {
         </Fab>
         <Fab
           aria-label='Account'
-          className={`${classes.fab}`}
+          className={classes.fab}
           color='primary'
           size='medium'
         >
@@ -85,7 +85,7 @@ class ActionBar extends React.Component {
         </Fab>
         <Fab
           aria-label='Settings'
-          className={`${classes.fab}`}
+          className={classes.fab}
           color='primary'
           size='medium'
         >
@@ -99,7 +99,7 @@ class ActionBar extends React.Component {
 ActionBar.propTypes = {
   classes: PropTypes.object.isRequired,
   refresh: PropTypes.func.isRequired,
-  user_id: PropTypes.number.isRequired,
+  userId: PropTypes.number.isRequired,
   username: PropTypes.string.isRequired,
   viewState: PropTypes.bool.isRequired
 };

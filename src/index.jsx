@@ -1,7 +1,8 @@
-require('dotenv').config();
+'use strict';
+
 import React from 'react';
-import App from './components/App';
 import ReactDOM from 'react-dom';
+import App from './components/App';
 import 'typeface-roboto';
 
 ReactDOM.render(<App />, document.getElementById('app'))

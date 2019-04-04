@@ -14,14 +14,24 @@ S.CardArea = styled.div`
   grid-column: 2 / span 2;
 `;
 
-const CardArea = (props) => (
-  <S.CardArea>
-    {props.children}
-  </S.CardArea>
-);
+const CardArea = (props) => {
+  const { children } = props;
+  return (
+    <S.CardArea>
+      {children}
+    </S.CardArea>
+  );
+};
+
+CardArea.defaultProps = {
+  children: null,
+};
+
+CardArea.propTypes = {
+  children: PropTypes.node,
+};
 
 export default CardArea;
-
 
 /*
 

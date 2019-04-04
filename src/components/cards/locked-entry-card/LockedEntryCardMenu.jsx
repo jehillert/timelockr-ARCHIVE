@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+// eslint-disable-next-line no-unused-vars
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -13,6 +15,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Paper from '@material-ui/core/Paper';
 import Promise from 'bluebird';
 import styled from 'styled-components';
+import { TimeExtensionDialog } from 'components';
 
 const S = {};
 
@@ -28,53 +31,69 @@ class LockedEntryCardMenu extends React.Component {
 
     this.state = {
       anchorEl: null,
-      selected: ''
+      selected: '',
+      shouldRenderDialog: false,
     };
 
     this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
+    this.setDialogVisibility = this.setDialogVisibility.bind(this);
   }
 
   setStateAsync = Promise.promisify(this.setState);
 
-  handleClick = event => {
-    return this.setState({ anchorEl: event.currentTarget });
+  setDialogVisibility = () => {
+    this.setState({ shouldRenderDialog: !this.state.shouldRenderDialog });
+    // alert('you said extend.');
   };
 
+  handleClick = event => (
+    this.setState({ anchorEl: event.currentTarget })
+  );
+
   handleClose = () => {
+    const { handleDelete } = this.props;
+    const { selected } = this.state;
     return this.setStateAsync({
       anchorEl: null,
     }).then(() => {
-      if (this.state.selected === 'extend') {
-        return this.props.handleExtend();
+      if (selected === 'extend') {
+        return this.setDialogVisibility();
       }
-      if (this.state.selected === 'delete') {
-        return this.props.handleDelete();
+      if (selected === 'delete') {
+        return handleDelete();
       }
+      return undefined;
     }).then(() => this.setState({
-      selected: ''
-    })).catch (err => console.error(err));
+      selected: '',
+    })).catch(err => console.error(err));
   };
 
-  handleSelect = (event) => {
-    return this.setState({
-      selected: event.currentTarget.dataset.value
-    },
-    (err) => {
-      if (err) {
-        return console.error(err);
-      }
-      return this.handleClose();
-    });
-  };
+  handleSelect = event => this.setStateAsync({
+      selected: event.currentTarget.dataset.value,
+    })
+    .then(() => this.handleClose())
+    .catch(err => console.error(err));
 
   render() {
-    const anchorEl = this.state.anchorEl;
+    const { anchorEl, shouldRenderDialog } = this.state;
+    const { entryId, releaseDate, refresh } = this.props;
     const open = Boolean(anchorEl);
 
     return (
       <>
+        {shouldRenderDialog
+          && (
+            <TimeExtensionDialog
+              entryId={entryId}
+              open={shouldRenderDialog}
+              releaseDate={releaseDate}
+              refresh={refresh}
+              setDialogVisibility={this.setDialogVisibility}
+            />
+          )
+        }
         <S.IconButton
           aria-label='More'
           aria-owns={open ? 'right-card-menu' : undefined}
@@ -89,8 +108,8 @@ class LockedEntryCardMenu extends React.Component {
             <Menu
               id='right-card-menu'
               anchorEl={anchorEl}
-              open={open}
               onClose={this.handleClose}
+              open={open}
             >
               <MenuItem data-value='extend' onClick={this.handleSelect}>
                 <ListItemIcon>
@@ -119,9 +138,11 @@ class LockedEntryCardMenu extends React.Component {
 }
 
 LockedEntryCardMenu.propTypes = {
+  entryId: PropTypes.string.isRequired,
   handleDelete: PropTypes.func.isRequired,
-  handleExtend: PropTypes.func.isRequired,
+  releaseDate: PropTypes.string.isRequired,
+  refresh: PropTypes.func.isRequired,
+
 };
 
 export default LockedEntryCardMenu;
-

@@ -1,4 +1,3 @@
-require('dotenv').config();
 const debug = require('debug')('server:auth');
 const hash = require('pbkdf2-password')();
 

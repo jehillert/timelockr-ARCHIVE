@@ -1,25 +1,23 @@
+/* eslint-disable react/jsx-indent */
 import React from 'react';
 import MomentUtils from '@date-io/moment';
 import { AuthModal, Main } from 'components';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { createNewUser, verifyUser } from 'utilities';
-import { defaultTheme } from 'theme';
-import { hot } from 'react-hot-loader'
-import { GlobalStyle } from 'theme';
+import { defaultTheme, GlobalStyle } from 'theme';
+import { hot } from 'react-hot-loader/root';
 import { MuiPickersUtilsProvider } from 'material-ui-pickers';
+import { SnackbarProvider } from 'notistack';
 import { ThemeProvider } from 'styled-components';
-import {
-    BrowserRouter as Router
-  , Route
-} from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      user_id: 0,
+      userId: 0,
       username: '',
-      viewState: false
+      viewState: false,
     };
 
     this.handleSignin = this.handleSignin.bind(this);
@@ -27,37 +25,42 @@ class App extends React.Component {
   }
 
   handleSignin = (user, pass) => {
-    console.log(`signing in`);
+    console.log('signing in');
     verifyUser(user, pass) // non-zero value indicates authenticated
-      .then(result => {
+      .then((result) => {
         this.setState((state, props) => ({
-          user_id: result.user_id,
+          userId: result.userId,
           username: user,
-          viewState: result.viewState
+          viewState: result.viewState,
         }));
       });
   }
 
   handleCreateNewUserAttempt = (user, pass) => {
     createNewUser(user, pass)
-      .then(response => {
+      .then((response) => {
         alert(response.data);
       });
   }
 
   render() {
+    const { userId, username, viewState } = this.state;
     return (
       <>
+        <SnackbarProvider maxSnack={3}>
         <GlobalStyle />
         <Router>
-          <MuiPickersUtilsProvider utils={MomentUtils}>
-            <Route exact path='/' render={() => (
-              this.state.viewState ? (
+        <MuiPickersUtilsProvider utils={MomentUtils}>
+          <Route
+            exact
+            path='/'
+            render={() => (
+              viewState ? (
                 <ThemeProvider theme={defaultTheme}>
                   <Main
-                    user_id={this.state.user_id}
-                    username={this.state.username}
-                    viewState={this.state.viewState}
+                    userId={userId}
+                    username={username}
+                    viewState={viewState}
                   />
                 </ThemeProvider>
               ) : (
@@ -65,17 +68,20 @@ class App extends React.Component {
                   <AuthModal
                     handleSignin={this.handleSignin}
                     handleCreateNewUserAttempt={this.handleCreateNewUserAttempt}
-                    viewState={this.state.viewState}
+                    viewState={viewState}
                   />
                 </ThemeProvider>
               )
-            )}/>
-          </MuiPickersUtilsProvider>
+            )}
+          />
+        </MuiPickersUtilsProvider>
         </Router>
+        </SnackbarProvider>
       </>
     );
   }
 }
 
-export default hot(module)(App);
+export default hot(App);
+// export default hot(module)(App);
 // export default App;

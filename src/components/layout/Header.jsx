@@ -18,29 +18,35 @@ S.Header = styled(Box)`
 `;
 
 const Header = (props) => {
+  const {
+    children, level, mx, my, text,
+  } = props;
+
   return (
     <S.Header
-      as={ `h${props.level}` }
-      mx={ props.mx }
-      my={ props.my }
+      as={`h${level}`}
+      mx={mx}
+      my={my}
     >
-      <div title={props.text}>{props.text}</div>
-      {props.children}
+      <div title={text}>{text}</div>
+      {children}
     </S.Header>
   );
 };
 
 Header.defaultProps = {
+  children: null,
   level: 'h1',
   mx: 1,
-  my: 1
-}
+  my: 1,
+};
 
 Header.propTypes = {
-  text: PropTypes.string.isRequired,
+  children: PropTypes.node,
   level: PropTypes.string,
   mx: PropTypes.number,
-  my: PropTypes.number
+  my: PropTypes.number,
+  text: PropTypes.string.isRequired,
 };
 
 export default Header;

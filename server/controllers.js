@@ -3,7 +3,6 @@ const hash = require('pbkdf2-password')();
 const helpers = require('./helpers/helpers');
 const models = require('./models');
 const auth = require('./helpers/auth');
-const util = require('util');
 
 Object.prototype.parseSqlResult = function() {
   return JSON.parse(JSON.stringify(this[0]));
@@ -28,7 +27,7 @@ module.exports = {
             });
           });
         })
-        .then((user) => res.status(202).send({ user_id: user.user_id }))
+        .then((user) => res.status(202).send({ userId: user.user_id }))
         .catch(error => console.error('Error', error))
   },
 
@@ -45,18 +44,41 @@ module.exports = {
   },
 
   entries: {
-    get: (req, res) =>
-      models.entries.get(['entries', 'users', 'user_id', 'username', req.query.username, 'release_date'])
-        .tap((results) => debug(results))
+    get: (req, res) => models.entries.get([
+        'entries',
+        'users',
+        'user_id',
+        'username',
+        req.query.username,
+        'release_date'
+      ])
         .then(results => helpers.filterAndFormatEntries(results))
         .then(results => res.send(results))
         .catch(error => console.error('Error', error)),
 
-    put: (req, res) => updateField(req, res),
+    put: (req, res) => models.general.put([
+        'entries',
+        'release_date',
+        req.body.data.releaseDate,
+        'entry_id',
+        req.body.data.entryId,
+    ])
+      .then(() => res.sendStatus(201))
+      .catch(error => console.error('Error', error)),
 
-    post: (req, res) =>
-      models.entries.post(['entries', 'user_id', 'creation_date', 'release_date', 'description', 'content',
-        req.body.user_id, req.body.creation_date, req.body.release_date, req.body.description, req.body.content])
+    post: (req, res) => models.entries.post([
+      'entries',
+      'user_id',
+      'creation_date',
+      'release_date',
+      'description',
+      'content',
+      req.body.userId,
+      req.body.creationDate,
+      req.body.releaseDate,
+      req.body.description,
+      req.body.content,
+    ])
       .then(results => res.sendStatus(201))
       .catch(error => console.error('Error', error)),
 
@@ -69,12 +91,11 @@ module.exports = {
   },
 
   signup: {
-    post: (req, res) =>
-      models.users
-        .post(['users', 'username', 'hash', 'salt', req.body.username, req.body.hash, req.body.salt])
-        .then(results => res.sendStatus(201))
-        .catch(error => res.sendStatus(409))
-        // .then(results => res.status(201).json({message: 'New user successfully created.'}))
+    post: (req, res) => models.users
+      .post(['users', 'username', 'hash', 'salt', req.body.username, req.body.hash, req.body.salt])
+      .then(results => res.sendStatus(201))
+      .catch(error => res.sendStatus(409))
+      // .then(results => res.status(201).json({message: 'New user successfully created.'}))
   }
 };
 
