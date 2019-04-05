@@ -23,13 +23,13 @@ class ConfirmDialog extends React.Component {
     open: false,
   };
 
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
+  handleClickOpen = () => (
+    this.setState({ open: true })
+  )
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+  handleClose = () => (
+    this.setState({ open: false })
+  )
 
   render() {
     return (

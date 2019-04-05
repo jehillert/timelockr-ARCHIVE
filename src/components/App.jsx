@@ -26,7 +26,7 @@ class App extends React.Component {
 
   handleSignin = (user, pass) => {
     console.log('signing in');
-    verifyUser(user, pass) // non-zero value indicates authenticated
+    return verifyUser(user, pass) // non-zero value indicates authenticated
       .then((result) => {
         this.setState((state, props) => ({
           userId: result.userId,
@@ -37,7 +37,7 @@ class App extends React.Component {
   }
 
   handleCreateNewUserAttempt = (user, pass) => {
-    createNewUser(user, pass)
+    return createNewUser(user, pass)
       .then((response) => {
         alert(response.data);
       });

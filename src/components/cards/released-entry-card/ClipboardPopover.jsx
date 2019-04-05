@@ -21,10 +21,10 @@ function ClipboardPopover(props) {
   useEffect(() => {
     console.log(anchorEl)
     setOpen(true);
-    setTimeout(() => {
+    const id = setTimeout(() => {
       setOpen(false);
-    }, 1000);
-  }, [trigger]);
+    }, 600);
+  }, [anchorEl, trigger]);
 
   return (
     <Box>

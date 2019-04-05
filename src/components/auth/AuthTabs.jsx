@@ -31,33 +31,43 @@ class AuthTabs extends React.Component {
   }
 
   handleSelect = () => {
-    if (this.state.key === 'signin') {
-      this.props.setTitle('TimeLockr');
+    let title = '';
+    const { key } = this.state;
+    const { setTitle } = this.props;
+
+    if (key === 'signin') {
+      title = 'TimeLockr';
     } else {
-      this.props.setTitle('TimeLockr');
+      title = 'TimeLockr';
     }
+    return setTitle(title);
   }
 
   render() {
+    const {
+      handleSignin,
+      handleCreateNewUserAttempt,
+    } = this.props;
     return (
-        <S.Tabs
-          id='modal-tabs'
-          className='nav-justified'
-          activeKey={this.state.key}
-          transition={false}
-          onSelect={key => this.setState({ key }, this.handleSelect)}
-        >
-          <Tab eventKey='signin' title='Sign In'>
-              <AuthForm
-                handleSubmit={this.props.handleSignin}
-              />
-          </Tab>
-          <Tab eventKey='signup' title='Sign Up'>
-              <AuthForm
-                handleSubmit={this.props.handleCreateNewUserAttempt}
-              />
-          </Tab>
-        </S.Tabs>
+      <S.Tabs
+        id='modal-tabs'
+        className='nav-justified'
+        // eslint-disable-next-line react/destructuring-assignment
+        activeKey={this.state.key}
+        transition={false}
+        onSelect={key => this.setState({ key }, this.handleSelect)}
+      >
+        <Tab eventKey='signin' title='Sign In'>
+          <AuthForm
+            handleSubmit={handleSignin}
+          />
+        </Tab>
+        <Tab eventKey='signup' title='Sign Up'>
+          <AuthForm
+            handleSubmit={handleCreateNewUserAttempt}
+          />
+        </Tab>
+      </S.Tabs>
     );
   }
 }
@@ -69,8 +79,3 @@ AuthTabs.propTypes = {
 };
 
 export default AuthTabs;
-
-
-// <S.Tabs>
-// </S.Tabs >
-// import styled from 'styled-components';

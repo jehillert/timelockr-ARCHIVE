@@ -47,59 +47,74 @@ class AuthForm extends React.Component {
   }
 
   handleSubmit = (event) => {
+    const { handleSubmit } = this.props;
+    const { email, password } = this.state;
     event.preventDefault();
-    this.props.handleSubmit(this.state.email, this.state.password);
+    return handleSubmit(email, password);
   }
 
-  handleChange = (prop) => (event) => {
-    this.setState({ [prop]: event.target.value });
-  };
+  handleChange = prop => event => (
+    this.setState({ [prop]: event.target.value })
+  );
 
-  handleClickShowPassword = () => {
-    this.setState(state => ({ showPassword: !state.showPassword }));
-  };
+  handleClickShowPassword = () => (
+    this.setState(state => ({ showPassword: !state.showPassword }))
+  );
 
   render() {
     const { classes } = this.props;
+    const {
+      email,
+      password,
+      showPassword,
+    } = this.state;
 
     return (
       <S.Form autoComplete='off'>
-          <TextField
-            id='outlined-email-input'
-            label='Email'
-            className={classNames(classes.dense, classes.margin, classes.textField)}
-            type='email'
-            name='email'
-            autoComplete='email'
-            margin='dense'
-            value={this.state.email}
-            variant='outlined'
-          />
-          <TextField
-            id='outlined-adornment-password'
-            className={classNames(classes.dense, classes.margin, classes.textField)}
-            margin='dense'
-            variant='outlined'
-            type={this.state.showPassword ? 'text' : 'password'}
-            label='Password'
-            value={this.state.password}
-            onChange={this.handleChange('password')}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position='end'>
-                  <IconButton
-                    aria-label='Toggle password visibility'
-                    onClick={this.handleClickShowPassword}
-                  >
-                    {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-          <Box alignItems='flex-end' className={classNames(classes.dense, classes.textField, classes.onRight)}>
-            <FormButton type='submit' handleSubmit={this.handleSubmit}>Submit</FormButton>
-          </Box>
+        <TextField
+          id='outlined-email-input'
+          label='Email'
+          className={classNames(classes.dense, classes.margin, classes.textField)}
+          type='email'
+          name='email'
+          autoComplete='email'
+          margin='dense'
+          value={email}
+          variant='outlined'
+        />
+        <TextField
+          id='outlined-adornment-password'
+          className={classNames(classes.dense, classes.margin, classes.textField)}
+          margin='dense'
+          variant='outlined'
+          type={showPassword ? 'text' : 'password'}
+          label='Password'
+          value={password}
+          onChange={this.handleChange('password')}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position='end'>
+                <IconButton
+                  aria-label='Toggle password visibility'
+                  onClick={this.handleClickShowPassword}
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+        <Box
+          alignItems='flex-end'
+          className={classNames(classes.dense, classes.textField, classes.onRight)}
+        >
+          <FormButton
+            type='submit'
+            handleSubmit={this.handleSubmit}
+          >
+            Submit
+          </FormButton>
+        </Box>
       </S.Form>
     );
   }

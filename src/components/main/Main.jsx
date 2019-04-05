@@ -3,13 +3,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getEntries } from 'utilities';
 import {
-  ActionBar,
   Box,
   CardArea,
   LeftSide,
   RightSide,
 } from 'layout';
 import {
+  ActionBar,
   CardColumn,
   ReleasedEntryCard,
   LockedEntryCard,
@@ -35,7 +35,7 @@ class Main extends React.Component {
 
   getEntries = () => {
     const { username } = this.props;
-    getEntries(username)
+    return getEntries(username)
       .then((results) => {
         console.log(results);
         const { locked, released } = results;

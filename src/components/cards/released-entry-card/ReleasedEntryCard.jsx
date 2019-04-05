@@ -35,9 +35,9 @@ const ReleasedEntryCard = (props) => {
       .then(() => refresh())
   );
 
-  const handleCardClick = (event) => {
-    updateAnchorEl(event.currentTarget);
-  };
+  const handleCardClick = event => (
+    updateAnchorEl(event.currentTarget)
+  );
 
   return (
     <ErrorBoundary>

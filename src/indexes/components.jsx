@@ -1,3 +1,4 @@
+export { default as ActionBar } from '../components/action-bar/ActionBar';
 export { default as AuthForm } from '../components/auth/AuthForm';
 export { default as AuthModal } from '../components/auth/AuthModal';
 export { default as AuthTabs } from '../components/auth/AuthTabs';
@@ -12,6 +13,7 @@ export { default as FormButton } from '../components/shared/FormButton';
 export { default as IncrementInput } from '../components/shared/IncrementInput';
 export { default as LockedEntryCard } from '../components/cards/locked-entry-card/LockedEntryCard';
 export { default as LockedEntryCardMenu } from '../components/cards/locked-entry-card/LockedEntryCardMenu';
+export { default as LockedEntryCardMenuBody } from '../components/cards/locked-entry-card/LockedEntryCardMenuBody';
 export { default as Main } from '../components/main/Main';
 export { default as ReleasedEntryCard } from '../components/cards/released-entry-card/ReleasedEntryCard';
 export { default as StyledMuiCardContent } from '../components/cards/StyledMuiCardContent';

@@ -38,18 +38,17 @@ class AuthModal extends React.Component {
     }
   }
 
-  handleShow = () => {
-    this.setState({ show: true });
-  }
+  handleShow = () => (
+    this.setState({ show: true })
+  )
 
-  handleClose = () => {
-    this.setState({ show: false });
-  }
+  handleClose = () => (
+    this.setState({ show: false })
+  )
 
-  setTitle = (newTitle) => {
-    // eslint-disable-next-line no-return-assign
-    this.setState(state => state.title = newTitle);
-  }
+  setTitle = newTitle => (
+    this.setState({ title: newTitle })
+  )
 
   render() {
     const { show, title } = this.state;

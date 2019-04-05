@@ -1,21 +1,13 @@
-/* eslint-disable camelcase */
-// eslint-disable-next-line no-unused-vars
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import CloseIcon from '@material-ui/icons/Close';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 import IconButton from '@material-ui/core/IconButton';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Paper from '@material-ui/core/Paper';
 import Promise from 'bluebird';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { TimeExtensionDialog } from 'components';
+import {
+  TimeExtensionDialog,
+  LockedEntryCardMenuBody,
+} from 'components';
 
 const S = {};
 
@@ -43,10 +35,9 @@ class LockedEntryCardMenu extends React.Component {
 
   setStateAsync = Promise.promisify(this.setState);
 
-  setDialogVisibility = () => {
-    this.setState({ shouldRenderDialog: !this.state.shouldRenderDialog });
-    // alert('you said extend.');
-  };
+  setDialogVisibility = () => (
+    this.setState({ shouldRenderDialog: !this.state.shouldRenderDialog })
+  );
 
   handleClick = event => (
     this.setState({ anchorEl: event.currentTarget })
@@ -103,35 +94,12 @@ class LockedEntryCardMenu extends React.Component {
         >
           <MoreVertIcon />
         </S.IconButton>
-        <Paper>
-          <ClickAwayListener onClickAway={this.handleClose}>
-            <Menu
-              id='right-card-menu'
-              anchorEl={anchorEl}
-              onClose={this.handleClose}
-              open={open}
-            >
-              <MenuItem data-value='extend' onClick={this.handleSelect}>
-                <ListItemIcon>
-                  <HourglassEmptyIcon />
-                </ListItemIcon>
-                <ListItemText inset primary='Extend Time' />
-              </MenuItem>
-              <MenuItem data-value='delete' onClick={this.handleSelect}>
-                <ListItemIcon>
-                  <DeleteOutlineIcon />
-                </ListItemIcon>
-                <ListItemText inset primary='Delete Entry' />
-              </MenuItem>
-              <MenuItem data-value='close' onClick={this.handleClose}>
-                <ListItemIcon>
-                  <CloseIcon />
-                </ListItemIcon>
-                <ListItemText inset primary='Exit' />
-              </MenuItem>
-            </Menu>
-          </ClickAwayListener>
-        </Paper>
+        <LockedEntryCardMenuBody
+          anchorEl={anchorEl}
+          handleClose={this.handleClose}
+          handleSelect={this.handleSelect}
+          open={open}
+        />
       </>
     );
   }

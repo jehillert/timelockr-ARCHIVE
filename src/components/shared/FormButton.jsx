@@ -45,17 +45,17 @@ const styles = theme => ({
   },
 });
 
-const FormButton = (props) => {
-  const { classes } = props;
+function FormButton(props) {
+  const { children, classes, handleSubmit } = props;
   return (
     <Button
-      onClick={props.handleSubmit}
-      variant="contained"
-      color="primary"
+      onClick={handleSubmit}
+      variant='contained'
+      color='primary'
       disableRipple
       className={classNames(classes.margin, classes.bootstrapRoot)}
     >
-      {props.children}
+      {children}
     </Button>
   );
 }
@@ -63,7 +63,6 @@ const FormButton = (props) => {
 FormButton.propTypes = {
   classes: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  text: PropTypes.string
 };
 
 export default withStyles(styles)(FormButton);

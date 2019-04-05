@@ -24,7 +24,7 @@ const LockedEntryCard = (props) => {
     <>
       {shouldRenderCard
         && (
-          <Card id={entry.entryId} style={{ width: '20rem' }}>
+          <Card id={entry.entryId} css='width: 20rem'>
             <StyledMuiCardHeader
               action={(
                 <LockedEntryCardMenu

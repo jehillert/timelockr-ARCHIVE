@@ -51,9 +51,9 @@ class EntryFormDialog extends React.Component {
     this.handleClose = this.handleClose.bind(this);
   }
 
-  handleChange = (e) => {
-    this.setState({ [e.target.id]: e.target.value });
-  }
+  handleChange = e => (
+    this.setState({ [e.target.id]: e.target.value })
+  )
 
   // handleChange = name => event => {
   //   this.setState({
@@ -61,17 +61,17 @@ class EntryFormDialog extends React.Component {
   //   });
   // };
 
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
+  handleClickOpen = () => (
+    this.setState({ open: true })
+  )
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+  handleClose = () => (
+    this.setState({ open: false })
+  )
 
-  handleDateChange = (date) => {
-    this.setState((state) => { state.selectedDate = date; });
-  };
+  handleDateChange = date => (
+    this.setState(state => ({ selectedDate: date }))
+  )
 
   handleSubmit = (event) => {
     // dates stored in UTC
@@ -126,13 +126,13 @@ class EntryFormDialog extends React.Component {
           <DialogTitle id='form-dialog-title'>New Entry</DialogTitle>
           <DialogContent>
             <TextField
+              css='margin: 8'
               id='description'
               autoComplete='off'
               fullWidth
               label='Enter a description.'
               margin='dense'
               placeholder='(555) 555-5555'
-              style={{ margin: 8 }}
               variant='outlined'
               className={classNames(classes.dense, classes.textField)}
               onChange={this.handleChange}

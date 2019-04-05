@@ -62,12 +62,11 @@ function TimeExtensionDialog(props) {
 
     // .format('YYYY-MM-DD HH:mm');
     console.log(`
-      releaseDate:    ${releaseDate}
-      \nreleaseDate:    ${moment(releaseDate).format('YYYY-MM-DD HH:mm')}
-      \nnewReleaseDate: ${newReleaseDate.format('YYYY-MM-DD HH:mm')}
+      releaseDate:    ${moment(releaseDate).format('YYYY-MM-DD HH:mm')}
+      newReleaseDate: ${newReleaseDate.format('YYYY-MM-DD HH:mm')}
     `);
 
-    extendReleaseDate(entryId, newReleaseDate.format('YYYY-MM-DD HH:mm').toString())
+    return extendReleaseDate(entryId, newReleaseDate.format('YYYY-MM-DD HH:mm').toString())
       .then(() => refresh())
       .then(() => handleClose());
   }

@@ -45,7 +45,7 @@ class CardWrapper extends React.Component {
             >
               <Paper
                 elevation={15}
-                style={{ display: 'inline-block' }}
+                css='display: inline-block'
               >
                 {render(this.state)}
               </Paper>
@@ -66,3 +66,4 @@ CardWrapper.propTypes = {
 };
 
 export default CardWrapper;
+

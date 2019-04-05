@@ -74,6 +74,7 @@ const config = {
     extensions: ['.js', '.jsx', '.css'],
     alias: {
       components: path.resolve(__dirname, 'src/indexes/components.jsx'),
+      contexts: path.resolve(__dirname, 'src/indexes/contexts.jsx'),
       layout: path.resolve(__dirname, 'src/indexes/layout.jsx'),
       theme: path.resolve(__dirname, 'src/indexes/theme.jsx'),
       utilities: path.resolve(__dirname, 'src/indexes/utilities.jsx'),

@@ -19,7 +19,11 @@ S.Header = styled(Box)`
 
 const Header = (props) => {
   const {
-    children, level, mx, my, text,
+    children,
+    level,
+    mx,
+    my,
+    text
   } = props;
 
   return (
