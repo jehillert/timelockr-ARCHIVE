@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import Popover from '@material-ui/core/Popover';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
-import { Box } from 'layout';
+import { Box } from 'components';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -19,12 +19,11 @@ function ClipboardPopover(props) {
   const { anchorEl, classes, trigger } = props;
 
   useEffect(() => {
-    console.log(anchorEl)
     setOpen(true);
-    const id = setTimeout(() => {
-      setOpen(false);
+    setTimeout(() => {
+      setOpen((false));
     }, 600);
-  }, [anchorEl, trigger]);
+  }, [trigger]);
 
   return (
     <Box>

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box } from 'layout';
+import { Box } from 'components';
 import styled from 'styled-components';
 
 const S = {};

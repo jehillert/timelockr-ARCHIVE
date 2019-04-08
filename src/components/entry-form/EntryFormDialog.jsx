@@ -8,9 +8,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Fab from '@material-ui/core/Fab';
 import moment from 'moment';
-import { Box } from 'layout';
 import { createEntry } from 'utilities';
 import {
+  Box,
   DatePicker,
   FormButton,
   TimePicker,
@@ -34,6 +34,7 @@ const styles = theme => ({
 class EntryFormDialog extends React.Component {
   constructor(props) {
     super(props);
+
     this.initialState = {
       description: '',
       content: '',
@@ -41,25 +42,13 @@ class EntryFormDialog extends React.Component {
       selectedTime: new Date(),
       open: false,
     };
-    this.state = this.initialState;
-    this.handleChange = this.handleChange.bind(this);
-    this.handleDateChange = this.handleDateChange.bind(this);
-    this.handleTimeChange = this.handleTimeChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
 
-    this.handleClickOpen = this.handleClickOpen.bind(this);
-    this.handleClose = this.handleClose.bind(this);
+    this.state = this.initialState;
   }
 
   handleChange = e => (
     this.setState({ [e.target.id]: e.target.value })
   )
-
-  // handleChange = name => event => {
-  //   this.setState({
-  //     [name]: event.target.value,
-  //   });
-  // };
 
   handleClickOpen = () => (
     this.setState({ open: true })
@@ -83,7 +72,6 @@ class EntryFormDialog extends React.Component {
       selectedTime,
     } = this.state;
     const { refresh } = this.props;
-    // console.log(formattedTime);
     const formattedTime = moment(selectedTime).utc().format('HH:mm').toString();
     const formattedDate = moment(selectedDate).utc().format('YYYY-MM-DD').toString();
     const releaseDateTime = `${formattedDate} ${formattedTime}`;

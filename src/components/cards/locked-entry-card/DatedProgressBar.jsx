@@ -3,7 +3,7 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import { Box } from 'layout';
+import { Box } from 'components';
 
 const S = {};
 S.Box = styled(Box)`

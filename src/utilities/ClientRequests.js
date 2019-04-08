@@ -71,7 +71,7 @@ module.exports.verifyUser = (user, pass) => {
       console.log(`User authenticated.\nuserId: ${result.data.userId}`);
       const authData = {
         userId: result.data.userId,
-        viewState: true,
+        isAuthorized: true,
       };
       return authData;
     })

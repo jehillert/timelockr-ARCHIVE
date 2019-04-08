@@ -52,7 +52,7 @@ module.exports = {
         req.query.username,
         'release_date'
       ])
-        .then(results => helpers.filterAndFormatEntries(results))
+        .then(results => helpers.sortEntries(results))
         .then(results => res.send(results))
         .catch(error => console.error('Error', error)),
 

@@ -2,14 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import { Box } from 'layout';
-import { FormButton } from 'components';
+import {
+  Box,
+  FormButton,
+} from 'components';
+import { withStyles } from '@material-ui/core/styles';
 
 const S = {};
 S.Form = styled.form`
@@ -37,19 +39,18 @@ class AuthForm extends React.Component {
     super(props);
 
     this.state = {
-      email: 'Cielo.Hermann',
-      password: '8IjZMxCae7ZHLzy',
+      email: 'Jacynthe_Quigley72',
+      password: 'yN6934K_8sacg60',
       showPassword: false,
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit = (event) => {
     const { handleSubmit } = this.props;
     const { email, password } = this.state;
+
     event.preventDefault();
+
     return handleSubmit(email, password);
   }
 

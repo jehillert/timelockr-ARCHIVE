@@ -26,11 +26,6 @@ class LockedEntryCardMenu extends React.Component {
       selected: '',
       shouldRenderDialog: false,
     };
-
-    this.handleClick = this.handleClick.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
-    this.setDialogVisibility = this.setDialogVisibility.bind(this);
   }
 
   setStateAsync = Promise.promisify(this.setState);
@@ -46,6 +41,7 @@ class LockedEntryCardMenu extends React.Component {
   handleClose = () => {
     const { handleDelete } = this.props;
     const { selected } = this.state;
+
     return this.setStateAsync({
       anchorEl: null,
     }).then(() => {

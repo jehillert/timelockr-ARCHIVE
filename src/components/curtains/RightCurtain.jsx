@@ -1,33 +1,33 @@
 import React from 'react';
-import { Box } from 'layout';
+import { Box } from 'components';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const S = {};
 
-S.RightSide = styled(Box)`
+S.RightCurtain = styled(Box)`
+  /* General Properties */
   color: #AEAEAA;
   background-color: black;
   grid-column: 4;
-  grid-row: 1 / span 10;
-
+  grid-row: 1 / span 100;
 `;
 
-const RightSide = (props) => {
+const RightCurtain = (props) => {
   const { children } = props;
   return (
-    <S.RightSide>
+    <S.RightCurtain>
       {children}
-    </S.RightSide>
+    </S.RightCurtain>
   );
 };
 
-RightSide.defaultProps = {
+RightCurtain.defaultProps = {
   children: null,
 };
 
-RightSide.propTypes = {
+RightCurtain.propTypes = {
   children: PropTypes.node,
 };
 
-export default RightSide;
+export default RightCurtain;

@@ -75,7 +75,7 @@ class AuthTabs extends React.Component {
 AuthTabs.propTypes = {
   handleSignin: PropTypes.func.isRequired,
   handleCreateNewUserAttempt: PropTypes.func.isRequired,
-  setTitle: PropTypes.func.isRequired
+  setTitle: PropTypes.func.isRequired,
 };
 
 export default AuthTabs;

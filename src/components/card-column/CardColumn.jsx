@@ -4,8 +4,11 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Box, Header } from 'layout';
-import { CardWrapper } from 'components';
+import {
+  Box,
+  CardWrapper,
+  Header,
+} from 'components';
 
 const S = {};
 
@@ -33,26 +36,26 @@ const CardColumn = (props) => {
 
   return (
     <>
-      {showCards
-        && (
-          <S.Column id={id} m={3} marginTop={2}>
-            <Header text={heading} level='3' mx={2} />
-            {entries.map((entry, index) => (
-              <CardWrapper
-                key={entry.entryId}
-                delay={index * delayIncrement}
-                render={wrapper => (
-                  <Card
-                    wrapper={wrapper}
-                    entry={entry}
-                    refresh={refresh}
-                  />
-                )}
+      <S.Column
+        id={id}
+        marginTop={2}
+        {...props}
+      >
+        <Header text={heading} level='3' mx={2} />
+        {entries.map((entry, index) => (
+          <CardWrapper
+            key={entry.entryId}
+            delay={index * delayIncrement}
+            render={wrapper => (
+              <Card
+                wrapper={wrapper}
+                entry={entry}
+                refresh={refresh}
               />
-            ))}
-          </S.Column>
-        )
-      }
+            )}
+          />
+        ))}
+      </S.Column>
     </>
   );
 };
@@ -64,7 +67,6 @@ CardColumn.propTypes = {
   entries: PropTypes.array,
   heading: PropTypes.string,
   refresh: PropTypes.func.isRequired,
-  showCards: PropTypes.bool.isRequired,
 };
 
 export default CardColumn;

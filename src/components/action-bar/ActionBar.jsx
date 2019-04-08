@@ -1,6 +1,6 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import { EntryFormDialog } from 'components';
-import { Box } from 'layout';
 import { withStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import LoopIcon from '@material-ui/icons/Loop';
@@ -9,18 +9,21 @@ import PersonIcon from '@material-ui/icons/Person';
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Box from '../box/Box';
 
+
+/*
+S.ActionBar = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin-top: 1rem;
+  align-items: center;
+  justify-content: flex-end;
+  grid-column: 2 / span 2;
+ `;
+*/
 const S = {};
-
-//S.ActionBar = styled(Box)`
-//  display: flex;
-//  flex-direction: row;
-//  flex-wrap: nowrap;
-//  margin-top: 1rem;
-//  align-items: center;
-//  justify-content: flex-end;
-//  grid-column: 2 / span 2;
-//`;
 
 S.ActionBar = styled(Box)`
   display: flex;
@@ -37,7 +40,12 @@ const styles = theme => ({
 });
 
 function ActionBar(props) {
-  const { classes, refresh, userId, username } = props;
+  const {
+    classes,
+    refresh,
+    userId,
+    username,
+  } = props;
   return (
     <S.ActionBar>
       <EntryFormDialog

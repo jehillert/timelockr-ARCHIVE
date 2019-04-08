@@ -21,16 +21,13 @@ class AuthModal extends React.Component {
       title: 'TimeLockr',
       show: true,
     };
-
-    this.handleShow = this.handleShow.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-    this.setTitle = this.setTitle.bind(this);
   }
 
   componentDidUpdate(prevProps) {
-    const { viewState } = this.props;
-    if (viewState !== prevProps.viewState) {
-      if (viewState < 2) {
+    const { isAuthorized } = this.props;
+
+    if (isAuthorized !== prevProps.isAuthorized) {
+      if (isAuthorized < 2) {
         this.handleShow();
       } else {
         this.handleClose();
@@ -52,7 +49,7 @@ class AuthModal extends React.Component {
 
   render() {
     const { show, title } = this.state;
-    const { handleCreateNewUserAttempt, handleSignin, viewState } = this.props;
+    const { handleCreateNewUserAttempt, handleSignin, isAuthorized } = this.props;
 
     return (
       <S.Modal backdrop='static' show={show} onHide={this.handleClose}>
@@ -63,7 +60,7 @@ class AuthModal extends React.Component {
           <AuthTabs
             handleSignin={handleSignin}
             handleCreateNewUserAttempt={handleCreateNewUserAttempt}
-            viewState={viewState}
+            isAuthorized={isAuthorized}
             setTitle={this.setTitle}
           />
         </Modal.Body>
@@ -75,7 +72,7 @@ class AuthModal extends React.Component {
 AuthModal.propTypes = {
   handleSignin: PropTypes.func.isRequired,
   handleCreateNewUserAttempt: PropTypes.func.isRequired,
-  viewState: PropTypes.bool.isRequired,
+  isAuthorized: PropTypes.bool.isRequired,
 };
 
 export default AuthModal;

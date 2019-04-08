@@ -2,27 +2,25 @@
 const debug = require('debug')('server:helpers');
 const moment = require('moment');
 
-const filterAndFormatEntries = (entries) => {
+const sortEntries = (unsorted) => {
   // Database dates are UTC.
-  const locked = [];
-  const released = [];
+  const entries = {};
 
+  entries.locked = [];
+  entries.released = [];
+
+  const { locked, released } = entries;
   const todayInISO = new Date().toISOString();
   const present = moment().unix();
 
   // eslint-disable-next-line no-restricted-syntax
-  for (const entry of entries) {
-    const content = entry.content;
-    const creationDate = entry.creation_date;
-    const description = entry.description;
+  for (const entry of unsorted) {
+    const { content, description } = entry;
     const entryId = entry.entry_id;
+    const creationDate = entry.creation_date;
     const releaseDate = entry.release_date;
 
-    debug({
-      entryId,
-      creationDate,
-      releaseDate,
-    });
+    // debug({ entryId, creationDate, releaseDate });
 
     if (moment(releaseDate).isBefore(todayInISO, 'seconds')) {
       const releasedEntry = {
@@ -46,11 +44,13 @@ const filterAndFormatEntries = (entries) => {
         releaseDate,
         fraction,
       };
+
       locked.push(lockedEntry);
     }
   }
+  debug(entries);
 
-  return { locked, released };
+  return { entries };
 };
 
 const getQueryParams = (req) => {
@@ -68,6 +68,6 @@ const getQueryParams = (req) => {
 };
 
 module.exports = {
-  filterAndFormatEntries,
+  sortEntries,
   getQueryParams,
 };

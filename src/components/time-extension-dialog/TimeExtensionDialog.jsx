@@ -2,8 +2,6 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-func-assign */
 import React, { useState, useEffect } from 'react';
-import { FormButton, IncrementInput } from 'components';
-import { extendReleaseDate } from 'utilities';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -11,6 +9,11 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import styled from 'styled-components';
+import {
+  FormButton,
+  IncrementInput,
+} from 'components';
+import { extendReleaseDate } from 'utilities';
 
 const S = {};
 

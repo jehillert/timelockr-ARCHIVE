@@ -8,9 +8,17 @@ const GlobalStyle = createGlobalStyle`
     /* font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; */
   }
 
-  .wrapper {
+  .primary-grid {
     display: grid;
-    grid-gap: 10px;
+    margin: none;
+    padding: none;
+    grid-template-columns: 1fr repeat(2, auto) 1fr;
+    grid-auto-rows: auto;
+    justify-content: center;
+  }
+
+  .initial-grid {
+    display: grid;
     margin: none;
     padding: none;
     grid-template-columns: 1fr repeat(2, auto) 1fr;
@@ -19,4 +27,3 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 export default GlobalStyle;
-

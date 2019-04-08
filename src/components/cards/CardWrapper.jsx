@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
-import { Box } from 'layout';
+import { Box } from 'components';
 
 class CardWrapper extends React.Component {
   constructor(props) {
@@ -66,4 +66,3 @@ CardWrapper.propTypes = {
 };
 
 export default CardWrapper;
-

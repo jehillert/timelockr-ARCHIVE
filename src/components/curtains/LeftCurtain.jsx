@@ -1,34 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Box } from 'layout';
+import { Box } from 'components';
 
 const S = {};
 
-S.LeftSide = styled(Box)`
+S.LeftCurtain = styled(Box)`
+  /* General Properties */
   display: flex;
   color: #AEAEAA;
   background-color: black;
   grid-column: 1;
-  grid-row: 1 / span 10;
+  grid-row: 1 / span 100;
   justify-content: flex-end;
 `;
 
-const LeftSide = (props) => {
+const LeftCurtain = (props) => {
   const { children } = props;
   return (
-    <S.LeftSide pt={2} pr={3}>
+    <S.LeftCurtain pt={2} pr={3}>
       {children}
-    </S.LeftSide>
+    </S.LeftCurtain>
   );
 };
 
-LeftSide.defaultProps = {
+LeftCurtain.defaultProps = {
   children: null,
 };
 
-LeftSide.propTypes = {
+LeftCurtain.propTypes = {
   children: PropTypes.node,
 };
 
-export default LeftSide;
+export default LeftCurtain;
