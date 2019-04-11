@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
+  CardColumn,
   LockedEntryCard,
   ReleasedEntryCard,
 } from 'components';
-import CardColumn from '../card-column/CardColumn'
 
 const S = {};
 
 S.CardArea = styled.div`
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
   align-items: flex-start;
   align-content: flex-start;
-  grid-column: 2 / span 2;
+  grid-column: 2;
+  grid-row: 2;
 `;
 
 const CardArea = ({ entries, refresh }) => {
@@ -34,36 +35,34 @@ const CardArea = ({ entries, refresh }) => {
     []);
 
   return (
-    <S.CardArea>
-      {(hasReleasedChildren && showReleased)
-        && (
-          <CardColumn
-            id='card-column-released-entries'
-            css='
-              margin-left = 2rem;
-              margin-right = 1rem;
-            '
-            heading='Unlocked'
-            Card={ReleasedEntryCard}
-            delayIncrement={70}
-            entries={released}
-            refresh={refresh}
-          />
-      )}
-      {(hasLockedChildren && showLocked)
-        && (
-          <CardColumn
-            id='card-column-locked-entries'
-            mr={4}
-            ml={1}
-            heading='Locked'
-            Card={LockedEntryCard}
-            delayIncrement={70}
-            entries={locked}
-            refresh={refresh}
-          />
-      )}
-    </S.CardArea>
+    <>
+      <S.CardArea>
+        {(hasReleasedChildren && showReleased)
+          && (
+            <CardColumn
+              id='card-column-released-entries'
+              mr={0}
+              ml={2}
+              Card={ReleasedEntryCard}
+              delayIncrement={70}
+              entries={released}
+              refresh={refresh}
+              />
+          )}
+        {(hasLockedChildren && showLocked)
+          && (
+            <CardColumn
+              id='card-column-locked-entries'
+              mr={1.625}
+              ml={0}
+              Card={LockedEntryCard}
+              delayIncrement={70}
+              entries={locked}
+              refresh={refresh}
+            />
+        )}
+      </S.CardArea>
+    </>
   );
 };
 

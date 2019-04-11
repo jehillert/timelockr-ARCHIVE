@@ -1,7 +1,7 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/forbid-prop-types */
 // eslint-disable-next-line no-unused-vars
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
@@ -19,9 +19,6 @@ S.Column = styled(Box)`
   justify-content: flex-start;
   align-content: center;
 `;
-// console.log('---------------------------------')
-// <S.Column id={id} m={3} marginTop={2}>
-// </S.Column>
 
 const CardColumn = (props) => {
   const {
@@ -31,7 +28,6 @@ const CardColumn = (props) => {
     delayIncrement,
     entries,
     refresh,
-    showCards,
   } = props;
 
   return (
@@ -41,7 +37,7 @@ const CardColumn = (props) => {
         marginTop={2}
         {...props}
       >
-        <Header text={heading} level='3' mx={2} />
+        {heading && <Header text={heading} level='3' mx={2} />}
         {entries.map((entry, index) => (
           <CardWrapper
             key={entry.entryId}

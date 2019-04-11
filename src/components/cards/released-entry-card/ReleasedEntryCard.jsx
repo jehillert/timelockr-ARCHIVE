@@ -16,10 +16,6 @@ import { withSnackbar } from 'notistack';
 
 const S = {};
 
-S.Card = styled(Card)`
- width: 19rem;
-`;
-
 S.IconButton = styled(IconButton)`
   &.s-icon-button {
     padding: 8px 7px 8px 7px;
@@ -57,7 +53,7 @@ const ReleasedEntryCard = (props) => {
             text={`DESCRIPTION:\n\t${description}\n\nCONTENT:\n\t${content}`}
             onCopy={() => updateCopied(!copied)}
           >
-            <S.Card onClick={handleCardClick} id={entryId}>
+            <Card onClick={handleCardClick} id={entryId} css='width: 19rem;'>
               <StyledMuiCardHeader
                 action={(
                   <S.IconButton
@@ -74,7 +70,7 @@ const ReleasedEntryCard = (props) => {
                   {content}
                 </Typography>
               </StyledMuiCardContent>
-            </S.Card>
+            </Card>
           </CopyToClipboard>
         </>
       )}

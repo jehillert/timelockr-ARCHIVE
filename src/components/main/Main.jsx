@@ -1,31 +1,59 @@
 /* eslint-disable react/jsx-indent */
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import {
   ActionBar,
   Box,
-  CardArea,
-  LeftCurtain,
-  RightCurtain,
+  CardAreaTabs,
+  LeftHead,
+  LeftSide,
+  MainMenu,
+  RightHead,
+  RightSide,
 } from 'components';
 
-// function Main({ props) {
+const S = {};
+
+S.AppBar = styled.div`
+  grid-area: ${props => props.gridArea};
+  justify-items: flex-end;
+  background-color: #A18664;
+`;
+
+S.AppBarContainer = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  width: 46.5rem;
+  padding: 1rem 2rem;
+`;
+
+S.ActionBar = styled(props => <ActionBar {...props} />)`
+  display: grid;
+  margin-top: 1rem;
+`;
+
 const Main = (props) => {
   const { entries, refresh } = props;
   return (
-    <Box className='primary-grid curtain'>
-      <LeftCurtain>
-        <h1>TimeLockr</h1>
-      </LeftCurtain>
-      <CardArea
+    <Box className='grid-desktop'>
+      <LeftHead gridArea='leftHead'><h1>TimeLockr</h1></LeftHead>
+      <LeftSide gridArea='leftSide' />
+      <S.AppBar gridArea='appBar'>
+        <S.AppBarContainer><MainMenu /></S.AppBarContainer>
+      </S.AppBar>
+      <CardAreaTabs
+        gridArea='cardArea'
         entries={entries}
         refresh={refresh}
       />
-      <RightCurtain>
-          <ActionBar
+      <RightHead gridArea='rightHead' />
+      <RightSide gridArea='rightSide'>
+          <S.ActionBar
             {...props}
           />
-      </RightCurtain>
+      </RightSide>
     </Box>
   );
 };

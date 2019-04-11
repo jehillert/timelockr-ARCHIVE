@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -40,7 +40,7 @@ const DatedProgressBar = (props) => {
         <span>{moment(releaseDate).format('h:mm A')}</span>
       </S.Box>
     </>
-  )
+  );
 };
 
 DatedProgressBar.propTypes = {

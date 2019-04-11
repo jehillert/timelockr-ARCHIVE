@@ -6,6 +6,7 @@
 // theme('size', { normal: ..., compact: ... });
 // <ThemeProvider theme={{ mode: 'dark', size: 'compact' }}>
 
+
 const defaultTheme = {
   // color
   accentColor: '#D93646',
@@ -26,9 +27,13 @@ const defaultTheme = {
   modalBorderRadius: '0rem',
   tabBorderRadius: '0rem',
   // shadow
+  boxShadowToLeft: '-10px 0px 5px rgba(24,29,39,.1)',
+  boxShadowToRight: '10px 0px 45px rgba(24,29,39,.1)',
   boxShadow: `0 0 100px rgba(24,29,39,.1),
               0 15px 30px rgba(24,29,39,.1),
               0 5px 10px rgba(24,29,39,.05)`,
+  // icons (https://google.github.io/material-design-icons/)
+
 };
 
 export default defaultTheme;

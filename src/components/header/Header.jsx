@@ -21,16 +21,13 @@ const Header = (props) => {
   const {
     children,
     level,
-    mx,
-    my,
-    text
+    text,
   } = props;
 
   return (
     <S.Header
       as={`h${level}`}
-      mx={mx}
-      my={my}
+      {...props}
     >
       <div title={text}>{text}</div>
       {children}

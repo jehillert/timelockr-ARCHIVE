@@ -8,14 +8,14 @@
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jehillert/Keep-Away"
+    "url": "https://github.com/jehillert/TimeLockr"
   },
   "scripts": {
     "clean": "rm dist/bundle.js",
     "build-dev": "webpack -d --mode development",
     "build-prod": "webpack -p --mode production",
     "dev-server": "nodemon --ignore node_modules --inspect server",
-    "start": "webpack-dev-server --host 0.0.0.0 --hot --mode development",
+    "start": "webpack-dev-server --hot --mode development",
     "start:dev": "nodenv -f .",
     "lint:css": "stylelint './src/**/*.js'"
   },
@@ -50,10 +50,12 @@
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.6",
     "react-copy-to-clipboard": "^5.0.1",
+    "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.8.6",
     "react-hot-loader": "^4.8.2",
     "react-router-dom": "^5.0.0",
-    "react-transition-group": "^2.7.1",
+    "react-swipeable-views": "^0.13.1",
+    "react-transition-group": "^2.9.0",
     "styled-components": "^4.2.0",
     "typeface-roboto": "0.0.54"
   },

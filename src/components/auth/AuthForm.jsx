@@ -106,7 +106,6 @@ class AuthForm extends React.Component {
           }}
         />
         <Box
-          alignItems='flex-end'
           className={classNames(classes.dense, classes.textField, classes.onRight)}
         >
           <FormButton

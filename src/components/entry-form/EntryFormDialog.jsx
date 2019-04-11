@@ -42,7 +42,6 @@ class EntryFormDialog extends React.Component {
       selectedTime: new Date(),
       open: false,
     };
-
     this.state = this.initialState;
   }
 
@@ -55,7 +54,7 @@ class EntryFormDialog extends React.Component {
   )
 
   handleClose = () => (
-    this.setState({ open: false })
+    this.setState(this.initialState)
   )
 
   handleDateChange = date => (
@@ -99,7 +98,7 @@ class EntryFormDialog extends React.Component {
     return (
       <Box>
         <Fab onClick={this.handleClickOpen}
-          size='medium'
+          size='small'
           color='primary'
           aria-label='New Entry'
           className={classes.fab}>
@@ -114,9 +113,9 @@ class EntryFormDialog extends React.Component {
           <DialogTitle id='form-dialog-title'>New Entry</DialogTitle>
           <DialogContent>
             <TextField
-              css='margin: 8'
               id='description'
               autoComplete='off'
+              css='margin: 8;'
               fullWidth
               label='Enter a description.'
               margin='dense'

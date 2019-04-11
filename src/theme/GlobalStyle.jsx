@@ -4,26 +4,32 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-color: white;
     color: #839496;
-    /* margin-top: 40px; */
-    /* font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; */
   }
 
-  .primary-grid {
-    display: grid;
-    margin: none;
-    padding: none;
-    grid-template-columns: 1fr repeat(2, auto) 1fr;
-    grid-auto-rows: auto;
-    justify-content: center;
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
   }
 
-  .initial-grid {
+  .grid-desktop {
     display: grid;
-    margin: none;
-    padding: none;
-    grid-template-columns: 1fr repeat(2, auto) 1fr;
-    justify-content: center;
+    grid-template-areas:
+      "leftHead appBar   rightHead"
+      "leftSide cardArea rightSide";
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-rows: auto 1fr;
+    width: 100vw;
+    height: 100vh;
+    /*margin: none;*/
+    /*padding: none;*/
+    /*justify-content: center;*/
   }
+
 `;
 
 export default GlobalStyle;
+
+// 1rem + 1rem + 19rem + 1rem || 1rem + 20rem + 1rem + 1rem
+//               LCard                  RCard
