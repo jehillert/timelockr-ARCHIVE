@@ -90,7 +90,7 @@ class EntryFormDialog extends React.Component {
     const releaseDateTime = `${formattedDate} ${formattedTime}`;
     let releaseDate = moment(releaseDateTime, 'YYYY-MM-DD h:mm').format('YYYY-MM-DD HH:mm');
 
-    if (dbms === 'postgres') {
+    if (process.env.DB_DBMS === 'postgres') {
       releaseDate += '+00';
     }
 

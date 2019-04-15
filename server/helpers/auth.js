@@ -27,5 +27,5 @@ function restrict(req, res, next) {
 
 module.exports = {
   hashPassword,
-  restrict
+  restrict,
 };

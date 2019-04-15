@@ -115,4 +115,3 @@ function updateField(req, res) {
     .then(results => res.sendStatus(201))
     .catch(error => console.error('Error', error));
 }
-
