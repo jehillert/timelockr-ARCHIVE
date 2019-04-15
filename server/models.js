@@ -1,5 +1,5 @@
 // const debug = require('debug')('server:models');
-const db = require('../db/db_mysql');
+const db = require('../db');
 
 module.exports = {
   general: {
