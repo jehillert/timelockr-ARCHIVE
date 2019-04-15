@@ -102,7 +102,7 @@ class LockedEntryCardMenu extends React.Component {
 }
 
 LockedEntryCardMenu.propTypes = {
-  entryId: PropTypes.string.isRequired,
+  entryId: PropTypes.number.isRequired,
   handleDelete: PropTypes.func.isRequired,
   releaseDate: PropTypes.string.isRequired,
   refresh: PropTypes.func.isRequired,

@@ -1,6 +1,7 @@
 import React from 'react';
 import { InlineDatePicker } from 'material-ui-pickers';
 import PropTypes from 'prop-types';
+import Moment from 'moment';
 
 const DatePicker = (props) => {
   const { selectedDate, handleDateChange } = props;
@@ -20,7 +21,10 @@ const DatePicker = (props) => {
 
 
 DatePicker.propTypes = {
-  selectedDate: PropTypes.objectOf(PropTypes.number).isRequired,
+  selectedDate: PropTypes.oneOfType([
+    PropTypes.instanceOf(Date),
+    PropTypes.instanceOf(Moment),
+  ]).isRequired,
   handleDateChange: PropTypes.func.isRequired,
 };
 

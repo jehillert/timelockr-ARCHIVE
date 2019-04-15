@@ -27,11 +27,11 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
   },
   dense: {
-    marginTop: 16
+    marginTop: 16,
   },
   onRight: {
-    alignSelf: 'flex-end'
-  }
+    alignSelf: 'flex-end',
+  },
 });
 
 class AuthForm extends React.Component {
@@ -39,8 +39,8 @@ class AuthForm extends React.Component {
     super(props);
 
     this.state = {
-      email: 'Jacynthe_Quigley72',
-      password: 'yN6934K_8sacg60',
+      email: 'Gladyce_Nolan13',
+      password: 'bqqusRch5Ig6CSM',
       showPassword: false,
     };
   }

@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
@@ -44,10 +44,10 @@ const CardArea = ({ entries, refresh }) => {
               mr={0}
               ml={2}
               Card={ReleasedEntryCard}
-              delayIncrement={70}
+              delayIncrement={100}
               entries={released}
               refresh={refresh}
-              />
+            />
           )}
         {(hasLockedChildren && showLocked)
           && (
@@ -56,7 +56,7 @@ const CardArea = ({ entries, refresh }) => {
               mr={1.625}
               ml={0}
               Card={LockedEntryCard}
-              delayIncrement={70}
+              delayIncrement={100}
               entries={locked}
               refresh={refresh}
             />

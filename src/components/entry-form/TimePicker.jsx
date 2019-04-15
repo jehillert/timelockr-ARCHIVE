@@ -2,6 +2,7 @@ import React from 'react';
 import { InlineTimePicker } from 'material-ui-pickers';
 import AccessTime from '@material-ui/icons/AccessTime';
 import PropTypes from 'prop-types';
+import Moment from 'moment';
 
 const TimePicker = (props) => {
   const { selectedTime, handleTimeChange } = props;
@@ -20,7 +21,10 @@ const TimePicker = (props) => {
 };
 
 TimePicker.propTypes = {
-  selectedTime: PropTypes.objectOf(PropTypes.number).isRequired,
+  selectedTime: PropTypes.oneOfType([
+    PropTypes.instanceOf(Date),
+    PropTypes.instanceOf(Moment),
+  ]).isRequired,
   handleTimeChange: PropTypes.func.isRequired,
 };
 

@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `user_settings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `entries` (
-  `entry_id` INT(4) ZEROFILL NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `entry_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `user_id` INT NOT NULL,
   `creation_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `release_date` DATETIME NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   `expires` int(11) unsigned NOT NULL,
   `data` text COLLATE utf8mb4_bin,
   PRIMARY KEY (`session_id`)
-) ENGINE=InnoDB
+) ENGINE=InnoDB;
 
 /* Procedure to show full entries */
 -- USE `keepsafe`;

@@ -34,79 +34,104 @@ const styles = theme => ({
 class EntryFormDialog extends React.Component {
   constructor(props) {
     super(props);
-
-    this.initialState = {
+    this.state = {
       description: '',
       content: '',
       selectedDate: new Date(),
       selectedTime: new Date(),
       open: false,
     };
-    this.state = this.initialState;
   }
 
   handleChange = e => (
     this.setState({ [e.target.id]: e.target.value })
   )
 
-  handleClickOpen = () => (
-    this.setState({ open: true })
-  )
+  handleClickOpen = () => {
+    this.setState({
+      description: '',
+      content: '',
+      selectedDate: new Date(),
+      selectedTime: new Date(),
+    });
+
+    this.setState({ open: true });
+  }
 
   handleClose = () => (
-    this.setState(this.initialState)
+    this.setState({ open: false })
   )
 
   handleDateChange = date => (
-    this.setState(state => ({ selectedDate: date }))
+    this.setState({ selectedDate: date })
   )
 
   handleSubmit = (event) => {
-    // dates stored in UTC
     event.preventDefault();
+
+    const dbms = process.env.DBMS || 'mysql';
+
     const {
       content,
       description,
       selectedDate,
       selectedTime,
     } = this.state;
-    const { refresh } = this.props;
+
+    const {
+      refresh,
+      userId,
+    } = this.props;
+
+    const creationDate = moment().format('YYYY-MM-DD HH:mm');
+
     const formattedTime = moment(selectedTime).utc().format('HH:mm').toString();
     const formattedDate = moment(selectedDate).utc().format('YYYY-MM-DD').toString();
     const releaseDateTime = `${formattedDate} ${formattedTime}`;
-    const releaseDate = moment(releaseDateTime, 'YYYY-MM-DD h:mm').format('YYYY-MM-DD HH:mm');
+    let releaseDate = moment(releaseDateTime, 'YYYY-MM-DD h:mm').format('YYYY-MM-DD HH:mm');
+
+    if (dbms === 'postgres') {
+      releaseDate += '+00';
+    }
+
     const newEntry = {
-      userId: this.props.userId,
-      creationDate: moment().format('YYYY-MM-DD HH:mm'),
-      releaseDate: releaseDate,
+      userId,
+      creationDate,
+      releaseDate,
       description,
       content,
     };
 
     return createEntry(newEntry)
       .then(() => refresh())
-      .then(this.setState((state) => state = this.initialState));
+      .then(this.handleClose);
   }
 
-  handleTimeChange = (time) => {
-    this.setState((state) => state.selectedTime = time);
-  }
+  handleTimeChange = time => this.setState({ selectedTime: time });
 
   render() {
     const { classes } = this.props;
-
+    const {
+      content,
+      description,
+      open,
+      selectedDate,
+      selectedTime,
+    } = this.state;
     return (
       <Box>
-        <Fab onClick={this.handleClickOpen}
+        <Fab
+          onClick={this.handleClickOpen}
           size='small'
           color='primary'
           aria-label='New Entry'
-          className={classes.fab}>
+          className={classes.fab}
+        >
           <AddIcon />
         </Fab>
         <Dialog
           aria-labelledby='form-dialog-title'
-          open={this.state.open}
+          open={open}
           onClose={this.handleClose}
           width='26rem'
         >
@@ -123,8 +148,8 @@ class EntryFormDialog extends React.Component {
               variant='outlined'
               className={classNames(classes.dense, classes.textField)}
               onChange={this.handleChange}
-              value={this.state.description}
-              />
+              value={description}
+            />
             <TextField
               id='content'
               autoComplete='off'
@@ -132,25 +157,25 @@ class EntryFormDialog extends React.Component {
               label='Enter something to lock away.'
               margin='dense'
               multiline
-              placeholder={`Ex-girlfriend's phone number`}
+              placeholder={'Ex-girlfriend\'s phone number'}
               rows='4'
               rowsMax='10'
               variant='outlined'
               className={classNames(classes.dense, classes.textField)}
               onChange={this.handleChange}
-              value={this.state.content}
+              value={content}
             />
             <Box flexWrap='nowrap'>
-                <>
-                  <DatePicker
-                    handleDateChange={this.handleDateChange}
-                    selectedDate={this.state.selectedDate}
-                  />
-                  <TimePicker
-                    handleTimeChange={this.handleTimeChange}
-                    selectedTime={this.state.selectedTime}
-                  />
-                </>
+              <>
+                <DatePicker
+                  handleDateChange={this.handleDateChange}
+                  selectedDate={selectedDate}
+                />
+                <TimePicker
+                  handleTimeChange={this.handleTimeChange}
+                  selectedTime={selectedTime}
+                />
+              </>
             </Box>
           </DialogContent>
           <DialogActions>
@@ -176,6 +201,7 @@ class EntryFormDialog extends React.Component {
 }
 
 EntryFormDialog.propTypes = {
+  classes: PropTypes.object.isRequired,
   refresh: PropTypes.func.isRequired,
   userId: PropTypes.number.isRequired,
 };

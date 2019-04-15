@@ -32,7 +32,7 @@ const LockedEntryCard = (props) => {
                   handleDelete={handleDelete}
                   releaseDate={entry.releaseDate}
                 />
-            )}
+              )}
               title={entry.description}
             />
             <StyledMuiCardContent>

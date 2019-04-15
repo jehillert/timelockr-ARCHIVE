@@ -8,6 +8,7 @@ import { hot } from 'react-hot-loader/root';
 import { MuiPickersUtilsProvider } from 'material-ui-pickers';
 import { SnackbarProvider } from 'notistack';
 import { ThemeProvider } from 'styled-components';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import MomentUtils from '@date-io/moment';
 
 class App extends React.Component {
@@ -67,6 +68,7 @@ class App extends React.Component {
     return (
       <>
         <SnackbarProvider maxSnack={3}>
+          <CssBaseline />
           <GlobalStyle />
           <Router>
             <MuiPickersUtilsProvider utils={MomentUtils}>

@@ -9,7 +9,7 @@ const S = {};
 S.Modal = styled(Modal)`
   div .modal-content {
     border-radius: ${props => props.theme.modalBorderRadius};
-    border-shadow: ${props => props.theme.boxShadow};
+    box-shadow: ${props => props.theme.boxShadow};
   }
 `;
 

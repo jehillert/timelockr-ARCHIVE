@@ -80,7 +80,7 @@ const ReleasedEntryCard = (props) => {
 
 ReleasedEntryCard.propTypes = {
   entry: PropTypes.shape({
-    entryId: PropTypes.string,
+    entryId: PropTypes.number,
     description: PropTypes.string,
     content: PropTypes.string,
   }).isRequired,

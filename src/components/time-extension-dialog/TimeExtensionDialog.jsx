@@ -18,8 +18,8 @@ import { extendReleaseDate } from 'utilities';
 const S = {};
 
 S.Form = styled.form`
-  display: 'flex',
-  flexWrap: 'wrap',
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 function TimeExtensionDialog(props) {
@@ -125,7 +125,7 @@ function TimeExtensionDialog(props) {
 }
 
 TimeExtensionDialog.propTypes = {
-  entryId: PropTypes.string.isRequired,
+  entryId: PropTypes.number.isRequired,
   open: PropTypes.bool.isRequired,
   refresh: PropTypes.func.isRequired,
   releaseDate: PropTypes.string.isRequired,
