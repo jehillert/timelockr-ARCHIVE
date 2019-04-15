@@ -1,4 +1,5 @@
 const debug = require('debug')('server:controllers');
+const chalk = require('chalk');
 const hash = require('pbkdf2-password')();
 const helpers = require('./helpers/helpers');
 const models = require('./models');
