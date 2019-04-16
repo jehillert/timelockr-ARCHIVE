@@ -1,6 +1,7 @@
 /* eslint-disable no-alert */
-/* eslint-disable camelcase */
 /* eslint-disable no-func-assign */
+import * as Debug from 'debug';
+// import chalk from 'chalk';
 import React, { useState, useEffect } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -14,6 +15,8 @@ import {
   IncrementInput,
 } from 'components';
 import { extendReleaseDate } from 'utilities';
+
+const debug = Debug('client:components:time-extension-dialog');
 
 const S = {};
 
@@ -31,7 +34,7 @@ function TimeExtensionDialog(props) {
     hours: 0,
     minutes: 0,
   });
-  useEffect(() => console.log(`${duration.months}---------------------------`));
+  useEffect(() => debug(`${duration.months}---------------------------`));
 
   // declare props
   const {
@@ -44,7 +47,7 @@ function TimeExtensionDialog(props) {
 
   // get changes in child components
   function getChange(units, value) {
-    console.log(`${units}: ${value}`);
+    debug(`${units}: ${value}`);
     setDurationValue({
       ...duration,
       [units]: value,
@@ -64,7 +67,7 @@ function TimeExtensionDialog(props) {
     const newReleaseDate = moment(releaseDate).add(mDuration);
 
     // .format('YYYY-MM-DD HH:mm');
-    console.log(`
+    debug(`
       releaseDate:    ${moment(releaseDate).format('YYYY-MM-DD HH:mm')}
       newReleaseDate: ${newReleaseDate.format('YYYY-MM-DD HH:mm')}
     `);

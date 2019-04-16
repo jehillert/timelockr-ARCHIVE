@@ -1,25 +1,39 @@
 const debug = require('debug')('server:controllers');
 const chalk = require('chalk');
-const hash = require('pbkdf2-password')();
+const hasher = require('pbkdf2-password')();
 const helpers = require('./helpers/helpers');
 const models = require('./models');
-const auth = require('./helpers/auth');
 
-Object.prototype.parseSqlResult = function() {
-  return JSON.parse(JSON.stringify(this[0]));
-};
+function deleteFromTable(req, res) {
+  const params = helpers.getQueryParams(req);
+  models.general
+    .delete(params)
+    .then(() => res.sendStatus(201))
+    .catch(error => debug('Error', error));
+}
+
+function updateField(req, res) {
+  const params = helpers.getQueryParams(req);
+  models.general
+    .put(params)
+    .then(() => res.sendStatus(201))
+    .catch(error => debug('Error', error));
+}
 
 module.exports = {
   signin: {
-    post: (req, res) =>
-      models.users.get(['users', 'username', req.body.username])
-        .then(user => {
-          user = user.parseSqlResult();
-          if (!user.username) throw new Error('Invalid username.');
-          return user;
+    post: (req, res) => models.users.get(['users', 'username', req.body.username])
+        .then((user) => {
+          let parsedUser = user;
+          parsedUser.parseSqlResult = function parseSqlResult() {
+            return JSON.parse(JSON.stringify(this[0]));
+          };
+          parsedUser = parsedUser.parseSqlResult();
+          if (!parsedUser.username) throw new Error('Invalid username.');
+          return parsedUser;
         })
-        .tap(user => {
-          hash({ password: req.body.password, salt: user.salt }, function (err, pass, salt, hash) {
+        .tap((user) => {
+          hasher({ password: req.body.password, salt: user.salt }, (err, pass, salt, hash) => {
             if (err) throw err;
             if (hash !== user.hash) throw new Error('Invalid password.');
             req.session.regenerate(() => {
@@ -28,20 +42,20 @@ module.exports = {
             });
           });
         })
-        .then((user) => res.status(202).send({ userId: user.user_id }))
-        .catch(error => console.error('Error', error))
+        .then(user => res.status(202).send({ userId: user.user_id }))
+        .catch(error => debug('Error', error)),
   },
 
   logout: {
     get: (req, res) => req.session.destroy()
-      .then(() => res.status(200).json({message: 'Logout successful.'}))
-      .catch(error => console.error('Error', error))
+      .then(() => res.status(200).json({ message: 'Logout successful.' }))
+      .catch(error => debug('Error', error)),
   },
 
   users: {
     put: (req, res) => updateField(req, res),
 
-    delete: (req, res) => deleteFromTable(req, res)
+    delete: (req, res) => deleteFromTable(req, res),
   },
 
   entries: {
@@ -51,11 +65,12 @@ module.exports = {
         'user_id',
         'username',
         req.query.username,
-        'release_date'
+        'release_date',
       ])
+        .tap(results => debug('\n\nEntries - UNSORTED:\n\n%O', results))
         .then(results => helpers.sortEntries(results))
         .then(results => res.send(results))
-        .catch(error => console.error('Error', error)),
+        .catch(error => debug('Error', error)),
 
     put: (req, res) => models.general.put([
         'entries',
@@ -65,7 +80,7 @@ module.exports = {
         req.body.data.entryId,
     ])
       .then(() => res.sendStatus(201))
-      .catch(error => console.error('Error', error)),
+      .catch(error => debug('Error', error)),
 
     post: (req, res) => models.entries.post([
       'entries',
@@ -80,38 +95,28 @@ module.exports = {
       req.body.description,
       req.body.content,
     ])
-      .then(results => res.sendStatus(201))
-      .catch(error => console.error('Error', error)),
+      .then(() => res.sendStatus(201))
+      .catch(error => debug('Error', error)),
 
-    delete: (req, res) => {
-      return models.general
+    delete: (req, res) => models.general
         .delete(['entries', 'entry_id', req.body.entryId])
-        .then(results => res.sendStatus(201))
-        .catch(error => console.error('Error', error));
-    }
+        .then(() => res.sendStatus(201))
+        .catch(error => debug('Error', error)),
   },
 
   signup: {
     post: (req, res) => models.users
-      .post(['users', 'username', 'hash', 'salt', req.body.username, req.body.hash, req.body.salt])
-      .then(results => res.sendStatus(201))
-      .catch(error => res.sendStatus(409))
-      // .then(results => res.status(201).json({message: 'New user successfully created.'}))
-  }
+      .post([
+        'users',
+        'username',
+        'hash',
+        'salt',
+        req.body.username,
+        req.body.hash,
+        req.body.salt,
+      ])
+      .then(() => res.sendStatus(201))
+      .catch(() => res.sendStatus(409)),
+      // .then(() => res.status(201).json({message: 'New user successfully created.'}))
+  },
 };
-
-function deleteFromTable(req, res) {
-  let params = helpers.getQueryParams(req);
-  models.general
-    .delete(params)
-    .then(results => res.sendStatus(201))
-    .catch(error => console.error('Error', error));
-}
-
-function updateField(req, res) {
-  let params = helpers.getQueryParams(req);
-  models.general
-    .put(params)
-    .then(results => res.sendStatus(201))
-    .catch(error => console.error('Error', error));
-}

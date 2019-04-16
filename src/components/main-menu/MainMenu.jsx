@@ -1,5 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 // import PropTypes from 'prop-types';
+import * as Debug from 'debug';
+// import chalk from 'chalk';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import IconButton from '@material-ui/core/IconButton';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -12,6 +14,8 @@ import PersonIcon from '@material-ui/icons/Person';
 import SettingsIcon from '@material-ui/icons/Settings';
 import styled from 'styled-components';
 import Promise from 'bluebird';
+
+const debug = Debug('client:components:main-menu');
 
 const S = {};
 
@@ -45,7 +49,7 @@ function MainMenu(props) {
   const [selection, setSelection] = useState('');
 
   useEffect(() => {
-    console.log(selection);
+    debug(selection);
   }, [selection]);
 
   const handleClick = event => setAnchorEl(event.currentTarget);

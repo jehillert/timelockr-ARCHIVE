@@ -1,12 +1,9 @@
 const debug = require('debug')('server:auth');
-const hash = require('pbkdf2-password')();
-
-Object.prototype.parseSqlResult = function() {
-  return JSON.parse(JSON.stringify(this[0]));
-};
+const chalk = require('chalk');
+const hasher = require('pbkdf2-password')();
 
 const hashPassword = (req, res, next) => {
-  hash({ password: req.body.password }, function (err, pass, salt, hash) {
+  hasher({ password: req.body.password }, (err, pass, salt, hash) => {
     if (err) {
       next(err);
     }

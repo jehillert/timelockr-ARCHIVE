@@ -1,3 +1,5 @@
+import * as Debug from 'debug';
+// import chalk from 'chalk';
 import React from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -10,6 +12,7 @@ import {
 } from 'components';
 
 const S = {};
+const debug = Debug('client:components:locked-entry-card-menu');
 
 S.IconButton = styled(IconButton)`
   &.s-icon-button {
@@ -54,14 +57,14 @@ class LockedEntryCardMenu extends React.Component {
       return undefined;
     }).then(() => this.setState({
       selected: '',
-    })).catch(err => console.error(err));
+    })).catch(err => debug(err));
   };
 
   handleSelect = event => this.setStateAsync({
       selected: event.currentTarget.dataset.value,
     })
     .then(() => this.handleClose())
-    .catch(err => console.error(err));
+    .catch(err => debug(err));
 
   render() {
     const { anchorEl, shouldRenderDialog } = this.state;

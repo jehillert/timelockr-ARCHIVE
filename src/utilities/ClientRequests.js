@@ -1,31 +1,34 @@
 /* eslint-disable camelcase */
+import * as Debug from 'debug';
+
 const axios = require('axios');
-const Promise = require('bluebird');
+
+const debug = Debug('client:utilities:client-requests');
 
 // https://www.npmjs.com/package/axios
 // https://flaviocopes.com/axios/
 
-module.exports.deleteEntry = (entryId) => {
+export const deleteEntry = (entryId) => {
   const url = 'http://localhost:3000/api/keepsafe/entries';
   const data = { data: { entryId } };
 
   return axios.delete(url, data)
-    .then(results => console.log(results))
-    .catch(err => console.error(err));
+    .then(res => debug(res.data))
+    .catch(err => debug(err));
 };
 
-module.exports.createEntry = (entry) => {
+export const createEntry = (entry) => {
   return axios.post('http://localhost:3000/api/keepsafe/entries', {
     userId: entry.userId,
     creationDate: entry.creationDate,
     releaseDate: entry.releaseDate,
     description: entry.description,
     content: entry.content,
-  }).then(response => console.log(response))
-    .catch(err => console.error(err));
+  }).then(response => debug(response.data))
+    .catch(err => debug(err));
 };
 
-module.exports.createNewUser = (user, pass) => {
+export const createNewUser = (user, pass) => {
   return axios.post('http://localhost:3000/api/keepsafe/signup', {
     username: user,
     password: pass,
@@ -35,45 +38,45 @@ module.exports.createNewUser = (user, pass) => {
       if (err.statusCode === 409) {
         return { userCreated: false, message: 'Username taken.  Please select another' };
       }
-      return console.log(err);
+      return debug(err);
     });
 };
 
 // For a PUT request: HTTP 200 or HTTP 204 should imply 'resource updated successfully'.
-module.exports.extendReleaseDate = (entryId, releaseDate) => {
+export const extendReleaseDate = (entryId, releaseDate) => {
   return axios.put('http://localhost:3000/api/keepsafe/entries', {
     data: { entryId, releaseDate },
   })
     .then(response => response)
     .catch((err) => {
-      console.log(err);
+      debug(err);
       if (err.statusCode === 400) {
         return { userCreated: false, message: 'Failed to update/extend releaseDate' };
       }
     });
 };
 
-module.exports.getEntries = (user) => {
+export const getEntries = (user) => {
   return axios.get(`http://localhost:3000/api/keepsafe/entries?username=${user}`)
     .then((results) => {
       const entries = JSON.parse(results.request.response);
       return entries;
     })
-    .catch(err => console.log(err));
+    .catch(err => debug(err));
 };
 
-module.exports.verifyUser = (user, pass) => {
+export const verifyUser = (user, pass) => {
   return axios.post('http://localhost:3000/api/keepsafe/signin', {
     username: user,
     password: pass,
   })
     .then((result) => {
-      console.log(`User authenticated.\nuserId: ${result.data.userId}`);
+      debug(`User authenticated.\nuserId: ${result.data.userId}`);
       const authData = {
         userId: result.data.userId,
         isAuthorized: true,
       };
       return authData;
     })
-    .catch(err => console.log(err));
+    .catch(err => debug(err));
 };

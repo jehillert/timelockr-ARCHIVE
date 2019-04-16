@@ -2,7 +2,7 @@
 /* eslint-disable key-spacing */
 require('dotenv').config();
 const cors = require('cors');
-const debug = require('debug')('TimeLocker:server');
+const debug = require('debug')('server:app');
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
@@ -23,6 +23,7 @@ const options = {
   database        : process.env.MYSQL_DB_NAME,
 };
 
+debug('Server Status: %o', 'DEVELOPMENT MODE - Debugging enabled...');
 debug(options);
 
 if (dbms === 'mysql') {
@@ -49,6 +50,6 @@ if (dbms === 'mysql') {
   app.use('/api/keepsafe', router);
   app.set('port', PORT);
   app.listen(app.get('port'), () => (
-    console.log(`Node app started. Listening on port ${PORT}`)
+    debug(`Node app started. Listening on port ${PORT}`)
   ));
 }

@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 const debug = require('debug')('server:helpers');
+const chalk = require('chalk');
 const moment = require('moment');
 
 const sortEntries = (unsorted) => {
@@ -19,8 +20,6 @@ const sortEntries = (unsorted) => {
     const entryId = entry.entry_id;
     const creationDate = entry.creation_date;
     const releaseDate = entry.release_date;
-
-    // debug({ entryId, creationDate, releaseDate });
 
     if (moment(releaseDate).isBefore(todayInISO, 'seconds')) {
       const releasedEntry = {
@@ -48,7 +47,9 @@ const sortEntries = (unsorted) => {
       locked.push(lockedEntry);
     }
   }
-  debug(entries);
+  debug('\n\nLocked Entries - SORTED\n\n%O', entries.locked);
+  debug('\n\nReleased Entries - SORTED\n\n', entries.released);
+  debug(`\n\n`);
 
   return { entries };
 };

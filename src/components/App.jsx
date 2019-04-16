@@ -1,4 +1,5 @@
-/* eslint-disable no-alert */
+import * as Debug from 'debug';
+// import chalk from 'chalk';
 import React from 'react';
 import { AuthModal, Main } from 'components';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -10,6 +11,9 @@ import { SnackbarProvider } from 'notistack';
 import { ThemeProvider } from 'styled-components';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import MomentUtils from '@date-io/moment';
+
+const debug = Debug('client:components:app');
+debug('Client Status: %o', 'DEVELOPMENT MODE - Debugging enabled...');
 
 class App extends React.Component {
   constructor(props) {
@@ -27,6 +31,12 @@ class App extends React.Component {
     const { username } = this.state;
     return getEntries(username)
       .then((results) => {
+        const { locked, released } = results.entries;
+        debug('LOCKED:\n%O', locked);
+        debug('RELEASED:\n%O', released);
+        return results;
+      })
+      .then((results) => {
         this.setState((state, props) => ({ entries: results.entries }));
       });
   }
@@ -36,7 +46,7 @@ class App extends React.Component {
   );
 
   handleSignin = (user, pass) => {
-    console.log('signing in');
+    debug('signing in');
     return verifyUser(user, pass) // non-zero value indicates authenticated
       .then((result) => {
         this.setState(state => ({
