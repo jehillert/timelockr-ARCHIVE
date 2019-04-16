@@ -1,13 +1,14 @@
-/* eslint-disable no-multi-assign */
-/* eslint-disable key-spacing */
+/* eslint-disable no-multi-spaces, no-multi-assign,
+  key-spacing, import/no-extraneous-dependencies */
 require('dotenv').config();
-const cors = require('cors');
-const debug = require('debug')('server:app');
-const express = require('express');
+const chalk      = require('chalk');
+const debug      = require('debug')(chalk.hex('#38A53C').bgHex('#000000')('server:app'));
+const cors       = require('cors');
+const express    = require('express');
 const bodyParser = require('body-parser');
-const session = require('express-session');
+const session    = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
-const router = require('./routes.js');
+const router     = require('./routes.js');
 
 // initialize server for appropriate dbms
 const app = module.exports = express();

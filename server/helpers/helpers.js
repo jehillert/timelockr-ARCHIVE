@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
-const debug = require('debug')('server:helpers');
 const chalk = require('chalk');
+const debug = require('debug')(chalk.hex('#ff7643').bgHex('#000000')('server:helpers'));
 const moment = require('moment');
 
 const sortEntries = (unsorted) => {
@@ -48,8 +48,8 @@ const sortEntries = (unsorted) => {
     }
   }
   debug('\n\nLocked Entries - SORTED\n\n%O', entries.locked);
-  debug('\n\nReleased Entries - SORTED\n\n', entries.released);
-  debug(`\n\n`);
+  debug('\n\nReleased Entries - SORTED\n\n%O', entries.released);
+  debug('\n\n');
 
   return { entries };
 };

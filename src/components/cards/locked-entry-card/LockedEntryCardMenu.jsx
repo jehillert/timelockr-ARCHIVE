@@ -1,18 +1,25 @@
-import * as Debug from 'debug';
+// import * as Debug from 'debug';
 // import chalk from 'chalk';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import CloseIcon from '@material-ui/icons/Close';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 import IconButton from '@material-ui/core/IconButton';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Promise from 'bluebird';
+import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {
-  TimeExtensionDialog,
-  LockedEntryCardMenuBody,
-} from 'components';
+import { deleteEntry } from 'utilities';
+import { TimeExtensionDialog } from 'components';
+
+// const debug = Debug('client:components:locked-entry-card-menu');
 
 const S = {};
-const debug = Debug('client:components:locked-entry-card-menu');
 
 S.IconButton = styled(IconButton)`
   &.s-icon-button {
@@ -20,96 +27,101 @@ S.IconButton = styled(IconButton)`
   }
 `;
 
-class LockedEntryCardMenu extends React.Component {
-  constructor(props) {
-    super(props);
+function LockedEntryCardMenu(props) {
+  const { entryId, releaseDate, refresh } = props;
 
-    this.state = {
-      anchorEl: null,
-      selected: '',
-      shouldRenderDialog: false,
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState('');
+  const [shouldRenderDialog, setShouldRenderDialog] = useState(false);
+
+  useEffect(() => {
+    // setOpen(sO => !sO);
+
+    if (selected === 'extend') {
+      setShouldRenderDialog(sRD => !sRD);
+      // setSelected('');
+    }
+
+    if (selected === 'delete') {
+      deleteEntry(entryId)
+        .then(() => refresh());
+        // .then(() => setSelected(''));
+    }
+
+    return () => {
+      setOpen(false);
+      setAnchorEl(null);
+      setSelected('');
     };
-  }
+  }, [entryId, refresh, selected]);
 
-  setStateAsync = Promise.promisify(this.setState);
-
-  setDialogVisibility = () => (
-    this.setState({ shouldRenderDialog: !this.state.shouldRenderDialog })
-  );
-
-  handleClick = event => (
-    this.setState({ anchorEl: event.currentTarget })
-  );
-
-  handleClose = () => {
-    const { handleDelete } = this.props;
-    const { selected } = this.state;
-
-    return this.setStateAsync({
-      anchorEl: null,
-    }).then(() => {
-      if (selected === 'extend') {
-        return this.setDialogVisibility();
-      }
-      if (selected === 'delete') {
-        return handleDelete();
-      }
-      return undefined;
-    }).then(() => this.setState({
-      selected: '',
-    })).catch(err => debug(err));
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+    setOpen(true);
   };
 
-  handleSelect = event => this.setStateAsync({
-      selected: event.currentTarget.dataset.value,
-    })
-    .then(() => this.handleClose())
-    .catch(err => debug(err));
-
-  render() {
-    const { anchorEl, shouldRenderDialog } = this.state;
-    const { entryId, releaseDate, refresh } = this.props;
-    const open = Boolean(anchorEl);
-
-    return (
-      <>
-        {shouldRenderDialog
-          && (
-            <TimeExtensionDialog
-              entryId={entryId}
-              open={shouldRenderDialog}
-              releaseDate={releaseDate}
-              refresh={refresh}
-              setDialogVisibility={this.setDialogVisibility}
-            />
-          )
-        }
-        <S.IconButton
-          aria-label='More'
-          aria-owns={open ? 'right-card-menu' : undefined}
-          aria-haspopup='true'
-          className='s-icon-button'
-          onClick={this.handleClick}
-        >
-          <MoreVertIcon />
-        </S.IconButton>
-        <LockedEntryCardMenuBody
-          anchorEl={anchorEl}
-          handleClose={this.handleClose}
-          handleSelect={this.handleSelect}
-          open={open}
-        />
-      </>
-    );
-  }
+  return (
+    <>
+      {shouldRenderDialog
+        && (
+          <TimeExtensionDialog
+            entryId={entryId}
+            open={shouldRenderDialog}
+            releaseDate={releaseDate}
+            refresh={refresh}
+            setDialogVisibility={setShouldRenderDialog(!shouldRenderDialog)}
+          />
+        )
+      }
+      <S.IconButton
+        aria-label='More'
+        aria-owns={open ? 'right-card-menu' : undefined}
+        aria-haspopup='true'
+        className='s-icon-button'
+        onClick={handleClick}
+      >
+        <MoreVertIcon />
+      </S.IconButton>
+      {open
+        && (
+          <ClickAwayListener onClickAway={() => setSelected('noSelection')}>
+            <Paper>
+              <Menu
+                id='right-card-menu'
+                anchorEl={anchorEl}
+                open={open}
+              >
+                <MenuItem data-value='extend' onClick={() => setSelected('extend')}>
+                  <ListItemIcon>
+                    <HourglassEmptyIcon />
+                  </ListItemIcon>
+                  <ListItemText inset primary='Extend Time' />
+                </MenuItem>
+                <MenuItem data-value='delete' onClick={() => setSelected('delete')}>
+                  <ListItemIcon>
+                    <DeleteOutlineIcon />
+                  </ListItemIcon>
+                  <ListItemText inset primary='Delete Entry' />
+                </MenuItem>
+                <MenuItem data-value='close' onClick={() => setSelected('noSelection')}>
+                  <ListItemIcon>
+                    <CloseIcon />
+                  </ListItemIcon>
+                  <ListItemText inset primary='Exit' />
+                </MenuItem>
+              </Menu>
+            </Paper>
+          </ClickAwayListener>
+        )}
+    </>
+  );
 }
 
 LockedEntryCardMenu.propTypes = {
   entryId: PropTypes.number.isRequired,
-  handleDelete: PropTypes.func.isRequired,
   releaseDate: PropTypes.string.isRequired,
   refresh: PropTypes.func.isRequired,
-
 };
 
 export default LockedEntryCardMenu;

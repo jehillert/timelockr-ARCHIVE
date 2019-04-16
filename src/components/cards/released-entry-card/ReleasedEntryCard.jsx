@@ -10,7 +10,7 @@ import { CopyToClipboard, deleteEntry, ErrorBoundary } from 'utilities';
 import {
   ClipboardPopover,
   StyledMuiCardContent,
-  StyledMuiCardHeader
+  StyledMuiCardHeader,
 } from 'components';
 import { withSnackbar } from 'notistack';
 
@@ -35,9 +35,10 @@ const ReleasedEntryCard = (props) => {
       .then(() => refresh())
   );
 
-  const handleCardClick = event => (
-    updateAnchorEl(event.currentTarget)
-  );
+  const handleCardClick = (event) => {
+    updateAnchorEl(event.currentTarget);
+    return updateCopied(false);
+  };
 
   return (
     <ErrorBoundary>
@@ -51,9 +52,9 @@ const ReleasedEntryCard = (props) => {
           )}
           <CopyToClipboard
             text={`DESCRIPTION:\n\t${description}\n\nCONTENT:\n\t${content}`}
-            onCopy={() => updateCopied(!copied)}
+            onCopy={() => updateCopied(true)}
           >
-            <Card onClick={handleCardClick} id={entryId} css='width: 19rem;'>
+            <Card id={entryId} css='width: 19rem;'>
               <StyledMuiCardHeader
                 action={(
                   <S.IconButton
@@ -65,7 +66,7 @@ const ReleasedEntryCard = (props) => {
                 )}
                 title={description}
               />
-              <StyledMuiCardContent>
+              <StyledMuiCardContent onClick={handleCardClick}>
                 <Typography>
                   {content}
                 </Typography>

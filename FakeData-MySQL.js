@@ -90,30 +90,3 @@ getAsync('mysql -u root <schema_mysql.sql')
     ).then(() => console.log('done')))
   .catch(err => console.log('cmd err', err));
       // console.log(user.username, user.password);
-/*
-  Maurine42               6bUeeOIkHbXNFGA
-  Adam.OKeefe             yVXI4eEbpYMgFMc
-  Earline29               HuLyOXuUAPNuyf3
-  Jaquan.Muller88         IDzsXxVshRDvpBG
-  Willard.Keebler53       8yttFU_UE2M0RBU
-  Vance_Leuschke          YsGUZsmaOcFoZ1_
-  Arne_Little             _VP63OJWcmsAI2N
-  Ismael50                _Y6_egqJCOxj8hg
-  Dario_Bashirian54       sQtDoIAxnwKAujR
-  Amaya_Reichel           9CEigbzawo0xTXU
-  Buster_Feil             f1HL0Rh0l059ja1
-  Crystal33               _RlHJdlloj5bK3f
-  Pascale81               kcdMPEO2e34CXb0
-  Holly.Lesch56           V8SJA6wv4TMBkIx
-  Paris.Terry             QZCeQdMceSD_Fj1
-  Laverne34               DiuldAjd77iI7Uk
-  Vaughn.Nader            Njw9inzAYkW374b
-  Nestor26                3Zrq4IVKreN2etN
-  Willie_Rippin           ihisRO5WVPARMD6
-  Eudora54                r3WPpU5Ynm3OwGI
-  Gladyce_Nolan13         bqqusRch5Ig6CSM
-  Ahmed.Beatty81          S_LRibJhh2bh5bX
-  Alivia77                utEs369H0Eb3abK
-  Christophe.Windler59    SY0qN0RCwVk360s
-  Garfield13              m0ck5P_0Nvxej6s
-*/

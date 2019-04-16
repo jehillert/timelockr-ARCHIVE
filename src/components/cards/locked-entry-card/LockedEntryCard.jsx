@@ -8,16 +8,10 @@ import {
   StyledMuiCardContent,
   LockedEntryCardMenu,
 } from 'components';
-import { deleteEntry } from 'utilities';
 
 const LockedEntryCard = (props) => {
   const { entry, refresh, wrapper } = props;
   const { shouldRenderCard } = wrapper;
-
-  const handleDelete = () => (
-    deleteEntry(entry.entryId)
-      .then(() => refresh())
-  );
 
   return (
     <>
@@ -29,7 +23,6 @@ const LockedEntryCard = (props) => {
                 <LockedEntryCardMenu
                   entryId={entry.entryId}
                   refresh={refresh}
-                  handleDelete={handleDelete}
                   releaseDate={entry.releaseDate}
                 />
               )}
@@ -47,7 +40,7 @@ const LockedEntryCard = (props) => {
 
 LockedEntryCard.propTypes = {
   entry: PropTypes.shape({
-    id: PropTypes.string,
+    entryId: PropTypes.number,
     label: PropTypes.string,
     todaysDate: PropTypes.string,
     creationDate: PropTypes.string,

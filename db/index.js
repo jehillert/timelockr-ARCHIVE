@@ -1,6 +1,6 @@
 /* eslint-disable key-spacing */
 const chalk = require('chalk');
-const debug = require('debug')(`db:${process.env.DBMS}`);
+const debug = require('debug')(chalk.hex('#8ecfe3').bgHex('#08134A')(`db:${process.env.DBMS}`));
 const mysql = require('mysql');
 const pg = require('pg-promise');
 const Promise = require('bluebird');

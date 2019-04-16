@@ -24,7 +24,6 @@ function LockedEntryCardMenuBody(props) {
         <Menu
           id='right-card-menu'
           anchorEl={anchorEl}
-          onClose={handleClose}
           open={open}
         >
           <MenuItem data-value='extend' onClick={handleSelect}>
