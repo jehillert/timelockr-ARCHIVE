@@ -34,33 +34,29 @@ function TimeExtensionDialog(props) {
     hours: 0,
     minutes: 0,
   });
+
   useEffect(() => debug(`${duration.months}---------------------------`));
 
   // declare props
   const {
     entryId,
+    handleOpen,
     open,
-    setDialogVisibility,
     refresh,
     releaseDate,
   } = props;
 
   // get changes in child components
-  function getChange(units, value) {
+  const getChange = (units, value) => {
     debug(`${units}: ${value}`);
     setDurationValue({
       ...duration,
       [units]: value,
     });
-  }
-
-  // hide dialog
-  function handleClose() {
-    setDialogVisibility(false);
-  }
+  };
 
   // calculate and submit new release date
-  function handleSubmit(event) {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     const mDuration = moment.duration(duration);
@@ -73,14 +69,9 @@ function TimeExtensionDialog(props) {
     `);
 
     return extendReleaseDate(entryId, newReleaseDate.format('YYYY-MM-DD HH:mm').toString())
-      .then(() => refresh())
-      .then(() => handleClose());
-  }
-
-  // bind functions
-  getChange = getChange.bind(this);
-  handleClose = handleClose.bind(this);
-  handleSubmit = handleSubmit.bind(this);
+      .then(() => handleOpen(false))
+      .then(() => refresh());
+  };
 
   // set up array of child components
   const timeUnits = Object.keys(duration);
@@ -92,12 +83,13 @@ function TimeExtensionDialog(props) {
     />
   ));
 
+  const handleCancelClick = () => handleOpen();
+
   return (
     <Dialog
       aria-labelledby='extend-dialog-title'
-      open={open}
-      onClose={handleClose}
       width='26rem'
+      open={open}
     >
       <DialogTitle id='form-dialog-title'>
         Extend Time
@@ -110,7 +102,7 @@ function TimeExtensionDialog(props) {
       <DialogActions>
         <FormButton
           type='button'
-          handleSubmit={handleClose}
+          handleSubmit={handleCancelClick}
           color='primary'
         >
           Cancel
@@ -128,11 +120,11 @@ function TimeExtensionDialog(props) {
 }
 
 TimeExtensionDialog.propTypes = {
-  entryId: PropTypes.number.isRequired,
   open: PropTypes.bool.isRequired,
+  handleOpen: PropTypes.func.isRequired,
+  entryId: PropTypes.number.isRequired,
   refresh: PropTypes.func.isRequired,
   releaseDate: PropTypes.string.isRequired,
-  setDialogVisibility: PropTypes.func.isRequired,
 };
 
 export default TimeExtensionDialog;

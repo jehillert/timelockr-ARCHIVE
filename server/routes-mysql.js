@@ -1,12 +1,12 @@
 // const debug = require('debug')('server:routes');
-const router = require('express').Router();
 const auth = require('./helpers/auth');
 const controller = require('./controllers');
+const router = require('express').Router();
 
 // route-specific middleware
 router.use('/signup', auth.hashPassword);
 
-// routes
+//routes
 router.post('/signin', controller.signin.post);
 router.post('/logout', controller.logout.get);
 router.post('/signup', controller.signup.post);

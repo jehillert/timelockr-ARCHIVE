@@ -46,7 +46,7 @@ class AuthTabs extends React.Component {
   render() {
     const {
       handleSignin,
-      handleCreateNewUserAttempt,
+      handleAddUser,
     } = this.props;
     return (
       <S.Tabs
@@ -64,7 +64,7 @@ class AuthTabs extends React.Component {
         </Tab>
         <Tab eventKey='signup' title='Sign Up'>
           <AuthForm
-            handleSubmit={handleCreateNewUserAttempt}
+            handleSubmit={handleAddUser}
           />
         </Tab>
       </S.Tabs>
@@ -74,7 +74,7 @@ class AuthTabs extends React.Component {
 
 AuthTabs.propTypes = {
   handleSignin: PropTypes.func.isRequired,
-  handleCreateNewUserAttempt: PropTypes.func.isRequired,
+  handleAddUser: PropTypes.func.isRequired,
   setTitle: PropTypes.func.isRequired,
 };
 

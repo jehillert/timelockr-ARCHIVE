@@ -1,5 +1,5 @@
+export { addUser } from '../utilities/ClientRequests';
 export { createEntry } from '../utilities/ClientRequests';
-export { createNewUser } from '../utilities/ClientRequests';
 export { deleteEntry } from '../utilities/ClientRequests';
 export { extendReleaseDate } from '../utilities/ClientRequests';
 export { getEntries } from '../utilities/ClientRequests';

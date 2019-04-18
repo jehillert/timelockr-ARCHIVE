@@ -64,15 +64,16 @@ getAsync('mysql -u root <schema.sql')
   // add each user to users table
   .then(users => Promise.each(
     users, user => axios.post(
-      'http://localhost:3000/api/keepsafe/signup',
+      'http://localhost:3000/api/timelockr_dev_db/signup',
       {
         username: user.username,
         password: user.password,
-      })
+      },
+    )
     .then(() => console.log(user.username, user.password))
     .then(() => (Promise.each(
         user.entries,
-        entry => axios.post('http://localhost:3000/api/keepsafe/entries', {
+        entry => axios.post('http://localhost:3000/api/timelockr_dev_db/entries', {
             userId: entry.userId,
             creationDate: entry.creationDate,
             releaseDate: entry.releaseDate,

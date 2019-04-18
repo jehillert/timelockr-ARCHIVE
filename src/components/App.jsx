@@ -3,7 +3,7 @@ import * as Debug from 'debug';
 import React from 'react';
 import { AuthModal, Main } from 'components';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { createNewUser, getEntries, verifyUser } from 'utilities';
+import { addUser, getEntries, verifyUser } from 'utilities';
 import { defaultTheme, GlobalStyle } from 'theme';
 import { hot } from 'react-hot-loader/root';
 import { MuiPickersUtilsProvider } from 'material-ui-pickers';
@@ -61,7 +61,7 @@ class App extends React.Component {
       });
   }
 
-  handleCreateNewUserAttempt = (username, password) => createNewUser(username, password)
+  handleAddUser = (username, password) => addUser(username, password)
     .then((response) => {
       alert(response.data);
     })
@@ -99,7 +99,7 @@ class App extends React.Component {
                     <ThemeProvider theme={defaultTheme}>
                       <AuthModal
                         handleSignin={this.handleSignin}
-                        handleCreateNewUserAttempt={this.handleCreateNewUserAttempt}
+                        handleAddUser={this.handleAddUser}
                         isAuthorized={isAuthorized}
                       />
                     </ThemeProvider>

@@ -1,8 +1,8 @@
 /*mysql -u root <schema.sql*/
-DROP DATABASE IF EXISTS `keepsafe`;
-CREATE DATABASE IF NOT EXISTS `keepsafe`;
+DROP DATABASE IF EXISTS `timelockr_dev_db`;
+CREATE DATABASE IF NOT EXISTS `timelockr_dev_db`;
 
-USE keepsafe;
+USE timelockr_dev_db;
 
 CREATE TABLE IF NOT EXISTS `users` (
   `user_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -43,15 +43,15 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 ) ENGINE=InnoDB;
 
 /* Procedure to show full entries */
--- USE `keepsafe`;
+-- USE `timelockr_dev_db`;
 -- DROP procedure IF EXISTS `ShowEntries`;
 
 -- DELIMITER $$
--- USE `keepsafe`$$
+-- USE `timelockr_dev_db`$$
 -- CREATE DEFINER=`root`@`localhost` PROCEDURE `JoinTables`()
 -- BEGIN
---   SELECT * FROM keepsafe.entries
---   LEFT JOIN keepsafe.users USING (user_id);
+--   SELECT * FROM timelockr_dev_db.entries
+--   LEFT JOIN timelockr_dev_db.users USING (user_id);
 -- END;$$
 
 -- DELIMITER ;

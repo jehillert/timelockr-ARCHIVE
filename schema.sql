@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS keepsafe;
-CREATE DATABASE keepsafe;
-\connect keepsafe
+DROP DATABASE IF EXISTS timelockr_dev_db;
+CREATE DATABASE timelockr_dev_db;
+\connect timelockr_dev_db
 
 CREATE TABLE IF NOT EXISTS users (
   user_id SERIAL PRIMARY KEY,

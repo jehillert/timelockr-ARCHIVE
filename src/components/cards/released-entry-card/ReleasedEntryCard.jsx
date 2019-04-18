@@ -6,13 +6,13 @@ import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import styled from 'styled-components';
-import { CopyToClipboard, deleteEntry, ErrorBoundary } from 'utilities';
 import {
   ClipboardPopover,
   StyledMuiCardContent,
   StyledMuiCardHeader,
 } from 'components';
 import { withSnackbar } from 'notistack';
+import { CopyToClipboard, deleteEntry, ErrorBoundary } from 'utilities';
 
 const S = {};
 

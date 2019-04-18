@@ -1,5 +1,8 @@
-// import * as Debug from 'debug';
-// import chalk from 'chalk';
+/* eslint-disable react-hooks/exhaustive-deps */
+/*
+  ! NEXT TIME THERE ARE TWO THINGS THAT OPEN, GIVE THEM DISTINCT NAMES.  VERY DISTINCT NAMES
+*/
+import * as Debug from 'debug';
 import React, { useEffect, useState } from 'react';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import CloseIcon from '@material-ui/icons/Close';
@@ -14,10 +17,10 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { deleteEntry } from 'utilities';
+import { deleteEntry } from '../../dialogs/node_modules/utilities';
 import { TimeExtensionDialog } from 'components';
 
-// const debug = Debug('client:components:locked-entry-card-menu');
+const debug = Debug('client:components:locked-entry-card-menu');
 
 const S = {};
 
@@ -36,19 +39,23 @@ function LockedEntryCardMenu(props) {
   const [shouldRenderDialog, setShouldRenderDialog] = useState(false);
 
   useEffect(() => {
-    // setOpen(sO => !sO);
+    debug(`
+      entryId:  ${entryId}
+      selected: ${selected}
+      open:     ${open}
+      anchorEl: ${anchorEl}
+    `);
 
     if (selected === 'extend') {
       setShouldRenderDialog(sRD => !sRD);
-      // setSelected('');
     }
 
     if (selected === 'delete') {
       deleteEntry(entryId)
         .then(() => refresh());
-        // .then(() => setSelected(''));
     }
 
+    // "the function passed to useEffect may return a clean-up function"
     return () => {
       setOpen(false);
       setAnchorEl(null);
@@ -56,9 +63,15 @@ function LockedEntryCardMenu(props) {
     };
   }, [entryId, refresh, selected]);
 
+  useEffect(() => setShouldRenderDialog(false), [releaseDate]);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
     setOpen(true);
+  };
+
+  const handleShouldRenderDialog = () => {
+    setShouldRenderDialog(false);
   };
 
   return (
@@ -67,10 +80,10 @@ function LockedEntryCardMenu(props) {
         && (
           <TimeExtensionDialog
             entryId={entryId}
-            open={shouldRenderDialog}
             releaseDate={releaseDate}
             refresh={refresh}
-            setDialogVisibility={setShouldRenderDialog(!shouldRenderDialog)}
+            handleOpen={handleShouldRenderDialog}
+            open={shouldRenderDialog}
           />
         )
       }

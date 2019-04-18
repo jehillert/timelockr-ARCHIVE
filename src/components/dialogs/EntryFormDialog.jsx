@@ -69,7 +69,7 @@ class EntryFormDialog extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    const dbms = process.env.DBMS || 'mysql';
+    const dbms = process.env.DB || 'mysql';
 
     const {
       content,
@@ -90,7 +90,7 @@ class EntryFormDialog extends React.Component {
     const releaseDateTime = `${formattedDate} ${formattedTime}`;
     let releaseDate = moment(releaseDateTime, 'YYYY-MM-DD h:mm').format('YYYY-MM-DD HH:mm');
 
-    if (process.env.DBMS === 'postgres') {
+    if (process.env.DB === 'postgres') {
       releaseDate += '+00';
     }
 

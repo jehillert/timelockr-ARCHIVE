@@ -87,10 +87,7 @@ function CardAreaTabs(props) {
             autoHideDuration={300}
             style={{ height }}
           >
-            <CardArea
-              entries={entries}
-              refresh={refresh}
-            />
+            <div></div>
           </VerticalScrollbars>
         </TabContainer>
         <TabContainer dir={theme.direction}>
@@ -100,10 +97,7 @@ function CardAreaTabs(props) {
             autoHideDuration={300}
             style={{ height }}
           >
-            <CardArea
-              entries={entries}
-              refresh={refresh}
-            />
+            <div></div>
           </VerticalScrollbars>
         </TabContainer>
       </SwipeableViews>

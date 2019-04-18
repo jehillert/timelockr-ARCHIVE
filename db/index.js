@@ -1,47 +1,26 @@
 /* eslint-disable key-spacing */
 const chalk = require('chalk');
-const debug = require('debug')(chalk.hex('#8ecfe3').bgHex('#08134A')(`db:${process.env.DBMS}`));
-const mysql = require('mysql');
-const pg = require('pg-promise');
+const debug = require('debug')(chalk.hex('#8ecfe3').bgHex('#08134A')(`db:${process.env.DB}`));
 const Promise = require('bluebird');
 
-Promise.promisifyAll(require('mysql/lib/Connection').prototype);
+const initOptions = { promiseLib: Promise };
+const pgp = require('pg-promise')(initOptions);
 
-let connection;
+debug('Database Status (PostgreSQL): %o', 'DEVELOPMENT MODE - Debugging enabled...');
+debug(chalk.white('Database Status (PostgreSQL):'), chalk.white.bold.bgRed(' DEVELOPMENT MODE '), chalk.inverse(' Debugging Enabled '));
 
-if (process.env.DBMS === 'postgres') {
-  debug('Database Status (PostgreSQL): %o', 'DEVELOPMENT MODE - Debugging enabled...');
-  debug(chalk.white('Database Status (PostgreSQL):'), chalk.white.bold.bgRed(' DEVELOPMENT MODE '), chalk.inverse(' Debugging Enabled '));
+const config = {
+  user               : process.env.PSQL_DB_USER,
+  password           : process.env.PSQL_DB_PASS,
+  database           : process.env.PSQL_DB_NAME,
+  host               : process.env.PSQL_DB_HOST,
+  port               : process.env.PSQL_DB_PORT,
+  max                : process.env.PSQL_DB_MAX,
+  idleTimeoutMillis  : process.env.PSQL_DB_IDLETIMEOUTMILLIS,
+};
 
-  const psqlConfig = {
-    user               : process.env.PSQL_DB_USER,
-    password           : process.env.PSQL_DB_PASS,
-    database           : process.env.PSQL_DB_NAME,
-    host               : process.env.PSQL_DB_HOST,
-    port               : process.env.PSQL_DB_PORT,
-    max                : process.env.PSQL_DB_MAX,
-    idleTimeoutMillis  : process.env.PSQL_DB_IDLETIMEOUTMILLIS,
-  };
+debug(config);
 
-  debug(psqlConfig);
+const db = pgp(config);
 
-  const pool = new pg.Pool(psqlConfig);
-  pool.on('error', err => (debug('idle client error', err.message, err.stack)));
-}
-
-if (process.env.DBMS === 'mysql') {
-  debug(chalk.white('Database Status (MySQL):'), chalk.white.bold.bgRed(' DEVELOPMENT MODE '), chalk.inverse(' Debugging Enabled '));
-  const mysqlConfig = {
-    host               : process.env.MYSQL_DB_HOST,
-    user               : process.env.MYSQL_DB_USER,
-    password           : process.env.MYSQL_DB_PASS,
-    database           : process.env.MYSQL_DB_NAME,
-  };
-
-  debug(mysqlConfig);
-
-  connection = mysql.createConnection(mysqlConfig);
-  connection.connect();
-}
-
-module.exports = connection;
+module.exports = db;
