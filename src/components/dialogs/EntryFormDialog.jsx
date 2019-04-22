@@ -1,3 +1,4 @@
+import * as Debug from 'debug';
 import React from 'react';
 import PropTypes from 'prop-types';
 import AddIcon from '@material-ui/icons/Add';
@@ -7,6 +8,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Fab from '@material-ui/core/Fab';
+import TextField from '@material-ui/core/TextField';
 import moment from 'moment';
 import { createEntry } from 'utilities';
 import {
@@ -15,8 +17,10 @@ import {
   FormButton,
   TimePicker,
 } from 'components';
-import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
+import * as c from '../../../server/helpers/chalks';
+
+const debug = Debug('client:components:entry-form-dialog');
 
 const styles = theme => ({
   dense: {
@@ -85,9 +89,12 @@ class EntryFormDialog extends React.Component {
 
     const formattedTime = moment(selectedTime).utc().format('HH:mm').toString();
     const formattedDate = moment(selectedDate).utc().format('YYYY-MM-DD').toString();
-    const releaseDateTime = `${formattedDate} ${formattedTime}-00`;
-    const releaseDate = moment(releaseDateTime, 'YYYY-MM-DD h:mm').format('YYYY-MM-DD HH:mm');
-
+    const releaseDate = `${formattedDate} ${formattedTime}-00`;
+    debug(
+      c.bgOrange(formattedTime),
+      c.bgOrange(formattedDate),
+      c.bgOrange(releaseDate),
+    );
     const newEntry = {
       userId,
       creationDate,
