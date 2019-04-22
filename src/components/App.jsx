@@ -1,5 +1,4 @@
 import * as Debug from 'debug';
-// import chalk from 'chalk';
 import React from 'react';
 import { AuthModal, Main } from 'components';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -63,7 +62,7 @@ class App extends React.Component {
 
   handleAddUser = (username, password) => addUser(username, password)
     .then((response) => {
-      alert(response.data);
+      debug(response.data);
     })
 
   render() {

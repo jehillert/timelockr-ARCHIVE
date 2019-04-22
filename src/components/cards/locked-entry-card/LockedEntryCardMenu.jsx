@@ -17,7 +17,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { deleteEntry } from '../../dialogs/node_modules/utilities';
+import { deleteEntry } from 'utilities';
 import { TimeExtensionDialog } from 'components';
 
 const debug = Debug('client:components:locked-entry-card-menu');
