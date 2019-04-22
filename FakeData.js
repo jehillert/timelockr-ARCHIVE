@@ -1,9 +1,17 @@
 /* eslint-disable import/no-extraneous-dependencies */
+// See EOF notes
+// eslint-disable-next-line import/no-extraneous-dependencies
+require('dotenv').config();
+
+const Debug = require('debug');
 const axios = require('axios');
 const cmd = require('node-cmd');
 const faker = require('faker');
 const moment = require('moment');
 const Promise = require('bluebird');
+
+const debug = Debug('■■■■:');
+debug('Client Status: %o', 'DEVELOPMENT MODE - Debugging enabled...');
 
 const getAsync = Promise.promisify(cmd.get, { multiArgs: true, context: cmd });
 
@@ -36,7 +44,6 @@ const generateUserEntries = (user, minEntries = 15, maxEntries = 30) => {
       content: faker.lorem.sentence(),
     };
 
-    // console.log(entry);
     entries.push(entry);
   }
   return entries;
@@ -49,7 +56,6 @@ const generateUsers = (numOfUsers = 100, users = []) => {
       password: faker.internet.password(),
     };
     user.entries = generateUserEntries(user);
-    // console.log(`[${user.userId}, '${user.username}', '${user.password}'],`);
     users.push(user);
   }
   return users;
@@ -58,17 +64,14 @@ const generateUsers = (numOfUsers = 100, users = []) => {
 const numOfUsers = 25;
 console.clear();
 
-getAsync('mysql -u root <schema.sql')
+getAsync('psql service=tldb<schema.sql')
   .then(() => { console.log('db tables cleared'); })
   .then(() => generateUsers(numOfUsers))
-  // add each user to users table
+  .tap(() => debug(`NUMBER OF USERS: ${numOfUsers}`))
   .then(users => Promise.each(
     users, user => axios.post(
       'http://localhost:3000/api/timelockr_dev_db/signup',
-      {
-        username: user.username,
-        password: user.password,
-      },
+      { username: user.username, password: user.password },
     )
     .then(() => console.log(user.username, user.password))
     .then(() => (Promise.each(
@@ -90,31 +93,39 @@ getAsync('mysql -u root <schema.sql')
       ))),
     ).then(() => console.log('done')))
   .catch(err => console.log('cmd err', err));
-      // console.log(user.username, user.password);
 /*
-  Maurine42               6bUeeOIkHbXNFGA
-  Adam.OKeefe             yVXI4eEbpYMgFMc
-  Earline29               HuLyOXuUAPNuyf3
-  Jaquan.Muller88         IDzsXxVshRDvpBG
-  Willard.Keebler53       8yttFU_UE2M0RBU
-  Vance_Leuschke          YsGUZsmaOcFoZ1_
-  Arne_Little             _VP63OJWcmsAI2N
-  Ismael50                _Y6_egqJCOxj8hg
-  Dario_Bashirian54       sQtDoIAxnwKAujR
-  Amaya_Reichel           9CEigbzawo0xTXU
-  Buster_Feil             f1HL0Rh0l059ja1
-  Crystal33               _RlHJdlloj5bK3f
-  Pascale81               kcdMPEO2e34CXb0
-  Holly.Lesch56           V8SJA6wv4TMBkIx
-  Paris.Terry             QZCeQdMceSD_Fj1
-  Laverne34               DiuldAjd77iI7Uk
-  Vaughn.Nader            Njw9inzAYkW374b
-  Nestor26                3Zrq4IVKreN2etN
-  Willie_Rippin           ihisRO5WVPARMD6
-  Eudora54                r3WPpU5Ynm3OwGI
-  Gladyce_Nolan13         bqqusRch5Ig6CSM
-  Ahmed.Beatty81          S_LRibJhh2bh5bX
-  Alivia77                utEs369H0Eb3abK
-  Christophe.Windler59    SY0qN0RCwVk360s
-  Garfield13              m0ck5P_0Nvxej6s
+const axios = require('axios');
+const cmd = require('node-cmd');
+const faker = require('faker');
+const moment = require('moment');
+const Promise = require('bluebird');
+
+import * as Debug from 'debug';
+import axios from 'axios';
+import cmd from 'node-cmd';
+import faker from 'faker';
+import moment from 'moment';
+import bluebird from 'bluebird';
+
+const Debug = require('debug');
+const debug = Debug('client:components:app');
+debug('Client Status: %o', 'DEVELOPMENT MODE - Debugging enabled...');
+
+SCRIPT NOTES:
+This script requires the following file to be located in the home directory:
+  .pg_service.conf
+
+The file should have the following contents:
+  [tldb]
+  dbname=postgres
+  host=localhost
+  port=5432
+  user=jhillert
+  password=OMITTED
+
+Note: Users should be logging in under user credentials, not with 'jhillert'
 */
+// getAsync('/home/jhillert/Dropbox/Scripts/psql service=tldb<schema.sql')
+// getAsync('./load_schema.sh')
+// getAsync('/home/jhillert/Dropbox/Projects/TimeLockr/load_schema.sh')
+// getAsync('psql --host=localhost --username=jhillert --port=5432<schema.sql')

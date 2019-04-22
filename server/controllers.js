@@ -22,28 +22,20 @@ function updateField(req, res) {
 
 module.exports = {
   signin: {
-    post: (req, res) => models.users.get(['users', 'username', req.body.username])
-        .then((user) => {
-          let parsedUser = user;
-          parsedUser.parseSqlResult = function parseSqlResult() {
-            return JSON.parse(JSON.stringify(this[0]));
-          };
-          parsedUser = parsedUser.parseSqlResult();
-          if (!parsedUser.username) throw new Error('Invalid username.');
-          return parsedUser;
-        })
-        .tap((user) => {
-          hasher({ password: req.body.password, salt: user.salt }, (err, pass, salt, hash) => {
-            if (err) throw err;
-            if (hash !== user.hash) throw new Error('Invalid password.');
-            req.session.regenerate(() => {
-              req.session.user = user;
-              req.session.save();
-            });
+    post: (req, res) => models.users.get(req.body.username)
+      .tap((user) => {
+        hasher({ password: req.body.password, salt: user[0].salt }, (err, pass, salt, hash) => {
+          if (err) throw err;
+          debug(chalk.hex('#ff7643')(`HASH --- ${hash}`));
+          if (hash !== user[0].hash) debug(chalk.hex('#ff7643')('Invalid password.'));
+          req.session.regenerate(() => {
+            req.session.user = user;
+            req.session.save();
           });
-        })
-        .then(user => res.status(202).send({ userId: user.user_id }))
-        .catch(error => debug('Error', error)),
+        });
+      })
+      .then(user => res.status(202).send({ userId: user[0].user_id }))
+      .catch(error => debug('Error', error)),
   },
 
   logout: {
@@ -59,36 +51,20 @@ module.exports = {
   },
 
   entries: {
-    get: (req, res) => models.entries.get([
-        'entries',
-        'users',
-        'user_id',
-        'username',
-        req.query.username,
-        'release_date',
-      ])
+    get: (req, res) => models.entries.get(req.query.username)
         .tap(results => debug('\n\nEntries - UNSORTED:\n\n%O', results))
         .then(results => helpers.sortEntries(results))
         .then(results => res.send(results))
         .catch(error => debug('Error', error)),
 
-    put: (req, res) => models.general.put([
-        'entries',
-        'release_date',
+    put: (req, res) => models.entries.update([
         req.body.data.releaseDate,
-        'entry_id',
         req.body.data.entryId,
     ])
       .then(() => res.sendStatus(201))
       .catch(error => debug('Error', error)),
 
     post: (req, res) => models.entries.post([
-      'entries',
-      'user_id',
-      'creation_date',
-      'release_date',
-      'description',
-      'content',
       req.body.userId,
       req.body.creationDate,
       req.body.releaseDate,
@@ -98,8 +74,8 @@ module.exports = {
       .then(() => res.sendStatus(201))
       .catch(error => debug('Error', error)),
 
-    delete: (req, res) => models.general
-        .delete(['entries', 'entry_id', req.body.entryId])
+    delete: (req, res) => models.entries
+        .delete(req.body.entryId)
         .then(() => res.sendStatus(201))
         .catch(error => debug('Error', error)),
   },
@@ -107,16 +83,16 @@ module.exports = {
   signup: {
     post: (req, res) => models.users
       .post([
-        'users',
-        'username',
-        'hash',
-        'salt',
         req.body.username,
         req.body.hash,
         req.body.salt,
       ])
+      .tap(() => {
+        debug(req.body.username);
+        debug(req.body.hash);
+        debug(req.body.salt);
+      })
       .then(() => res.sendStatus(201))
       .catch(() => res.sendStatus(409)),
-      // .then(() => res.status(201).json({message: 'New user successfully created.'}))
   },
 };

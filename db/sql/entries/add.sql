@@ -1,6 +1,0 @@
--- YOU SHOULD USE A TRANSACTION HERE, TO RETURN ALL ENTRIES
--- OR ON CLIENT SIDE, JUST RETURN THE NEW ENTRY, AND INSERT IN THE RIGHT SPOT
-INSERT INTO entries
-VALUES
-  (${userId}, ${creationDate}, ${releaseDate}, ${description}, ${content})
-RETURNING *

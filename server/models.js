@@ -2,19 +2,34 @@ const db = require('../db');
 
 module.exports = {
 
-  general: {
-    delete: params => db.queryAsync('DELETE FROM $1 WHERE $2 = $3', params),
-    put: params => db.queryAsync('UPDATE IGNORE $1 SET $2 = $3 WHERE $4 = $5', params),
-  },
-
   users: {
-    get: params => db.queryAsync('SELECT * FROM $1 WHERE $2 = $3', params),
-    post: params => db.queryAsync('INSERT INTO $1($2, $3, $4) VALUES ($5, $6, $7)', params),
-  },
+    get: user => db
+      .query('SELECT * FROM users WHERE username = $1', user)
+      .catch(err => console.log(err)),
+    post: params => db
+      .query('INSERT INTO users (username, hash, salt) VALUES ($1, $2, $3) ON CONFLICT (username) DO NOTHING', params)
+      .catch(err => console.log(err)),
+    delete: params => db
+      .query('DELETE FROM users WHERE user_id = $1', params)
+      .catch(err => console.log(err)),
+    update: params => db
+      .query('UPDATE users SET $1 = $2 WHERE user_id = $2 ON CONFLICT DO NOTHING', params)
+      .catch(err => console.log(err)),
+    },
 
-  entries: {
-    get: params => db.queryAsync('SELECT * FROM $1 LEFT JOIN $2 USING ($3) WHERE $4 = $5 ORDER BY $6 ASC', params),
-    post: params => db.queryAsync('INSERT INTO $1($2, $3, $4, $5, $6) VALUES ($7,$8,$9,$10,$11)', params),
+    entries: {
+    get: username => db
+      .query('SELECT * FROM entries LEFT JOIN users ON users.user_id = entries.user_id WHERE users.username = $1 ORDER BY entries.release_date ASC', username)
+      .catch(err => console.log(err)),
+    post: params => db
+      .query('INSERT INTO entries(user_id, creation_date, release_date, description, content) VALUES ($1, $2, $3, $4, $5)', params)
+      .catch(err => console.log(err)),
+    delete: entryId => db
+      .query('DELETE FROM entries WHERE entry_id = $1', entryId)
+      .catch(err => console.log(err)),
+    update: params => db
+      .query('UPDATE entries SET release_date = $1 WHERE entry_id = $2', params)
+      .catch(err => console.log(err)),
   },
 
 };

@@ -1,113 +1,59 @@
-'use strict';
-
-const db = require('./db');
-
+/* eslint-disable no-multi-spaces, no-multi-assign,
+  key-spacing, import/no-extraneous-dependencies */
+require('dotenv').config();
+const chalk = require('chalk');
+const debug = require('debug')(chalk.hex('#00FF40').bgHex('#000000')('server:app'));
+const cors = require('cors');
 const express = require('express');
-const app = express();
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const Store = require('connect-pg-simple')(session);
+const router = require('./routes.js');
 
-// NOTE: We implement only GET handlers here, because:
-//
-// 1. This demo is to be tested by typing URL-s manually in the browser;
-// 2. The demo's focus is on a proper database layer, not a web server.
+// initialize server for appropriate dbms
+const app = module.exports = express();
+const PORT = process.env.PORT || 3000;
 
-//////////////////////////////////////////////
-// Users Web API
-//////////////////////////////////////////////
+// session
+const options = {
+  host: process.env.PGHOST,
+  port: process.env.PGPORT,
+  user: process.env.PGUSER,
+  password: process.env.PGPASSWORD,
+  database: process.env.PGDATABASE,
+};
 
-// create table Users:
-GET('/users/create', () => db.users.create());
+debug('Server Status: %o', 'DEVELOPMENT MODE - Debugging enabled...');
+debug(options);
 
-// add some initial records:
-GET('/users/init', () => db.users.init());
+const sessionStore = new Store(options);
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
 
-// remove all records from the table:
-GET('/users/empty', () => db.users.empty());
+// app.use(session({
+//   store: sessionStore,
+//   secret: process.env.SESSION_SECRET,
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
+// }));
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  store: sessionStore,
+  resave: true,
+  rolling: true,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000,
+    domain: 'localhost:8080',
+    path: '/',
+    secure: false,
+  },
+}));
 
-// drop the table:
-GET('/users/drop', () => db.users.drop());
-
-// add a new user, if it doesn't exist yet, and return the object:
-GET('/users/add/:name', req => {
-  return db.task('add-user', t => {
-    return t.users.findByName(req.params.name)
-      .then(user => {
-        return user || t.users.add(req.params.name);
-      });
-  });
-});
-
-// find a user by id:
-GET('/users/find/:id', req => db.users.findById(req.params.id));
-
-// remove a user by id:
-GET('/users/remove/:id', req => db.users.remove(req.params.id));
-
-// get all users:
-GET('/users/all', () => db.users.all());
-
-// count all users:
-GET('/users/total', () => db.users.total());
-
-//////////////////////////////////////////////
-// Products Web API
-//////////////////////////////////////////////
-
-// create table Products:
-GET('/products/create', () => db.products.create());
-
-// drop the table:
-GET('/products/drop', () => db.products.drop());
-
-// remove all products:
-GET('/products/empty', () => db.products.empty());
-
-// add a new user product, if it doesn't exist yet, and return the object:
-GET('/products/add/:userId/:name', req => {
-  return db.task('add-product', t => {
-    return t.products.find(req.params)
-      .then(product => {
-        return product || t.products.add(req.params);
-      });
-  });
-});
-
-// find a product by user id + product name id:
-GET('/products/find/:userId/:name', req => db.products.find(req.params));
-
-// remove a product by id:
-GET('/products/remove/:id', req => db.products.remove(req.params.id));
-
-// get all products:
-GET('/products/all', () => db.products.all());
-
-// count all products:
-GET('/products/total', () => db.products.total());
-
-/////////////////////////////////////////////
-// Express/server part;
-/////////////////////////////////////////////
-
-// Generic GET handler;
-function GET(url, handler) {
-  app.get(url, (req, res) => {
-    handler(req)
-      .then(data => {
-        res.json({
-          success: true,
-          data
-        });
-      })
-      .catch(error => {
-        res.json({
-          success: false,
-          error: error.message || error
-        });
-      });
-  });
-}
-
-const port = 3000;
-
-app.listen(port, () => {
-  console.log('\nReady for GET requests on http://localhost:' + port);
-});
+app.use('/api/timelockr_dev_db', router);
+app.set('port', PORT);
+app.listen(app.get('port'), () => (
+  debug(`Node app started. Listening on port ${PORT}`)
+));

@@ -1,5 +1,7 @@
+\c postgres jhillert
 DROP DATABASE IF EXISTS timelockr_dev_db;
 CREATE DATABASE timelockr_dev_db;
+
 \connect timelockr_dev_db
 
 CREATE TABLE IF NOT EXISTS users (
@@ -42,3 +44,5 @@ CREATE TABLE IF NOT EXISTS session (
 )
 WITH (OIDS=FALSE);
 ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
+
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO PUBLIC

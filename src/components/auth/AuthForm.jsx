@@ -38,9 +38,9 @@ class AuthForm extends React.Component {
     super(props);
 
     this.state = {
-      email: '',
+      email: 'x@x.com',
       emailError: false,
-      password: '',
+      password: 'xxx',
       passwordError: false,
       showPassword: false,
     };
@@ -60,10 +60,10 @@ class AuthForm extends React.Component {
 
     event.preventDefault();
     return handleSubmitAsync(email, password)
-      .then(this.setState({
-        email: '',
+      .then((state) => this.setState({
+        email: 'x@x.com',
+        password: 'xxx',
         emailError: false,
-        password: '',
         passwordError: false,
         showPassword: false,
       }));
@@ -76,7 +76,7 @@ class AuthForm extends React.Component {
       this.setState({ emailError: !EmailValidator.validate(event.target.value) });
     } else if (prop === 'password' && passwordError) {
       this.setState({ passwordError: !event.target.value });
-  }
+    }
 
     return this.setState({ [prop]: event.target.value });
   };

@@ -1,22 +1,24 @@
-/* eslint-disable key-spacing */
+/* eslint-disable key-spacing, import/order, import/no-extraneous-dependencies */
+require('dotenv').config();
+
+const c = require('../server/helpers/chalks');
 const chalk = require('chalk');
-const debug = require('debug')(chalk.hex('#8ecfe3').bgHex('#08134A')(`db:${process.env.DB}`));
 const Promise = require('bluebird');
 
 const initOptions = { promiseLib: Promise };
 const pgp = require('pg-promise')(initOptions);
+const debug = require('debug')(c.blueBlack('database:index'));
 
-debug('Database Status (PostgreSQL): %o', 'DEVELOPMENT MODE - Debugging enabled...');
-debug(chalk.white('Database Status (PostgreSQL):'), chalk.white.bold.bgRed(' DEVELOPMENT MODE '), chalk.inverse(' Debugging Enabled '));
+debug(c.error(' DEVELOPMENT MODE '), chalk.inverse(' Debugging Enabled '));
 
 const config = {
-  user               : process.env.PSQL_DB_USER,
-  password           : process.env.PSQL_DB_PASS,
-  database           : process.env.PSQL_DB_NAME,
-  host               : process.env.PSQL_DB_HOST,
-  port               : process.env.PSQL_DB_PORT,
-  max                : process.env.PSQL_DB_MAX,
-  idleTimeoutMillis  : process.env.PSQL_DB_IDLETIMEOUTMILLIS,
+  user               : process.env.PGUSER,
+  password           : process.env.PGPASSWORD,
+  database           : process.env.PGDATABASE,
+  host               : process.env.PGHOST,
+  port               : process.env.PGPORT,
+  max                : process.env.PG_MAX,
+  idleTimeoutMillis  : process.env.PG_IDLETIMEOUTMILLIS,
 };
 
 debug(config);
@@ -24,3 +26,7 @@ debug(config);
 const db = pgp(config);
 
 module.exports = db;
+/*
+Ubuntu Configuration:
+  https://help.ubuntu.com/stable/serverguide/postgresql.html
+*/

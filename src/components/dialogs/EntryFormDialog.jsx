@@ -69,8 +69,6 @@ class EntryFormDialog extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    const dbms = process.env.DB || 'mysql';
-
     const {
       content,
       description,
@@ -87,12 +85,8 @@ class EntryFormDialog extends React.Component {
 
     const formattedTime = moment(selectedTime).utc().format('HH:mm').toString();
     const formattedDate = moment(selectedDate).utc().format('YYYY-MM-DD').toString();
-    const releaseDateTime = `${formattedDate} ${formattedTime}`;
-    let releaseDate = moment(releaseDateTime, 'YYYY-MM-DD h:mm').format('YYYY-MM-DD HH:mm');
-
-    if (process.env.DB === 'postgres') {
-      releaseDate += '+00';
-    }
+    const releaseDateTime = `${formattedDate} ${formattedTime}-00`;
+    const releaseDate = moment(releaseDateTime, 'YYYY-MM-DD h:mm').format('YYYY-MM-DD HH:mm');
 
     const newEntry = {
       userId,
