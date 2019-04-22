@@ -1,3 +1,6 @@
+/* eslint-disable key-spacing, import/order, import/no-extraneous-dependencies */
+require('dotenv').config();
+
 const c = require('../server/helpers/chalks');
 const chalk = require('chalk');
 const Promise = require('bluebird');
