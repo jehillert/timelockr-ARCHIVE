@@ -1,7 +1,7 @@
+const path = require('path');
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
-const path = require('path');
 
 const config = {
   entry: './src/index.jsx',
@@ -56,16 +56,14 @@ const config = {
     tls: 'empty',
   },
   plugins: [
+    new Dotenv({
+      systemvars: true,
+    }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
-  ],
-  plugins: [
     new CopyWebpackPlugin([
       // relative path is from src
       { from: './static/favicon.ico' }, // <- your path to favicon
     ]),
-    new Dotenv({
-      systemvars: true,
-    }),
   ],
   devServer: {
     contentBase: './dist',

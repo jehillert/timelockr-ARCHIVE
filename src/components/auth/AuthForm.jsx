@@ -38,9 +38,9 @@ class AuthForm extends React.Component {
     super(props);
 
     this.state = {
-      email: 'x@x.com',
+      email: '',
       emailError: false,
-      password: 'xxx',
+      password: '',
       passwordError: false,
       showPassword: false,
     };
@@ -61,8 +61,8 @@ class AuthForm extends React.Component {
     event.preventDefault();
     return handleSubmitAsync(email, password)
       .then((state) => this.setState({
-        email: 'x@x.com',
-        password: 'xxx',
+        email: '',
+        password: '',
         emailError: false,
         passwordError: false,
         showPassword: false,

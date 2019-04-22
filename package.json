@@ -1,8 +1,12 @@
 {
   "name": "timelockr",
   "version": "1.0.0",
-  "description": "Making information inaccessible.",
+  "description": "Make stuff inaccessible.",
   "main": "index.js",
+  "engines": {
+    "node": "10.15.3",
+    "npm": "6.9.0"
+  },
   "keywords": [],
   "author": "",
   "license": "UNLICENSED",

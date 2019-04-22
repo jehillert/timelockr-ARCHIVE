@@ -1,6 +1,7 @@
 /* eslint-disable no-multi-spaces, no-multi-assign,
   key-spacing, import/no-extraneous-dependencies */
 require('dotenv').config();
+
 const chalk = require('chalk');
 const debug = require('debug')(chalk.hex('#00FF40').bgHex('#000000')('server:app'));
 const cors = require('cors');
