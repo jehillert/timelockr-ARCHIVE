@@ -19,46 +19,6 @@ S.Column = styled(Box)`
   align-content: center;
 `;
 
-/*
-When you moved key into wrapper component.
-When cardmenu made conditional on existence of id.
-    LockedEntryCard      23
-    StyledMuiCardHeader  8
-    LockedEntryCard      21
-    LockedEntryCard      20
-    CardColumn           73
-    CardWrapper          46
-    CardWrapper          42
-    CardWrapper          39
-    CardColumn           69
-
-When you moved key into wrapper component.
-    LockedEntryCard:      23
-    StyledMuiCardHeader:  8
-    LockedEntryCard:      21
-    LockedEntryCard:      20
-    CardColumn:           45
-    CardWrapper:          46
-    CardWrapper:          42
-    CardWrapper:          39
-    CardColumn:           41
-
-When you moved key into wrapped component.
-    LockedEntryCardMenuBody  24
-    LockedEntryCardMenuBody  23
-    LockedEntryCardMenuBody  22
-    LockedEntryCardMenu      103
-    LockedEntryCard          23
-    StyledMuiCardHeader      8
-    LockedEntryCard          21
-    LockedEntryCard          20
-    CardColumn               45
-    CardWrapper              46
-    CardWrapper              42
-    CardWrapper              39
-    CardColumn               41
-*/
-
 const CardColumn = (props) => {
   const {
     Card,

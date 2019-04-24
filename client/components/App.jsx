@@ -95,14 +95,14 @@ class App extends React.Component {
                       />
                     </ThemeProvider>
                   ) : (
-                    <ThemeProvider theme={defaultTheme}>
-                      <AuthModal
-                        handleSignin={this.handleSignin}
-                        handleAddUser={this.handleAddUser}
-                        isAuthorized={isAuthorized}
-                      />
-                    </ThemeProvider>
-                  )
+                      <ThemeProvider theme={defaultTheme}>
+                        <AuthModal
+                          handleSignin={this.handleSignin}
+                          handleAddUser={this.handleAddUser}
+                          isAuthorized={isAuthorized}
+                        />
+                      </ThemeProvider>
+                    )
                 )}
               />
             </MuiPickersUtilsProvider>
