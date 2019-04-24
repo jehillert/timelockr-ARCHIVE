@@ -14,11 +14,12 @@ debug(c.error(' DEVELOPMENT MODE '), chalk.inverse(' Debugging Enabled '));
 const config = {
   user               : process.env.PGUSER,
   password           : process.env.PGPASSWORD,
-  database           : process.env.PGDATABASE,
-  host               : process.env.PGHOST,
-  port               : process.env.PGPORT,
-  max                : process.env.PG_MAX,
-  idleTimeoutMillis  : process.env.PG_IDLETIMEOUTMILLIS,
+  database           : process.env.PGDATABASE || 'db',
+  host               : process.env.PGHOST || 'localhost',
+  port               : process.env.PGPORT || 5432,
+  max                : process.env.PG_MAX || 100,
+  idleTimeoutMillis  : process.env.PG_IDLETIMEOUTMILLIS || 30000,
+  ssl                : process.env.PG_SSL || true,
 };
 
 debug(config);

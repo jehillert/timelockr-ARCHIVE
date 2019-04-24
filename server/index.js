@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 3000;
 // session
 const options = {
   host: process.env.PGHOST,
-  port: process.env.PGPORT,
+  port: process.env.PGPORT || 5432,
   user: process.env.PGUSER,
   password: process.env.PGPASSWORD,
   database: process.env.PGDATABASE,
