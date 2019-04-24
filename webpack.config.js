@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 const config = {
-  entry: './src/index.jsx',
+  entry: './client/index.jsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -61,7 +61,7 @@ const config = {
     }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
     new CopyWebpackPlugin([
-      // relative path is from src
+      // relative path is from client
       { from: './static/favicon.ico' }, // <- your path to favicon
     ]),
   ],
@@ -71,10 +71,10 @@ const config = {
   resolve: {
     extensions: ['.js', '.jsx', '.css'],
     alias: {
-      components: path.resolve(__dirname, 'src/indexes/components.jsx'),
-      contexts: path.resolve(__dirname, 'src/indexes/contexts.jsx'),
-      theme: path.resolve(__dirname, 'src/indexes/theme.jsx'),
-      utilities: path.resolve(__dirname, 'src/indexes/utilities.jsx'),
+      components: path.resolve(__dirname, 'client/indexes/components.jsx'),
+      contexts: path.resolve(__dirname, 'client/indexes/contexts.jsx'),
+      theme: path.resolve(__dirname, 'client/indexes/theme.jsx'),
+      utilities: path.resolve(__dirname, 'client/indexes/utilities.jsx'),
     },
   },
 };
@@ -85,7 +85,7 @@ THIS IS FOR FAVICON
   const CopyWebpackPlugin = require('copy-webpack-plugin');
 
   new CopyWebpackPlugin([
-    // relative path is from src
+    // relative path is from client
     { from: './static/favicon.ico' }, // <- your path to favicon
   ])
 

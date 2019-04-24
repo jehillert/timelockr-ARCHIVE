@@ -16,13 +16,15 @@
     "url": "https://github.com/jehillert/TimeLockr"
   },
   "scripts": {
+    "heroku-prebuild": "npm install --dev",
     "clean": "rm dist/bundle.js",
     "build-dev": "webpack -d --mode development",
     "build-prod": "webpack -p --mode production",
     "dev-server": "nodemon --ignore node_modules --inspect server",
     "start": "webpack-dev-server --hot --mode development",
     "start:dev": "nodenv -f .",
-    "lint:css": "stylelint './src/**/*.js'"
+    "lint:css": "stylelint './client/**/*.js'",
+    "heroku-postbuild": "npm install && cd client && npm install --only-dev && npm install && npm run build"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.3",
@@ -99,6 +101,7 @@
     "stylelint-config-standard": "^18.2.0",
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-processor-styled-components": "^1.6.0",
+    "table": "^5.2.3",
     "url-loader": "^1.1.2",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0",

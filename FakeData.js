@@ -1,131 +1,165 @@
-/* eslint-disable import/no-extraneous-dependencies */
-// See EOF notes
-// eslint-disable-next-line import/no-extraneous-dependencies
+// ENVIRONMENT
 require('dotenv').config();
 
-const Debug = require('debug');
+// DEPENDENCIES
 const axios = require('axios');
-const cmd = require('node-cmd');
 const faker = require('faker');
+const fs = require('fs');
 const moment = require('moment');
+const table = require('table').table;
+const getBorderCharacters = require('table').getBorderCharacters
 const Promise = require('bluebird');
 
-const debug = Debug('■■■■:');
-debug('Client Status: %o', 'DEVELOPMENT MODE - Debugging enabled...');
+// VARIABLES
+const fixedEntries = 5;
+const minEntries = 15;
+const maxEntries = 30;
+const numOfUsers = 25;
 
-const getAsync = Promise.promisify(cmd.get, { multiArgs: true, context: cmd });
+let fileFormattedCredentials = '';
+let entries = [];
+let users = [];
 
-faker.seed(123);
-
-const aTimeLaterToday = () => {
+// FUNCTIONS (ABC)
+function aTimeLaterToday() {
   const now = moment();
   const midnight = moment().endOf('hour');
   let timeInBetween = faker.date.between(now, midnight);
-  timeInBetween = moment(timeInBetween).format('YYYY-MM-DD HH:mm');
-  // timeInBetween = moment(timeInBetween).format('YYYY-MM-DD HH:mm:ss');
+  timeInBetween = moment(timeInBetween).format('YYYY-MM-DD HH:mm:ss+00');
   return timeInBetween;
 };
-const generateUserEntries = (user, minEntries = 15, maxEntries = 30) => {
-  const entries = [];
 
-  const numOfUserEntries = faker.random.number({ min: minEntries, max: maxEntries });
+function generateEntriesForUsers(users, fixedEntries, minEntries, maxEntries) {
+  let numOfUserEntries;
 
-  for (let e = 0; e < numOfUserEntries; e += 1) {
-    const creationDate = moment(faker.date.past()).format('YYYY-MM-DD HH:mm');
-    const releaseDate = Math.random() < 0.5
-                    ? aTimeLaterToday()
-                    : moment(faker.date.future()).format('YYYY-MM-DD HH:mm');
-
-    const entry = {
-      userId: user.userId,
-      creationDate,
-      releaseDate,
-      description: faker.lorem.words(Math.floor((Math.random() * 10))),
-      content: faker.lorem.sentence(),
-    };
-
-    entries.push(entry);
+  if (fixedEntries) {
+    numOfUserEntries = fixedEntries;
   }
-  return entries;
-};
-const generateUsers = (numOfUsers = 100, users = []) => {
-  for (let i = 1; i <= numOfUsers; i += 1) {
-    const user = {
-      userId: i,
-      username: faker.internet.userName(),
-      password: faker.internet.password(),
-    };
-    user.entries = generateUserEntries(user);
-    users.push(user);
-  }
+
+  users.forEach(genUserEntries = (user) => {
+    if (!fixedEntries) {
+      numOfUserEntries = faker.random.number({ min: minEntries, max: maxEntries });
+    }
+    const entries = [];
+    for (let e = 0; e < numOfUserEntries; e += 1) {
+      const creationDate = moment(faker.date.past()).format('YYYY-MM-DD HH:mm:ss+00');
+      const releaseDate = Math.random() < 0.5
+                      ? aTimeLaterToday()
+                      : moment(faker.date.future()).format('YYYY-MM-DD HH:mm:ss+00');
+      const entry = {
+        userId: user.userId,
+        creationDate,
+        releaseDate,
+        description: faker.lorem.words(Math.floor(Math.random() * (Math.floor(3) - Math.ceil(1) + 1)) + Math.ceil(1)),
+        content: faker.lorem.sentence(),
+      };
+
+      entries.push(entry);
+    }
+
+    user.entries = entries;
+  });
+
   return users;
 };
 
-const numOfUsers = 25;
+function formatCredentialsAsString(usersCredentials) {
+  const concatCred = (accumCreds, user) => (
+    `${accumCreds}\nusername: '${user.username}',\npassword: '${user.password}',\n`
+  );
+  return usersCredentials.reduce(concatCred, '');
+}
+
+function generateUsers(numOfUsers, users = []) {
+  let usersTableArray = [];
+  let data = '';
+
+  for (let i = 1; i <= numOfUsers; i += 1) {
+    const user = {
+      userId: i,
+      username: faker.internet.email(),
+      password: faker.internet.password(),
+    };
+
+    users.push(user);
+  }
+
+  return users;
+};
+
+function getAllEntries(users) {
+  const entries = [];
+  users.forEach(getUserEntries = (user) => {
+    user.entries.forEach(pushEntry = (entry) => {
+      entries.push(entry);
+    })
+  })
+  return entries;
+}
+
+function writeDataToFile(data) {
+  console.log(data);
+  fs.writeFile('fake-credentials.data', data, 'utf8', (err) => {
+    if (err) {
+      return console.log(err);
+    }
+    console.log(`Mock user credentials written to 'fake-credentials.data'`)
+  })
+}
+
+// MAIN
 console.clear();
 
-getAsync('psql service=tldb<schema.sql')
-  .then(() => { console.log('db tables cleared'); })
-  .then(() => generateUsers(numOfUsers))
-  .tap(() => debug(`NUMBER OF USERS: ${numOfUsers}`))
-  .then(users => Promise.each(
-    users, user => axios.post(
-      'http://localhost:3000/api/timelockr_dev_db/signup',
-      { username: user.username, password: user.password },
-    )
-    .then(() => console.log(user.username, user.password))
-    .then(() => (Promise.each(
-        user.entries,
-        entry => axios.post('http://localhost:3000/api/timelockr_dev_db/entries', {
-            userId: entry.userId,
-            creationDate: entry.creationDate,
-            releaseDate: entry.releaseDate,
-            description: entry.description,
-            content: entry.content,
-          })
-        .then(() => console.log(
-          entry.userId,
-          entry.creationDate,
-          entry.releaseDate,
-          entry.description,
-          entry.content,
-        )),
-      ))),
-    ).then(() => console.log('done')))
-  .catch(err => console.log('cmd err', err));
+faker.seed(123);
+users = generateUsers(numOfUsers);
+console.table(users);
+
+fileFormattedCredentials = formatCredentialsAsString(users);
+writeDataToFile(fileFormattedCredentials);
+
+users = generateEntriesForUsers(users, fixedEntries, minEntries, maxEntries);
+entries = getAllEntries(users);
+
+console.table(entries);
+
+Promise.each(
+  users, user => axios.post(
+    'http://localhost:3000/api/db/signup',
+    { username: user.username, password: user.password },
+  )
+  .then(() => console.log(user.username, user.password))
+  .then(() => (Promise.each(
+      user.entries,
+      entry => axios.post('http://localhost:3000/api/db/entries', {
+          userId: entry.userId,
+          creationDate: entry.creationDate,
+          releaseDate: entry.releaseDate,
+          description: entry.description,
+          content: entry.content,
+        })
+      .then(() => console.log(
+        entry.userId,
+        entry.creationDate,
+        entry.releaseDate,
+        entry.description,
+        entry.content,
+      )),
+    )),
+  ).then(() => console.log('done')))
+.catch(err => console.log(err));
+
 /*
-const axios = require('axios');
-const cmd = require('node-cmd');
-const faker = require('faker');
-const moment = require('moment');
-const Promise = require('bluebird');
+  SCRIPT NOTES:
+  This script requires the following file to be located in the home directory:
+    .pg_service.conf
 
-import * as Debug from 'debug';
-import axios from 'axios';
-import cmd from 'node-cmd';
-import faker from 'faker';
-import moment from 'moment';
-import bluebird from 'bluebird';
+  The file should have the following contents:
+    [tldb]
+    dbname=postgres
+    host=localhost
+    port=5432
+    user=jhillert
+    password=OMITTED
 
-const Debug = require('debug');
-const debug = Debug('client:components:app');
-debug('Client Status: %o', 'DEVELOPMENT MODE - Debugging enabled...');
-
-SCRIPT NOTES:
-This script requires the following file to be located in the home directory:
-  .pg_service.conf
-
-The file should have the following contents:
-  [tldb]
-  dbname=postgres
-  host=localhost
-  port=5432
-  user=jhillert
-  password=OMITTED
-
-Note: Users should be logging in under user credentials, not with 'jhillert'
+  Note: Users should be logging in under user credentials, not with 'jhillert'
 */
-// getAsync('/home/jhillert/Dropbox/Scripts/psql service=tldb<schema.sql')
-// getAsync('./load_schema.sh')
-// getAsync('/home/jhillert/Dropbox/Projects/TimeLockr/load_schema.sh')
-// getAsync('psql --host=localhost --username=jhillert --port=5432<schema.sql')

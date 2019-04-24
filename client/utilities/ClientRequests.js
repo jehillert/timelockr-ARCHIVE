@@ -5,7 +5,7 @@ import * as Debug from 'debug';
 const axios = require('axios');
 
 const debug = Debug('client:utilities:client-requests');
-const urlBase = 'http://localhost:3000/api/timelockr_dev_db';
+const urlBase = 'http://localhost:3000/api/db';
 
 // ENTRY REQUESTS
 export const deleteEntry = entryId => axios.delete(`${urlBase}/entries`, { data: { entryId } })

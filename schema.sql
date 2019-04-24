@@ -1,8 +1,8 @@
 \c postgres jhillert
-DROP DATABASE IF EXISTS timelockr_dev_db;
-CREATE DATABASE timelockr_dev_db;
+DROP DATABASE IF EXISTS db;
+CREATE DATABASE db;
 
-\connect timelockr_dev_db
+\connect db
 
 CREATE TABLE IF NOT EXISTS users (
   user_id SERIAL PRIMARY KEY,

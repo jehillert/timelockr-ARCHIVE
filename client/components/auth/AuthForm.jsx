@@ -38,9 +38,9 @@ class AuthForm extends React.Component {
     super(props);
 
     this.state = {
-      email: '',
-      emailError: false,
-      password: '',
+      username: 'Mervin.Graham@hotmail.com',
+      password: 'bUeeOIkHbXNFGAf',
+      notAnEmailAddressError: false,
       passwordError: false,
       showPassword: false,
     };
@@ -48,32 +48,32 @@ class AuthForm extends React.Component {
 
   handleSubmit = (event) => {
     const { handleSubmit } = this.props;
-    const { email, password } = this.state;
+    const { username, password } = this.state;
     const handleSubmitAsync = Promise.promisify(handleSubmit);
 
-    if (!EmailValidator.validate(email) || password === '') {
+    if (!EmailValidator.validate(username) || password === '') {
       return this.setState({
-        emailError: !EmailValidator.validate(email),
+        notAnEmailAddressError: !EmailValidator.validate(username),
         passwordError: !password,
       });
     }
 
     event.preventDefault();
-    return handleSubmitAsync(email, password)
+    return handleSubmitAsync(username, password)
       .then((state) => this.setState({
-        email: '',
+        username: '',
         password: '',
-        emailError: false,
+        notAnEmailAddressError: false,
         passwordError: false,
         showPassword: false,
       }));
   }
 
   handleChange = prop => (event) => {
-    const { emailError, passwordError } = this.state;
+    const { notAnEmailAddressError, passwordError } = this.state;
 
-    if (prop === 'email' && emailError === true) {
-      this.setState({ emailError: !EmailValidator.validate(event.target.value) });
+    if (prop === 'username' && notAnEmailAddressError === true) {
+      this.setState({ notAnEmailAddressError: !EmailValidator.validate(event.target.value) });
     } else if (prop === 'password' && passwordError) {
       this.setState({ passwordError: !event.target.value });
     }
@@ -88,8 +88,8 @@ class AuthForm extends React.Component {
   render() {
     const { classes } = this.props;
     const {
-      email,
-      emailError,
+      username,
+      notAnEmailAddressError,
       password,
       passwordError,
       showPassword,
@@ -98,15 +98,15 @@ class AuthForm extends React.Component {
     return (
       <S.Form autoComplete='off'>
         <TextField
-          id='outlined-email-input'
+          id='outlined-email-as-username-input'
           label='Email'
           className={classNames(classes.dense, classes.margin, classes.textField)}
-          error={emailError}
+          error={notAnEmailAddressError}
           type='email'
-          name='email'
+          name='username'
           autoComplete='email'
           margin='dense'
-          value={email}
+          value={username}
           variant='outlined'
           onChange={this.handleChange('email')}
         />
@@ -155,74 +155,6 @@ AuthForm.propTypes = {
 
 export default withStyles(styles)(AuthForm);
 
-// email: 'Rita_Barrows',
-// password: 'MgFMcT_XhjQWxcO',
-//
-// email: 'Llewellyn_Hegmann',
-// password: 'ODjCg5Id5qL4yNN',
-//
-// email: 'Tevin29',
-// password: 'hzw0kIhT8yttFU_',
-//
-// email: 'Erwin_Roob94',
-// password: 'pz0H844baOYBKTA',
-//
-// email: 'Hollie.Leffler',
-// password: 'KPnALOGwR0P7_Qz',
-//
-// email: 'Alaina1',
-// password: 'zlanxFN0oogEzVp',
-//
-// email: 'Arnaldo1',
-// password: 'rgrGynFI8rW9bf2',
-//
-// email: 'Lance_Moore',
-// password: 'O94LUj15a7uM3Qe',
-//
-// email: 'Julian.Orn71',
-// password: '5TgMtja6px7EzNn',
-//
-// email: 'Jaylon_Price1',
-// password: 'xszHdFn9IHB4OgG',
-//
-// email: 'Vernie.Dickens2',
-// password: 'hMru5_RlHJdlloj',
-//
-// email: 'Doris70',
-// password: 'MPEO2e34CXb010L',
-//
-// email: 'Kailee_Flatley',
-// password: 'NAdvsapLG7ZGEco',
-//
-// email: 'Theresia5',
-// password: 'umWkGi0q6KUdprF',
-//
-// email: 'Hettie.Stracke20',
-// password: 'TXHqfanfn0g2Jj3',
-//
-// email: 'Uriah61',
-// password: 'ZQ2Njw9inzAYkW3',
-//
-// email: 'Timmy.Braun',
-// password: 'RTjGiAthvJXhbAD',
-//
-// email: 'Roosevelt.Parker28',
-// password: '2Td85JyhuOvMJ2b',
-//
-// email: 'Rozella_Rau12',
-// password: 'NuSPmT05SHtKnOO',
-//
-// email: 'Chandler82',
-// password: 'lPX8MqJaFWe9Ggg',
-//
-// email: 'Elisa37',
-// password: 'v2oLh1uLDdgwQzA',
-//
-// email: 'Oliver_Kassulke76',
-// password: 'neIB8LPYZ3vwl2e',
-//
-// email: 'Joan.Nolan78',
-// password: '74L55sT5ufpGxZ9',
-//
-// email: 'Karlee_Yost',
-// password: 'JieiYho5a4Zh2BU',
+/*
+
+*/

@@ -53,7 +53,7 @@ app.use(session({
   },
 }));
 
-app.use('/api/timelockr_dev_db', router);
+app.use(`/api/${process.env.PGDATABASE}`, router);
 app.set('port', PORT);
 app.listen(app.get('port'), () => (
   debug(`Node app started. Listening on port ${PORT}`)
