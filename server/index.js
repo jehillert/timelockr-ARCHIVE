@@ -54,7 +54,11 @@ app.use(session({
 }));
 
 app.use(`/api/${process.env.PGDATABASE}`, router);
-app.set('port', PORT);
-app.listen(app.get('port'), () => (
-  debug(`Node app started. Listening on port ${PORT}`)
+
+app.set('port', process.env.PORT);
+app.set('host', '0.0.0.0');
+
+app.listen(app.get('port'), app.get('host'), () => (
+  debug(`Node app started. Listening on port ${process.env.PORT}`)
 ));
+
