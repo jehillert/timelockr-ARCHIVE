@@ -23,7 +23,7 @@
     "start": "webpack-dev-server --hot --mode development",
     "start:dev": "nodenv -f .",
     "lint:css": "stylelint './client/**/*.js'",
-    "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress"
+    "heroku-postbuild": "webpack -p --config ./webpack.config.js --progress"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.3",
