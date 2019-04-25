@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   devtool: 'source-map',
@@ -25,7 +24,6 @@ module.exports = {
     tls: 'empty',
   },
   plugins: [
-    new Dotenv({ systemvars: true }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'production',
