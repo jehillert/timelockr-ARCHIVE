@@ -18,6 +18,12 @@ module.exports = {
       { test: /\.png$/, use: [{ loader: 'url-loader', options: { mimetype: 'image/png' } }] },
     ],
   },
+  node: {
+    console: true,
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
+  },
   plugins: [
     new Dotenv({ systemvars: true }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
@@ -73,12 +79,6 @@ new webpack.DefinePlugin({
 POSSIBLY NEEDED:
   const CopyWebpackPlugin = require('copy-webpack-plugin');
   new CopyWebpackPlugin([{ from: './static/favicon.ico' }]),
-  node: {
-    console: true,
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty',
-  },
   rules: [
     { test: /\.jsx?$/, include: /node_modules/, use: ['react-hot-loader/webpack'] },
   ]
