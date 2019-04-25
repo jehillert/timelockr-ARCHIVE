@@ -1,5 +1,8 @@
 /* eslint-disable no-multi-spaces, no-multi-assign,
-  key-spacing, import/no-extraneous-dependencies */
+   key-spacing, import/no-extraneous-dependencies
+! CHANGES REQUIRED:
+!   cookie: {... domain: 'localhost:8080',
+*/
 require('dotenv').config();
 
 const chalk = require('chalk');
@@ -32,13 +35,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-// app.use(session({
-//   store: sessionStore,
-//   secret: process.env.SESSION_SECRET,
-//   resave: false,
-//   saveUninitialized: true,
-//   cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
-// }));
 app.use(session({
   secret: process.env.SESSION_SECRET,
   store: sessionStore,
@@ -46,19 +42,32 @@ app.use(session({
   rolling: true,
   saveUninitialized: true,
   cookie: {
-    maxAge: 24 * 60 * 60 * 1000,
+    maxAge: 30 * 24 * 60 * 60 * 1000,
     domain: 'localhost:8080',
     path: '/',
     secure: false,
   },
 }));
 
-app.use(`/api/${process.env.PGDATABASE}`, router);
+app.use('/api/db', router);
+// app.use(`/api/${process.env.PGDATABASE}`, router);
 
-app.set('port', process.env.PORT);
-app.set('host', '0.0.0.0');
-
-app.listen(app.get('port'), app.get('host'), () => (
-  debug(`Node app started. Listening on port ${process.env.PORT}`)
+app.set('port', PORT);
+app.listen(app.get('port'), () => (
+  debug(`Node app started. Listening on port ${PORT}`)
 ));
 
+  // app.use(session({
+  //   store: sessionStore,
+  //   secret: process.env.SESSION_SECRET,
+  //   resave: false,
+  //   saveUninitialized: true,
+  //   cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
+  // }));
+
+  // app.set('port', process.env.PORT);
+  // app.set('host', '0.0.0.0');
+  //
+  // app.listen(app.get('port'), app.get('host'), () => (
+  //   debug(`Node app started. Listening on port ${process.env.PORT}`)
+  // ));

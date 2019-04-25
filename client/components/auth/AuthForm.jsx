@@ -38,8 +38,8 @@ class AuthForm extends React.Component {
     super(props);
 
     this.state = {
-      username: 'Bernard_Hamill@hotmail.com',
-      password: 'wU5ECxrpdBF6EFU',
+      username: 'Mervin.Graham@hotmail.com',
+      password: 'bUeeOIkHbXNFGAf',
       notAnEmailAddressError: false,
       passwordError: false,
       showPassword: false,
