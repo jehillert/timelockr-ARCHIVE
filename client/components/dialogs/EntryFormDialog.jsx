@@ -1,4 +1,5 @@
 import * as Debug from 'debug';
+import chalk from 'chalk';
 import React from 'react';
 import PropTypes from 'prop-types';
 import AddIcon from '@material-ui/icons/Add';
@@ -18,8 +19,8 @@ import {
   TimePicker,
 } from 'components';
 import { withStyles } from '@material-ui/core/styles';
-import * as c from '../../../server/helpers/chalks';
 
+const bgOrange = chalk.hex('#000000').bgHex('#38A53C');
 const debug = Debug('client:components:entry-form-dialog');
 
 const styles = theme => ({
@@ -91,9 +92,9 @@ class EntryFormDialog extends React.Component {
     const formattedDate = moment(selectedDate).utc().format('YYYY-MM-DD').toString();
     const releaseDate = `${formattedDate} ${formattedTime}-00`;
     debug(
-      c.bgOrange(formattedTime),
-      c.bgOrange(formattedDate),
-      c.bgOrange(releaseDate),
+      bgOrange(formattedTime),
+      bgOrange(formattedDate),
+      bgOrange(releaseDate),
     );
     const newEntry = {
       userId,

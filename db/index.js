@@ -1,17 +1,17 @@
 /* eslint-disable key-spacing, import/order, import/no-extraneous-dependencies */
 require('dotenv').config();
 
-const c = require('../server/helpers/chalks');
 const chalk = require('chalk');
 const Promise = require('bluebird');
 
-const debug = require('debug')(c.blueBlack('database:index'));
-debug(c.error(' DEVELOPMENT MODE '), chalk.inverse(' Debugging Enabled '));
+const debug = require('debug')(chalk.hex('#0a93ff').bgHex('#000000')('database:index'));
+
+debug(chalk.bold.hex('#FF0000')(' DEVELOPMENT MODE '), chalk.inverse(' Debugging Enabled '));
 
 const initOptions = { promiseLib: Promise };
 const pgp = require('pg-promise')(initOptions);
 
-const connectionString = process.env.DATABASE_URL
+const connectionString = process.env.DATABASE_URL;
 const db = pgp(connectionString);
 
 module.exports = db;
