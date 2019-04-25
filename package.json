@@ -16,13 +16,10 @@
     "url": "https://github.com/jehillert/TimeLockr"
   },
   "scripts": {
-    "clean": "rm dist/bundle.js",
-    "build-dev": "webpack -d --mode development",
-    "build-prod": "webpack -p --mode production",
     "dev-server": "nodemon --ignore node_modules --inspect server",
     "start": "webpack-dev-server --hot --mode development",
-    "start:dev": "nodenv -f .",
-    "lint:css": "stylelint './client/**/*.js'",
+    "lint:js": "eslint . --ignore-path .eslintignore",
+    "lint:css": "stylelint src/common/**/*.css",
     "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress"
   },
   "dependencies": {

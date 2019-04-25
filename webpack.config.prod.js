@@ -47,11 +47,15 @@ module.exports = {
 /*
 
 ! TO FINISH:
-!   https://iamakulov.com/notes/webpack-front-end-size-caching/
+!   minify production bundle
+!     https://iamakulov.com/notes/webpack-front-end-size-caching/
+!   go over webpack migration notes:
+!      https://webpack.js.org/migrate/3/#dedupeplugin-has-been-removed
 
 CONSIDER ADDING:
-  https://github.com/webpack-contrib/mini-css-extract-plugin
-
+  One resource said adding this was suggested:
+    https://github.com/webpack-contrib/mini-css-extract-plugin
+  Can you replace dotenv or heroku env variables with vars defeined in webpack.DefinePlugin?
 POSSIBLY REVERT TO:
   { test: /\.less$/, use: ['style-loader', 'css-loader', 'less-loader'] },
 
