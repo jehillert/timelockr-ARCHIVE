@@ -54,7 +54,7 @@ app.use('/api/db', router);
 
 app.set('port', PORT);
 app.listen(app.get('port'), () => (
-  debug(`Node app started. Listening on port ${PORT}`)
+  console.log(`Node app started. Listening on port ${PORT}`)
 ));
 
   // app.use(session({

@@ -14,11 +14,11 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.(js|jsx)$/, use: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.jsx?$/, include: /node_modules/, use: ['react-hot-loader/webpack'] },
-      { test: /\.css$/, use: ['style-loader', 'css-loader/locals'] },
-      { test: /\.less$/, use: ['style-loader', 'css-loader', 'less-loader'] },
-      { test: /\.png$/, use: [{ loader: 'url-loader', options: { mimetype: 'image/png' } }] },
+      {test: /\.(js|jsx)$/, use: 'babel-loader', exclude: /node_modules/},
+      {test: /\.jsx?$/, include: /node_modules/, use: ['react-hot-loader/webpack']},
+      {test: /\.css$/, use: ['style-loader', 'css-loader/locals']},
+      {test: /\.less$/, use: ['style-loader', 'css-loader', 'less-loader']},
+      {test: /\.png$/, use: [{ loader: 'url-loader', options: { mimetype: 'image/png'}}]},
     ],
   },
   node: {
@@ -41,6 +41,7 @@ module.exports = {
       utilities: path.resolve(__dirname, 'client/indexes/utilities.jsx'),
     },
   },
+
 };
 
 /*
