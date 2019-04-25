@@ -3,12 +3,11 @@ const webpack = require('webpack');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  mode: 'development',
   devtool: 'cheap-module-eval-source-map',
   entry: './client/index.jsx',
   target: 'web',
   output: {
-    path: path.resolve(__dirname, 'dist'), // Note: Physical files are only output by the production build task `npm run build`.
+    path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
     filename: 'bundle.js',
   },
@@ -30,6 +29,10 @@ module.exports = {
   plugins: [
     new Dotenv({ systemvars: true }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: 'development',
+      API_HOST: 'http://localhost:3000',
+    }),
   ],
   devServer: { contentBase: './dist' },
   resolve: {
@@ -41,6 +44,7 @@ module.exports = {
       utilities: path.resolve(__dirname, 'client/indexes/utilities.jsx'),
     },
   },
+
 };
 
 /*

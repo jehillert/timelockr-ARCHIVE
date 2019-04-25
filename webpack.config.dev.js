@@ -3,22 +3,21 @@ const webpack = require('webpack');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  mode: 'development',
   devtool: 'cheap-module-eval-source-map',
   entry: './client/index.jsx',
   target: 'web',
   output: {
-    path: path.resolve(__dirname, 'dist'), // Note: Physical files are only output by the production build task `npm run build`.
+    path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
     filename: 'bundle.js',
   },
   module: {
     rules: [
-      {test: /\.(js|jsx)$/, use: 'babel-loader', exclude: /node_modules/},
-      {test: /\.jsx?$/, include: /node_modules/, use: ['react-hot-loader/webpack']},
-      {test: /\.css$/, use: ['style-loader', 'css-loader/locals']},
-      {test: /\.less$/, use: ['style-loader', 'css-loader', 'less-loader']},
-      {test: /\.png$/, use: [{ loader: 'url-loader', options: { mimetype: 'image/png'}}]},
+      { test: /\.(js|jsx)$/, use: 'babel-loader', exclude: /node_modules/ },
+      { test: /\.jsx?$/, include: /node_modules/, use: ['react-hot-loader/webpack'] },
+      { test: /\.css$/, use: ['style-loader', 'css-loader/locals'] },
+      { test: /\.less$/, use: ['style-loader', 'css-loader', 'less-loader'] },
+      { test: /\.png$/, use: [{ loader: 'url-loader', options: { mimetype: 'image/png' } }] },
     ],
   },
   node: {
@@ -30,6 +29,10 @@ module.exports = {
   plugins: [
     new Dotenv({ systemvars: true }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: 'development',
+      API_HOST: 'http://localhost:3000',
+    }),
   ],
   devServer: { contentBase: './dist' },
   resolve: {

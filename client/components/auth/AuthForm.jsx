@@ -1,4 +1,6 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
+import chalk from 'chalk';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import classNames from 'classnames';
@@ -36,7 +38,8 @@ const styles = theme => ({
 class AuthForm extends React.Component {
   constructor(props) {
     super(props);
-
+    console.log(chalk.hex('#000000').bgHex('#38A53C')(process.env.API_HOST));
+    console.log(chalk.hex('#000000').bgHex('#38A53C')(process.env.PGPORT));
     this.state = {
       username: 'Mervin.Graham@hotmail.com',
       password: 'bUeeOIkHbXNFGAf',
@@ -60,7 +63,7 @@ class AuthForm extends React.Component {
 
     event.preventDefault();
     return handleSubmitAsync(username, password)
-      .then((state) => this.setState({
+      .then(state => this.setState({
         username: '',
         password: '',
         notAnEmailAddressError: false,

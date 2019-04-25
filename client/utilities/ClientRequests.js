@@ -5,7 +5,8 @@ import * as Debug from 'debug';
 const axios = require('axios');
 
 const debug = Debug('client:utilities:client-requests');
-const urlBase = 'http://localhost:3000/api/db';
+const urlBase = `${process.env.API_HOST}/api/db`;
+console.log(urlBase);
 
 // ENTRY REQUESTS
 export const deleteEntry = entryId => axios.delete(`${urlBase}/entries`, { data: { entryId } })
@@ -29,7 +30,7 @@ export const getEntries = user => axios
   })
   .catch(err => debug(err));
 
-/*1*/
+/* 1 */
 export const extendReleaseDate = (entryId, releaseDate) => axios
   .put(`${urlBase}/entries`, {
     data: { entryId, releaseDate },
@@ -71,7 +72,7 @@ export const verifyUser = (user, pass) => axios.post(`${urlBase}/signin`, {
     };
     return authData;
   })
-  .catch(err => debug(err));
+  .catch(err => debug(`Failed to authenticate user.\n${err}`));
 
 /*
 

@@ -1,8 +1,11 @@
-/* eslint-disable no-multi-spaces, no-multi-assign,
-   key-spacing, import/no-extraneous-dependencies
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-multi-spaces */
+/* eslint-disable no-multi-assign */
+/* eslint-disable key-spacing */
+/*
 ! CHANGES REQUIRED:
 !   cookie: {... domain: 'localhost:8080',
-*/
+ */
 require('dotenv').config();
 
 const chalk = require('chalk');
@@ -16,7 +19,7 @@ const router = require('./routes.js');
 
 // initialize server for appropriate dbms
 const app = module.exports = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.API_HOST || 3000;
 
 // session
 const options = {

@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  mode: 'production',
   devtool: 'source-map',
   entry: './client/index.jsx',
   output: {
@@ -22,14 +21,15 @@ module.exports = {
   plugins: [
     new Dotenv({ systemvars: true }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"'
-    })
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       compress: {
         warnings: false
       }
+    }),
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: 'production',
+      API_HOST: 'https://timelockr.herokuapp.com',
     }),
   ],
   resolve: {
@@ -53,11 +53,22 @@ module.exports = {
 !      https://webpack.js.org/migrate/3/#dedupeplugin-has-been-removed
 
 CONSIDER ADDING:
-  One resource said adding this was suggested:
+    One resource said adding this was suggested:
+
     https://github.com/webpack-contrib/mini-css-extract-plugin
-  Can you replace dotenv or heroku env variables with vars defeined in webpack.DefinePlugin?
+
+    Can you replace dotenv or heroku env variables with vars defeined in webpack.DefinePlugin?
+
 POSSIBLY REVERT TO:
-  { test: /\.less$/, use: ['style-loader', 'css-loader', 'less-loader'] },
+
+new webpack.DefinePlugin({
+      'process.env.NODE_ENV': 'process.env.NODE_ENV',
+      'process.env.API_HOST': '"https://timelockr.herokuapp.com"',
+    }),
+
+    'process.env.NODE_ENV': 'process.env.NODE_ENV',
+
+    { test: /\.less$/, use: ['style-loader', 'css-loader', 'less-loader'] },
 
 POSSIBLY NEEDED:
   const CopyWebpackPlugin = require('copy-webpack-plugin');
