@@ -21,12 +21,6 @@ module.exports = {
   plugins: [
     new Dotenv({ systemvars: true }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
-    new webpack.optimize.UglifyJsPlugin({
-      minimize: true,
-      compress: {
-        warnings: false
-      }
-    }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'production',
       API_HOST: 'https://timelockr.herokuapp.com',
@@ -45,6 +39,12 @@ module.exports = {
 
 
 /*
+    new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
+      compress: {
+        warnings: false
+      }
+    }),
 
 ! TO FINISH:
 !   minify production bundle
