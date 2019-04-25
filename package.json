@@ -20,7 +20,7 @@
     "start": "webpack-dev-server --hot --mode development",
     "lint:js": "eslint . --ignore-path .eslintignore",
     "lint:css": "stylelint client/common/**/*.css",
-    "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress"
+    "heroku-postbuild": "webpack -p --config ./webpack.config.prod.js --progress"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.3",
