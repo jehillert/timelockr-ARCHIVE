@@ -10,24 +10,24 @@ const initOptions = { promiseLib: Promise };
 const pgp = require('pg-promise')(initOptions);
 
 
-const config = {
-    user               : process.env.PGUSER,
-    password           : process.env.PGPASSWORD,
-    database           : process.env.PGDATABASE || 'db',
-    host               : process.env.PGHOST || 'localhost',
-    port               : process.env.PGPORT || 5432,
-    max                : process.env.PG_MAX || 100,
-    idleTimeoutMillis  : process.env.PG_IDLETIMEOUTMILLIS || 30000,
-    ssl                : process.env.PG_SSL || true,
-  };
+// const config = {
+//     user               : process.env.PGUSER,
+//     password           : process.env.PGPASSWORD,
+//     database           : process.env.PGDATABASE || 'db',
+//     host               : process.env.PGHOST || 'localhost',
+//     port               : process.env.PGPORT || 5432,
+//     max                : process.env.PG_MAX || 100,
+//     idleTimeoutMillis  : process.env.PG_IDLETIMEOUTMILLIS || 30000,
+//     ssl                : process.env.PG_SSL || true,
+//   };
 
-  debug(config);
+//   debug(config);
 
-  const db = pgp(config);
+//   const db = pgp(config);
+
+//   module.exports = db;
+
+  const connectionString = process.env.DATABASE_URL;
+  const db = pgp(connectionString);
 
   module.exports = db;
-
-  // const connectionString = process.env.DATABASE_URL;
-  // const db = pgp(connectionString);
-  //
-  // module.exports = db;
