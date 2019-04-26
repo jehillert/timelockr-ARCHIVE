@@ -4,6 +4,18 @@ const GlobalStyle = createGlobalStyle`
   body {
     background-color: white;
     color: #839496;
+    font-family: [
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      "Helvetica Neue",
+      Arial,
+      sans-serif,
+      "Apple Color Emoji",
+      "Segoe UI Emoji",
+      "Segoe UI Symbol",
+    ];
   }
 
   * {

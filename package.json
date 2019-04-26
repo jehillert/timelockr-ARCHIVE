@@ -63,8 +63,7 @@
     "react-router-dom": "^5.0.0",
     "react-swipeable-views": "^0.13.1",
     "react-transition-group": "^2.9.0",
-    "styled-components": "^4.2.0",
-    "typeface-roboto": "0.0.54"
+    "styled-components": "^4.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",

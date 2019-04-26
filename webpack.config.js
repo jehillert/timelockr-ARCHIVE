@@ -12,7 +12,7 @@ module.exports = {
     filename: 'bundle.js',
   },
   module: {
-    rules: [
+  rules: [
       { test: /\.(js|jsx)$/, use: 'babel-loader', exclude: /node_modules/ },
       { test: /\.jsx?$/, include: /node_modules/, use: ['react-hot-loader/webpack'] },
       { test: /\.css$/, use: ['style-loader', 'css-loader/locals'] },

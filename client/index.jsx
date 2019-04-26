@@ -1,9 +1,9 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import '@babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
-import 'typeface-roboto';
+// import 'typeface-roboto';
+//     "typeface-roboto": "0.0.54" package.json
 
 require('dotenv').config();
 
