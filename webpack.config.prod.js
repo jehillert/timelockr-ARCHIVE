@@ -7,13 +7,13 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/dist/'
+    publicPath: '/dist/',
   },
   module: {
     rules: [
       { test: /\.(js|jsx)$/, use: 'babel-loader', exclude: /node_modules/ },
       { test: /\.css$/, use: ['style-loader', 'css-loader/locals'] },
-      { test: /\.css$/, use: ['style-loader', 'css-loader', 'less-loader'] },
+      { test: /\.css$/, use: ['style-loader', { loader: 'css-loader', options: { minimize: true } }, 'less-loader'] },
       { test: /\.png$/, use: [{ loader: 'url-loader', options: { mimetype: 'image/png' } }] },
     ],
   },
@@ -39,11 +39,12 @@ module.exports = {
       utilities: path.resolve(__dirname, 'client/indexes/utilities.jsx'),
     },
   },
-}
+};
 
 
 /*
-      { test: /\.css$/, use: ['style-loader', {loader: 'css-loader', options: {minimize: true}}, 'less-loader'] },
+      { test: /\.css$/, use: ['style-loader', {loader: 'css-loader',
+      options: {minimize: true}}, 'less-loader'] },
 
 
     new webpack.optimize.UglifyJsPlugin({

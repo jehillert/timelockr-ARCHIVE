@@ -30,7 +30,6 @@ module.exports = {
     new Dotenv({ systemvars: true }),
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
     new webpack.EnvironmentPlugin({
-      NODE_ENV: 'development',
       API_HOST: 'http://localhost:3000',
     }),
   ],
