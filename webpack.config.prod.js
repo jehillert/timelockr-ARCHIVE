@@ -12,7 +12,6 @@ module.exports = {
   module: {
     rules: [
       { test: /\.(js|jsx)$/, use: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.css$/, use: ['style-loader', 'css-loader/locals'] },
       { test: /\.css$/, use: ['style-loader', { loader: 'css-loader', options: { minimize: true } }, 'less-loader'] },
       { test: /\.png$/, use: [{ loader: 'url-loader', options: { mimetype: 'image/png' } }] },
     ],
