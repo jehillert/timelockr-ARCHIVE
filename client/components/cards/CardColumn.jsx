@@ -22,7 +22,6 @@ S.Column = styled(Box)`
 const CardColumn = (props) => {
   const {
     Card,
-    id,
     heading,
     delayIncrement,
     entries,
@@ -32,8 +31,9 @@ const CardColumn = (props) => {
   return (
     <>
       <S.Column
-        id={id}
-        marginTop={2}
+        ClassName='card-column'
+        mt={2}
+        mx={0}
         {...props}
       >
         {heading && <Header text={heading} level='3' mx={2} />}
@@ -57,7 +57,6 @@ const CardColumn = (props) => {
 };
 
 CardColumn.propTypes = {
-  id: PropTypes.string.isRequired,
   Card: PropTypes.elementType.isRequired,
   delayIncrement: PropTypes.number.isRequired,
   entries: PropTypes.array,

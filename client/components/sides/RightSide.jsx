@@ -6,12 +6,12 @@ import styled from 'styled-components';
 const S = {};
 
 S.RightSide = styled(Box)`
-  background-color: black;
-  box-shadow: ${props => props.theme.boxShadowToLeft};
+  background-color: ${props => props.theme.secondaryColor};
+  box-shadow: ${props => props.theme.leftBoxShadow};
   color: #AEAEAA;
   display: flex;
   grid-area: ${props => props.gridArea};
-  margin-left: 1rem;
+  margin-left: 1.5rem;
 `;
 
 const RightSide = (props) => {

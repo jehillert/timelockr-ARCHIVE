@@ -13,7 +13,7 @@ const moment = require('moment');
 const Promise = require('bluebird');
 
 // VARIABLES
-const fixedEntries = 5;
+const fixedEntries = 25;
 const minEntries = 15;
 const maxEntries = 30;
 const numOfUsers = 25;

@@ -28,15 +28,12 @@ const GlobalStyle = createGlobalStyle`
   .grid-desktop {
     display: grid;
     grid-template-areas:
-      "leftHead appBar   rightHead"
+      "leftSide appBar   rightSide"
       "leftSide cardArea rightSide";
     grid-template-columns: 1fr auto 1fr;
     grid-template-rows: auto 1fr;
     width: 100vw;
     height: 100vh;
-    /*margin: none;*/
-    /*padding: none;*/
-    /*justify-content: center;*/
   }
 
 `;

@@ -18,7 +18,9 @@ const S = {};
 S.Form = styled.form`
   display: flex;
   flex-direction: column;
-  padding-top: 5rem;
+  padding-top: 3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   padding-bottom: 1.5rem;
 `;
 
@@ -41,8 +43,8 @@ class AuthForm extends React.Component {
     console.log(chalk.hex('#000000').bgHex('#38A53C')(process.env.API_HOST));
     console.log(chalk.hex('#000000').bgHex('#38A53C')(process.env.PGPORT));
     this.state = {
-      username: 'Mervin.Graham@hotmail.com',
-      password: 'bUeeOIkHbXNFGAf',
+      username: 'Monte5@hotmail.com',
+      password: 'dGtDTrMxaQvRZXn',
       notAnEmailAddressError: false,
       passwordError: false,
       showPassword: false,

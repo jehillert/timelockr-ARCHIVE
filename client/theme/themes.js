@@ -13,27 +13,33 @@ const defaultTheme = {
   backgroundColor: 'white',
   backgroundHoverColor: '#D93646',
   backgroundBorderHoverColor: '#D93646',
-  primaryFontColor: 'white',
   primaryColor: '#6A6A6A',
-  secondaryFontColor: '#839496',
   secondaryColor: '#202020',
+  textColor1: 'white',
+  textColor2: '#9D9D9D',
+  // dimensions
+  cardWidth: '19rem',
+  cardAreaWidth: '41rem',
   // margin
   insideFacingMargin: '0.25rem',
   outsideFacingMargin: '0.25rem',
   cornerButtonRightMargin: '-0.25',
   cornerButtonTopMargin: '-0.25rem',
   // radius
+  cardRadius: '0rem',
   backgroundBorderRadius: '0rem',
   modalBorderRadius: '0rem',
   tabBorderRadius: '0rem',
   // shadow
-  boxShadowToLeft: '-10px 0px 5px rgba(24,29,39,.1)',
-  boxShadowToRight: '10px 0px 45px rgba(24,29,39,.1)',
-  boxShadow: `0 0 100px rgba(24,29,39,.1),
-              0 15px 30px rgba(24,29,39,.1),
-              0 5px 10px rgba(24,29,39,.05)`,
+  boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);',
+  rightBoxShadow: '8px 0px 7px -1px rgba(0,0,0,0.63)',
+  leftBoxShadow: '-8px 0px 7px -1px rgba(0,0,0,0.63)',
+  // webkitBoxShadow: '21px 0px 44px -4px rgba(0,0,0,0.52)',
   // icons (https://google.github.io/material-design-icons/)
 
 };
 
 export default defaultTheme;
+  // boxShadowToLeft: '-10px 0px 5px rgba(24,29,39,.1)',
+  // boxShadowToRight: '10px 0px 45px rgba(24,29,39,.1)',
+// 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)

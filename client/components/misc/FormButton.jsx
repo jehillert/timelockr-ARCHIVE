@@ -7,7 +7,7 @@ import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/
 
 const styles = theme => ({
   margin: {
-    margin: theme.spacing.unit,
+    margin: '8px',
   },
   bootstrapRoot: {
     boxShadow: 'none',

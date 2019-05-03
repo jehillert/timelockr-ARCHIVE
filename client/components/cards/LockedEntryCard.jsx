@@ -1,9 +1,9 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card from '@material-ui/core/Card';
 import {
-  DatedProgressBar,
+  CountdownTimer,
+  StyledMuiCard,
   StyledMuiCardHeader,
   StyledMuiCardContent,
   LockedEntryCardMenu,
@@ -17,7 +17,7 @@ const LockedEntryCard = (props) => {
     <>
       {shouldRenderCard
         && (
-          <Card id={entry.entryId} css='width: 20rem;'>
+          <StyledMuiCard id={entry.entryId} className='styled-mui-card'>
             <StyledMuiCardHeader
               action={(
                 <LockedEntryCardMenu
@@ -29,9 +29,9 @@ const LockedEntryCard = (props) => {
               title={entry.description}
             />
             <StyledMuiCardContent>
-              <DatedProgressBar entry={entry} />
+              <CountdownTimer refresh={refresh} futureDate={entry.releaseDate} />
             </StyledMuiCardContent>
-          </Card>
+          </StyledMuiCard>
         )
       }
     </>

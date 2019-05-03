@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Grow from '@material-ui/core/Grow';
-import Paper from '@material-ui/core/Paper';
+import styled from 'styled-components';
 import { Box } from 'components';
 
 class CardWrapper extends React.Component {
@@ -36,25 +36,21 @@ class CardWrapper extends React.Component {
     } = this.state;
     const { render } = this.props;
     return (
-      <Box m={2}>
+      <Box my={1.5}>
         {shouldRenderCard
           && (
             <Grow
               in={show}
               {...(show ? { timeout: 300 } : {})}
             >
-              <Paper
-                elevation={15}
-                css='display: inline-block;'
-              >
-                {render(this.state)}
-              </Paper>
+              {render(this.state)}
             </Grow>
           )}
       </Box>
     );
   }
 }
+
 
 CardWrapper.defaultProps = {
   delay: 0,

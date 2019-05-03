@@ -12,7 +12,7 @@ const styles = theme => ({
   },
 });
 
-function ActionBar(props) {
+function EntryFormDialogButton(props) {
   const {
     classes,
     refresh,
@@ -30,11 +30,11 @@ function ActionBar(props) {
   );
 }
 
-ActionBar.propTypes = {
+EntryFormDialogButton.propTypes = {
   classes: PropTypes.object.isRequired,
   refresh: PropTypes.func.isRequired,
   userId: PropTypes.number.isRequired,
   username: PropTypes.string.isRequired,
 };
 
-export default withStyles(styles)(ActionBar);
+export default withStyles(styles)(EntryFormDialogButton);

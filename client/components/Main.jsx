@@ -3,33 +3,37 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
-  ActionBar,
+  EntryFormDialogButton,
   Box,
   CardAreaTabs,
-  LeftHead,
   LeftSide,
   MainMenu,
-  RightHead,
   RightSide,
 } from 'components';
 
 const S = {};
 
+S.Middle = styled(Box)`
+  grid-column: 2;
+  width: 44rem;
+`;
+
 S.AppBar = styled.div`
-  grid-area: ${props => props.gridArea};
-  justify-items: flex-end;
   background-color: #A18664;
+  justify-items: flex-end;
+  height: 3rem;
+  width: ${props => props.cardAreaWidth};
+  grid-area: ${props => props.gridArea};
 `;
 
 S.AppBarContainer = styled.div`
   align-items: center;
   display: flex;
   justify-content: flex-end;
-  width: 46.5rem;
-  padding: 1rem 2rem;
+  padding: 0 0.25rem 0 1rem;
 `;
 
-S.ActionBar = styled(props => <ActionBar {...props} />)`
+S.EntryFormDialogButton = styled(props => <EntryFormDialogButton {...props} />)`
   display: grid;
   margin-top: 1rem;
 `;
@@ -38,21 +42,20 @@ const Main = (props) => {
   const { entries, refresh } = props;
   return (
     <Box className='grid-desktop'>
-      <LeftHead gridArea='leftHead'><h1>TimeLockr</h1></LeftHead>
-      <LeftSide gridArea='leftSide' />
-      <S.AppBar gridArea='appBar'>
-        <S.AppBarContainer><MainMenu /></S.AppBarContainer>
-      </S.AppBar>
-      <CardAreaTabs
-        gridArea='cardArea'
-        entries={entries}
-        refresh={refresh}
-      />
-      <RightHead gridArea='rightHead' />
-      <RightSide gridArea='rightSide'>
-          <S.ActionBar
-            {...props}
+      <LeftSide gridArea='leftSide' title='TimeLockr' />
+        <S.Middle>
+          <S.AppBar gridArea='appBar'>
+            <S.AppBarContainer><MainMenu /></S.AppBarContainer>
+          </S.AppBar>
+          <CardAreaTabs
+            id='card-area-tabs'
+            gridArea='cardArea'
+            entries={entries}
+            refresh={refresh}
           />
+        </S.Middle>
+      <RightSide gridArea='rightSide'>
+          <S.EntryFormDialogButton {...props} />
       </RightSide>
     </Box>
   );

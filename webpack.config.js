@@ -27,7 +27,7 @@ module.exports = {
   },
   plugins: [
     new Dotenv({ systemvars: true }),
-    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
+    new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en/),
     new webpack.EnvironmentPlugin({
       API_HOST: 'http://localhost:3000',
     }),

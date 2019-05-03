@@ -1,13 +1,13 @@
 // eslint-disable-next-line no-unused-vars
 import React, { Fragment, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import Card from '@material-ui/core/Card';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import styled from 'styled-components';
 import {
   ClipboardPopover,
+  StyledMuiCard,
   StyledMuiCardContent,
   StyledMuiCardHeader,
 } from 'components';
@@ -54,7 +54,7 @@ const ReleasedEntryCard = (props) => {
             text={`DESCRIPTION:\n\t${description}\n\nCONTENT:\n\t${content}`}
             onCopy={() => updateCopied(true)}
           >
-            <Card id={entryId} css='width: 19rem;'>
+            <StyledMuiCard id={entryId} className='styled-mui-card'>
               <StyledMuiCardHeader
                 action={(
                   <S.IconButton
@@ -71,7 +71,7 @@ const ReleasedEntryCard = (props) => {
                   {content}
                 </Typography>
               </StyledMuiCardContent>
-            </Card>
+            </StyledMuiCard>
           </CopyToClipboard>
         </>
       )}

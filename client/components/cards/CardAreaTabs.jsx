@@ -8,7 +8,9 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import {
   CardArea,
-  TabContainer,
+  LockedEntryCard,
+  ReleasedEntryCard,
+  CardAreaTabContainer,
   VerticalScrollbars,
 } from 'components';
 // import { Scrollbars } from 'react-custom-scrollbars';
@@ -40,7 +42,7 @@ function CardAreaTabs(props) {
   const [height, setHeight] = useState(0);
 
   useEffect(() => {
-    setHeight(windowSize.innerHeight - 147);
+    setHeight(windowSize.innerHeight - 96);
   }, [windowSize.innerHeight]);
 
   const handleChange = (event, v) => setValue(v);
@@ -57,17 +59,16 @@ function CardAreaTabs(props) {
           textColor='primary'
           variant='fullWidth'
         >
-          <Tab label='Locked' />
           <Tab label='Unlocked' />
-          <Tab label='Item Three' />
+          <Tab label='Locked' />
         </Tabs>
       </AppBar>
       <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={value}
         onChangeIndex={handleChangeIndex}
+        containerStyle={styles.slideContainer}
       >
-        <TabContainer dir={theme.direction}>
           <VerticalScrollbars
             autoHide
             autoHideTimeout={650}
@@ -75,37 +76,32 @@ function CardAreaTabs(props) {
             style={{ height }}
           >
             <CardArea
-              entries={entries}
+              id='card-area-released'
+              Card={ReleasedEntryCard}
+              entries={entries.released}
               refresh={refresh}
             />
           </VerticalScrollbars>
-        </TabContainer>
-        <TabContainer dir={theme.direction}>
           <VerticalScrollbars
             autoHide
             autoHideTimeout={650}
             autoHideDuration={300}
             style={{ height }}
           >
-            <div></div>
+            <CardArea
+              id='card-area-locked'
+              Card={LockedEntryCard}
+              entries={entries.locked}
+              refresh={refresh}
+            />
           </VerticalScrollbars>
-        </TabContainer>
-        <TabContainer dir={theme.direction}>
-          <VerticalScrollbars
-            autoHide
-            autoHideTimeout={650}
-            autoHideDuration={300}
-            style={{ height }}
-          >
-            <div></div>
-          </VerticalScrollbars>
-        </TabContainer>
       </SwipeableViews>
     </S.Div>
   );
 }
 
 CardAreaTabs.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   classes: PropTypes.object.isRequired,
   entries: PropTypes.shape({
     locked: PropTypes.array,
@@ -113,6 +109,7 @@ CardAreaTabs.propTypes = {
   }).isRequired,
   gridArea: PropTypes.string.isRequired,
   refresh: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   theme: PropTypes.object.isRequired,
 };
 

@@ -21,8 +21,13 @@ const S = {};
 
 S.IconButton = styled(IconButton)`
   .s-icon-button {
-    color: ${props => props.theme.primaryColor}
-    height: 2rem;
+    color: ${props => props.theme.secondaryColor};
+    margin-top: -5px;
+    height: 2.25rem;
+    width: 2.25rem
+    hover: {
+      background-color: red;
+    }
   }
 `;
 
