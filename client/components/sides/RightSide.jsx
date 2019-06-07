@@ -11,7 +11,8 @@ S.RightSide = styled(Box)`
   color: #AEAEAA;
   display: flex;
   grid-area: ${props => props.gridArea};
-  margin-left: 1.5rem;
+  overflow: visible;
+  z-index: 2;
 `;
 
 const RightSide = (props) => {

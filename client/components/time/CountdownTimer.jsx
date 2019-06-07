@@ -14,35 +14,25 @@ S.CountdownContainer = styled.div`
   align-items: center;
 `;
 
-S.CircularProgress = styled.div`
-  stroke-dasharray: 151px;
-  stroke-dashoffset: 0px;
-  stroke-linecap: butt;
-  stroke-width: 4px;
-  stroke: #fd4f57;
-  fill: none;
-
-  svg {
-    width: 10rem;
-    height: 10rem;
-    transform: rotateZ(-90deg);
-
-    @keyframes countdown-animation {
-      from {
-        stroke-dashoffset: 0px;
-      }
-      to {
-        stroke-dashoffset: 151px;
-      }
-    }
-  }
-`;
-
 S.CountdownText = styled.div`
   z-index: 1;
   text-align: center;
   text-anchor: middle;
 `;
+S.CountdownText = styled.div`
+  z-index: 1;
+  text-align: center;
+  text-anchor: middle;
+`;
+S.CountdownText = styled.div`
+  z-index: 1;
+  text-align: center;
+  text-anchor: middle;
+`;
+
+/*
+! change console.log to debug()
+*/
 
 function CountdownTimer(props) {
   const { futureDate, refresh } = props;
@@ -56,32 +46,32 @@ function CountdownTimer(props) {
 
   const formatDisplayTime = () => {
     let tr;
-    if (duration.asSeconds() < 0) {
-      refresh();
+
+    if (duration.asSeconds() <= -1) {
+      return refresh();
     }
+
     if (duration.years()) {
-      tr = duration.format('y [years], M [months], d [days]', {
-        trim: 'all',
-      });
+      tr = duration.format('y [years], M [months], d [days]', { trim: 'all' });
     } else if (duration.months()) {
-      tr = duration.format('M [months], d [days], h [hours]', {
-        trim: 'all',
-      });
+      tr = duration.format('M [months], d [days], h [hours]', { trim: 'all' });
     } else if (duration.days()) {
-      tr = duration.format('d [days], h [hours], m [min]', {
-        trim: 'all',
-      });
+      tr = duration.format('d [days], h [hours], m [min]', { trim: 'all' });
     } else {
-      tr = duration.format('hh:mm:ss', {
-        trim: false,
-      });
+      tr = duration.format('hh:mm:ss', { trim: false });
     }
+
     setTimeRemaining(tr);
-    console.log(timeRemaining);
+    console.log(tr);
   };
 
   const incrementTime = () => {
-    setDuration(() => duration.subtract(1, 's'));
+    if (duration.asHours() <= 24) {
+      setDuration(() => duration.subtract(1, 'seconds'));
+    } else if (duration.asDays() <= 30) {
+      setDuration(() => duration.subtract(60, 'seconds'));
+    }
+
     setFraction(duration.asSeconds());
     formatDisplayTime();
   };
@@ -92,6 +82,8 @@ function CountdownTimer(props) {
     formatDisplayTime();
     if (duration.asHours() <= 24) {
       timer = setInterval(incrementTime, 1000);
+    } else if (duration.asDays() <= 30) {
+      timer = setInterval(incrementTime, 60000);
     }
 
     setOpen(true);
@@ -108,18 +100,6 @@ function CountdownTimer(props) {
     <S.CountdownContainer>
       {open && (
         <>
-          <S.CircularProgress>
-            <svg>
-              <circle
-                r='24'
-                cx='26'
-                cy='26'
-                style={{
-                  animation: `countdown-animation ${duration.asSeconds()}s linear`,
-                }}
-              />
-            </svg>
-          </S.CircularProgress>
           <S.CountdownText>
             {timeRemaining}
           </S.CountdownText>

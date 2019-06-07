@@ -5,20 +5,10 @@ import Modal from '@material-ui/core/Modal';
 import { withStyles } from '@material-ui/core/styles';
 import { AuthTabs, Box } from 'components';
 
-function getModalStyle() {
-  const top = 50;
-  const left = 50;
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
-
 const styles = theme => ({
   paper: {
-    position: 'absolute',
+    marginTop: '4rem',
+    margin: 'auto',
     width: theme.spacing.unit * 60,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
@@ -77,9 +67,9 @@ class AuthModal extends React.Component {
         open={open}
         onClose={this.handleClose}
       >
-        <div style={getModalStyle()} className={classes.paper}>
-          <Box ml={3} mt={3} mb={3}>
-            <h3>{title}</h3>
+        <div className={classes.paper}>
+          <Box pl={3} pt={2} pb={1}>
+            <h2>{title}</h2>
           </Box>
           <AuthTabs
             handleSignin={handleSignin}

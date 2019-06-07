@@ -22,6 +22,16 @@ S.IconButton = styled(IconButton)`
   }
 `;
 
+/*
+! ADD 'MASONRY' LAYOUT !
+  check this one out first:
+    https://www.npmjs.com/package/react-masonry-css
+  then these:
+    https://www.npmjs.com/package/react-masonry-component
+    https://www.npmjs.com/package/react-native-masonry-list
+    https://www.npmjs.com/package/react-masonry-layout
+*/
+
 const ReleasedEntryCard = (props) => {
   const [copied, updateCopied] = useState(false);
   const [anchorEl, updateAnchorEl] = useState(null);

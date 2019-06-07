@@ -51,6 +51,11 @@ module.exports = {
   },
 
   entries: {
+    delete: (req, res) => models.entries
+        .delete(req.body.entryId)
+        .then(() => res.sendStatus(200))
+        .catch(error => debug('Error', error)),
+
     get: (req, res) => models.entries.get(req.query.username)
         .tap(results => debug('\n\nEntries - UNSORTED:\n\n%O', results))
         .then(results => helpers.sortEntries(results))
@@ -73,11 +78,6 @@ module.exports = {
     ])
       .then(() => res.sendStatus(201))
       .catch(error => debug('Error', error)),
-
-    delete: (req, res) => models.entries
-        .delete(req.body.entryId)
-        .then(() => res.sendStatus(201))
-        .catch(error => debug('Error', error)),
   },
 
   signup: {

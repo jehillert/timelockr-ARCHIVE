@@ -1,3 +1,15 @@
+// RERENDER INDIVUAL CARDS NOW.  NOT THE WHOLE STACK EVERY TIME
+
+
+
+
+
+
+
+
+
+
+
 /* eslint-disable react/jsx-indent */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -22,8 +34,11 @@ S.AppBar = styled.div`
   background-color: #A18664;
   justify-items: flex-end;
   height: 3rem;
-  width: ${props => props.cardAreaWidth};
+  box-shadow: ${props => props.theme.boxShadow};
   grid-area: ${props => props.gridArea};
+  width: ${props => props.cardAreaWidth};
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
 `;
 
 S.AppBarContainer = styled.div`
@@ -45,7 +60,9 @@ const Main = (props) => {
       <LeftSide gridArea='leftSide' title='TimeLockr' />
         <S.Middle>
           <S.AppBar gridArea='appBar'>
-            <S.AppBarContainer><MainMenu /></S.AppBarContainer>
+            <S.AppBarContainer>
+              <MainMenu />
+            </S.AppBarContainer>
           </S.AppBar>
           <CardAreaTabs
             id='card-area-tabs'

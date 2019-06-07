@@ -12,15 +12,16 @@ S.LeftSide = styled.div`
   display: flex;
   grid-area: ${props => props.gridArea};
   justify-content: flex-end;
-  margin-right: 1.5rem;
+  overflow: visible;
   padding-right: 1rem;
   padding-top: 1rem;
+  z-index: 2;
 `;
 
 const LeftSide = (props) => {
   const { children, gridArea, title } = props;
   return (
-    <S.LeftSide pt={2} pr={3} gridArea={gridArea}>
+    <S.LeftSide gridArea={gridArea}>
       {title && (
         <h2>{title}</h2>
       )}

@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 const StyledMuiCard = styled(Card)`
   &.styled-mui-card {
+    z-index: 1;
     box-shadow: ${props => props.theme.boxShadow};
     border-radius: ${props => props.theme.cardRadius};
     width: ${props => props.theme.cardWidth}

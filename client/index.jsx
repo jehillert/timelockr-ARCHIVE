@@ -1,7 +1,7 @@
 import '@babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import App from './components/main/App';
 // import 'typeface-roboto';
 //     "typeface-roboto": "0.0.54" package.json
 

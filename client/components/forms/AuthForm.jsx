@@ -43,8 +43,8 @@ class AuthForm extends React.Component {
     console.log(chalk.hex('#000000').bgHex('#38A53C')(process.env.API_HOST));
     console.log(chalk.hex('#000000').bgHex('#38A53C')(process.env.PGPORT));
     this.state = {
-      username: 'Monte5@hotmail.com',
-      password: 'dGtDTrMxaQvRZXn',
+      username: 'Kraig0@yahoo.com',
+      password: 'x_wB4TKRvV9dVRm',
       notAnEmailAddressError: false,
       passwordError: false,
       showPassword: false,

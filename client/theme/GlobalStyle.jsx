@@ -27,6 +27,7 @@ const GlobalStyle = createGlobalStyle`
 
   .grid-desktop {
     display: grid;
+    grid-column-gap: 0;
     grid-template-areas:
       "leftSide appBar   rightSide"
       "leftSide cardArea rightSide";

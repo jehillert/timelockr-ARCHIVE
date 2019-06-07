@@ -36,14 +36,16 @@ class CardWrapper extends React.Component {
     } = this.state;
     const { render } = this.props;
     return (
-      <Box my={1.5}>
+      <Box mx={1.5} my={1.5}>
         {shouldRenderCard
           && (
             <Grow
               in={show}
               {...(show ? { timeout: 300 } : {})}
             >
+            <div>
               {render(this.state)}
+            </div>
             </Grow>
           )}
       </Box>

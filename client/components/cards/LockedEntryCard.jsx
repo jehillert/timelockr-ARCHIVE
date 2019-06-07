@@ -1,7 +1,8 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
+  CircularProgressBar,
   CountdownTimer,
   StyledMuiCard,
   StyledMuiCardHeader,
@@ -9,9 +10,38 @@ import {
   LockedEntryCardMenu,
 } from 'components';
 
+/*
+! provide user a way to control mode
+  1 - 'TIMER ONLY'
+  2 - 'TIMER PLUS PROGRESS'
+  3 - 'RELEASE-DATE OVERLAY'
+*/
+
 const LockedEntryCard = (props) => {
   const { entry, refresh, wrapper } = props;
   const { shouldRenderCard } = wrapper;
+
+  const [displayMode, setDisplayMode] = useState(1);
+
+
+  const renderTimer = (
+    <CountdownTimer refresh={refresh} futureDate={entry.releaseDate} />
+  );
+
+  // const [frctn, setFraction] = useState(fraction);
+  // const handleChangeEvent = (event) => {
+  //   setFraction(event.target.value);
+  // }
+  // const renderTimerAndCircProgress = () => (
+  //   <CircularProgressBar
+  //     strokeWidth='10'
+  //     sqSize='200'
+  //     percentage={fraction}
+  //     futureDate={entry.releaseDate}
+  //     referenceDate={entry.creationDate}
+  //   />
+  //   <CountdownTimer refresh={refresh} futureDate={entry.releaseDate} />
+  // );
 
   return (
     <>
@@ -29,7 +59,8 @@ const LockedEntryCard = (props) => {
               title={entry.description}
             />
             <StyledMuiCardContent>
-              <CountdownTimer refresh={refresh} futureDate={entry.releaseDate} />
+              {(displayMode === 1) && renderTimer}
+              {(displayMode === 2) && renderTimerAndCircProgress}
             </StyledMuiCardContent>
           </StyledMuiCard>
         )

@@ -1,10 +1,9 @@
 // https://flaviocopes.com/axios/ || https://www.npmjs.com/package/axios
-/* eslint-disable camelcase */
 import * as Debug from 'debug';
 
 const axios = require('axios');
 
-const debug = Debug('client:utilities:client-requests');
+const debug = Debug('client:client-requests');
 const urlBase = `${process.env.API_HOST}/api/db`;
 console.log(urlBase);
 
@@ -75,7 +74,5 @@ export const verifyUser = (user, pass) => axios.post(`${urlBase}/signin`, {
   .catch(err => debug(`Failed to authenticate user.\n${err}`));
 
 /*
-
   [1] For a PUT request: HTTP 200 or HTTP 204 should imply 'resource updated successfully'.
-
 */

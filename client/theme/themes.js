@@ -31,12 +31,10 @@ const defaultTheme = {
   modalBorderRadius: '0rem',
   tabBorderRadius: '0rem',
   // shadow
-  boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);',
+  boxShadow: '0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
+  // boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);',
   rightBoxShadow: '8px 0px 7px -1px rgba(0,0,0,0.63)',
   leftBoxShadow: '-8px 0px 7px -1px rgba(0,0,0,0.63)',
-  // webkitBoxShadow: '21px 0px 44px -4px rgba(0,0,0,0.52)',
-  // icons (https://google.github.io/material-design-icons/)
-
 };
 
 export default defaultTheme;

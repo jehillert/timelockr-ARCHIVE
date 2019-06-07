@@ -11,6 +11,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Fab from '@material-ui/core/Fab';
 import TextField from '@material-ui/core/TextField';
 import moment from 'moment';
+import styled from 'styled-components';
 import { createEntry } from 'utilities';
 import {
   Box,
@@ -22,6 +23,16 @@ import { withStyles } from '@material-ui/core/styles';
 
 const bgOrange = chalk.hex('#000000').bgHex('#38A53C');
 const debug = Debug('client:components:entry-form-dialog');
+
+const S = {};
+
+S.Dialog = styled(Dialog)`
+  display: flex;
+  flex-direction: row;
+  margin-top: 4rem;
+  align-self: flex-end;
+  justify-content: center;
+`;
 
 const styles = theme => ({
   dense: {
@@ -131,8 +142,9 @@ class EntryFormDialog extends React.Component {
         >
           <AddIcon />
         </Fab>
-        <Dialog
+        <S.Dialog
           aria-labelledby='form-dialog-title'
+          className='s-dialog'
           open={open}
           onClose={this.handleClose}
           width='26rem'
@@ -196,7 +208,7 @@ class EntryFormDialog extends React.Component {
               Submit
             </FormButton>
           </DialogActions>
-        </Dialog>
+        </S.Dialog>
       </Box>
     );
   }
