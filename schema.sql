@@ -46,3 +46,4 @@ WITH (OIDS=FALSE);
 ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO PUBLIC
+"Dear Suddenlink Communications User, We are holding an anniversary celebration"

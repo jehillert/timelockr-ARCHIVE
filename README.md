@@ -1,3 +1,28 @@
+
+INSTALLATION - PostgreSQL
+
+  This app uses PostgreSQL as the database management system.
+  Please install Postgres 6.9.0 or compatible version.
+
+INSTALLATION - TimeLocker
+
+  Open bash or other Linux terminal and enter the following commands:
+    git clone https://github.com/jehillert/TimeLockr
+    cd TimneLockr
+
+
+  Load schema file using commnad lne
+    sudo -u postgres psql<schema_psql.sql
+
+  To install TimeLocker, open a terminal in the root folder of this project and type:
+    npm install
+
+  To Run Create Database:
+    Install the latest version of Postgres.
+  To npm strart
+
+
+
 This file is a work-in-progress:
 
 

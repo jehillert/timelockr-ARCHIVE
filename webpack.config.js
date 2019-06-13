@@ -12,7 +12,7 @@ module.exports = {
     filename: 'bundle.js',
   },
   module: {
-  rules: [
+    rules: [
       { test: /\.(js|jsx)$/, use: 'babel-loader', exclude: /node_modules/ },
       { test: /\.jsx?$/, include: /node_modules/, use: ['react-hot-loader/webpack'] },
       { test: /\.less$/, use: ['style-loader', 'css-loader/locals', 'less-loader'] },
@@ -40,10 +40,11 @@ module.exports = {
       utilities: path.resolve(__dirname, 'client/indexes/utilities.jsx'),
     },
   },
-
 };
 
 /*
+ADD BACK?
+      { test: /\.css$/, use: ['style-loader', 'css-loader/locals'] },
 POSSIBLY NEEDED:
   const CopyWebpackPlugin = require('copy-webpack-plugin');
   ...
