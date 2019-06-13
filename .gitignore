@@ -27,6 +27,7 @@ coverage
 build/
 dist/
 NOTES/
+.vscode/
 
 # node-waf configuration
 .lock-wscript
