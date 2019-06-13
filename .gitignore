@@ -54,12 +54,16 @@ typings/
 
 # misc
 .bit/
-.env
-.DS_Store
 .vscode/
-config.js
+.DS_Store
+.env
+.favorites.json
 *.sublime-workspace
 *.sublime-project
+bookmarks.json
+launch.json
+config.js
+TIMELOCKR.code-workspace
 
 # next.js build output
 .next
@@ -71,5 +75,3 @@ _notes/
 node_modules/
 bower_components
 jspm_packages/
-.favorites.json
-TIMELOCKR.code-workspace
