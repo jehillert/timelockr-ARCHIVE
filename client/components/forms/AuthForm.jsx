@@ -43,8 +43,10 @@ class AuthForm extends React.Component {
     console.log(chalk.hex('#000000').bgHex('#38A53C')(process.env.API_HOST));
     console.log(chalk.hex('#000000').bgHex('#38A53C')(process.env.PGPORT));
     this.state = {
-      username: 'Kraig0@yahoo.com',
-      password: 'x_wB4TKRvV9dVRm',
+      // username: 'Kraig0@yahoo.com',
+      // password: 'x_wB4TKRvV9dVRm',
+      username: '',
+      password: '',
       notAnEmailAddressError: false,
       passwordError: false,
       showPassword: false,
@@ -91,7 +93,7 @@ class AuthForm extends React.Component {
   );
 
   render() {
-    const { classes } = this.props;
+    const { autocompletePasswordType, classes } = this.props;
     const {
       username,
       notAnEmailAddressError,
@@ -105,26 +107,27 @@ class AuthForm extends React.Component {
         <TextField
           id='outlined-email-as-username-input'
           label='Email'
+          autoComplete='email'
           className={classNames(classes.dense, classes.margin, classes.textField)}
           error={notAnEmailAddressError}
-          type='email'
-          name='username'
-          autoComplete='email'
           margin='dense'
+          name='username'
+          onChange={this.handleChange('username')}
+          type='username'
           value={username}
           variant='outlined'
-          onChange={this.handleChange('email')}
         />
         <TextField
           id='outlined-adornment-password'
+          label='Password'
+          autoComplete={autocompletePasswordType}
           className={classNames(classes.dense, classes.margin, classes.textField)}
           error={passwordError}
           margin='dense'
-          variant='outlined'
-          type={showPassword ? 'text' : 'password'}
-          label='Password'
-          value={password}
           onChange={this.handleChange('password')}
+          type={showPassword ? 'text' : 'password'}
+          value={password}
+          variant='outlined'
           InputProps={{
             endAdornment: (
               <InputAdornment position='end'>
@@ -156,10 +159,7 @@ class AuthForm extends React.Component {
 AuthForm.propTypes = {
   classes: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  autocompletePasswordType: PropTypes.string.isRequired,
 };
 
 export default withStyles(styles)(AuthForm);
-
-/*
-
-*/
