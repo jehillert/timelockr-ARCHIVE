@@ -13,7 +13,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/jehillert/TimeLockr"
+    "url": "https://github.com/jehillert/TimeLockr.git"
   },
   "scripts": {
     "dev-server": "nodemon --ignore node_modules --inspect server",
@@ -37,7 +37,7 @@
     "@material-ui/system": "^3.0.0-alpha.2",
     "@rehooks/window-size": "^1.0.2",
     "ajv": "^6.10.0",
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "babel-loader": "^8.0.5",
     "babel-plugin-styled-components": "^1.10.0",
     "bluebird": "^3.5.3",

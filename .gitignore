@@ -1,3 +1,7 @@
+# business logic
+fake-credentials.data
+GenFakeCredsAndData.js
+
 # Logs
 logs
 *.log
@@ -26,7 +30,6 @@ coverage
 # Compiled Dirs (http://nodejs.org/api/addons.html)
 build/
 dist/
-NOTES/
 
 # node-waf configuration
 .lock-wscript
@@ -53,25 +56,31 @@ typings/
 .yarn-integrity
 
 # misc
-.bit/
 .vscode/
+archive/
+_notes/
+NOTES/
+notes/
+Notes/
+.bit/
 .DS_Store
 .env
 .favorites.json
-*.sublime-workspace
+*.code-workspace
 *.sublime-project
+*.sublime-workspace
+*.notes
 bookmarks.json
 launch.json
 config.js
-TIMELOCKR.code-workspace
 
 # next.js build output
 .next
 
+
 # Dependency directories
 # Deployed apps should consider commenting these lines out:
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
-_notes/
 node_modules/
 bower_components
 jspm_packages/

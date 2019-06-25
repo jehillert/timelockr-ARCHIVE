@@ -19,11 +19,13 @@ S.CountdownText = styled.div`
   text-align: center;
   text-anchor: middle;
 `;
+
 S.CountdownText = styled.div`
   z-index: 1;
   text-align: center;
   text-anchor: middle;
 `;
+
 S.CountdownText = styled.div`
   z-index: 1;
   text-align: center;
@@ -32,6 +34,15 @@ S.CountdownText = styled.div`
 
 /*
 ! change console.log to debug()
+*/
+
+/*
+I think the problem is you need to watch "futureDate" for changes
+or instread of subtracting seconds from a duration,
+your state is a "time passed since initialization", and you subtract
+"time passed since initialization" from futureDate
+
+or useeffect
 */
 
 function CountdownTimer(props) {
@@ -47,7 +58,7 @@ function CountdownTimer(props) {
   const formatDisplayTime = () => {
     let tr;
 
-    if (duration.asSeconds() <= -1) {
+    if (duration.asSeconds() <= 0) {
       return refresh();
     }
 
